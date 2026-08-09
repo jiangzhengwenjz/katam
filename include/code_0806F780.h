@@ -23,7 +23,7 @@ extern const s8 gUnk_08350C20[][2];
 // TODO: A bunch of functions below have unknown 1st param type
 bool16 ObjectPreUpdate(struct ObjectBase *);
 bool32 sub_0806F8BC(struct ObjectBase *);
-bool32 Object4PostUpdate(struct EffectObject *);
+bool32 EffectObjectPostUpdate(struct EffectObject *);
 void sub_0806FC70(struct ObjectBase *);
 void RequestScreenShake(u16, struct ObjectBase *);
 void sub_080700D8(struct ObjectBase *);
@@ -31,7 +31,7 @@ bool8 sub_08070504(struct ObjectBase *);
 void sub_08070580(void);
 struct Object14 *sub_080706A0(struct ObjectBase *, u32, u16, u8, bool8 (*)(struct Object14 *), void (*)(struct Object14 *));
 void ObjectBaseInitSprite(struct ObjectBase *, struct Sprite *, u32, u16, u8, u16);
-void Object4InitSprite(struct EffectObject *, struct Sprite *, u32, u16, u8, u16);
+void EffectObjectInitSprite(struct EffectObject *, struct Sprite *, u32, u16, u8, u16);
 void sub_080711A8(struct Kirby *);
 void sub_080716BC(struct Kirby *);
 void sub_08071994(struct Kirby *);

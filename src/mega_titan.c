@@ -3876,7 +3876,7 @@ static void sub_080F3974(struct Object *obj2, u32 a2, u16 a3, u8 a4)
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
     u16 var;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = obj2->base.x;
     obj4->y = obj2->base.y;
@@ -3887,7 +3887,7 @@ static void sub_080F3974(struct Object *obj2, u32 a2, u16 a3, u8 a4)
     var = ((obj2->base.sprite.unk14 & 0x7C0) >> 6) - 1;
     if ((a4 > 0xB && a4 < 0x10) || a4 > 0x27)
         ++var;
-    Object4InitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
+    EffectObjectInitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
     obj4->unk8 = a2;
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
@@ -3920,7 +3920,7 @@ static void sub_080F3A98(void)
                 goto _080F3C78;
             if (Macro_0810B1F4(&obj2_2->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3935,7 +3935,7 @@ static void sub_080F3A98(void)
         if (obj4->unk4 != obj2->unk83)
             obj4->flags |= 0x1000;
         else
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -3944,7 +3944,7 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
     struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = mt->obj2.base.x;
     obj4->y = mt->obj2.base.y;
@@ -3956,13 +3956,13 @@ static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
     {
         obj4->unk3C = 0x100;
         obj4->unk3E = 0x180;
-        Object4InitSprite(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
+        EffectObjectInitSprite(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
     }
     else
     {
         obj4->unk3C = -0x100;
         obj4->unk3E = 0x180;
-        Object4InitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
+        EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
     }
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33C, 1);
@@ -3994,7 +3994,7 @@ static void sub_080F3E40(void)
                 goto _080F4020;
             if (Macro_0810B1F4(&mt->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -4026,7 +4026,7 @@ static void sub_080F3E40(void)
                 obj4->y -= obj4->unk3E;
             }
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 

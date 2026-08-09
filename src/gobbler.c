@@ -1395,13 +1395,13 @@ static void sub_080E5E58(struct Gobbler *gobbler)
     struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = gobbler->obj2.base.x;
     obj4->y = gobbler->obj2.base.y;
     obj4->parent = gobbler;
     obj4->roomId = gobbler->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x10, 0x30C, 0x12, 0x1D);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x30C, 1);
 }
@@ -1441,7 +1441,7 @@ static void sub_080E5F20(void)
                 goto label;
             if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1453,7 +1453,7 @@ static void sub_080E5F20(void)
         obj4->flags |= 4;
         if (gobbler2->obj2.unk83 == 1 || gobbler2->obj2.unk83 == 7 || gobbler2->obj2.unk83 > 0xC)
             obj4->flags |= 0x400;
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
         if (!(obj4->flags & 0x400))
         {
             if (!(obj4->unk4 & 0x3F))
@@ -1471,7 +1471,7 @@ static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
     struct Task *t = TaskCreate(sub_080E6320, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = gobbler->obj2.base.x;
     obj4->y = gobbler->obj2.base.y;
@@ -1484,7 +1484,7 @@ static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
         obj4->x += a2 * 0x100;
     obj4->y += a3 * 0x100;
     obj4->flags |= 0x4000;
-    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x6012000, 0x2A0, 0, 0xA);
 }
 
 static void sub_080E6320(void)
@@ -1508,7 +1508,7 @@ static void sub_080E6320(void)
                 goto label;
             if (Macro_0810B1F4(&gobbler->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1526,7 +1526,7 @@ static void sub_080E6320(void)
         if (obj4->y <= 0xE800)
             obj4->flags |= 0x1000;
         else
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
     }
 }
 

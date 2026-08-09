@@ -2430,7 +2430,7 @@ static void sub_0800D450(void)
                 goto label;
             if (Macro_0810B1F4(&ss->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -2442,7 +2442,7 @@ static void sub_0800D450(void)
         Macro_0809E55C(obj4);
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -2451,7 +2451,7 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = ss->obj2.base.x;
     obj4->y = ss->obj2.base.y;
@@ -2464,7 +2464,7 @@ static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
     if (Macro_0810B1F4(&ss->obj2.base))
         obj4->flags |= 0x2000;
     obj4->flags |= 0x4000; // why do it twice lol
-    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
 }
 
 static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
@@ -2472,7 +2472,7 @@ static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = gs->unk0.obj2.base.x;
     obj4->y = gs->unk0.obj2.base.y;
@@ -2485,7 +2485,7 @@ static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
     if (Macro_0810B1F4(&gs->unk0.obj2.base))
         obj4->flags |= 0x2000;
     obj4->flags |= 0x4000; // why do it twice lol
-    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
 }
 
 static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
@@ -2528,7 +2528,7 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
     u16 i;
 
-    ClearObject4(&var->obj4);
+    ClearEffectObject(&var->obj4);
     var->obj4.unk0 = 3;
     var->obj4.x = gs->unk0.obj2.base.x;
     var->obj4.y = gs->unk0.obj2.base.y;
@@ -2542,7 +2542,7 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     if (Macro_0810B1F4(&gs->unk0.obj2.base))
         var->obj4.flags |= 0x2000;
     for (i = 0; i < 3; ++i)
-        Object4InitSprite(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
+        EffectObjectInitSprite(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
 }
 
 static void sub_0800DAD8(void)
@@ -2566,7 +2566,7 @@ static void sub_0800DAD8(void)
                 goto label;
             if (Macro_0810B1F4(&gs->unk0.obj2.base) && !(var->obj4.flags & 0x2000))
             {
-                Object4DisplaySprite(&var->obj4);
+                EffectObjectDisplaySprite(&var->obj4);
                 return;
             }
         }

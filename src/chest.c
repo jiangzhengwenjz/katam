@@ -161,7 +161,7 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     void *ptr = TaskGetStructPtr(task);
     popup = ptr;
     popup2 = popup;
-    ClearObject4(&popup->obj4);
+    ClearEffectObject(&popup->obj4);
     popup->obj4.unk0 = 3;
     popup->obj4.x = chest->obj2.base.x;
     popup->obj4.y = chest->obj2.base.y;
@@ -239,7 +239,7 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
         break;
     }
     if (numTiles != 0) {
-        Object4InitSprite(&popup2->obj4, &popup2->obj4.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
+        EffectObjectInitSprite(&popup2->obj4, &popup2->obj4.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
     }
     else {
         popup2->obj4.flags |= 0x400;
@@ -277,7 +277,7 @@ static void sub_0800B7A4(void) {
             goto _0800B870;
         }
         if (Macro_0810B1F4(&parent->obj2.base) && !(popup->obj4.flags & 0x2000)) {
-            Object4DisplaySprite(&popup->obj4);
+            EffectObjectDisplaySprite(&popup->obj4);
             return;
         }
     }
@@ -291,7 +291,7 @@ static void sub_0800B7A4(void) {
         popup->obj4.x += popup->obj4.unk3C;
         popup->obj4.y -= popup->obj4.unk3E;
     }
-    Object4PostUpdate(&popup->obj4);
+    EffectObjectPostUpdate(&popup->obj4);
 }
 
 static void sub_0800B97C(struct ChestItemPopup *popup) {

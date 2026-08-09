@@ -133,7 +133,7 @@ static void sub_080AF204(struct Object *glunk)
     struct Task *t = TaskCreate(sub_080AF330, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r6 = TaskGetStructPtr(t), *obj4 = r6;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = glunk->base.x;
     obj4->y = glunk->base.y;
@@ -145,7 +145,7 @@ static void sub_080AF204(struct Object *glunk)
     obj4->y -= 0x800;
     if (Macro_0810B1F4(&glunk->base))
         obj4->flags |= 0x2000;
-    Object4InitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
+    EffectObjectInitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
@@ -174,7 +174,7 @@ static void sub_080AF330(void)
                 goto _080AF4F4;
             if (Macro_0810B1F4(&glunk->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -193,7 +193,7 @@ static void sub_080AF330(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }

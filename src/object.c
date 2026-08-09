@@ -1761,7 +1761,7 @@ static void sub_0809E424(struct Object *sb) {
     u16 r1;
 
     r7 = TaskGetStructPtr(task);
-    ClearObject4(r7);
+    ClearEffectObject(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
@@ -1777,7 +1777,7 @@ static void sub_0809E424(struct Object *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x297, 1, 12);
+    EffectObjectInitSprite(r7, &r7->sprite, 0x6012000, 0x297, 1, 12);
 }
 
 static void sub_0809E55C(void) {
@@ -1792,7 +1792,7 @@ static void sub_0809E55C(void) {
     } else {
         if (ip) {
             if (Macro_0810B1F4(&ip->base) && !(r7->flags & 0x2000)) {
-                Object4DisplaySprite(r7);
+                EffectObjectDisplaySprite(r7);
                 return;
             }
         } else {
@@ -1820,7 +1820,7 @@ static void sub_0809E55C(void) {
         }
         r7->x = ip->base.x + r7->unk3C;
         r7->y = ip->base.y + r7->unk3E;
-        Object4PostUpdate(r7);
+        EffectObjectPostUpdate(r7);
     }
 }
 
@@ -1830,7 +1830,7 @@ void sub_0809E79C(struct Object *sb) {
     u16 r1;
 
     r7 = TaskGetStructPtr(task);
-    ClearObject4(r7);
+    ClearEffectObject(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
@@ -1846,7 +1846,7 @@ void sub_0809E79C(struct Object *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x29D, 0, 12);
+    EffectObjectInitSprite(r7, &r7->sprite, 0x6012000, 0x29D, 0, 12);
 }
 
 static void sub_0809E8D4(void) {
@@ -1861,7 +1861,7 @@ static void sub_0809E8D4(void) {
     } else {
         if (ip) {
             if (Macro_0810B1F4(&ip->base) && !(r7->flags & 0x2000)) {
-                Object4DisplaySprite(r7);
+                EffectObjectDisplaySprite(r7);
                 return;
             }
         } else {
@@ -1905,7 +1905,7 @@ static void sub_0809E8D4(void) {
                 r7->unk3E -= 0x100;
                 break;
             }
-            Object4PostUpdate(r7);
+            EffectObjectPostUpdate(r7);
         }
     }
 }
@@ -1916,7 +1916,7 @@ static void sub_0809EB90(struct Object *sb) {
     u16 r1;
 
     r7 = TaskGetStructPtr(task);
-    ClearObject4(r7);
+    ClearEffectObject(r7);
     r7->unk0 = 3;
     r7->x = sb->base.x;
     r7->y = sb->base.y;
@@ -1934,7 +1934,7 @@ static void sub_0809EB90(struct Object *sb) {
     if (Macro_0810B1F4(&sb->base))
         r7->flags |= 0x2000;
     r7->flags |= 0x4000;
-    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x29e, 0, 12);
+    EffectObjectInitSprite(r7, &r7->sprite, 0x6012000, 0x29e, 0, 12);
 }
 
 static void sub_0809ECD0(void) {
@@ -1948,7 +1948,7 @@ static void sub_0809ECD0(void) {
     } else {
         if (ip) {
             if (Macro_0810B1F4(&ip->base) && !(r7->flags & 0x2000)) {
-                Object4DisplaySprite(r7);
+                EffectObjectDisplaySprite(r7);
                 return;
             }
         } else {
@@ -1998,7 +1998,7 @@ static void sub_0809ECD0(void) {
         }
         r7->x = ip->base.x + r7->unk3C;
         r7->y = ip->base.y + r7->unk3E;
-        Object4PostUpdate(r7);
+        EffectObjectPostUpdate(r7);
     }
 }
 

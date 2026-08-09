@@ -892,13 +892,13 @@ static struct EffectObject *sub_080DCF18(struct Kracko *kracko)
     struct Task *t = TaskCreate(sub_080DD044, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x30, 0x339, 9, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     obj4->unk8 = obj4->sprite.palId;
@@ -942,10 +942,10 @@ static void sub_080DD044(void)
         {
             obj4->sprite.palId = obj4->unk8;
             obj4->sprite.unk8 &= ~0x800;
-            Object4DisplaySprite(obj4);
+            EffectObjectDisplaySprite(obj4);
             obj4->sprite.palId = obj4->unk4;
             obj4->sprite.unk8 |= 0x800;
-            Object4DisplaySprite(obj4);
+            EffectObjectDisplaySprite(obj4);
             return;
         }
         obj4->x = kracko->obj2.base.x;
@@ -994,13 +994,13 @@ static struct EffectObject *sub_080DD55C(struct Kracko *kracko)
     struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x40, 0x339, 0xC, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     return obj4;
@@ -1033,7 +1033,7 @@ static void sub_080DD62C(void)
                 goto label;
             if (Macro_0810B1F4(&kracko2->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1059,7 +1059,7 @@ static void sub_080DD62C(void)
         }
         obj4->x = kracko->obj2.base.x;
         obj4->y = kracko->obj2.base.y;
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -1068,13 +1068,13 @@ static struct EffectObject *sub_080DD8D8(struct Kracko *kracko)
     struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = kracko->obj2.base.x;
     obj4->y = kracko->obj2.base.y;
     obj4->parent = kracko;
     obj4->roomId = kracko->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 9, 0x339, 0, 0x18);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x339, 1);
     return obj4;
@@ -1107,7 +1107,7 @@ static void sub_080DD9B4(void)
                 goto label;
             if (Macro_0810B1F4(&kracko2->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1122,7 +1122,7 @@ static void sub_080DD9B4(void)
         obj4->objBase54 = kracko->obj2.base.objBase54;
         obj4->objBase55 = kracko->obj2.base.objBase55;
         sub_080DDFB4(obj4, kracko);
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -1131,7 +1131,7 @@ static struct EffectObject *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
     struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -1146,7 +1146,7 @@ static struct EffectObject *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
     else
         obj4->x += a * 0x100;
     obj4->y += b * 0x100;
-    Object4InitSprite(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x20, 0x33B, 0xE, 0x1A);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x33B, 1);
     return obj4;
@@ -1176,7 +1176,7 @@ static void sub_080DDD60(void)
                 goto label;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1188,7 +1188,7 @@ static void sub_080DDD60(void)
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
         else
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
     }
 }
 

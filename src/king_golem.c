@@ -166,13 +166,13 @@ static struct EffectObject *sub_080DA68C(struct KingGolem *kg)
     struct Task *t = TaskCreate(sub_080DA768, sizeof(struct EffectObject), 0x1000, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = kg->obj2.base.x;
     obj4->y = kg->obj2.base.y;
     obj4->parent = kg;
     obj4->roomId = kg->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x303, 1);
     return obj4;
@@ -205,7 +205,7 @@ static void sub_080DA768(void)
                 goto label;
             if (Macro_0810B1F4(&kg3->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -231,7 +231,7 @@ static void sub_080DA768(void)
             obj4->sprite.variant = 8;
             gCurTask->main = sub_080DAB00;
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
         if (kg1->obj2.unk83 == 6)
             obj4->flags |= 4;
     }
@@ -264,7 +264,7 @@ static void sub_080DAB00(void)
                 goto label;
             if (Macro_0810B1F4(&kg3->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -324,7 +324,7 @@ static void sub_080DAB00(void)
             kg1->obj2.base.flags |= 4;
             obj4->flags &= ~2;
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
         ++obj4->unk4;
     }
 }

@@ -336,7 +336,7 @@ static struct EffectObject *sub_0801C0A8(struct Shard *shard, u16 a2)
     struct Task *t = TaskCreate(sub_0801C194, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = shard->obj2.base.x;
     obj4->y = shard->obj2.base.y;
@@ -346,7 +346,7 @@ static struct EffectObject *sub_0801C0A8(struct Shard *shard, u16 a2)
     obj4->y = shard->obj2.base.y;
     if (Macro_0810B1F4(&shard->obj2.base))
         obj4->flags |= 0x2000;
-    Object4InitSprite(obj4, &obj4->sprite, VramMalloc(gUnk_082DE5E0[a2][2]), gUnk_082DE5E0[a2][0], gUnk_082DE5E0[a2][1], 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, VramMalloc(gUnk_082DE5E0[a2][2]), gUnk_082DE5E0[a2][0], gUnk_082DE5E0[a2][1], 0x19);
     obj4->sprite.palId = shard->obj2.base.sprite.palId;
     return obj4;
 }
@@ -372,7 +372,7 @@ static void sub_0801C194(void)
                 goto label;
             if (Macro_0810B1F4(&shard->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -382,7 +382,7 @@ static void sub_0801C194(void)
             KirbySomething(obj4);
         }
         Macro_0809E55C(obj4);
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 

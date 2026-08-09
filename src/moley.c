@@ -1043,7 +1043,7 @@ static void sub_080ECEC0(struct Moley *moley)
     struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = moley->obj2.base.x;
     obj4->y = moley->obj2.base.y;
@@ -1053,7 +1053,7 @@ static void sub_080ECEC0(struct Moley *moley)
     if (!(moley->obj2.base.flags & 1))
         obj4->flags |= 1;
     obj4->flags |= 0x4000;
-    Object4InitSprite(obj4, &obj4->sprite, 0x6012000, 0x340, 0, 0x17);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x6012000, 0x340, 0, 0x17);
 }
 
 static void sub_080ECF6C(void)
@@ -1082,7 +1082,7 @@ static void sub_080ECF6C(void)
                     goto _080ECFF4;
                 if (Macro_0810B1F4(&moley->obj2.base) && !(obj4->flags & 0x2000))
                 {
-                    Object4DisplaySprite(obj4);
+                    EffectObjectDisplaySprite(obj4);
                     return;
                 }
             } while (0); // never required elsewhere
@@ -1093,7 +1093,7 @@ static void sub_080ECF6C(void)
             KirbySomething(obj4);
         }
         obj4->flags |= 4;
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 

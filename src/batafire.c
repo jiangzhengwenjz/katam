@@ -913,13 +913,13 @@ static void sub_080CAF60(struct Object *batafire)
     struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = batafire->base.x;
     obj4->y = batafire->base.y;
     obj4->parent = batafire;
     obj4->roomId = batafire->base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 1);
 }
@@ -951,7 +951,7 @@ static void sub_080CB02C(void)
                 goto label;
             if (Macro_0810B1F4(&batafire2->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -992,7 +992,7 @@ static void sub_080CB02C(void)
             obj4->x += obj4->unk3C;
             obj4->y -= obj4->unk3E;
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 

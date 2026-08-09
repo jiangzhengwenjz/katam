@@ -347,7 +347,7 @@ static void sub_080BB290(void) {
 void sub_080BB470(struct Object* arg0) {
     struct Task *task = TaskCreate(sub_080BB568, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    ClearObject4(obj);
+    ClearEffectObject(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -368,7 +368,7 @@ void sub_080BB470(struct Object* arg0) {
     if (Macro_0810B1F4(&arg0->base)) {
         obj->flags |= 0x2000;
     }
-    Object4InitSprite(obj, &obj->sprite, 0x12, 0x334, 1, 0xc);
+    EffectObjectInitSprite(obj, &obj->sprite, 0x12, 0x334, 1, 0xc);
 }
 
 static void sub_080BB568(void) {
@@ -392,7 +392,7 @@ static void sub_080BB568(void) {
                 goto _08117E38;
             if (Macro_0810B1F4(&r1->base) && !(obj->flags & 0x2000))
             {
-                Object4DisplaySprite(obj);
+                EffectObjectDisplaySprite(obj);
                 return;
             }
         }
@@ -418,7 +418,7 @@ static void sub_080BB568(void) {
                 obj->x += obj->unk3C;
                 obj->y -= obj->unk3E;
             }
-            Object4PostUpdate(obj);
+            EffectObjectPostUpdate(obj);
         }
     }
 }
@@ -426,7 +426,7 @@ static void sub_080BB568(void) {
 void sub_080BB804(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj2 = TaskGetStructPtr(task), *obj = obj2;
-    ClearObject4(obj);
+    ClearEffectObject(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -448,7 +448,7 @@ void sub_080BB804(struct Object* arg0, u8 arg1) {
     if (Macro_0810B1F4(&arg0->base)) {
         obj->flags |= 0x2000;
     }
-    Object4InitSprite(obj, &obj->sprite, 0x12, 0x334, 2, 0xc);
+    EffectObjectInitSprite(obj, &obj->sprite, 0x12, 0x334, 2, 0xc);
 }
 
 static void sub_080BB8FC(void) {
@@ -472,7 +472,7 @@ static void sub_080BB8FC(void) {
                 goto _08117E38;
             if (Macro_0810B1F4(&r1->base) && !(obj->flags & 0x2000))
             {
-                Object4DisplaySprite(obj);
+                EffectObjectDisplaySprite(obj);
                 return;
             }
         }
@@ -509,7 +509,7 @@ static void sub_080BB8FC(void) {
                 obj->x += obj->unk3C;
                 obj->y -= obj->unk3E;
             }
-            Object4PostUpdate(obj);
+            EffectObjectPostUpdate(obj);
         }
     }
 }

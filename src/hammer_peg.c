@@ -17,23 +17,23 @@ const struct AnimInfo gUnk_082DEB04[] = {
 void *CreateHammerPeg(struct ObjectTemplate *object, u8 r1)
 {
     struct Task *newTask = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
-    struct Object *newObject2 = TaskGetStructPtr(newTask);
+    struct Object *newObject = TaskGetStructPtr(newTask);
 
-    InitObject(newObject2, object, r1);
+    InitObject(newObject, object, r1);
 
-    newObject2->unk85 = 0;
-    newObject2->base.flags |= 0x18b00;
-    newObject2->base.unk68 &= ~7;
+    newObject->unk85 = 0;
+    newObject->base.flags |= 0x18b00;
+    newObject->base.unk68 &= ~7;
 
-    ObjectSetBounds(&newObject2->base, -8, -8, 8, 8);
+    ObjectSetBounds(&newObject->base, -8, -8, 8, 8);
 
-    newObject2->unk83 = 0;
+    newObject->unk83 = 0;
 
-    ObjectInitSprite(newObject2);
+    ObjectInitSprite(newObject);
 
-    gUnk_08351648[newObject2->type].unk10(newObject2);
+    gUnk_08351648[newObject->type].unk10(newObject);
 
-    return newObject2;
+    return newObject;
 }
 
 void sub_08025320(struct Object *r0)

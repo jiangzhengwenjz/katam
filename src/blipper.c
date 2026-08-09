@@ -940,7 +940,7 @@ static void sub_080A6CBC(struct Object *blipper, u8 a2)
     struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = blipper->base.x;
     obj4->y = blipper->base.y;
@@ -975,7 +975,7 @@ static void sub_080A6CBC(struct Object *blipper, u8 a2)
     }
     if (Macro_0810B1F4(&blipper->base))
         obj4->flags |= 0x2000;
-    Object4InitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
 }
@@ -1005,7 +1005,7 @@ static void sub_080A6E44(void)
                 goto label;
             if (Macro_0810B1F4(&blipper->base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -1024,7 +1024,7 @@ static void sub_080A6E44(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }

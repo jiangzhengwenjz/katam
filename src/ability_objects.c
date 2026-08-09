@@ -454,7 +454,7 @@ static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
     struct Task *task = TaskCreate(sub_080AA108, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
-    ClearObject4(obj);
+    ClearEffectObject(obj);
     obj->unk0 = 3;
     obj->x = arg0->base.x;
     obj->y = arg0->base.y;
@@ -493,10 +493,10 @@ static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
         break;
     }
     if (gUnk_0203AD40 & 1) {
-        Object4InitSprite(obj, &obj->sprite, 0xd, 0x2c2, 0, 0xa);
+        EffectObjectInitSprite(obj, &obj->sprite, 0xd, 0x2c2, 0, 0xa);
     }
     else {
-        Object4InitSprite(obj, &obj->sprite, 0xd, 0x2c2, 1, 0xa);
+        EffectObjectInitSprite(obj, &obj->sprite, 0xd, 0x2c2, 1, 0xa);
     }
 }
 
@@ -516,7 +516,7 @@ static void sub_080AA108(void) {
             if (obj2) {
                 if (Macro_0810B1F4(&obj2->base)) {
                     if (!(obj->flags & 0x2000)) {
-                        Object4DisplaySprite(obj);
+                        EffectObjectDisplaySprite(obj);
                         return;
                     }
                 }
@@ -565,7 +565,7 @@ static void sub_080AA108(void) {
                 obj->x += obj->unk3C;
                 obj->y -= obj->unk3E;
             }
-            Object4PostUpdate(obj);
+            EffectObjectPostUpdate(obj);
         }
     }
 }

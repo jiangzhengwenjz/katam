@@ -35,37 +35,37 @@
     } \
 })
 
-#define KirbySomething(obj4) ({ \
-    struct EffectObject *_obj = (obj4); \
+#define KirbySomething(effectObject) ({ \
+    struct EffectObject *_obj = (effectObject); \
     u8 _r3 = 0; \
  \
-    if (gKirbys[0].base.base.base.roomId != (obj4)->roomId) { \
+    if (gKirbys[0].base.base.base.roomId != (effectObject)->roomId) { \
         _r3 = 1; \
-        if (gKirbys[1].base.base.base.roomId != (obj4)->roomId) { \
+        if (gKirbys[1].base.base.base.roomId != (effectObject)->roomId) { \
             _r3 = 2; \
-            if (gKirbys[2].base.base.base.roomId != (obj4)->roomId) { \
+            if (gKirbys[2].base.base.base.roomId != (effectObject)->roomId) { \
                 _r3 = 3; \
-                if (gKirbys[3].base.base.base.roomId != (obj4)->roomId) \
+                if (gKirbys[3].base.base.base.roomId != (effectObject)->roomId) \
                     _r3 = 4; \
             } \
         } \
     } \
     if (gUnk_03000510.unk4 & ((1 << _r3) | 0x10) && !(_obj->flags & 0x2000)) { \
-        Object4DisplaySprite(_obj); \
+        EffectObjectDisplaySprite(_obj); \
         return; \
     } \
 })
 
-#define Macro_080A4728(obj2) ({ \
+#define Macro_080A4728(object) ({ \
     u8 _idx, _idx2; \
  \
-    if ((obj2)->base.unk56 != 0xff) \
-        _idx = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
+    if ((object)->base.unk56 != 0xff) \
+        _idx = gCurLevelInfo[(object)->base.unk56].unk65E; \
     else \
         _idx = 0xff; \
     if (_idx != 0xff) { \
         _idx2 = _idx * 8 + gUnk_02022F40[_idx]++; \
-        gUnk_02022EC0[0][_idx2] = (obj2); \
+        gUnk_02022EC0[0][_idx2] = (object); \
         gUnk_02022EC0[0][_idx2 + 1] = NULL; \
     } \
 })

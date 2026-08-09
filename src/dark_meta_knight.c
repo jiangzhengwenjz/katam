@@ -2908,7 +2908,7 @@ static struct EffectObject *sub_080FC5F8(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FC6D4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, sub_08100170);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -2916,7 +2916,7 @@ static struct EffectObject *sub_080FC5F8(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = 0x40;
     obj4->unk3E = -0x15;
-    Object4InitSprite(obj4, &obj4->sprite, 0xC, 0x392, 0, 0x18);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0xC, 0x392, 0, 0x18);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
     return obj4;
@@ -2948,7 +2948,7 @@ static void sub_080FC6D4(void)
                 goto _080FC8A8;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -2968,7 +2968,7 @@ static void sub_080FC6D4(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -2978,13 +2978,13 @@ static void sub_080FC9C8(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FCA94, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
     obj4->parent = dmk;
     obj4->roomId = dmk->obj2.base.roomId;
-    Object4InitSprite(obj4, &obj4->sprite, 0xC, 0x392, 1, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0xC, 0x392, 1, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
@@ -3015,7 +3015,7 @@ static void sub_080FCA94(void)
                 goto _080FCC70;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3039,7 +3039,7 @@ static void sub_080FCA94(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3049,7 +3049,7 @@ static void sub_080FCD98(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FCE70, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3057,7 +3057,7 @@ static void sub_080FCD98(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = 0x100;
     obj4->unk3E = 0x200;
-    Object4InitSprite(obj4, &obj4->sprite, 4, 0x392, 2, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 4, 0x392, 2, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
@@ -3088,7 +3088,7 @@ static void sub_080FCE70(void)
                 goto _080FD04C;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3115,7 +3115,7 @@ static void sub_080FCE70(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3125,7 +3125,7 @@ static void sub_080FD194(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FD26C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3133,7 +3133,7 @@ static void sub_080FD194(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->unk3C = -0x100;
     obj4->unk3E = 0x200;
-    Object4InitSprite(obj4, &obj4->sprite, 4, 0x392, 3, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 4, 0x392, 3, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x390, 1);
 }
@@ -3165,7 +3165,7 @@ static void sub_080FD26C(void)
                 goto _080FD448;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3192,7 +3192,7 @@ static void sub_080FD26C(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3259,7 +3259,7 @@ static struct EffectObject *sub_080FD8B4(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FD9AC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, sub_081001A4);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3269,7 +3269,7 @@ static struct EffectObject *sub_080FD8B4(struct DarkMetaKnight *dmk)
     obj4->unk3E = 0;
     obj4->y -= 0x3800;
     obj4->x -= 0x3000;
-    Object4InitSprite(obj4, &obj4->sprite, 0x50, 0x3A3, 0, 0x1A);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x50, 0x3A3, 0, 0x1A);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x3A3, 1);
     return obj4;
@@ -3299,7 +3299,7 @@ static void sub_080FD9AC(void)
                 goto _080FDB70;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3323,7 +3323,7 @@ static void sub_080FD9AC(void)
                 obj4->x += obj4->unk3C;
                 obj4->y -= obj4->unk3E;
             }
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3442,7 +3442,7 @@ static void sub_080FE1D0(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FE2AC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *obj4 = TaskGetStructPtr(t);
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3450,7 +3450,7 @@ static void sub_080FE1D0(struct DarkMetaKnight *dmk)
     obj4->roomId = dmk->obj2.base.roomId;
     obj4->flags |= dmk->obj2.base.flags & 1;
     obj4->flags ^= 1;
-    Object4InitSprite(obj4, &obj4->sprite, 0x2A, 0x391, 0x22, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x2A, 0x391, 0x22, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x391, 1);
 }
@@ -3481,7 +3481,7 @@ static void sub_080FE2AC(void)
                 goto _080FE48C;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3498,7 +3498,7 @@ static void sub_080FE2AC(void)
         else
         {
             obj4->flags |= 4;
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
         }
     }
 }
@@ -3597,7 +3597,7 @@ static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
     struct EffectObject *obj4_2 = TaskGetStructPtr(t), *obj4 = obj4_2;
     u32 var;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -3609,7 +3609,7 @@ static void sub_080FE954(struct ObjectBase *objBase, u8 a2)
     if (!(obj4->flags & 1))
         obj4->objBase54 = -obj4->objBase54;
     obj4_2->y = objBase->y - ((((a2 & 3) << 3) | (a2 & 3)) << 10);
-    Object4InitSprite(obj4, &obj4->sprite, 0x1E, 0x397, a2, 0x19);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x1E, 0x397, a2, 0x19);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x397, 1);
 }
@@ -3654,7 +3654,7 @@ static void sub_080FEA70(void)
                 goto _080FEC9C;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3686,7 +3686,7 @@ static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
     struct EffectObject *obj4 = TaskGetStructPtr(t);
     u32 var;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -3695,7 +3695,7 @@ static void sub_080FEEC0(struct ObjectBase *objBase, u8 a2)
     obj4->flags |= objBase->flags & 1;
     obj4->y = objBase->y; // duh
     var = (a2 & 3);
-    Object4InitSprite(obj4, &obj4->sprite, 0x28, 0x397, 2 * (a2&1) + 8, 0x17);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 0x28, 0x397, 2 * (a2&1) + 8, 0x17);
     obj4->sprite.palId = 0;
     Macro_081050E8(obj4, &obj4->sprite, 0x397, 1);
 }
@@ -3727,7 +3727,7 @@ static void sub_080FEFB0(void)
                 goto _080FF190;
             if (Macro_0810B1F4(objBase) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3754,7 +3754,7 @@ static void sub_080FEFB0(void)
             obj4->sprite.y += gUnk_0203AD18[1];
             Macro_0803DBC8(obj4, &obj4->sprite);
         }
-        Object4PostUpdate(obj4);
+        EffectObjectPostUpdate(obj4);
     }
 }
 
@@ -3767,7 +3767,7 @@ static struct EffectObject *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
     struct Object9 *obj9 = tmp;
     u8 i;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = objBase->x;
     obj4->y = objBase->y;
@@ -3782,7 +3782,7 @@ static struct EffectObject *sub_080FF3F4(struct ObjectBase *objBase, u8 a2)
         obj9->unk68[2][i] = 0;
     }
     if (a2) sp0C = 0xD;
-    Object4InitSprite(obj4, &obj4->sprite, 1, 0x397, sp0C, 0x18);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 1, 0x397, sp0C, 0x18);
     obj4->sprite.palId = 0;
     if (objBase->flags & 1)
         obj4->flags |= 1;
@@ -3830,7 +3830,7 @@ static void sub_080FF5B0(void)
             {
                 obj4->x = obj9->unk48[i][0];
                 obj4->y = obj9->unk48[i][1];
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
             }
             obj4->x = x;
             obj4->y = y;
@@ -3921,7 +3921,7 @@ static void sub_080FFBC0(struct DarkMetaKnight *dmk)
     struct Task *t = TaskCreate(sub_080FFC68, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
 
-    ClearObject4(obj4);
+    ClearEffectObject(obj4);
     obj4->unk0 = 3;
     obj4->x = dmk->obj2.base.x;
     obj4->y = dmk->obj2.base.y;
@@ -3934,7 +3934,7 @@ static void sub_080FFBC0(struct DarkMetaKnight *dmk)
         obj4->flags |= 1;
         obj4->x += 0x2000;
     }
-    Object4InitSprite(obj4, &obj4->sprite, 8, 0x393, 0, 0xA);
+    EffectObjectInitSprite(obj4, &obj4->sprite, 8, 0x393, 0, 0xA);
 }
 
 static void sub_080FFC68(void)
@@ -3970,7 +3970,7 @@ static void sub_080FFC68(void)
                 goto _080FFE14;
             if (Macro_0810B1F4(&dmk->obj2.base) && !(obj4->flags & 0x2000))
             {
-                Object4DisplaySprite(obj4);
+                EffectObjectDisplaySprite(obj4);
                 return;
             }
         }
@@ -3982,7 +3982,7 @@ static void sub_080FFC68(void)
         if (obj4->flags & 2)
             obj4->flags |= 0x1000;
         else
-            Object4PostUpdate(obj4);
+            EffectObjectPostUpdate(obj4);
     }
 }
 

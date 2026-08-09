@@ -5632,7 +5632,7 @@ void sub_0803DAB8(struct ObjectBase *r8, struct Sprite *sprite)
     }
 }
 
-void Object4DisplaySprite(struct EffectObject *r8)
+void EffectObjectDisplaySprite(struct EffectObject *r8)
 {
     struct Sprite *sprite = &r8->sprite;
     u8 tmp;
@@ -5858,7 +5858,7 @@ void ClearObjectBase(struct ObjectBase *r4)
     r4->sprite.unk20[0].unk0 = -1;
 }
 
-void ClearObject4(struct EffectObject *r1)
+void ClearEffectObject(struct EffectObject *r1)
 {
     CpuFill16(0, r1, sizeof(struct EffectObject));
 }

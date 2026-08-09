@@ -3377,7 +3377,7 @@ static void sub_081050E8(struct Object *r5, u8 r7)
     struct Task *t = TaskCreate(sub_08105278, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
@@ -3385,7 +3385,7 @@ static void sub_081050E8(struct Object *r5, u8 r7)
     r4->roomId = r5->base.roomId;
     if (!(r5->base.flags & 1))
         r4->flags |= 1;
-    Object4InitSprite(r4, &r4->sprite, gUnk_08357250[r7], 0x398, r7 + 4, 27);
+    EffectObjectInitSprite(r4, &r4->sprite, gUnk_08357250[r7], 0x398, r7 + 4, 27);
     r4->sprite.unk8 |= 0x80;
     r4->sprite.palId = 0; // redundant
     Macro_081050E8(r4, &r4->sprite, 0x398, 1);
@@ -3449,7 +3449,7 @@ static void sub_08105278(void)
             goto _08105464;
         if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
         {
-            Object4DisplaySprite(r5);
+            EffectObjectDisplaySprite(r5);
             return;
         }
     }
@@ -3506,7 +3506,7 @@ static void sub_08105278(void)
         if (r5->unk3E < 0)
             r5->unk3E = 0;
     }
-    Object4PostUpdate(r5);
+    EffectObjectPostUpdate(r5);
     if (!(r5->unk4 & 7) && r5->sprite.unk1C)
         --r5->sprite.unk1C;
 }
@@ -3516,7 +3516,7 @@ static struct EffectObject *sub_081055B8(struct Object *r5)
     struct Task *t = TaskCreate(sub_08105698, sizeof(struct EffectObject), 0x1000, TASK_USE_EWRAM, sub_0810A130);
     struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
@@ -3524,7 +3524,7 @@ static struct EffectObject *sub_081055B8(struct Object *r5)
     r4->roomId = r5->base.roomId;
     if (!(r5->base.flags & 1))
         r4->flags |= 1;
-    Object4InitSprite(r4, &r4->sprite, 30, 0x39A, 0, 25);
+    EffectObjectInitSprite(r4, &r4->sprite, 30, 0x39A, 0, 25);
     r4->sprite.palId = 0; // redundant
     Macro_081050E8(r4, &r4->sprite, 0x139A, 1);
     return r4;
@@ -3560,7 +3560,7 @@ static void sub_08105698(void)
             goto _081057CA;
         if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
         {
-            Object4DisplaySprite(r5);
+            EffectObjectDisplaySprite(r5);
             return;
         }
     }
@@ -3598,7 +3598,7 @@ static void sub_08105698(void)
             r5->sprite.variant = 4;
             break;
         }
-        Object4PostUpdate(r5);
+        EffectObjectPostUpdate(r5);
     }
 }
 
@@ -4039,14 +4039,14 @@ static void sub_081069BC(struct Object *star)
         t = TaskCreate(sub_08106BE0, sizeof(struct EffectObject), 0xFFF, TASK_USE_EWRAM, ObjectBaseDestroy);
         r5 = TaskGetStructPtr(t);
         r4 = r5;
-        ClearObject4(r4);
+        ClearEffectObject(r4);
         r4->unk0 = 3;
         r4->x = star2->base.x;
         r4->y = star2->base.y;
         r4->parent = star2;
         r4->roomId = star2->base.roomId;
         if (!(star2->base.flags & 1)) r4->flags |= 1;
-        Object4InitSprite(r5, &r5->sprite, 0x10, 0x399, ((star->type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1, 27);
+        EffectObjectInitSprite(r5, &r5->sprite, 0x10, 0x399, ((star->type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1, 27);
         r4->sprite.palId = 0; // redundant
         Macro_081050E8(r4, &r4->sprite, 0x399, 1);
     }
@@ -4067,7 +4067,7 @@ static void sub_08106AD0(struct Object *r5)
         t = TaskCreate(sub_08106BE0, sizeof(struct EffectObject), 0xFFF, TASK_USE_EWRAM, ObjectBaseDestroy);
         r0 = TaskGetStructPtr(t);
         r4 = r0;
-        ClearObject4(r4);
+        ClearEffectObject(r4);
         r4->unk0 = 3;
         r4->x = r5->base.x;
         r4->y = r5->base.y;
@@ -4077,7 +4077,7 @@ static void sub_08106AD0(struct Object *r5)
         var = ((r6->type == OBJ_UNKNOWN_D4
                 ? r6->unk83
                 : r6->type - OBJ_DARK_MIND_STAR_FIRE) << 1) + 1;
-        Object4InitSprite(r4, &r4->sprite, 0x10, 0x399, var, 27);
+        EffectObjectInitSprite(r4, &r4->sprite, 0x10, 0x399, var, 27);
         r4->sprite.palId = 0; // redundant
         Macro_081050E8(r4, &r4->sprite, 0x399, 1);
         r4->unk4 = 1;
@@ -4462,14 +4462,14 @@ static void sub_08107ED4(struct ObjectBase *r4)
     struct Task *t = TaskCreate(sub_08107FC4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r5 = TaskGetStructPtr(t);
 
-    ClearObject4(r5);
+    ClearEffectObject(r5);
     r5->unk0 = 3;
     r5->x = r4->x;
     r5->y = r4->y;
     r5->parent = r4;
     r5->roomId = r4->roomId;
     r5->y -= 0x2800;
-    Object4InitSprite(r5, &r5->sprite, 20, gUnk_083572D0[gLanguage][0], gUnk_083572D0[gLanguage][1], 1);
+    EffectObjectInitSprite(r5, &r5->sprite, 20, gUnk_083572D0[gLanguage][0], gUnk_083572D0[gLanguage][1], 1);
     r5->sprite.palId = 0;
     Macro_081050E8(r5, &r5->sprite, 0x2C3, 1);
 }
@@ -4501,7 +4501,7 @@ static void sub_08107FC4(void)
                 goto _081081A8;
             if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
             {
-                Object4DisplaySprite(r5);
+                EffectObjectDisplaySprite(r5);
                 return;
             }
         }
@@ -4511,7 +4511,7 @@ static void sub_08107FC4(void)
             KirbySomething(r5);
         }
         Macro_0809E55C(r5);
-        Object4PostUpdate(r5);
+        EffectObjectPostUpdate(r5);
     }
 }
 
@@ -4520,14 +4520,14 @@ static void sub_08108280(struct Object *r5)
     struct Task *t = TaskCreate(sub_08108368, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r4 = TaskGetStructPtr(t);
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
     r4->parent = r5;
     r4->roomId = r5->base.roomId;
     r4->y -= 0x4000;
-    Object4InitSprite(r4, &r4->sprite, 0x30, 0x399, 15, 25);
+    EffectObjectInitSprite(r4, &r4->sprite, 0x30, 0x399, 15, 25);
     r4->sprite.palId = 0;
     r4->unk4 = 14;
     Macro_081050E8(r4, &r4->sprite, 0x39A, !r4->sprite.palId);
@@ -4575,14 +4575,14 @@ static void sub_08108960(struct Object *r4)
     struct Task *t = TaskCreate(sub_08108A50, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r5 = TaskGetStructPtr(t);
 
-    ClearObject4(r5);
+    ClearEffectObject(r5);
     r5->unk0 = 3;
     r5->x = r4->base.x;
     r5->y = r4->base.y;
     r5->parent = r4;
     r5->roomId = r4->base.roomId;
     r5->y -= 0x4000;
-    Object4InitSprite(r5, &r5->sprite, 0x30, 0x399, 14, 25);
+    EffectObjectInitSprite(r5, &r5->sprite, 0x30, 0x399, 14, 25);
     r5->sprite.palId = 0;
     r5->unk4 = 14;
     Macro_081050E8(r5, &r5->sprite, 0x39A, !r5->sprite.palId);
@@ -4643,7 +4643,7 @@ static struct EffectObject *sub_08109304(struct Object *sp10, u8 sp08)
     r0 = TaskGetStructPtr(t);
     r4 = &r0->unk0;
     r5 = r0;
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = sp10->base.x;
     r4->y = sp10->base.y;
@@ -4661,7 +4661,7 @@ static struct EffectObject *sub_08109304(struct Object *sp10, u8 sp08)
         if (Rand16() & 1) r5->unk68[i][1] = -r5->unk68[i][1];
     }
     if (sp08) sp0C = 17;
-    Object4InitSprite(r4, &r4->sprite, 4, 0x399, sp0C, 0x18);
+    EffectObjectInitSprite(r4, &r4->sprite, 4, 0x399, sp0C, 0x18);
     r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39A, 1);
     return r4;
@@ -4698,7 +4698,7 @@ static void sub_081094C4(void)
             {
                 r6->x = sp2C->unk48[r8][0];
                 r6->y = sp2C->unk48[r8][1];
-                Object4DisplaySprite(r6);
+                EffectObjectDisplaySprite(r6);
             }
             r6->x = r4;
             r6->y = r5;
@@ -9153,13 +9153,13 @@ static void sub_08111B88(struct Object *r5)
     struct Task *t = TaskCreate(sub_08111C5C, sizeof(struct EffectObject), 0x1001, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r4 = TaskGetStructPtr(t);
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->base.x;
     r4->y = r5->base.y;
     r4->parent = r5;
     r4->roomId = r5->base.roomId;
-    Object4InitSprite(r4, &r4->sprite, 0xC, 0x399, 0x26, 0x17);
+    EffectObjectInitSprite(r4, &r4->sprite, 0xC, 0x399, 0x26, 0x17);
     r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39A, TRUE);
 }
@@ -9200,7 +9200,7 @@ static void sub_08111C5C(void)
                 goto _08111E70;
             if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
             {
-                Object4DisplaySprite(r5);
+                EffectObjectDisplaySprite(r5);
                 return;
             }
         }
@@ -9209,7 +9209,7 @@ static void sub_08111C5C(void)
         _08111E70:
             KirbySomething(r5);
         }
-        Object4PostUpdate(r5);
+        EffectObjectPostUpdate(r5);
     }
 }
 
@@ -9219,7 +9219,7 @@ static struct EffectObject *sub_08111EF4(struct DarkMindForm2 *r6)
     struct Task *t = TaskCreate(sub_08112024, sizeof(struct EffectObject), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->unk0.base.x;
     r4->y = r5->unk0.base.y;
@@ -9235,7 +9235,7 @@ static struct EffectObject *sub_08111EF4(struct DarkMindForm2 *r6)
         r4->x += 0x2000;
         r4->y -= 0x1C00;
     }
-    Object4InitSprite(r4, &r4->sprite, 0x24, 0x399, 0x2B, 8);
+    EffectObjectInitSprite(r4, &r4->sprite, 0x24, 0x399, 0x2B, 8);
     r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39A, TRUE);
     r4->unk4 = 0x20;
@@ -9269,7 +9269,7 @@ static void sub_08112024(void)
                 goto _0811220C;
             if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
             {
-                Object4DisplaySprite(r5);
+                EffectObjectDisplaySprite(r5);
                 return;
             }
         }
@@ -9281,7 +9281,7 @@ static void sub_08112024(void)
         if (r5->flags & 2)
             r5->flags |= 0x1000;
         else
-            Object4PostUpdate(r5);
+            EffectObjectPostUpdate(r5);
     }
 }
 
@@ -9290,13 +9290,13 @@ static struct EffectObject *sub_081122A0(struct Object *r6, u8 sb)
     struct Task *t = TaskCreate(sub_081123CC, sizeof(struct EffectObject), 0x3501, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r6->base.x;
     r4->y = r6->base.y;
     r4->parent = r6;
     r4->roomId = r6->base.roomId;
-    Object4InitSprite(r4, &r4->sprite, 0x24, 0x399, 0x2a, 10);
+    EffectObjectInitSprite(r4, &r4->sprite, 0x24, 0x399, 0x2a, 10);
     r4->sprite.palId = 0;
     if (sb)
         r4->flags |= 1;
@@ -9341,7 +9341,7 @@ static void sub_081123CC(void)
                 goto _081125D4;
             if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
             {
-                Object4DisplaySprite(r5);
+                EffectObjectDisplaySprite(r5);
                 return;
             }
         }
@@ -9360,7 +9360,7 @@ static void sub_081123CC(void)
             r5->y = r8->base.y + 0x8D00;
             r5->x += (4 - (Rand16() & 7)) * 0x100;
         }
-        Object4PostUpdate(r5);
+        EffectObjectPostUpdate(r5);
     }
 }
 
@@ -9372,7 +9372,7 @@ static struct EffectObject *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
     struct EffectObject *r6 = &r0->unk0;
     struct Object13 *r8 = r0;
 
-    ClearObject4(r6);
+    ClearEffectObject(r6);
     r6->unk0 = 3;
     r6->x = sb->unk0.base.x;
     r6->y = sb->unk0.base.y;
@@ -9386,7 +9386,7 @@ static struct EffectObject *sub_081126C0(struct DarkMindForm2 *sb, u8 sp08)
         r8->unk68[i] = (Rand16() & 0x7FF) + 0x400;
     }
     if (sp08) sp0C = 41;
-    Object4InitSprite(r6, &r6->sprite, 1, 0x399, sp0C, 10);
+    EffectObjectInitSprite(r6, &r6->sprite, 1, 0x399, sp0C, 10);
     r6->sprite.palId = 0;
     if (sp08)
         r6->flags |= 1;
@@ -9431,7 +9431,7 @@ static void sub_08112880(void)
         {
             r5->x = sp2C->unk48[r8][0];
             r5->y = sp2C->unk48[r8][1];
-            Object4DisplaySprite(r5);
+            EffectObjectDisplaySprite(r5);
         }
         r5->x = r6;
         r5->y = r7;
@@ -11481,13 +11481,13 @@ static struct EffectObject *sub_081171BC(struct DarkMindTrigger *r5)
     struct Task *t = TaskCreate(sub_08117298, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct EffectObject *r0 = TaskGetStructPtr(t), *r4 = r0;
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->unk0.base.x;
     r4->y = r5->unk0.base.y;
     r4->parent = &r5->unk0;
     r4->roomId = r5->unk0.base.roomId;
-    Object4InitSprite(r4, &r4->sprite, 42, 0x39C, 2, 26);
+    EffectObjectInitSprite(r4, &r4->sprite, 42, 0x39C, 2, 26);
     r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x39C, 1);
     return r4;
@@ -11525,7 +11525,7 @@ static void sub_08117298(void)
                 goto _081174AC;
             if (Macro_0810B1F4(&r3->base) && !(r5->flags & 0x2000))
             {
-                Object4DisplaySprite(r5);
+                EffectObjectDisplaySprite(r5);
                 return;
             }
         }
@@ -11534,7 +11534,7 @@ static void sub_08117298(void)
         _081174AC:
             KirbySomething(r5);
         }
-        Object4PostUpdate(r5);
+        EffectObjectPostUpdate(r5);
     }
 }
 
@@ -11670,7 +11670,7 @@ static void sub_08117C84(struct DarkMindTrigger *r4)
     u16 r4_;
     u32 a, b;
 
-    ClearObject4(r7);
+    ClearEffectObject(r7);
     r7->unk0 = 3;
     r7->x = r4->unk0.base.x;
     r7->y = r4->unk0.base.y;
@@ -11700,7 +11700,7 @@ static void sub_08117C84(struct DarkMindTrigger *r4)
         break;
     }
     r7->flags |= 0x4000;
-    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x291, r4_, 6);
+    EffectObjectInitSprite(r7, &r7->sprite, 0x6012000, 0x291, r4_, 6);
 }
 
 static void sub_08117DA0(void)
@@ -11724,7 +11724,7 @@ static void sub_08117DA0(void)
                 goto _08117E38;
             if (Macro_0810B1F4(&r1->base) && !(r3->flags & 0x2000))
             {
-                Object4DisplaySprite(r3);
+                EffectObjectDisplaySprite(r3);
                 return;
             }
         }
@@ -11745,7 +11745,7 @@ static void sub_08117DA0(void)
                 r3->x += r3->unk3C;
                 r3->y -= r3->unk3E;
             }
-            Object4PostUpdate(r3);
+            EffectObjectPostUpdate(r3);
         }
     }
 }
@@ -11756,7 +11756,7 @@ static void sub_08117F6C(struct DarkMindTrigger *r4)
     struct EffectObject *r7 = TaskGetStructPtr(t);
     u32 v;
 
-    ClearObject4(r7);
+    ClearEffectObject(r7);
     r7->unk0 = 3;
     r7->x = r4->unk0.base.x;
     r7->y = r4->unk0.base.y;
@@ -11768,7 +11768,7 @@ static void sub_08117F6C(struct DarkMindTrigger *r4)
     r7->x += ((0x10 - (Rand16() & 0x1F)) * 0x100);
     r7->y += ((8 - (Rand16() & 0x1F)) * 0x100);
     r7->flags |= 0x4000;
-    Object4InitSprite(r7, &r7->sprite, 0x6012000, 0x2A6, 0, 6);
+    EffectObjectInitSprite(r7, &r7->sprite, 0x6012000, 0x2A6, 0, 6);
 }
 
 static void sub_08118064(void)
@@ -11792,7 +11792,7 @@ static void sub_08118064(void)
                 goto _081180F8;
             if (Macro_0810B1F4(&r1->base) && !(r3->flags & 0x2000))
             {
-                Object4DisplaySprite(r3);
+                EffectObjectDisplaySprite(r3);
                 return;
             }
         }
@@ -11813,7 +11813,7 @@ static void sub_08118064(void)
                 r3->x += r3->unk3C;
                 r3->y -= r3->unk3E;
             }
-            Object4PostUpdate(r3);
+            EffectObjectPostUpdate(r3);
         }
     }
 }
@@ -11823,7 +11823,7 @@ static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
     struct Task *t = TaskCreate(sub_08118310, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct EffectObject *r4 = TaskGetStructPtr(t);
 
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->unk0.base.x;
     r4->y = r5->unk0.base.y;
@@ -11832,7 +11832,7 @@ static void sub_08118220(struct DarkMindTrigger *r5, u8 r6)
     r4->x = (0xE0 - 0xA * r6) * 0x100;
     r4->y = 0xA000;
     r4->unk8 = r6;
-    Object4InitSprite(r4, &r4->sprite, 2, 0x389, 2, 0);
+    EffectObjectInitSprite(r4, &r4->sprite, 2, 0x389, 2, 0);
     r4->sprite.palId = 0;
     Macro_081050E8(r4, &r4->sprite, 0x389, 1);
 }
@@ -11859,7 +11859,7 @@ static void sub_08118310(void)
                 goto _081183AC;
             if (Macro_0810B1F4(&r1->unk0.base) && !(r5->flags & 0x2000))
             {
-                Object4DisplaySprite(r5);
+                EffectObjectDisplaySprite(r5);
                 return;
             }
         }
@@ -11883,7 +11883,7 @@ static void sub_08118310(void)
             r5->sprite.variant = r6->unkC0 + 2;
             break;
         }
-        Object4PostUpdate(r5);
+        EffectObjectPostUpdate(r5);
     }
 }
 
@@ -12082,7 +12082,7 @@ static void sub_08118A60(struct DarkMindTrigger *r5)
 {
     struct Task *t = TaskCreate(sub_08117530, sizeof(struct EffectObject), 0xFFF, TASK_USE_IWRAM, NULL);
     struct EffectObject *r4 = TaskGetStructPtr(t);
-    ClearObject4(r4);
+    ClearEffectObject(r4);
     r4->unk0 = 3;
     r4->x = r5->unk0.base.x;
     r4->y = r5->unk0.base.y;
