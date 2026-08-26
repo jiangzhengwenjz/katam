@@ -1387,7 +1387,7 @@ static void sub_08022D78(struct CutsceneTrigger5 *trigger)
     }
 }
 
-static void sub_08022DE4(struct Object *obj)
+void sub_08022DE4(struct Object *obj)
 {
     switch (obj->objTemplate->subtype1)
     {

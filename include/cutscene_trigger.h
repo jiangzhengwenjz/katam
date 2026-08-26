@@ -75,4 +75,6 @@ extern const s16 gUnk_082DEA9C[];
 
 void *CreateCutsceneTrigger(struct ObjectTemplate *, u8);
 
+void sub_08022DE4(struct Object *);
+
 #endif
