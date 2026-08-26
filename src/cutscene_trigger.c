@@ -1407,11 +1407,9 @@ void sub_08022DE4(struct Object *obj)
         obj->unk78 = sub_08022174;
         break;
     case 6:
-        {
         obj->unk78 = sub_080233E0;
         sub_080233E0(obj);
         break;
-        }
     }
 }
 
@@ -1898,7 +1896,7 @@ static void sub_08023734(struct CutsceneTrigger2 *trigger)
         {
             struct EffectObject *o = trigger->unk294[i];
 
-            if (o->x <= 0x11FFF && o->y > -0x2000)
+            if (o->x < 0x12000 && o->y > -0x2000)
                 done = FALSE;
             else
             {
