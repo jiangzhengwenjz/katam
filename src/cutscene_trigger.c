@@ -694,100 +694,116 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
         switch (trigger2->unk2A4[i])
         {
         case 0:
-            {
+        {
             bool32 done = TRUE;
             s32 diff;
             s32 spd;
 
             if (o->x > kirby->base.base.base.x)
             {
-                    diff = o->x - kirby->base.base.base.x;
-                    spd = (diff >> 8) * gUnk_082DEA6C[j][0];
-                    if (spd < gUnk_082DEA7C[j][0])
-                        spd = (u16)gUnk_082DEA7C[j][0]; // (u16) loads ldrh not ldrsh; required for matching (all four clamps)
-                    else
-                    {
-                        s32 max = gUnk_082DEA8C[j][0];
-                        s32 tmp = spd;
+                diff = o->x - kirby->base.base.base.x;
+                spd = (diff >> 8) * gUnk_082DEA6C[j][0];
+                if (spd < gUnk_082DEA7C[j][0])
+                {
+                    u16 lo = gUnk_082DEA7C[j][0];
 
-                        if (tmp > max)
-                            tmp = max;
-                        spd = tmp;
-                    }
-                    o->unk3C = spd;
-                    if (o->unk3C < diff)
-                    {
-                        o->unk3C = -spd;
-                        done = FALSE;
-                    }
-                    else
-                        o->unk3C = 0;
+                    spd = lo;
+                }
+                else
+                {
+                    s32 hi = gUnk_082DEA8C[j][0];
+                    s32 tmp = spd;
+
+                    if (tmp > hi)
+                        tmp = hi;
+                    spd = tmp;
+                }
+                o->unk3C = spd;
+                if (o->unk3C < diff)
+                {
+                    o->unk3C = -spd;
+                    done = FALSE;
+                }
+                else
+                    o->unk3C = 0;
             }
             else if (o->x < kirby->base.base.base.x)
             {
-                    diff = kirby->base.base.base.x - o->x;
-                    spd = (diff >> 8) * gUnk_082DEA6C[j][0];
-                    if (spd < gUnk_082DEA7C[j][0])
-                        spd = (u16)gUnk_082DEA7C[j][0];
-                    else if (spd > gUnk_082DEA8C[j][0])
-                        spd = gUnk_082DEA8C[j][0];
-                    o->unk3C = spd;
-                    if (o->unk3C < diff)
-                        done = FALSE;
-                    else
-                        o->unk3C = 0;
+                diff = kirby->base.base.base.x - o->x;
+                spd = (diff >> 8) * gUnk_082DEA6C[j][0];
+                if (spd < gUnk_082DEA7C[j][0])
+                {
+                    u16 lo = gUnk_082DEA7C[j][0];
+
+                    spd = lo;
+                }
+                else if (spd > gUnk_082DEA8C[j][0])
+                    spd = gUnk_082DEA8C[j][0];
+                o->unk3C = spd;
+                if (o->unk3C < diff)
+                    done = FALSE;
+                else
+                    o->unk3C = 0;
             }
             else
             {
-                    o->x = kirby->base.base.base.x;
-                    o->unk3C = 0;
+                o->x = kirby->base.base.base.x;
+                o->unk3C = 0;
             }
             if (o->y > kirby->base.base.base.y)
             {
-                    diff = o->y - kirby->base.base.base.y;
-                    spd = (diff >> 8) * gUnk_082DEA6C[j][1];
-                    if (spd < gUnk_082DEA7C[j][1])
-                        spd = (u16)gUnk_082DEA7C[j][1];
-                    else if (spd > gUnk_082DEA8C[j][1])
-                        spd = gUnk_082DEA8C[j][1];
-                    o->unk3E = spd;
-                    if (o->unk3E < diff)
-                        break;
-                    o->unk3E = 0;
+                diff = o->y - kirby->base.base.base.y;
+                spd = (diff >> 8) * gUnk_082DEA6C[j][1];
+                if (spd < gUnk_082DEA7C[j][1])
+                {
+                    u16 lo = gUnk_082DEA7C[j][1];
+
+                    spd = lo;
+                }
+                else if (spd > gUnk_082DEA8C[j][1])
+                    spd = gUnk_082DEA8C[j][1];
+                o->unk3E = spd;
+                if (o->unk3E < diff)
+                    break;
+                o->unk3E = 0;
             }
             else if (o->y < kirby->base.base.base.y)
             {
-                    diff = kirby->base.base.base.y - o->y;
-                    spd = (diff >> 8) * gUnk_082DEA6C[j][1];
-                    if (spd < gUnk_082DEA7C[j][1])
-                        spd = (u16)gUnk_082DEA7C[j][1];
-                    else
-                    {
-                        s32 max = gUnk_082DEA8C[j][1];
-                        s32 tmp = spd;
+                diff = kirby->base.base.base.y - o->y;
+                spd = (diff >> 8) * gUnk_082DEA6C[j][1];
+                if (spd < gUnk_082DEA7C[j][1])
+                {
+                    u16 lo = gUnk_082DEA7C[j][1];
 
-                        if (tmp > max)
-                            tmp = max;
-                        spd = tmp;
-                    }
-                    o->unk3E = spd;
-                    if (o->unk3E < diff)
-                    {
-                        done = FALSE;
-                        o->unk3E = -spd;
-                    }
-                    else
-                        o->unk3E = 0;
+                    spd = lo;
+                }
+                else
+                {
+                    s32 hi = gUnk_082DEA8C[j][1];
+                    s32 tmp = spd;
+
+                    if (tmp > hi)
+                        tmp = hi;
+                    spd = tmp;
+                }
+                o->unk3E = spd;
+                if (o->unk3E < diff)
+                {
+                    done = FALSE;
+                    o->unk3E = -spd;
+                }
+                else
+                    o->unk3E = 0;
             }
             else
             {
-                    o->y = kirby->base.base.base.y;
-                    o->unk3E = 0;
+                o->y = kirby->base.base.base.y;
+                o->unk3E = 0;
             }
             if (done)
-                    trigger2->unk2A4[i] = 1;
+                trigger2->unk2A4[i] = 1;
             break;
-            }
+        }
         case 1:
             sub_080525C0(kirby);
             CreateEffectObject(&kirby->base.base.base, 0, 0x292, 0);
@@ -805,8 +821,8 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
         case 2:
             if (trigger2->unk2AC[i]++ > 0x1E)
             {
-                    PlaySfx(&trigger->obj2.base, SE_08D5C490);
-                    trigger2->unk2A4[i] = 3;
+                PlaySfx(&trigger->obj2.base, SE_08D5C490);
+                trigger2->unk2A4[i] = 3;
             }
             break;
         case 3:
@@ -815,7 +831,7 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
             slot->xspeed -= 0x10;
             slot->yspeed += 0xA;
             if (gUnk_082DEA9C[j] > slot->xspeed)
-                    trigger2->unk2A4[i] = 4;
+                trigger2->unk2A4[i] = 4;
             break;
         case 4:
             slot->x += slot->xspeed;
@@ -823,7 +839,7 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
             slot->xspeed += 0x18;
             slot->yspeed += 0xA;
             if (slot->y < -0x2000)
-                    trigger2->unk2A4[i] = 5;
+                trigger2->unk2A4[i] = 5;
             break;
         case 5:
             slot->xspeed = 0;
