@@ -1380,7 +1380,7 @@ static void sub_08022D78(struct CutsceneTrigger5 *trigger)
         trigger->unkC4->unk8 |= 0x40;
         trigger->unkC4->unkA = 0x80;
         trigger->unkC4->unk4 = 0xFFFF;
-        trigger->unkC4->unk6 = -1;
+        trigger->unkC4->unk6 = 0xFFFF;
         trigger->unkB4 = 0;
         trigger->obj2.unk78 = sub_080233A8;
         sub_0808859C(&trigger->obj2, gUnk_0835105C[10], 0x48);
