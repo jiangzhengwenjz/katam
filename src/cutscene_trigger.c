@@ -1193,26 +1193,26 @@ static void sub_08022770(struct CutsceneTrigger5 *trigger)
             u16 angle;
 
             if (++kirby->animationIndex > 0x59)
-            kirby->animationIndex = 0x4A;
+                kirby->animationIndex = 0x4A;
             spd = trigger->unkB4 / 2; // the u8 t staging and clamp arm order are required for matching
             if (spd < 0xC8)
-            t = spd;
+                t = spd;
             else
-            t = 0xC8;
+                t = 0xC8;
             spd8 = t;
             a[0] = trigger->unkCE[i][0];
             a[1] = trigger->unkCE[i][1];
             b[0] = 0x7000 - kirby->base.base.base.x;
             b[1] = -0x2000 - kirby->base.base.base.y;
             if (b[0] * a[1] - a[0] * b[1] > 0)
-            spd8 = -spd8;
+                spd8 = -spd8;
             angle = (spd8 + 0x400) & 0x3FF;
             trigger->unkCE[i][0] = (a[0] * gSineTable[angle + 0x100] - a[1] * gSineTable[angle]) >> 14;
             trigger->unkCE[i][1] = (a[0] * gSineTable[angle] + a[1] * gSineTable[angle + 0x100]) >> 14;
             kirby->base.base.base.x += trigger->unkCE[i][0];
             kirby->base.base.base.y += trigger->unkCE[i][1];
             if (kirby->base.base.base.x >> 8 >= 0x168 && kirby->base.base.base.x >> 8 <= 0x178
-            && kirby->base.base.base.y >> 8 > 0xD7 && kirby->base.base.base.y >> 8 <= 0xE8)
+             && kirby->base.base.base.y >> 8 > 0xD7 && kirby->base.base.base.y >> 8 <= 0xE8)
             {
             kirby->base.base.base.x = 0x17000;
             kirby->base.base.base.y = 0xE000;
@@ -1224,9 +1224,9 @@ static void sub_08022770(struct CutsceneTrigger5 *trigger)
         }
         case 1:
             if (++kirby->animationIndex > 0x59)
-            kirby->animationIndex = 0x4A;
+                kirby->animationIndex = 0x4A;
             if (trigger->unkE2[i] & 1)
-            kirby->base.base.base.flags ^= 0x400;
+                kirby->base.base.base.flags ^= 0x400;
             if (++trigger->unkE2[i] > 0x3B)
             {
             kirby->base.base.base.flags |= 0x400;
