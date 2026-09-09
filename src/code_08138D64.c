@@ -1810,35 +1810,31 @@ static bool32 sub_0813BCA0(struct Unk_08138D64 *a1, u8 a2) {
 
     if (a1->unk7D1) return FALSE;
     for (i = 1; i < a2; ++i) {
-        struct {
-            s16 unk0[5];
-        } sp00 = {
-            {
-                0, 0, 0,
-                a1->unk7C0[i][0] + 3, a1->unk7C0[i][1] + 0x10
-            },
+        struct SpriteTransform sp00 = {
+            0, 0, 0,
+            a1->unk7C0[i][0] + 3, a1->unk7C0[i][1] + 0x10
         };
         j = i + -1;
         if (a1->unk7DB[j]) {
             ++a1->unk7D8[j];
             switch (a1->unk7DB[j]) {
             case 1:
-                sp00.unk0[1] = sp00.unk0[2] = 0x100;
+                sp00.qScaleX = sp00.qScaleY = 0x100;
                 if (a1->unk7D8[j] > 0xE) {
                     a1->unk7D8[j] = 0;
                     a1->unk7DB[j] = 2;
                 }
                 break;
             case 2:
-                sp00.unk0[1] = sp00.unk0[2] = (10 - a1->unk7D8[j]) * 0x100 / 10;
+                sp00.qScaleX = sp00.qScaleY = (10 - a1->unk7D8[j]) * 0x100 / 10;
                 if (a1->unk7D8[j] + 1 > 9) {
                     a1->unk7D8[j] = 0;
                     a1->unk7DB[j] = 0;
                 }
                 break;
             }
-            sub_08155604(&a1->unk6D0[j][0], sp00.unk0);
-            sub_08155604(&a1->unk6D0[j][1], sp00.unk0);
+            sub_08155604(&a1->unk6D0[j][0], &sp00);
+            sub_08155604(&a1->unk6D0[j][1], &sp00);
             DisplaySprite(&a1->unk6D0[j][0]);
             DisplaySprite(&a1->unk6D0[j][1]);
         }

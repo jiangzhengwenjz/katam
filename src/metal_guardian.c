@@ -67,7 +67,7 @@ void* CreateMetalGuardian(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -182,8 +182,8 @@ static void sub_080BD988(struct Object* arg0) {
         arg0->base.counter = 0;
         arg0->kirby3 = FindTargetKirby(&arg0->base);
     }
-    if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) <= 0x3fff) {
-        if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3fff) {
+    if (abs(arg0->kirby3->base.x - arg0->base.x) <= 0x3fff) {
+        if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x3fff) {
             sub_080BE284(arg0);
         }
     }
@@ -272,7 +272,7 @@ static void sub_080BDA70(struct Object* arg0, u8 arg1) {
         laser->base.x += 0x800;
     }
     laser->base.sprite.palId = 0;
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == laser->base.roomId) {
+    if (gKirbys[gLocalPlayerId].base.roomId == laser->base.roomId) {
         laser->base.sprite.palId = sub_0803DF24(0x311);
         if (laser->base.sprite.palId == 0xff) {
             laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
@@ -286,7 +286,7 @@ static void sub_080BDA70(struct Object* arg0, u8 arg1) {
 static bool8 sub_080BDD1C(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
-    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, 0, !arg0->base.sprite.palId);
     if (arg0->unk88 != 0 && arg0->base.flags & 2) {
         arg0->base.flags |= 0x1000;
         return TRUE;
@@ -339,7 +339,7 @@ static void sub_080BDE7C(struct Object* arg0) {
     ObjectSetBounds(&laser->base, 16, -1, 18, 1);
     ObjectBaseInitSprite(&laser->base, &laser->base.sprite, 0xc, 0x311, 7, 0x1b);
     laser->base.sprite.palId = 0;
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == laser->base.roomId) {
+    if (gKirbys[gLocalPlayerId].base.roomId == laser->base.roomId) {
         laser->base.sprite.palId = sub_0803DF24(0x311);
         if (laser->base.sprite.palId == 0xff) {
             laser->base.sprite.palId = sub_0803DFAC(0x311, 0);
@@ -355,7 +355,7 @@ static bool8 sub_080BE0E8(struct Unk_080C4EDC* arg0) {
     struct Sprite sprite;
     arg0->base.flags |= 4;
     Macro_08107BA8_4(&arg0->base, &arg0->base.sprite, &sprite, 0xc, &arg0->base.sprite);
-    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, !arg0->base.sprite.palId);
+    Macro_081050E8(&arg0->base, &arg0->base.sprite, 0x311, 0, !arg0->base.sprite.palId);
     return FALSE;
 }
 

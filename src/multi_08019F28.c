@@ -562,7 +562,7 @@ static void sub_0801A468(struct Multi_08019F28 *r6)
 static void sub_0801A4E0(void)
 {
     struct Multi_08019F28 *r6, *r0 = TaskGetStructPtr(gCurTask);
-    s16 array[5];
+    struct SpriteTransform transform;
 
     r6 = r0;
     if (r6->unk0C & 4)
@@ -573,12 +573,12 @@ static void sub_0801A4E0(void)
         r6->unk58.x = 120;
         r6->unk58.y = 88;
         r6->unk58.unk8 = 0x60;
-        array[0] = r6->unk84.unk10;
-        array[1] = 0x100;
-        array[2] = 0x100;
-        array[3] = r6->unk58.x;
-        array[4] = r6->unk58.y;
-        sub_08155604(&r6->unk58, array);
+        transform.rotation = r6->unk84.unk10;
+        transform.qScaleX = 0x100;
+        transform.qScaleY = 0x100;
+        transform.x = r6->unk58.x;
+        transform.y = r6->unk58.y;
+        sub_08155604(&r6->unk58, &transform);
         DisplaySprite(&r6->unk58);
         r6->unk84.unk10 += 0x20;
     }

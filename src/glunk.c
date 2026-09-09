@@ -30,7 +30,7 @@ void *CreateGlunk(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *glunk = tmp;
 
     InitObject(glunk, template, a2);
-    if (glunk->base.x > glunk->kirby3->base.base.base.x)
+    if (glunk->base.x > glunk->kirby3->base.x)
         glunk->base.flags |= 1;
     else
         glunk->base.flags &= ~1;
@@ -147,7 +147,7 @@ static void sub_080AF204(struct Object *glunk)
         obj4->flags |= 0x2000;
     EffectObjectInitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, 1);
 }
 
 static void sub_080AF330(void)
@@ -161,7 +161,7 @@ static void sub_080AF330(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 6, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x327, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, !obj4->sprite.palId);
         glunk = obj4->parent;
         if (glunk)
         {

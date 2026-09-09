@@ -37,7 +37,7 @@ void* CreateBomber(struct ObjectTemplate* arg0, u8 arg1) {
     obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.unkC |= 0x100;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {

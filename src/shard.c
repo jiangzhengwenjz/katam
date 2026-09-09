@@ -120,12 +120,12 @@ bool32 sub_0801BA18(struct ObjectBase *objBase, bool32 a2)
         if (!a2)
         {
             if (kirby->hp <= 0
-                || kirby->base.base.base.roomId != objBase->roomId
+                || kirby->base.roomId != objBase->roomId
                 || sub_0805BEC4(kirby)
-                || vars[0] > kirby->base.base.base.x
-                || vars[0] + 0xF000 < kirby->base.base.base.x
-                || vars[1] > kirby->base.base.base.y
-                || vars[1] + 0xA000 < kirby->base.base.base.y)
+                || vars[0] > kirby->base.x
+                || vars[0] + 0xF000 < kirby->base.x
+                || vars[1] > kirby->base.y
+                || vars[1] + 0xA000 < kirby->base.y)
                 return FALSE;
         }
         else
@@ -135,10 +135,10 @@ bool32 sub_0801BA18(struct ObjectBase *objBase, bool32 a2)
                 if (kirby->lives) return FALSE;
             }
             else if (sub_0805BEC4(kirby)
-                || vars[0] > kirby->base.base.base.x
-                || vars[0] + 0xF000 < kirby->base.base.base.x
-                || vars[1] > kirby->base.base.base.y
-                || vars[1] + 0xA000 < kirby->base.base.base.y)
+                || vars[0] > kirby->base.x
+                || vars[0] + 0xF000 < kirby->base.x
+                || vars[1] > kirby->base.y
+                || vars[1] + 0xA000 < kirby->base.y)
                 return FALSE;
         }
     }
@@ -199,9 +199,9 @@ static void sub_0801BC28(struct Shard *shard)
     if (shardAlias->obj2.base.flags & 0x40000
         && !(shardAlias->obj2.base.flags & 0x1000))
     {
-        if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.header.kind)
+        if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.header.kind)
             r2 = FALSE;
-        else if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.base.base.unk56 >= gNumHumanPlayers)
+        else if (((struct Kirby *)shardAlias->obj2.base.unk6C)->base.unk56 >= gNumHumanPlayers)
             r2 = FALSE;
         else
             r2 = TRUE;
@@ -236,7 +236,7 @@ static void sub_0801BD68(struct Shard *shard)
     for (i = 0; i < 4; ++i)
     {
         struct Kirby *kirby = gKirbys + i;
-        if (roomId == kirby->base.base.base.roomId)
+        if (roomId == kirby->base.roomId)
         {
             array[i] = count;
             ++count;
@@ -246,7 +246,7 @@ static void sub_0801BD68(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if (roomId == kirby->base.base.base.roomId
+        if (roomId == kirby->base.roomId
             && !((shardAlias->unkE0 >> i) & 1))
         {
             sub_0804BD98(kirby, array[i], count, shardAlias->unkDC, gUnk_08352DBE[shard->obj2.objTemplate->subtype1][0], gUnk_08352DBE[shard->obj2.objTemplate->subtype1][1]);
@@ -281,9 +281,9 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
 
             if (li->currentRoom == gCurLevelInfo[i].currentRoom
                 && kirby->movementState & 0x40
-                && kirby->base.base.base.unkC & 0x1000
-                && var[0] <= kirby->base.base.base.x && var[0] + sp[0] >= kirby->base.base.base.x
-                && var[1] <= kirby->base.base.base.y && var[1] + sp[1] >= kirby->base.base.base.y)
+                && kirby->base.unkC & 0x1000
+                && var[0] <= kirby->base.x && var[0] + sp[0] >= kirby->base.x
+                && var[1] <= kirby->base.y && var[1] + sp[1] >= kirby->base.y)
             {
                 boolean = TRUE;
                 break;
@@ -297,7 +297,7 @@ static void sub_0801BE4C(struct Shard *shard) // see sub_0802AE9C
             for (i = 0; i < gNumKirbys; ++i)
             {
                 if (gKirbys[i].hp > 0
-                    && gCurLevelInfo[shard->obj2.base.unk56].currentRoom == gKirbys[i].base.base.base.roomId)
+                    && gCurLevelInfo[shard->obj2.base.unk56].currentRoom == gKirbys[i].base.roomId)
                     sub_0805BDF4(gKirbys + i, shard->obj2.objTemplate->unk1E, shard->obj2.objTemplate->unk1A, shard->obj2.objTemplate->unk1C);
             }
             shard->obj2.unk78 = sub_0801C3B0;
@@ -450,7 +450,7 @@ static void sub_0801C3F4(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if (shard->obj2.base.roomId == kirby->base.base.base.roomId
+        if (shard->obj2.base.roomId == kirby->base.roomId
             && kirby->hp <= 0)
             return;
     }
@@ -517,7 +517,7 @@ static void sub_0801C558(struct Shard *shard)
     {
         struct Kirby *kirby = gKirbys + i;
 
-        if (r2 == kirby->base.base.base.roomId)
+        if (r2 == kirby->base.roomId)
         {
             ++kirby; --kirby;
         }

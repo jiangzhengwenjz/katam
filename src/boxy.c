@@ -100,7 +100,7 @@ void *CreateBoxy(struct ObjectTemplate *template, u8 a2)
     boxy->obj2.base.unk5C &= ~7;
     boxy->obj2.base.unk5C |= 3;
     boxy->obj2.base.unk5C |= 0xA0;
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
@@ -118,16 +118,16 @@ static void sub_080D571C(struct Boxy *boxy)
 {
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
     boxy->obj2.base.flags |= 4;
-    if (!(boxy->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && boxy->obj2.base.roomId == boxy->obj2.kirby3->base.base.base.roomId)
+    if (!(boxy->obj2.kirby3->base.unkC & 0x8000)
+        && boxy->obj2.base.roomId == boxy->obj2.kirby3->base.roomId)
     {
-        if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+        if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
             boxy->obj2.base.flags |= 1;
         else
             boxy->obj2.base.flags &= ~1;
-        if (Macro_08039430_2(&boxy->obj2.kirby3->base.base.base, &boxy->obj2))
+        if (Macro_08039430_2(&boxy->obj2.kirby3->base, &boxy->obj2))
         {
-            Macro_081003EC(&boxy->obj2, &boxy->obj2.kirby3->base.base.base);
+            Macro_081003EC(&boxy->obj2, &boxy->obj2.kirby3->base);
             boxy->obj2.base.flags &= ~0x200;
             boxy->obj2.unk85 = 0;
             sub_080D777C(boxy);
@@ -168,7 +168,7 @@ static void sub_080D5930(struct Boxy *boxy)
         if (Rand16() & 3)
         {
             boxy->obj2.unk85 += 0x10;
-            if (abs(boxy->obj2.kirby3->base.base.base.x - boxy->obj2.base.x) < a * 0x100)
+            if (abs(boxy->obj2.kirby3->base.x - boxy->obj2.base.x) < a * 0x100)
             {
                 if (!(Rand16() & 1))
                     sub_080D5B2C(boxy);
@@ -225,7 +225,7 @@ static void sub_080D5B2C(struct Boxy *boxy)
 {
     ObjectSetFunc(boxy, 0, sub_080D5BB0);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
@@ -270,7 +270,7 @@ static void sub_080D5D54(struct Boxy *boxy)
 {
     ObjectSetFunc(boxy, 0, sub_080D5DD8);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
@@ -443,14 +443,14 @@ static void sub_080D655C(struct Boxy *boxy)
 
     ObjectSetFunc(boxy, 1, sub_080D6648);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
-    if (abs(boxy->obj2.kirby3->base.base.base.x - boxy->obj2.base.x) > 0x3000)
+    if (abs(boxy->obj2.kirby3->base.x - boxy->obj2.base.x) > 0x3000)
     {
         id += 3;
-        if (abs(boxy->obj2.kirby3->base.base.base.x - boxy->obj2.base.x) > 0x6000)
+        if (abs(boxy->obj2.kirby3->base.x - boxy->obj2.base.x) > 0x6000)
             id += 3;
     }
     id += Rand16() & 3;
@@ -547,7 +547,7 @@ static void sub_080D6988(struct Boxy *boxy)
 {
     ObjectSetFunc(boxy, 2, sub_080D6A30);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
@@ -611,7 +611,7 @@ static void sub_080D6B9C(struct Boxy *boxy)
 {
     ObjectSetFunc(boxy, 0, sub_080D6C0C);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
@@ -710,7 +710,7 @@ void sub_080D7020(struct Object *box)
     if (box->base.flags & 1)
         box->base.xspeed = -box->base.xspeed;
     box->base.counter = 0x1E0;
-    Macro_081003EC(box, &box->kirby3->base.base.base);
+    Macro_081003EC(box, &box->kirby3->base);
 }
 
 static void sub_080D712C(struct Object *box)
@@ -731,7 +731,7 @@ static void sub_080D712C(struct Object *box)
         {
             box->base.xspeed = 0;
             box->base.yspeed = 0;
-            if (abs(box->kirby3->base.base.base.x - box->base.x) < 0x3000)
+            if (abs(box->kirby3->base.x - box->base.x) < 0x3000)
             {
                 sub_080D730C(box);
                 return;
@@ -886,7 +886,7 @@ static void sub_080D7824(struct Boxy *boxy)
 {
     ObjectSetFunc(boxy, 2, sub_080D5F7C);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;
@@ -902,7 +902,7 @@ static void sub_080D787C(struct Boxy *boxy)
 {
     ObjectSetFunc(boxy, 6, sub_080D78D0);
     boxy->obj2.kirby3 = FindTargetKirby(&boxy->obj2.base);
-    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.base.base.x)
+    if (boxy->obj2.base.x > boxy->obj2.kirby3->base.x)
         boxy->obj2.base.flags |= 1;
     else
         boxy->obj2.base.flags &= ~1;

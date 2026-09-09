@@ -21,6 +21,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
+#include "main.h"
 
 // Reports an error diagnostic and terminates the program.
 [[noreturn]] void RaiseError(const char* format, ...)
@@ -32,5 +33,17 @@
     std::vsnprintf(buffer, bufferSize, format, args);
     std::fprintf(stderr, "error: %s\n", buffer);
     va_end(args);
-    std::exit(1);
+    if (g_outputFile != nullptr)
+    {
+        std::fclose(g_outputFile);
+        g_outputFile = nullptr;
+        if (!g_outputFilename.empty())
+            std::remove(g_outputFilename.c_str());
+    }
+    if (g_inputFile != nullptr)
+    {
+        std::fclose(g_inputFile);
+        g_inputFile = nullptr;
+    }
+    std::exit(2);
 }

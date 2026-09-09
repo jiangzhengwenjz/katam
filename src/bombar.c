@@ -155,11 +155,11 @@ static void sub_080D7A6C(struct Object *bombar)
 {
     bombar->kirby3 = FindTargetKirby(&bombar->base);
     bombar->base.flags |= 4;
-    if (!(bombar->kirby3->base.base.base.unkC & 0x8000)
-        && bombar->base.roomId == bombar->kirby3->base.base.base.roomId
-        && Macro_08039430_1(&bombar->kirby3->base.base.base, bombar))
+    if (!(bombar->kirby3->base.unkC & 0x8000)
+        && bombar->base.roomId == bombar->kirby3->base.roomId
+        && Macro_08039430_1(&bombar->kirby3->base, bombar))
     {
-        Macro_081003EC(bombar, &bombar->kirby3->base.base.base);
+        Macro_081003EC(bombar, &bombar->kirby3->base);
         bombar->base.flags &= ~0x200;
         sub_080D9E94(bombar);
         bombar->base.counter = 0x5A;
@@ -1313,8 +1313,8 @@ static void sub_080D9A04(struct Object *missile)
         {
             missile->kirby3 = FindTargetKirby(&missile->base);
             missile->unk9E = 0;
-            missile->unkA0 = missile->kirby3->base.base.base.x >> 8;
-            missile->unkA2 = missile->kirby3->base.base.base.y >> 8;
+            missile->unkA0 = missile->kirby3->base.x >> 8;
+            missile->unkA2 = missile->kirby3->base.y >> 8;
         }
         lhs = missile->base.y & ~0x8FF;
         rhs = (missile->unkA2 * 0x100) & ~0x8FF;
@@ -1398,8 +1398,8 @@ static void sub_080D9A04(struct Object *missile)
         {
             missile->kirby3 = FindTargetKirby(&missile->base);
             missile->unk9E = 0;
-            missile->unkA0 = missile->kirby3->base.base.base.x >> 8;
-            missile->unkA2 = missile->kirby3->base.base.base.y >> 8;
+            missile->unkA0 = missile->kirby3->base.x >> 8;
+            missile->unkA2 = missile->kirby3->base.y >> 8;
         }
         lhs = missile->base.y & ~0x8FF;
         rhs = (missile->unkA2 * 0x100) & ~0x8FF;
@@ -1553,9 +1553,9 @@ void sub_080D9EE8(struct Object *bomb)
     if (bomb->objTemplate->subtype1)
         bomb->base.flags |= 1;
     bomb->unk9F = 0;
-    if (bomb->base.x - 0x1000 < bomb->kirby3->base.base.base.x)
+    if (bomb->base.x - 0x1000 < bomb->kirby3->base.x)
         bomb->base.xspeed = 0x100;
-    if (bomb->base.x + 0x1000 > bomb->kirby3->base.base.base.x)
+    if (bomb->base.x + 0x1000 > bomb->kirby3->base.x)
         bomb->base.xspeed = -0x100;
 }
 

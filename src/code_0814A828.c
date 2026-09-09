@@ -273,7 +273,7 @@ void sub_0814A828(void) {
         gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
         m4aSoundVSyncOn();
         for (i = 0; i < gNumHumanPlayers; ++i)
-            gKirbys[i].base.base.base.flags &= ~0x1000000;
+            gKirbys[i].base.flags &= ~0x1000000;
         t = TaskCreate(sub_0814A914, sizeof(struct Unk_0814A828), 0x1000, TASK_USE_IWRAM | TASK_x0004, nullsub_12);
         var = TaskGetStructPtr(t);
         CpuFill16(0, var, sizeof(struct Unk_0814A828));

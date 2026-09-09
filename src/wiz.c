@@ -153,11 +153,11 @@ static void sub_080E7EBC(struct Object *wiz)
 {
     wiz->kirby3 = FindTargetKirby(&wiz->base);
     wiz->base.flags |= 4;
-    if (!(wiz->kirby3->base.base.base.unkC & 0x8000)
-        && wiz->base.roomId == wiz->kirby3->base.base.base.roomId
-        && Macro_08039430_1(&wiz->kirby3->base.base.base, wiz))
+    if (!(wiz->kirby3->base.unkC & 0x8000)
+        && wiz->base.roomId == wiz->kirby3->base.roomId
+        && Macro_08039430_1(&wiz->kirby3->base, wiz))
     {
-        Macro_081003EC(wiz, &wiz->kirby3->base.base.base);
+        Macro_081003EC(wiz, &wiz->kirby3->base);
         sub_080EABC0(wiz);
     }
 }
@@ -1068,12 +1068,12 @@ static void sub_080E9E58(struct Object *cloud)
         if (cloud->base.header.unk1 & 2)
         {
             cloud->base.sprite.palId = 0;
-            Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x318, 1);
+            Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x318, 0, 1);
         }
         else
         {
             cloud->base.sprite.palId = 0;
-            Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x317, 1);
+            Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x317, 0, 1);
         }
         if (cloud->base.flags & 2)
         {
@@ -1084,7 +1084,7 @@ static void sub_080E9E58(struct Object *cloud)
             else
                 cloud->base.counter = 0x40;
             cloud->base.sprite.palId = 0;
-            Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x317, 1);
+            Macro_081050E8(&cloud->base, &cloud->base.sprite, 0x317, 0, 1);
         }
     }
     if (!--cloud->base.counter)
@@ -1131,13 +1131,13 @@ static void sub_080EA0D8(struct Object *apple)
         if (apple->base.counter)
         {
             apple->base.sprite.palId = 0;
-            Macro_081050E8(&apple->base, &apple->base.sprite, 0x317, 1);
+            Macro_081050E8(&apple->base, &apple->base.sprite, 0x317, 0, 1);
             apple->base.counter = 0;
         }
         else
         {
             apple->base.sprite.palId = 0;
-            Macro_081050E8(&apple->base, &apple->base.sprite, 0x318, 1);
+            Macro_081050E8(&apple->base, &apple->base.sprite, 0x318, 0, 1);
             apple->base.counter = 1;
         }
     }
@@ -1220,7 +1220,7 @@ static void sub_080EA3B8(struct Object *cloud)
     ObjectSetBounds(objBase, 2, 2, 2, 2);
     ObjectBaseInitSprite(objBase, &objBase->sprite, 6, 0x317, 0x18, 0xC);
     objBase->sprite.palId = 0;
-    Macro_081050E8(objBase, &objBase->sprite, 0x318, 1);
+    Macro_081050E8(objBase, &objBase->sprite, 0x318, 0, 1);
     objBase->counter = 8;
 }
 
@@ -1230,7 +1230,7 @@ static void sub_080EA528(void)
     struct Sprite sprite;
 
     Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 6, &objBase->sprite);
-    Macro_081050E8(objBase, &objBase->sprite, 0x318, !objBase->sprite.palId);
+    Macro_081050E8(objBase, &objBase->sprite, 0x318, 0, !objBase->sprite.palId);
     if (!ObjectPreUpdate(objBase))
     {
         objBase->flags |= 4;

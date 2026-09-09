@@ -263,7 +263,7 @@ static void sub_08026168(struct Cutscene *arg0) {
         }
     }
     if (arg0->flags & 0x400000) {
-        s16 array2[5];
+        struct SpriteTransform transform;
         s16 array[2];
         sprite = &arg0->unk144;
         if (!(arg0->flags & 0x80000000)) {
@@ -272,7 +272,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             }
         }
         if (arg0->flags & 0x800000) {
-            Macro_08026168(sprite, arg0->unk31C, arg0->unk314[0], arg0->unk314[1], array, array2, 0x2023);
+            Macro_08026168(sprite, arg0->unk31C, arg0->unk314[0], arg0->unk314[1], array, &transform, 0x2023);
         }
         else if (!(arg0->unk358 & 0xf)) {
             u32 val;
@@ -289,7 +289,7 @@ static void sub_08026168(struct Cutscene *arg0) {
     }
     if (arg0->flags & 0x1000) {
         s16 val;
-        s16 array2[4];
+        struct SpriteTransform transform;
         s16 array[2];
         struct Sprite *sprite1 = &arg0->unkA4;
         sprite = &arg0->unkCC;
@@ -316,26 +316,26 @@ static void sub_08026168(struct Cutscene *arg0) {
                 array[0] = (((arg0->unk328 - 0x7800) * val) >> 0x10) + 0x78;
                 array[1] = (((arg0->unk32C - 0x5000) * val) >> 0x10) + 0x50;
             }
-            array2[0] = 0;
-            array2[1] = val;
-            array2[2] = val;
-            array2[3] = array[0];
-            array2[4] = array[1]; // UB: out-of-bounds access
+            transform.rotation = 0;
+            transform.qScaleX = val;
+            transform.qScaleY = val;
+            transform.x = array[0];
+            transform.y = array[1];
             arg0->unkA4.unk8 |= 0x2020;
-            sub_08155604(sprite1, array2);
+            sub_08155604(sprite1, &transform);
             DisplaySprite(sprite1);
-            array2[0] = 0;
-            array2[1] = val;
-            array2[2] = val;
-            array2[3] = array[0];
-            array2[4] = array[1]; // UB: out-of-bounds access
+            transform.rotation = 0;
+            transform.qScaleX = val;
+            transform.qScaleY = val;
+            transform.x = array[0];
+            transform.y = array[1];
             arg0->unkCC.unk8 |= 0x2020;
-            sub_08155604(sprite, array2);
+            sub_08155604(sprite, &transform);
             DisplaySprite(sprite);
         }
     }
     if (arg0->flags & 0x8000) {
-        s16 array2[5];
+        struct SpriteTransform transform;
         s16 array[2];
         sprite = &arg0->unkF4;
         if (!(arg0->flags & 0x80000000)) {
@@ -348,7 +348,7 @@ static void sub_08026168(struct Cutscene *arg0) {
             }
         }
         if (arg0->flags & 0x40000) {
-            Macro_08026168(sprite, arg0->unk344, arg0->unk33C, arg0->unk340, array, array2, 0x42022);
+            Macro_08026168(sprite, arg0->unk344, arg0->unk33C, arg0->unk340, array, &transform, 0x42022);
         }
         DisplaySprite(sprite);
     }

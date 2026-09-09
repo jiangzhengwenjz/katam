@@ -194,9 +194,9 @@ static void sub_0802AE9C(struct DoorToHub *door)
 
             if (li->currentRoom == gCurLevelInfo[j].currentRoom
                 && kirby->movementState & 0x40
-                && kirby->base.base.base.unkC & 0x1000
-                && var[0] <= kirby->base.base.base.x && var[0] + sp[0] >= kirby->base.base.base.x
-                && var[1] <= kirby->base.base.base.y && var[1] + sp[1] >= kirby->base.base.base.y)
+                && kirby->base.unkC & 0x1000
+                && var[0] <= kirby->base.x && var[0] + sp[0] >= kirby->base.x
+                && var[1] <= kirby->base.y && var[1] + sp[1] >= kirby->base.y)
             {
                 r8 = TRUE;
                 break;
@@ -218,7 +218,7 @@ static void sub_0802AE9C(struct DoorToHub *door)
             }
             for (j = 0; j < gNumHumanPlayers; ++j)
             {
-                gKirbys[j].base.base.base.unkC |= 0x800000;
+                gKirbys[j].base.unkC |= 0x800000;
                 sub_0805BDF4(&gKirbys[j], gUnk_082D8CF0[j], gUnk_082D8D08[j][0] >> 12, gUnk_082D8D08[j][1] >> 12);
             }
             if (gAIKirbyState < AI_KIRBY_STATE_CUTSCENE)

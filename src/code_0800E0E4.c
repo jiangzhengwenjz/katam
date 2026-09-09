@@ -195,7 +195,7 @@ static void sub_0800E27C(void)
                         r6->x = 0x10 * ptr[0] - sp00[0];
                         r6->y = 0x10 * ptr[1] - sp00[1];
                         if (!(var->objBase.flags & 0x400)
-                            && gKirbys[gLocalPlayerId].base.base.base.roomId == var->objBase.roomId)
+                            && gKirbys[gLocalPlayerId].base.roomId == var->objBase.roomId)
                         {
                             r6->x += gUnk_0203AD18[0];
                             r6->y += gUnk_0203AD18[1];
@@ -221,7 +221,7 @@ static void sub_0800E27C(void)
                         r6->x = 0x10 * ptr[0] - sp00[0];
                         r6->y = 0x10 * ptr[1] - sp00[1];
                         if (!(var->objBase.flags & 0x400)
-                            && gKirbys[gLocalPlayerId].base.base.base.roomId == var->objBase.roomId)
+                            && gKirbys[gLocalPlayerId].base.roomId == var->objBase.roomId)
                         {
                             r6->x += gUnk_0203AD18[0];
                             r6->y += gUnk_0203AD18[1];

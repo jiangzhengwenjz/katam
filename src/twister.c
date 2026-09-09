@@ -25,7 +25,7 @@ void* CreateTwister(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -83,7 +83,7 @@ static void sub_080BBE08(struct Object* arg0) {
 
 static void sub_080BBEBC(struct Object* arg0) {
     ObjectSetFunc(arg0, 2, sub_080BBF54);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -94,7 +94,7 @@ static void sub_080BBEBC(struct Object* arg0) {
     arg0->base.unk5C = ~0x20;
     arg0->base.unk5C &= ~7;
     arg0->base.unk5C |= 1;
-    if (arg0->kirby3->base.base.base.x < arg0->base.x) {
+    if (arg0->kirby3->base.x < arg0->base.x) {
         arg0->unk85 |= 1;
     }
     else {
@@ -118,8 +118,8 @@ static void sub_080BBF54(struct Object* arg0) {
         if (++arg0->unk9E > 7) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         lhs = arg0->base.y & ~0xfff;
         rhs = ((arg0->unkA2 + 2) << 8) & ~0xfff;
@@ -203,8 +203,8 @@ static void sub_080BBF54(struct Object* arg0) {
         if (++arg0->unk9E > 7) {
             arg0->kirby3 = FindTargetKirby(&arg0->base);
             arg0->unk9E = 0;
-            arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-            arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+            arg0->unkA0 = arg0->kirby3->base.x >> 8;
+            arg0->unkA2 = arg0->kirby3->base.y >> 8;
         }
         lhs = arg0->base.y & ~0xfff;
         rhs = ((arg0->unkA2 + 2) << 8) & ~0xfff;
@@ -290,7 +290,7 @@ static void sub_080BBF54(struct Object* arg0) {
             return;
         }
         else {
-            if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x3fff) {
+            if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x3fff) {
                 arg0->unk85 ^= 1;
                 arg0->base.counter = 0x78;
             }

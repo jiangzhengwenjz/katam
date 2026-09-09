@@ -88,11 +88,11 @@ static void sub_080DA2BC(struct KingGolem *kg)
 {
     kg->obj2.base.flags |= 4;
     kg->obj2.kirby3 = FindTargetKirby(&kg->obj2.base);
-    if (!(kg->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && kg->obj2.base.roomId == kg->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&kg->obj2.kirby3->base.base.base, &kg->obj2))
+    if (!(kg->obj2.kirby3->base.unkC & 0x8000)
+        && kg->obj2.base.roomId == kg->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&kg->obj2.kirby3->base, &kg->obj2))
     {
-        Macro_081003EC(&kg->obj2, &kg->obj2.kirby3->base.base.base);
+        Macro_081003EC(&kg->obj2, &kg->obj2.kirby3->base);
         sub_080DA4B0(kg);
         kg->obj2.unk78 = sub_080DB664;
         kg->obj2.base.flags &= ~0x200;
@@ -174,7 +174,7 @@ static struct EffectObject *sub_080DA68C(struct KingGolem *kg)
     obj4->roomId = kg->obj2.base.roomId;
     EffectObjectInitSprite(obj4, &obj4->sprite, 0x1E, 0x303, 7, 0x1B);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x303, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, 1);
     return obj4;
 }
 
@@ -192,7 +192,7 @@ static void sub_080DA768(void)
     {
         Macro_0809E55C(obj4);
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x1E, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x303, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, !obj4->sprite.palId);
         kg3 = obj4->parent;
         if (kg3)
         {
@@ -251,7 +251,7 @@ static void sub_080DAB00(void)
     {
         Macro_0809E55C(obj4);
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 0x1E, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x303, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x303, 0, !obj4->sprite.palId);
         kg3 = obj4->parent;
         if (kg3)
         {

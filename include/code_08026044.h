@@ -82,7 +82,7 @@ struct Unk_080299B4 {
     u16 unk3A; //unknown
 }; /* size = 0x3C */
 
-#define Macro_08026168(sprite, arg1, arg2, arg3, array, array2, flag) ({ \
+#define Macro_08026168(sprite, arg1, arg2, arg3, array, transform, flag) ({ \
     s16 _val; \
     if ((arg1) <= 0x1ff) { \
         _val = 2; \
@@ -94,13 +94,13 @@ struct Unk_080299B4 {
         (array)[0] = ((((arg2) - 0x7800) * _val) >> 0x10) + 0x78; \
         (array)[1] = ((((arg3) - 0x5000) * _val) >> 0x10) + 0x50; \
     } \
-    (array2)[0] = 0;  \
-    (array2)[1] = _val; \
-    (array2)[2] = _val; \
-    (array2)[3] = (array)[0]; \
-    (array2)[4] = (array)[1]; \
+    (transform)->rotation = 0; \
+    (transform)->qScaleX = _val; \
+    (transform)->qScaleY = _val; \
+    (transform)->x = (array)[0]; \
+    (transform)->y = (array)[1]; \
     sprite->unk8 = (flag); \
-    sub_08155604(sprite, array2); \
+    sub_08155604(sprite, transform); \
 })
 
 void CreateCutscene(void);

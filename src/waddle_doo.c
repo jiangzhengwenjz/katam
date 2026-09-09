@@ -48,7 +48,7 @@ void* CreateWaddleDoo(struct ObjectTemplate* arg0, u8 arg1) {
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     ObjectSetBounds(&obj->base, -6, -4, 6, 10);
     obj->base.unk4C = obj->base.y = ((obj->base.y + (obj->base.unk3F << 8)) & ~0xfff) - (obj->base.unk3F << 8) - 1;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     ObjectInitSprite(obj);
@@ -279,10 +279,10 @@ static void sub_080B6DDC(struct Object* arg0, u8 arg1) {
     ObjectBaseInitSprite(obj, &obj->sprite, 8, 0x330, 0xa, 0xc);
     obj->sprite.palId = 0;
     if (arg0->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 1);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, 1);
     }
     else {
-        Macro_081050E8(obj, &obj->sprite, 0x308, 1);
+        Macro_081050E8(obj, &obj->sprite, 0x308, 0, 1);
     }
     PlaySfx(obj, SE_WADDLE_DOO_BEAM_ATTACK);
 }
@@ -293,10 +293,10 @@ static void sub_080B7068(void) {
     struct Object *parent = obj->parent;
     Macro_08107BA8_4(obj, &obj->sprite, &sprite, 8, &obj->sprite);
     if (parent->base.unkC & 0x10) {
-        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, obj->sprite.palId == 0);
+        Macro_081050E8(obj, &obj->sprite, gUnk_08351648[OBJ_DROPPY].unk8, 0, obj->sprite.palId == 0);
     }
     else {
-        Macro_081050E8(obj, &obj->sprite, 0x308, obj->sprite.palId == 0);
+        Macro_081050E8(obj, &obj->sprite, 0x308, 0, obj->sprite.palId == 0);
     }
     parent = obj->parent;
     if (obj->roomId != 0xffff && parent->base.flags & 0x1000) {

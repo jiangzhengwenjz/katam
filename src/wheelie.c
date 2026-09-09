@@ -37,7 +37,7 @@ void* CreateWheelie(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -100,7 +100,7 @@ static void sub_080BC604(struct Object* arg0) {
                             arg0->base.counter = 0x1e;
                         }
                         arg0->kirby3 = FindTargetKirby(&arg0->base);
-                        if (arg0->kirby3->base.base.base.x > arg0->base.x) {
+                        if (arg0->kirby3->base.x > arg0->base.x) {
                             if (arg0->base.flags & 1) {
                                 r5 = TRUE;
                             }
@@ -110,7 +110,7 @@ static void sub_080BC604(struct Object* arg0) {
                                 r5 = TRUE;
                             }
                         }
-                        if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x1fff) {
+                        if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x1fff) {
                             r5 = TRUE;
                         }
                         if (r5) {
@@ -165,7 +165,7 @@ static void sub_080BC790(struct Object* arg0) {
                     arg0->base.counter = 0x1e;
                 }
                 arg0->kirby3 = FindTargetKirby(&arg0->base);
-                if (arg0->kirby3->base.base.base.x > arg0->base.x) {
+                if (arg0->kirby3->base.x > arg0->base.x) {
                     if (arg0->base.flags & 1) {
                         r5 = TRUE;
                     }
@@ -175,7 +175,7 @@ static void sub_080BC790(struct Object* arg0) {
                         r5 = TRUE;
                     }
                 }
-                if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) <= 0x1fff) {
+                if (abs(arg0->kirby3->base.y - arg0->base.y) <= 0x1fff) {
                     r5 = TRUE;
                 }
                 if (r5) {
@@ -282,7 +282,7 @@ static void sub_080BCAC8(struct Object* arg0) {
     }
     if (arg0->base.unk62 & 4) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
-        if (arg0->kirby3->base.base.base.x > arg0->base.x) {
+        if (arg0->kirby3->base.x > arg0->base.x) {
             if (arg0->base.flags & 1) {
                 ObjectSetFunc(arg0, 2, sub_080BC878);
                 sub_080897A0(&arg0->base);

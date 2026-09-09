@@ -122,7 +122,7 @@ void* CreateBrontoBurt(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -135,14 +135,14 @@ void* CreateBrontoBurt(struct ObjectTemplate* arg0, u8 arg1) {
     switch (arg0->subtype1) {
         default:
         case 0:
-            if (obj->base.y > obj->kirby3->base.base.base.y) {
+            if (obj->base.y > obj->kirby3->base.y) {
                 sub_080AEB68(obj);
             } else {
                 sub_080AD8F0(obj);
             }
             break;
         case 1:
-            if (obj->base.y > obj->kirby3->base.base.base.y) {
+            if (obj->base.y > obj->kirby3->base.y) {
                 sub_080AEBD8(obj);
             } else {
                 sub_080AEC34(obj);
@@ -172,14 +172,14 @@ void sub_080AD7C0(struct Object* obj) {
     switch (obj->objTemplate->subtype1) {
         default:
         case 0:
-            if (obj->base.y > obj->kirby3->base.base.base.y) {
+            if (obj->base.y > obj->kirby3->base.y) {
                 sub_080AEB68(obj);
             } else {
                 sub_080AD8F0(obj);
             }
             break;
         case 1:
-            if (obj->base.y > obj->kirby3->base.base.base.y) {
+            if (obj->base.y > obj->kirby3->base.y) {
                 sub_080AEBD8(obj);
             } else {
                 sub_080AEC34(obj);
@@ -291,7 +291,7 @@ static void sub_080ADA30(struct Object* obj) {
 
     if (obj->base.counter > 0x14) {
         obj->kirby3 = FindTargetKirby(&obj->base);
-        if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADA94;
+        if (obj->kirby3->base.y > obj->base.y) obj->unk78 = sub_080ADA94;
         else obj->unk78 = sub_080ADAD8;
     }
 
@@ -334,7 +334,7 @@ static void sub_080ADB1C(struct Object* obj) {
 
     if (obj->base.counter > 0x14) {
         obj->kirby3 = FindTargetKirby(&obj->base);
-        if (obj->kirby3->base.base.base.y > obj->base.y) obj->unk78 = sub_080ADC10;
+        if (obj->kirby3->base.y > obj->base.y) obj->unk78 = sub_080ADC10;
         else obj->unk78 = sub_080ADB7C;
     }
 
@@ -393,15 +393,15 @@ static void sub_080ADCA4(struct Object* obj) {
         return;
     }
 
-    if (abs(obj->base.y - obj->kirby3->base.base.base.y) < 0x2000) {
-        obj->base.x = obj->kirby3->base.base.base.x;
+    if (abs(obj->base.y - obj->kirby3->base.y) < 0x2000) {
+        obj->base.x = obj->kirby3->base.x;
     } else {
-        obj->base.x = obj->kirby3->base.base.base.x;
+        obj->base.x = obj->kirby3->base.x;
         obj->base.x += (s32)(gUnk_08353A3C[Rand16() & 3]) << 8;
     }
     obj->base.y = gCurLevelInfo[obj->base.unk56].viewportPosition.y;
     obj->base.flags |= 0x140;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -416,7 +416,7 @@ static void sub_080ADD74(struct Object* obj) {
         obj->kirby3 = FindTargetKirby(&obj->base);
     }
 
-    if (abs(obj->base.y - obj->kirby3->base.base.base.y) < 0x1000) {
+    if (abs(obj->base.y - obj->kirby3->base.y) < 0x1000) {
         sub_080AEC90(obj);
     } else {
         obj->base.counter++;
@@ -526,13 +526,13 @@ static void sub_080ADDE0(struct Object* obj) {
 static void sub_080AE100(struct Object* obj) {
     ObjectSetFunc(obj, 2, sub_080AE1AC);
     obj->kirby3 = FindTargetKirby(&obj->base);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
     }
 
-    if (obj->base.y > obj->kirby3->base.base.base.y) {
+    if (obj->base.y > obj->kirby3->base.y) {
         obj->base.yspeed = 0xB5;
         obj->unk85 = 4;
     } else {
@@ -540,7 +540,7 @@ static void sub_080AE100(struct Object* obj) {
         obj->unk85 = 8;
     }
 
-    if (obj->base.x < obj->kirby3->base.base.base.x) {
+    if (obj->base.x < obj->kirby3->base.x) {
         obj->base.xspeed = 0xB5;
         obj->unk85 |= 2;
     } else {
@@ -747,8 +747,8 @@ static void BrontoBurtStalk(struct Object* obj) {
     if (obj->unk9E > 7) {
         obj->kirby3 = FindTargetKirby(&obj->base);
         obj->unk9E = 0;
-        obj->unkA0 = obj->kirby3->base.base.base.x >> 8;
-        obj->unkA2 = obj->kirby3->base.base.base.y >> 8;
+        obj->unkA0 = obj->kirby3->base.x >> 8;
+        obj->unkA2 = obj->kirby3->base.y >> 8;
     }
 
     r4 = obj->base.y & 0xFFFFF000;
@@ -975,7 +975,7 @@ static void sub_080AECA4(struct Object* obj) {
 static void sub_080AECC4(struct Object* obj) {
     ObjectSetFunc(obj, 1, sub_080AE834);
     obj->base.xspeed = 0x66;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     } else {
         obj->base.flags &= ~1;
@@ -996,7 +996,7 @@ static void sub_080AED30(struct Object* obj) {
         obj->kirby3 = FindTargetKirby(&obj->base);
     }
 
-    if (abs(obj->base.x - obj->kirby3->base.base.base.x) < 0x3000) {
+    if (abs(obj->base.x - obj->kirby3->base.x) < 0x3000) {
         sub_080AE85C(obj);
     } else {
         obj->base.counter++;

@@ -125,7 +125,7 @@ void sub_0808845C(struct Object *, u16);
 void sub_080884C4(struct Object *);
 void sub_08088528(struct Object *);
 void sub_0808859C(struct Object *, u16, u16);
-void sub_08088640(struct Object *, u8, u16);
+void sub_08088640(struct Kirby *, u8, u16);
 void sub_080886A8(struct ObjectBase *);
 void sub_08088700(struct ObjectBase *, u16);
 void sub_0808925C(struct ObjectBase *);

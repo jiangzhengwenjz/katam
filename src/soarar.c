@@ -32,7 +32,7 @@ void *CreateSoarar(struct ObjectTemplate *arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -52,7 +52,7 @@ void sub_080AB8DC(struct Object *obj) {
     obj->base.flags |= 0x140;
     obj->base.flags &= ~0x20;
     obj->base.yspeed = 0;
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -150,11 +150,11 @@ static void sub_080ABA40(struct Object *obj) {
         obj->unk85 = 0xA0;
         break;
     }
-    dx = obj->kirby3->base.base.base.x;
+    dx = obj->kirby3->base.x;
     dx -= obj->base.x;
     dx >>= 8;
     dy = obj->base.y;
-    dy -= obj->kirby3->base.base.base.y;
+    dy -= obj->kirby3->base.y;
     dy >>= 8;
     dist = Sqrt((dx * dx + dy * dy) << 8);
     a = (dx * 0x100 / dist) * 0x100;
@@ -197,7 +197,7 @@ static void sub_080ABB38(struct Object *obj) {
 
 static void sub_080ABBBC(struct Object *obj) {
     ObjectSetFunc(obj, 0, sub_080ABC18);
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->base.yspeed = -0x80;
         obj->unk83 = 5;
     }
@@ -240,12 +240,12 @@ static void sub_080ABC18(struct Object *obj) {
     }
     if (obj->unk85 != 0) {
         if (obj->base.xspeed > 0) {
-            if (obj->kirby3->base.base.base.x < obj->base.x) {
+            if (obj->kirby3->base.x < obj->base.x) {
                 sub_080AC33C(obj);
             }
         }
         else {
-            if (obj->kirby3->base.base.base.x > obj->base.x) {
+            if (obj->kirby3->base.x > obj->base.x) {
                 sub_080AC33C(obj);
             }
         }
@@ -308,7 +308,7 @@ static void sub_080ABCE4(struct Object *obj) {
 
 static void sub_080ABDE8(struct Object *obj) {
     ObjectSetFunc(obj, 0, sub_080ABE40);
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->unk83 = 5;
     }
     else {
@@ -322,7 +322,7 @@ static void sub_080ABDE8(struct Object *obj) {
 }
 
 static void sub_080ABE40(struct Object *obj) {
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->base.yspeed -= 8;
         if (obj->base.yspeed < -0xA0) {
             obj->base.yspeed = -0xA0;
@@ -373,7 +373,7 @@ static void sub_080ABEAC(struct Object *obj) {
     ObjectSetBounds(p, 2, 2, 2, 2);
     ObjectBaseInitSprite(p, &p->sprite, 2, 0x2FC, 0xD, 0xC);
     p->sprite.palId = 0;
-    Macro_081050E8(p, &p->sprite, 0x30A, 1);
+    Macro_081050E8(p, &p->sprite, 0x30A, 0, 1);
     PlaySfx(p, SE_BASIC_ENEMY_LASER_ATTACK);
 }
 
@@ -382,7 +382,7 @@ static void sub_080AC0A4(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *p = tmp;
 
     Macro_08107BA8_4(p, &p->sprite, &sprite, 2, &p->sprite);
-    Macro_081050E8(p, &p->sprite, 0x30A, !p->sprite.palId);
+    Macro_081050E8(p, &p->sprite, 0x30A, 0, !p->sprite.palId);
     if (ObjectPreUpdate(p)) {
         return;
     }
@@ -412,7 +412,7 @@ static void sub_080AC0A4(void) {
 static void sub_080AC33C(struct Object *obj) {
     ObjectSetFunc(obj, 9, sub_080ABCE4);
     obj->unk85--;
-    if (obj->kirby3->base.base.base.y > obj->base.y) {
+    if (obj->kirby3->base.y > obj->base.y) {
         obj->base.yspeed = -0x80;
     }
     else {
@@ -507,16 +507,22 @@ void sub_080AC45C(struct Object *obj) {
     }
 }
 
-bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
+// a2 is a tagged pointer. kind 0 identifies the Kirby view; the nonzero
+// branch below uses an Object view, but the tag alone does not establish
+// that every nonzero value has the full struct Object layout.
+bool32 sub_080AC5E0(struct Object *obj, struct ObjectHeader *a2) {
+    struct Kirby *kirby = (struct Kirby *)a2;
+    struct Object *obj2 = (struct Object *)a2;
+
     if (obj->unk83 > 1) {
         return FALSE;
     }
-    if (kirby->base.base.base.header.kind == 0) {
+    if (a2->kind == 0) {
         if (kirby->hp > 0
             && kirby->animationIndex != 0x27
             && kirby->animationIndex <= 0x7A
             && kirby->unk110 == NULL
-            && !(kirby->base.base.base.flags & 0x03800B00)) {
+            && !(kirby->base.flags & 0x03800B00)) {
             kirby->unk110 = gUnk_083539B4;
             obj->kirby3 = kirby;
             ObjectSetFunc(obj, 2, sub_080AC71C);
@@ -527,7 +533,10 @@ bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
         }
     }
     else {
-        if ((u8)(kirby->base.base.type - 0x5E) > 0xE) {
+        // TODO: Prove that every nonzero a2 reaching this branch has a full
+        // struct Object layout. The interaction dispatch alone does not
+        // establish that invariant.
+        if (!ObjType5ETo6C(obj2)) {
             return FALSE;
         }
         ObjectSetFunc(obj, 2, sub_080AC824);
@@ -535,7 +544,7 @@ bool32 sub_080AC5E0(struct Object *obj, struct Kirby *kirby) {
     obj->base.xspeed = 0;
     obj->base.yspeed = 0;
     obj->base.counter = obj->unk80;
-    obj->base.unk6C = kirby;
+    obj->base.unk6C = a2;
     PlaySfx(&obj->base, SE_FROSTY_SWALLOW_KIRBY);
     return TRUE;
 }

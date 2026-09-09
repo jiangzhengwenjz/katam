@@ -28,7 +28,7 @@ void* CreateRolyPoly(struct ObjectTemplate* arg0, u8 playerId) {
     struct Object* rolypoly = tmp;
 
     InitObject(rolypoly, arg0, playerId);
-    if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
+    if (rolypoly->base.x > rolypoly->kirby3->base.x) {
         rolypoly->base.flags |= 0x1;
     }
     else {
@@ -56,7 +56,7 @@ static void sub_080ACDA4(struct Object* rolypoly) {
 
         switch (rolypoly->unk83) {
         case 0:
-            if (rolypoly->base.x > rolypoly->kirby3->base.base.base.x) {
+            if (rolypoly->base.x > rolypoly->kirby3->base.x) {
                 rolypoly->base.flags |= 0x1;
             }
             else {
@@ -70,7 +70,7 @@ static void sub_080ACDA4(struct Object* rolypoly) {
 
         case 2:
             if ((rolypoly->base.counter & 0xf) == 0xf &&
-                abs(rolypoly->kirby3->base.base.base.x - rolypoly->base.x) <= 0x4fff) {
+                abs(rolypoly->kirby3->base.x - rolypoly->base.x) <= 0x4fff) {
                 if (!(Rand16() & 0x0003)) {
                     newUnk9D |= 0x01;
                 }

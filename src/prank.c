@@ -25,7 +25,7 @@ void* CreatePrank(struct ObjectTemplate* arg0, u8 arg1)
     struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x02000000;
-    if (obj->base.x > obj->kirby3->base.base.base.x)
+    if (obj->base.x > obj->kirby3->base.x)
     {
         obj->base.flags |= 1;
     }
@@ -260,12 +260,12 @@ void sub_080A170C(struct Object *prank)
 bool8 sub_080A1804(struct Object *prank, struct Kirby *kirby)
 {
     if (prank->unk83 != 2
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
         || kirby->unk110
-        || kirby->base.base.base.flags & 0x3800B00)
+        || kirby->base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(prank, 0x10, sub_080A1898);
     prank->base.flags &= ~2;

@@ -24,6 +24,7 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
+#include <limits>
 #include "midi.h"
 #include "main.h"
 #include "error.h"
@@ -45,7 +46,9 @@ std::int16_t g_midiTimeDiv;
 int g_midiChan;
 std::int32_t g_initialWait;
 
+static long s_fileSize;
 static long s_trackDataStart;
+static long s_trackDataEnd = -1;
 static std::vector<Event> s_seqEvents;
 static std::vector<Event> s_trackEvents;
 static std::int32_t s_absoluteTime;
@@ -53,37 +56,68 @@ static int s_blockCount = 0;
 static int s_minNote;
 static int s_maxNote;
 static int s_runningStatus;
+static int s_pendingNoteOffs[128];
+
+bool EventCompare(const Event& event1, const Event& event2);
+std::uint32_t ReadInt8();
 
 void Seek(long offset)
 {
+    if (offset < 0 || offset > s_fileSize)
+        RaiseError("invalid seek offset (%ld)", offset);
     if (std::fseek(g_inputFile, offset, SEEK_SET) != 0)
-        RaiseError("failed to seek to %l", offset);
+        RaiseError("failed to seek to %ld", offset);
 }
 
 void Skip(long offset)
 {
+    if (offset < 0)
+        RaiseError("invalid skip length (%ld)", offset);
+
+    long current = std::ftell(g_inputFile);
+    if (current < 0)
+        RaiseError("failed to query input position");
+
+    std::uint64_t target = static_cast<std::uint64_t>(current) + static_cast<std::uint64_t>(offset);
+    if (target > static_cast<std::uint64_t>(s_fileSize)
+        || (s_trackDataEnd >= 0 && target > static_cast<std::uint64_t>(s_trackDataEnd)))
+        RaiseError("event data extends beyond the MIDI track");
+
     if (std::fseek(g_inputFile, offset, SEEK_CUR) != 0)
-        RaiseError("failed to skip %l bytes", offset);
+        RaiseError("failed to skip %ld bytes", offset);
 }
 
 std::string ReadSignature()
 {
     char signature[4];
 
-    if (std::fread(signature, 4, 1, g_inputFile) != 1)
-        RaiseError("failed to read signature");
+    for (char& c : signature)
+        c = static_cast<char>(ReadInt8());
 
     return std::string(signature, 4);
 }
 
 std::uint32_t ReadInt8()
 {
-    int c = std::fgetc(g_inputFile);
+    long current = std::ftell(g_inputFile);
+    if (current < 0)
+        RaiseError("failed to query input position");
+    if (current >= s_fileSize || (s_trackDataEnd >= 0 && current >= s_trackDataEnd))
+        RaiseError("unexpected EOF");
 
+    int c = std::fgetc(g_inputFile);
     if (c < 0)
         RaiseError("unexpected EOF");
 
-    return c;
+    return static_cast<std::uint32_t>(c);
+}
+
+std::uint32_t ReadDataByte()
+{
+    std::uint32_t value = ReadInt8();
+    if (value >= 0x80)
+        RaiseError("invalid MIDI data byte (0x%02X)", value);
+    return value;
 }
 
 std::uint32_t ReadInt16()
@@ -115,56 +149,122 @@ std::uint32_t ReadInt32()
 
 std::uint32_t ReadVLQ()
 {
-    std::uint32_t val = 0;
-    std::uint32_t c;
+    std::uint32_t value = 0;
 
-    do
+    // MID2AGB 1.06a accepts non-canonical VLQs longer than four bytes and
+    // performs every shift in 32 bits.  Several real FE8U MIDI files use this
+    // harmlessly to wrap a sequence timestamp back to an earlier value.
+    // Keep the 32-bit parsing behavior, then reject only a final event stream
+    // that remains non-chronological and would trigger the official binary's
+    // out-of-bounds duration-table access.
+    for (;;)
     {
-        c = ReadInt8();
-        val <<= 7;
-        val |= (c & 0x7F);
-    } while (c & 0x80);
+        std::uint32_t byte = ReadInt8();
+        value = (value << 7) | (byte & 0x7F);
+        if ((byte & 0x80) == 0)
+            return value;
+    }
+}
 
-    return val;
+static std::int32_t SignedFromBits(std::uint32_t bits)
+{
+    if (bits <= static_cast<std::uint32_t>(std::numeric_limits<std::int32_t>::max()))
+        return static_cast<std::int32_t>(bits);
+    return -1 - static_cast<std::int32_t>(std::numeric_limits<std::uint32_t>::max() - bits);
+}
+
+static std::int32_t AddWrapped32(std::int32_t lhs, std::int32_t rhs)
+{
+    return SignedFromBits(static_cast<std::uint32_t>(lhs) + static_cast<std::uint32_t>(rhs));
+}
+
+static std::int32_t LookupWaitDuration(std::int32_t diff)
+{
+    if (diff >= 0 && diff <= 96)
+        return g_noteDurationLUT[diff];
+
+    if (!g_emulateOfficialWrappedWaitBug)
+        RaiseError("MIDI events are not in chronological order");
+
+    // MID2AGB 1.06a indexes 96 integers before its duration table for the
+    // wrapped -96-tick delta in SA2's mus_final_ending. The adjacent bytes
+    // decode as this value. Reproduce that one known result explicitly,
+    // without performing an out-of-bounds read or signed overflow ourselves.
+    if (diff == -96)
+        return static_cast<std::int32_t>(0x27732527u);
+
+    RaiseError("unsupported MID2AGB 1.06a wrapped-wait bug pattern");
+}
+
+void AdvanceTime()
+{
+    std::uint32_t bits = static_cast<std::uint32_t>(s_absoluteTime);
+    bits += ReadVLQ();
+    s_absoluteTime = SignedFromBits(bits);
+}
+
+void AddNoteDuration(Event& event, std::uint32_t delta)
+{
+    if (delta > static_cast<std::uint32_t>(std::numeric_limits<std::int32_t>::max() - event.param2))
+        RaiseError("MIDI note duration is too large");
+    event.param2 += static_cast<std::int32_t>(delta);
 }
 
 void ReadMidiFileHeader()
 {
+    s_trackDataEnd = -1;
+    if (std::fseek(g_inputFile, 0, SEEK_END) != 0)
+        RaiseError("failed to determine input size");
+    s_fileSize = std::ftell(g_inputFile);
+    if (s_fileSize < 0)
+        RaiseError("failed to determine input size");
+
     Seek(0);
 
     if (ReadSignature() != "MThd")
         RaiseError("MIDI file header signature didn't match \"MThd\"");
 
-    std::uint32_t headerLength = ReadInt32();
+    // MID2AGB always consumes the six standard header bytes and ignores
+    // the declared header-length value.
+    (void)ReadInt32();
 
-    if (headerLength != 6)
-        RaiseError("MIDI file header length isn't 6");
-
-    std::uint16_t midiFormat = ReadInt16();
+    // MID2AGB reads this field through a signed 16-bit temporary.  Values
+    // 0x8000-0xFFFF therefore behave as nonzero multi-track formats, while
+    // positive formats 2 and above are rejected.
+    std::int16_t midiFormat = static_cast<std::int16_t>(ReadInt16());
 
     if (midiFormat >= 2)
-        RaiseError("unsupported MIDI format (%u)", midiFormat);
+        RaiseError("unsupported MIDI format (%d)", midiFormat);
 
-    g_midiFormat = (MidiFormat)midiFormat;
+    g_midiFormat = midiFormat == 0 ? MidiFormat::SingleTrack : MidiFormat::MultiTrack;
     g_midiTrackCount = ReadInt16();
     g_midiTimeDiv = ReadInt16();
 
-    if (g_midiTimeDiv < 0)
+    if (g_midiTrackCount <= 0)
+        RaiseError("MIDI file has no tracks");
+    if (g_midiFormat == MidiFormat::SingleTrack && g_midiTrackCount != 1)
+        RaiseError("format 0 MIDI must contain exactly one track");
+    if (g_midiTimeDiv <= 0)
         RaiseError("unsupported MIDI time division (%d)", g_midiTimeDiv);
 }
 
 long ReadMidiTrackHeader(long offset)
 {
+    s_trackDataEnd = -1;
     Seek(offset);
 
     if (ReadSignature() != "MTrk")
         RaiseError("MIDI track header signature didn't match \"MTrk\"");
 
-    long size = ReadInt32();
-
+    std::uint32_t size = ReadInt32();
     s_trackDataStart = std::ftell(g_inputFile);
 
-    return size + 8;
+    std::uint64_t end = static_cast<std::uint64_t>(s_trackDataStart) + size;
+    if (end > static_cast<std::uint64_t>(s_fileSize))
+        RaiseError("MIDI track extends beyond the end of the file");
+    s_trackDataEnd = static_cast<long>(end);
+
+    return static_cast<long>(size) + 8;
 }
 
 void StartTrack()
@@ -196,9 +296,15 @@ void DetermineEventCategory(MidiEventCategory& category, int& typeChan, int& siz
         size = 0;
         s_runningStatus = 0;
     }
-    else if (typeChan >= 0xF0)
+    else if (typeChan == 0xF0 || typeChan == 0xF7)
     {
         category = MidiEventCategory::SysEx;
+        size = 0;
+        s_runningStatus = 0;
+    }
+    else if (typeChan >= 0xF0)
+    {
+        category = MidiEventCategory::Invalid;
         size = 0;
         s_runningStatus = 0;
     }
@@ -233,13 +339,15 @@ void MakeBlockEvent(Event& event, EventType type)
 
 std::string ReadEventText()
 {
-    char buffer[2];
+    char buffer[2] = {};
     std::uint32_t length = ReadVLQ();
 
     if (length <= 2)
     {
-        if (fread(buffer, length, 1, g_inputFile) != 1)
-            RaiseError("failed to read event text");
+        // Use the bounds-checked byte reader instead of fread so a malformed
+        // text event cannot consume bytes from the following MIDI track.
+        for (std::uint32_t i = 0; i < length; ++i)
+            buffer[i] = static_cast<char>(ReadInt8());
     }
     else
     {
@@ -252,7 +360,7 @@ std::string ReadEventText()
 
 bool ReadSeqEvent(Event& event)
 {
-    s_absoluteTime += ReadVLQ();
+    AdvanceTime();
     event.time = s_absoluteTime;
 
     MidiEventCategory category;
@@ -290,6 +398,15 @@ bool ReadSeqEvent(Event& event)
             MakeBlockEvent(event, EventType::LoopEndBegin);
         else if (text == "]")
             MakeBlockEvent(event, EventType::LoopEnd);
+        else if (text == "]+")
+        {
+            // The reconstruction marker extends the official "]" marker.  When
+            // marker handling is disabled, MID2AGB 1.06a still treats the text
+            // as a normal loop end; -I only changes its same-tick ordering.
+            MakeBlockEvent(event, g_honorEncodingMarkers
+                ? EventType::LoopEndLate
+                : EventType::LoopEnd);
+        }
         else if (text == ":")
             MakeBlockEvent(event, EventType::Label);
         else
@@ -306,13 +423,23 @@ bool ReadSeqEvent(Event& event)
             event.param2 = 0;
             break;
         case 0x51: // tempo
-            if (ReadVLQ() != 3)
+        {
+            std::uint32_t length = ReadVLQ();
+            // The official converter silently ignores an empty tempo meta
+            // event.  Other invalid lengths are rejected here instead of
+            // following the binary into malformed-track reads or hangs.
+            if (length == 0)
+                return false;
+            if (length != 3)
                 RaiseError("invalid tempo size");
 
             event.type = EventType::Tempo;
             event.param1 = 0;
             event.param2 = ReadInt24();
+            if (event.param2 == 0)
+                RaiseError("invalid zero tempo");
             break;
+        }
         case 0x58: // time signature
         {
             if (ReadVLQ() != 4)
@@ -328,6 +455,8 @@ bool ReadSeqEvent(Event& event)
 
             int clockTicks = 96 * numerator * g_clocksPerBeat;
             int denominator = 1 << denominatorExponent;
+            if (clockTicks % denominator != 0)
+                RaiseError("invalid time signature");
             int timeSig = clockTicks / denominator;
 
             if (timeSig <= 0 || timeSig >= 0x10000)
@@ -360,14 +489,20 @@ void ReadSeqEvents()
             s_seqEvents.push_back(event);
 
             if (event.type == EventType::EndOfTrack)
+            {
+                // MID2AGB globally orders sequence events, including wrapped
+                // timestamps used by some authoring files.  The terminal EOT
+                // record itself is deliberately excluded and stays last.
+                std::stable_sort(s_seqEvents.begin(), s_seqEvents.end() - 1, EventCompare);
                 return;
+            }
         }
     }
 }
 
-bool CheckNoteEnd(Event& event)
+bool CheckNoteEnd(Event& event, int& staleNoteOffs)
 {
-    event.param2 += ReadVLQ();
+    AddNoteDuration(event, ReadVLQ());
 
     MidiEventCategory category;
     int typeChan;
@@ -389,18 +524,30 @@ bool CheckNoteEnd(Event& event)
         {
         case 0x80: // note off
         {
-            int note = ReadInt8();
-            ReadInt8(); // ignore velocity
+            int note = ReadDataByte();
+            ReadInt8(); // ignore velocity; MID2AGB accepts the full byte range
             if (note == event.note)
-                return true;
+            {
+                if (staleNoteOffs > 0)
+                    --staleNoteOffs;
+                else
+                    return true;
+            }
             break;
         }
         case 0x90: // note on
         {
-            int note = ReadInt8();
-            int velocity = ReadInt8();
-            if (velocity == 0 && note == event.note)
-                return true;
+            int note = ReadDataByte();
+            int velocity = ReadDataByte();
+            if (note == event.note)
+            {
+                if (velocity != 0)
+                    return true; // a retrigger terminates the previous note
+                if (staleNoteOffs > 0)
+                    --staleNoteOffs;
+                else
+                    return true;
+            }
             break;
         }
         default:
@@ -431,7 +578,7 @@ bool CheckNoteEnd(Event& event)
     RaiseError("invalid event");
 }
 
-void FindNoteEnd(Event& event)
+void FindNoteEnd(Event& event, int staleNoteOffs)
 {
     // Save the current file position and running status
     // which get modified by CheckNoteEnd.
@@ -440,7 +587,7 @@ void FindNoteEnd(Event& event)
 
     event.param2 = 0;
 
-    while (!CheckNoteEnd(event))
+    while (!CheckNoteEnd(event, staleNoteOffs))
         ;
 
     Seek(startPos);
@@ -449,7 +596,7 @@ void FindNoteEnd(Event& event)
 
 bool ReadTrackEvent(Event& event)
 {
-    s_absoluteTime += ReadVLQ();
+    AdvanceTime();
     event.time = s_absoluteTime;
 
     MidiEventCategory category;
@@ -470,17 +617,26 @@ bool ReadTrackEvent(Event& event)
 
         switch (typeChan & 0xF0)
         {
+        case 0x80: // note off
+        {
+            int note = ReadDataByte();
+            ReadDataByte(); // velocity
+            if (s_pendingNoteOffs[note] > 0)
+                --s_pendingNoteOffs[note];
+            return false;
+        }
         case 0x90: // note on
         {
-            int note = ReadInt8();
-            int velocity = ReadInt8();
+            int note = ReadDataByte();
+            int velocity = ReadDataByte();
 
             if (velocity != 0)
             {
                 event.type = EventType::Note;
                 event.note = note;
                 event.param1 = velocity;
-                FindNoteEnd(event);
+                FindNoteEnd(event, s_pendingNoteOffs[note]);
+                ++s_pendingNoteOffs[note];
                 if (event.param2 > 0)
                 {
                     if (note < s_minNote)
@@ -489,12 +645,22 @@ bool ReadTrackEvent(Event& event)
                         s_maxNote = note;
                 }
             }
+            else
+            {
+                if (s_pendingNoteOffs[note] > 0)
+                    --s_pendingNoteOffs[note];
+                return false;
+            }
             break;
         }
         case 0xB0: // controller event
             event.type = EventType::Controller;
             event.param1 = ReadInt8(); // controller index
-            event.param2 = ReadInt8(); // value
+            event.param2 = ReadInt8(); // value (MID2AGB accepts 0..255)
+            // MID2AGB accepts the alternate controller range 42..63 as
+            // aliases for 12..33, matching the SDK authoring convention.
+            if (event.param1 >= 0x2A && event.param1 <= 0x3F)
+                event.param1 -= 0x1E;
             break;
         case 0xC0: // instrument change
             event.type = EventType::InstrumentChange;
@@ -523,6 +689,23 @@ bool ReadTrackEvent(Event& event)
     if (category == MidiEventCategory::Meta)
     {
         int metaEventType = ReadInt8();
+
+        // Track-local text metadata preserves sequence-encoding details that
+        // standard MIDI otherwise discards.  "!" forces the next operation
+        // to emit its opcode instead of using running-status compression.
+        if (metaEventType >= 1 && metaEventType <= 7)
+        {
+            std::string text = ReadEventText();
+            if (text == "!" && g_honorEncodingMarkers)
+            {
+                event.type = EventType::StatusReset;
+                event.param1 = 0;
+                event.param2 = 0;
+                return true;
+            }
+            return false;
+        }
+
         SkipEventData();
 
         if (metaEventType == 0x2F)
@@ -547,6 +730,7 @@ void ReadTrackEvents()
 
     s_minNote = 0xFF;
     s_maxNote = 0;
+    std::fill(std::begin(s_pendingNoteOffs), std::end(s_pendingNoteOffs), 0);
 
     for (;;)
     {
@@ -597,6 +781,40 @@ bool EventCompare(const Event& event1, const Event& event2)
     return false;
 }
 
+bool IsSameOutputCommand(const Event& event1, const Event& event2)
+{
+    if (event1.time != event2.time || event1.type != event2.type)
+        return false;
+
+    switch (event1.type)
+    {
+    case EventType::Controller:
+        return event1.param1 == event2.param1;
+    case EventType::InstrumentChange:
+    case EventType::PitchBend:
+        return true;
+    default:
+        return false;
+    }
+}
+
+void CoalesceAdjacentOutputCommands(std::vector<Event>& events)
+{
+    // MID2AGB performs this after its stable event ordering.  Only adjacent
+    // events that would emit the same command are coalesced, and the final
+    // value wins.  A different command between two values intentionally
+    // prevents coalescing, even when all three share the same timestamp.
+    std::size_t write = 0;
+    for (std::size_t read = 0; read < events.size(); ++read)
+    {
+        if (write != 0 && IsSameOutputCommand(events[write - 1], events[read]))
+            events[write - 1] = events[read];
+        else
+            events[write++] = events[read];
+    }
+    events.resize(write);
+}
+
 std::unique_ptr<std::vector<Event>> MergeEvents()
 {
     std::unique_ptr<std::vector<Event>> events(new std::vector<Event>());
@@ -630,16 +848,24 @@ std::unique_ptr<std::vector<Event>> MergeEvents()
 
 void ConvertTimes(std::vector<Event>& events)
 {
+    const std::int64_t scale = 24LL * g_clocksPerBeat;
+
     for (Event& event : events)
     {
-        event.time = (24 * g_clocksPerBeat * event.time) / g_midiTimeDiv;
+        std::int64_t convertedTime = (scale * event.time) / g_midiTimeDiv;
+        if (convertedTime < 0 || convertedTime > std::numeric_limits<std::int32_t>::max())
+            RaiseError("converted MIDI timestamp is too large");
+        event.time = static_cast<std::int32_t>(convertedTime);
 
         if (event.type == EventType::Note)
         {
             event.param1 = g_noteVelocityLUT[event.param1];
 
-            std::uint32_t duration = (24 * g_clocksPerBeat * event.param2) / g_midiTimeDiv;
+            std::int64_t convertedDuration = (scale * event.param2) / g_midiTimeDiv;
+            if (convertedDuration < 0 || convertedDuration > std::numeric_limits<std::int32_t>::max())
+                RaiseError("converted MIDI note duration is too large");
 
+            std::int32_t duration = static_cast<std::int32_t>(convertedDuration);
             if (duration == 0)
                 duration = 1;
 
@@ -655,6 +881,13 @@ std::unique_ptr<std::vector<Event>> InsertTimingEvents(std::vector<Event>& inEve
 {
     std::unique_ptr<std::vector<Event>> outEvents(new std::vector<Event>());
 
+    // A valid but adversarially large timestamp can otherwise expand into
+    // millions of synthetic measure/wait events and a very large assembly
+    // file.  This limit is far above every real song in the tested corpora
+    // while bounding memory, CPU, and output growth for hostile inputs.
+    constexpr std::size_t kMaxSyntheticTimingEvents = 1u << 18;
+    std::size_t syntheticTimingEvents = 0;
+
     Event timingEvent = {};
     timingEvent.time = 0;
     timingEvent.type = EventType::TimeSignature;
@@ -664,8 +897,21 @@ std::unique_ptr<std::vector<Event>> InsertTimingEvents(std::vector<Event>& inEve
     {
         while (EventCompare(timingEvent, event))
         {
+            if (syntheticTimingEvents++ >= kMaxSyntheticTimingEvents)
+                RaiseError("MIDI timing expansion is too large");
             outEvents->push_back(timingEvent);
-            timingEvent.time += timingEvent.param2;
+            if (g_emulateOfficialWrappedWaitBug)
+            {
+                timingEvent.time = AddWrapped32(timingEvent.time, timingEvent.param2);
+            }
+            else
+            {
+                std::int64_t nextTiming = static_cast<std::int64_t>(timingEvent.time)
+                    + timingEvent.param2;
+                if (nextTiming > std::numeric_limits<std::int32_t>::max())
+                    RaiseError("MIDI timing event is too large");
+                timingEvent.time = static_cast<std::int32_t>(nextTiming);
+            }
         }
 
         if (event.type == EventType::TimeSignature)
@@ -677,7 +923,18 @@ std::unique_ptr<std::vector<Event>> InsertTimingEvents(std::vector<Event>& inEve
                 outEvents->push_back(originalTimingEvent);
             }
             timingEvent.param2 = event.param2;
-            timingEvent.time = event.time + timingEvent.param2;
+            if (g_emulateOfficialWrappedWaitBug)
+            {
+                timingEvent.time = AddWrapped32(event.time, timingEvent.param2);
+            }
+            else
+            {
+                std::int64_t nextTiming = static_cast<std::int64_t>(event.time)
+                    + timingEvent.param2;
+                if (nextTiming > std::numeric_limits<std::int32_t>::max())
+                    RaiseError("MIDI timing event is too large");
+                timingEvent.time = static_cast<std::int32_t>(nextTiming);
+            }
         }
 
         outEvents->push_back(event);
@@ -690,16 +947,37 @@ std::unique_ptr<std::vector<Event>> SplitTime(std::vector<Event>& inEvents)
 {
     std::unique_ptr<std::vector<Event>> outEvents(new std::vector<Event>());
 
+    constexpr std::size_t kMaxSyntheticTimingEvents = 1u << 18;
+    std::size_t syntheticTimingEvents = 0;
     std::int32_t time = 0;
 
     for (const Event& event : inEvents)
     {
-        std::int32_t diff = event.time - time;
+        std::int32_t diff;
+        if (g_emulateOfficialWrappedWaitBug)
+        {
+            diff = SignedFromBits(static_cast<std::uint32_t>(event.time)
+                - static_cast<std::uint32_t>(time));
+        }
+        else
+        {
+            std::int64_t wideDiff = static_cast<std::int64_t>(event.time) - time;
+            if (wideDiff < 0)
+                RaiseError("MIDI events are not in chronological order");
+            if (wideDiff > std::numeric_limits<std::int32_t>::max())
+                RaiseError("MIDI wait is too large");
+            diff = static_cast<std::int32_t>(wideDiff);
+        }
 
         if (diff > 96)
         {
             int wholeNoteCount = (diff - 1) / 96;
             diff -= 96 * wholeNoteCount;
+
+            if (static_cast<std::uint64_t>(syntheticTimingEvents)
+                + static_cast<std::uint64_t>(wholeNoteCount) > kMaxSyntheticTimingEvents)
+                RaiseError("MIDI timing expansion is too large");
+            syntheticTimingEvents += static_cast<std::size_t>(wholeNoteCount);
 
             for (int i = 0; i < wholeNoteCount; i++)
             {
@@ -711,12 +989,16 @@ std::unique_ptr<std::vector<Event>> SplitTime(std::vector<Event>& inEvents)
             }
         }
 
-        std::int32_t lutValue = g_noteDurationLUT[diff];
+        std::int32_t lutValue = LookupWaitDuration(diff);
 
         if (lutValue != diff)
         {
+            if (syntheticTimingEvents++ >= kMaxSyntheticTimingEvents)
+                RaiseError("MIDI timing expansion is too large");
             Event timeSplitEvent = {};
-            timeSplitEvent.time = time + lutValue;
+            timeSplitEvent.time = g_emulateOfficialWrappedWaitBug
+                ? AddWrapped32(time, lutValue)
+                : time + lutValue;
             timeSplitEvent.type = EventType::TimeSplit;
             outEvents->push_back(timeSplitEvent);
         }
@@ -741,8 +1023,11 @@ std::unique_ptr<std::vector<Event>> CreateTies(std::vector<Event>& inEvents)
             tieEvent.param2 = -1;
             outEvents->push_back(tieEvent);
 
+            std::int64_t tieEnd = static_cast<std::int64_t>(event.time) + event.param2;
+            if (tieEnd > std::numeric_limits<std::int32_t>::max())
+                RaiseError("MIDI note end is too large");
             Event eotEvent = {};
-            eotEvent.time = event.time + event.param2;
+            eotEvent.time = static_cast<std::int32_t>(tieEnd);
             eotEvent.type = EventType::EndOfTie;
             eotEvent.note = event.note;
             outEvents->push_back(eotEvent);
@@ -763,7 +1048,18 @@ void CalculateWaits(std::vector<Event>& events)
 
     for (unsigned i = 0; i < events.size() && events[i].type != EventType::EndOfTrack; i++)
     {
-        events[i].time = events[i + 1].time - events[i].time;
+        if (g_emulateOfficialWrappedWaitBug)
+        {
+            events[i].time = SignedFromBits(static_cast<std::uint32_t>(events[i + 1].time)
+                - static_cast<std::uint32_t>(events[i].time));
+        }
+        else
+        {
+            std::int64_t wait = static_cast<std::int64_t>(events[i + 1].time) - events[i].time;
+            if (wait < 0 || wait > std::numeric_limits<std::int32_t>::max())
+                RaiseError("MIDI events are not in chronological order");
+            events[i].time = static_cast<std::int32_t>(wait);
+        }
 
         if (events[i].type == EventType::TimeSignature)
         {
@@ -804,14 +1100,18 @@ int CalculateCompressionScore(std::vector<Event>& events, int index)
             }
 
             std::int32_t duration = events[i].param2;
+            // The official pattern scorer represents TIE with the internal duration
+            // state 127.  Use that value explicitly instead of relying on the
+            // historical out-of-bounds lookup at index -1.
+            std::int32_t encodedDuration = duration == -1 ? 127 : g_noteDurationLUT[duration];
 
-            if (g_noteDurationLUT[duration] != lastDuration)
+            if (encodedDuration != lastDuration)
             {
                 val++;
-                lastDuration = g_noteDurationLUT[duration];
+                lastDuration = encodedDuration;
             }
 
-            if (duration != lastDuration)
+            if (duration != encodedDuration)
                 val++;
 
             if (val == 0)
@@ -885,7 +1185,13 @@ void CompressWholeNote(std::vector<Event>& events, int index)
                 return;
         }
 
-        if (IsCompressionMatch(events, index, j))
+        bool beginsAtControlFlowBoundary =
+            j > 0 &&
+            (events[j - 1].type == EventType::LoopBegin ||
+             events[j - 1].type == EventType::LoopEndBegin ||
+             events[j - 1].type == EventType::Label);
+
+        if ((!g_protectControlFlowPatterns || !beginsAtControlFlowBoundary) && IsCompressionMatch(events, index, j))
         {
             events[j].type = EventType::Pattern;
             events[j].param2 = events[index].param2 & 0x7FFFFFFF;
@@ -906,7 +1212,17 @@ void Compress(std::vector<Event>& events)
                 return;
         }
 
-        if (CalculateCompressionScore(events, i) >= 6)
+        // The official converter does not use a measure beginning at a
+        // sequence control label as a reusable pattern definition.  Such a
+        // label (notably a loop begin) belongs to the control-flow boundary,
+        // not to the musical contents of the following measure.
+        bool beginsAtControlFlowBoundary =
+            i > 0 &&
+            (events[i - 1].type == EventType::LoopBegin ||
+             events[i - 1].type == EventType::LoopEndBegin ||
+             events[i - 1].type == EventType::Label);
+
+        if ((!g_protectControlFlowPatterns || !beginsAtControlFlowBoundary) && CalculateCompressionScore(events, i) >= 6)
         {
             CompressWholeNote(events, i);
         }
@@ -938,6 +1254,22 @@ void ReadMidiTracks()
 
                 std::unique_ptr<std::vector<Event>> events(MergeEvents());
 
+                // A sequence-level loop marker normally applies to every MIDI
+                // channel.  Some original songs deliberately leave selected
+                // AGB tracks linear, so remove those control events before
+                // timing, wait splitting, and compression for such tracks.
+                if (g_noLoopTracks.count(g_agbTrack) != 0)
+                {
+                    auto it = std::remove_if(events->begin(), events->end(), [](const Event& event)
+                    {
+                        return event.type == EventType::LoopBegin
+                            || event.type == EventType::LoopEndBegin
+                            || event.type == EventType::LoopEnd
+                            || event.type == EventType::LoopEndLate;
+                    });
+                    events->erase(it, events->end());
+                }
+
                 // We don't need TEMPO in anything but track 1.
                 if (g_agbTrack == 1)
                 {
@@ -946,9 +1278,32 @@ void ReadMidiTracks()
                 }
 
                 ConvertTimes(*events);
+
+                auto loopEndDelayIt = g_loopEndDelays.find(g_agbTrack);
+                if (loopEndDelayIt != g_loopEndDelays.end() && loopEndDelayIt->second != 0)
+                {
+                    for (Event& event : *events)
+                    {
+                        if (event.type == EventType::LoopEnd
+                            || event.type == EventType::LoopEndBegin
+                            || event.type == EventType::LoopEndLate)
+                        {
+                            std::int64_t delayed = static_cast<std::int64_t>(event.time) + loopEndDelayIt->second;
+                            if (delayed > std::numeric_limits<std::int32_t>::max())
+                                RaiseError("delayed loop end is too large");
+                            event.time = static_cast<std::int32_t>(delayed);
+                        }
+                    }
+                    std::stable_sort(events->begin(), events->end(), EventCompare);
+                }
+
                 events = InsertTimingEvents(*events);
                 events = CreateTies(*events);
-                std::stable_sort(events->begin(), events->end(), EventCompare);
+                // As with the sequence track, the terminal EOT record stays
+                // at the end even if a malformed wrapped timestamp makes it
+                // earlier than preceding events.
+                std::stable_sort(events->begin(), events->end() - 1, EventCompare);
+                CoalesceAdjacentOutputCommands(*events);
                 events = SplitTime(*events);
                 CalculateWaits(*events);
 

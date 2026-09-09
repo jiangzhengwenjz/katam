@@ -38,7 +38,7 @@ void* CreateBlockin(struct ObjectTemplate* arg0, u8 arg1) {
 
 static void sub_080A4728(struct Object* arg0) {
     if (arg0->base.flags & 0x40000) {
-        if (((struct Kirby *)arg0->base.unk6C)->base.base.base.unk68 & 0x80) {
+        if (((struct Kirby *)arg0->base.unk6C)->base.unk68 & 0x80) {
             arg0->base.flags &= ~0x40000;
         }
         else {
@@ -78,8 +78,8 @@ static void sub_080A4840(struct Object* arg0) {
     if (++arg0->unk9E > 3) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-        arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     
     r3 = (arg0->base.y & ~0xfff);
@@ -173,11 +173,11 @@ void sub_080A49D0(struct Object* arg0) {
 
 static void sub_080A4A08(struct Object* arg0) {
     arg0->kirby3 = arg0->base.unk6C;
-    if (arg0->kirby3->base.base.base.header.kind != 0 && arg0->kirby3->base.base.base.parent != NULL) {
-        arg0->kirby3 = arg0->kirby3->base.base.base.parent;
+    if (arg0->kirby3->base.header.kind != 0 && arg0->kirby3->base.parent != NULL) {
+        arg0->kirby3 = arg0->kirby3->base.parent;
     }
     ObjectSetFunc(arg0, 1, sub_080A47C8);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {

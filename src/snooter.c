@@ -16,7 +16,7 @@ void *CreateSnooter(struct ObjectTemplate *arg0, u8 arg1) {
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -5, 5, 6);
     ObjectSetBounds(&obj->base, -6, -6, 6, 8);
-    if (obj->base.x > FindTargetKirby(&obj->base)->base.base.base.x) {
+    if (obj->base.x > FindTargetKirby(&obj->base)->base.x) {
         obj->base.flags |= 1;
     }
     ObjectInitSprite(obj);
@@ -34,7 +34,7 @@ static void sub_080ACB74(struct Object *arg0) {
 
 void sub_080ACBA4(struct Object *arg0) {
     ObjectSetFunc(arg0, 8, sub_080AC45C);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {

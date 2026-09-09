@@ -115,7 +115,7 @@ void *CreateBoxin(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *boxin = tmp;
 
     InitObject(boxin, template, a2);
-    if (boxin->base.x > boxin->kirby3->base.base.base.x)
+    if (boxin->base.x > boxin->kirby3->base.x)
         boxin->base.flags |= 1;
     else
         boxin->base.flags &= ~1;
@@ -153,8 +153,8 @@ static void sub_080B408C(struct Object *boxin)
     {
         boxin->base.xspeed = 0;
         boxin->base.yspeed = 0;
-        if (abs(boxin->kirby3->base.base.base.x - boxin->base.x) < 0x4000
-            && abs(boxin->kirby3->base.base.base.y - boxin->base.y) < 0x3000)
+        if (abs(boxin->kirby3->base.x - boxin->base.x) < 0x4000
+            && abs(boxin->kirby3->base.y - boxin->base.y) < 0x3000)
             sub_080B597C(boxin);
         else if (!--boxin->base.counter)
         {
@@ -185,7 +185,7 @@ static void sub_080B408C(struct Object *boxin)
             }
             else
             {
-                if (boxin->base.x > boxin->kirby3->base.base.base.x)
+                if (boxin->base.x > boxin->kirby3->base.x)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
@@ -226,7 +226,7 @@ static void sub_080B4338(struct Object *boxin)
             else
             {
                 ObjectSetFunc(boxin, 2, sub_080B408C);
-                if (boxin->base.x > boxin->kirby3->base.base.base.x)
+                if (boxin->base.x > boxin->kirby3->base.x)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
@@ -297,7 +297,7 @@ static void sub_080B4570(struct Object *boxin)
             else
             {
                 ObjectSetFunc(boxin, 2, sub_080B408C);
-                if (boxin->base.x > boxin->kirby3->base.base.base.x)
+                if (boxin->base.x > boxin->kirby3->base.x)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
@@ -368,7 +368,7 @@ static void sub_080B479C(struct Object *boxin)
             else
             {
                 ObjectSetFunc(boxin, 2, sub_080B408C);
-                if (boxin->base.x > boxin->kirby3->base.base.base.x)
+                if (boxin->base.x > boxin->kirby3->base.x)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
@@ -441,7 +441,7 @@ static void sub_080B49E8(struct Object *boxin)
             else
             {
                 ObjectSetFunc(boxin, 2, sub_080B408C);
-                if (boxin->base.x > boxin->kirby3->base.base.base.x)
+                if (boxin->base.x > boxin->kirby3->base.x)
                     boxin->base.flags |= 1;
                 else
                     boxin->base.flags &= ~1;
@@ -815,7 +815,7 @@ void sub_080B5838(struct Object *boxin)
     else
     {
         ObjectSetFunc(boxin, 2, sub_080B408C);
-        if (boxin->base.x > boxin->kirby3->base.base.base.x)
+        if (boxin->base.x > boxin->kirby3->base.x)
             boxin->base.flags |= 1;
         else
             boxin->base.flags &= ~1;
@@ -854,7 +854,7 @@ static void sub_080B5910(struct Object *boxin)
         else
         {
             ObjectSetFunc(boxin, 2, sub_080B408C);
-            if (boxin->base.x > boxin->kirby3->base.base.base.x)
+            if (boxin->base.x > boxin->kirby3->base.x)
                 boxin->base.flags |= 1;
             else
                 boxin->base.flags &= ~1;
@@ -928,7 +928,7 @@ static void sub_080B5AA4(struct Object *boxin)
 static void sub_080B5AC8(struct Object *boxin)
 {
     ObjectSetFunc(boxin, 0, sub_080B5B0C);
-    if (boxin->base.x > boxin->kirby3->base.base.base.x)
+    if (boxin->base.x > boxin->kirby3->base.x)
         boxin->base.flags |= 1;
     else
         boxin->base.flags &= ~1;

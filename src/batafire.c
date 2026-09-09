@@ -212,18 +212,18 @@ static void sub_080C939C(struct Object *batafire)
 {
     batafire->base.flags |= 4;
     batafire->kirby3 = FindTargetKirby(&batafire->base);
-    if (batafire->base.x > batafire->kirby3->base.base.base.x)
+    if (batafire->base.x > batafire->kirby3->base.x)
         batafire->base.flags |= 1;
     else
         batafire->base.flags &= ~1;
-    if (!(batafire->kirby3->base.base.base.unkC & 0x8000)
-        && batafire->base.roomId == batafire->kirby3->base.base.base.roomId)
+    if (!(batafire->kirby3->base.unkC & 0x8000)
+        && batafire->base.roomId == batafire->kirby3->base.roomId)
     {
 
-        if (Macro_08039430_1(&batafire->kirby3->base.base.base, batafire))
+        if (Macro_08039430_1(&batafire->kirby3->base, batafire))
         {
-            Macro_081003EC(batafire, &batafire->kirby3->base.base.base);
-            if (batafire->kirby3->base.base.base.x > batafire->base.x)
+            Macro_081003EC(batafire, &batafire->kirby3->base);
+            if (batafire->kirby3->base.x > batafire->base.x)
                 batafire->unk9E = 1;
             else
                 batafire->unk9E = 0;
@@ -249,7 +249,7 @@ void sub_080C95D4(struct Object *batafire)
     batafire->base.yspeed = 0;
     batafire->unk9E = 0;
     batafire->base.flags &= ~2;
-    if (batafire->base.x > batafire->kirby3->base.base.base.x)
+    if (batafire->base.x > batafire->kirby3->base.x)
         batafire->base.flags |= 1;
     else
         batafire->base.flags &= ~1;
@@ -271,7 +271,7 @@ void sub_080C95D4(struct Object *batafire)
 static void sub_080C96EC(struct Object *batafire)
 {
     batafire->base.flags |= 4;
-    if (batafire->base.x > batafire->kirby3->base.base.base.x)
+    if (batafire->base.x > batafire->kirby3->base.x)
         batafire->base.flags |= 1;
     else
         batafire->base.flags &= ~1;
@@ -321,7 +321,7 @@ static void sub_080C97F0(struct Object *batafire)
         batafire->base.y = batafire->base.y & ~0xFF;
     batafire->base.xspeed = 0;
     batafire->base.yspeed = 0;
-    if (batafire->base.x > batafire->kirby3->base.base.base.x)
+    if (batafire->base.x > batafire->kirby3->base.x)
         batafire->base.flags |= 1;
     else
         batafire->base.flags &= ~1;
@@ -343,7 +343,7 @@ static void sub_080C97F0(struct Object *batafire)
 static void sub_080C9900(struct Object *batafire)
 {
     batafire->base.flags |= 4;
-    if (batafire->base.x > batafire->kirby3->base.base.base.x)
+    if (batafire->base.x > batafire->kirby3->base.x)
         batafire->base.flags |= 1;
     else
         batafire->base.flags &= ~1;
@@ -420,7 +420,7 @@ static void sub_080C9A08(struct Object *batafire)
         sub_080C97F0(batafire);
     else
     {
-        if (batafire->base.x > batafire->kirby3->base.base.base.x)
+        if (batafire->base.x > batafire->kirby3->base.x)
             batafire->base.flags |= 1;
         else
             batafire->base.flags &= ~1;
@@ -458,7 +458,7 @@ static void sub_080C9BB4(struct Object *batafire)
         sub_080C95D4(batafire);
     else
     {
-        if (batafire->base.x > batafire->kirby3->base.base.base.x)
+        if (batafire->base.x > batafire->kirby3->base.x)
             batafire->base.flags |= 1;
         else
             batafire->base.flags &= ~1;
@@ -921,7 +921,7 @@ static void sub_080CAF60(struct Object *batafire)
     obj4->roomId = batafire->base.roomId;
     EffectObjectInitSprite(obj4, &obj4->sprite, 8, 0x2E7, 0xE, 0x19);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 0, 1);
 }
 
 static void sub_080CB02C(void)
@@ -938,7 +938,7 @@ static void sub_080CB02C(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 8, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x2E7, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x2E7, 0, !obj4->sprite.palId);
         batafire2 = obj4->parent;
         if (batafire2)
         {

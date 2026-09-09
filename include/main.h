@@ -97,7 +97,7 @@ extern struct Unk_030023F4 gUnk_030023F4;
 
 extern u32 gMainFlags;
 
-extern u8 gUnk_03002450[];
+extern u8 gUnk_03002450[0x20];
 extern FuncType_030068C0 gUnk_03002470[4];
 extern u16 gUnk_03002480;
 extern u8* gUnk_03002484;
@@ -122,7 +122,15 @@ extern u8 gUnk_03002760[2][0x280] __attribute__((aligned(4)));
 extern u16 gObjPalette[0x100] __attribute__((aligned(4)));
 extern u32 gFrameCount;
 extern u16 gWinRegs[6];
-extern u8 gUnk_03002E80[];
+/* Four per-BG rectangles of BG tilemap entries, measured in tiles, that
+ * sub_08154B14 clears to gUnk_030060A0.parts[bg] and then zeroes. One 4-byte
+ * entry per BG, indexed bg * 4:
+ *     +0 left, +1 top, +2 right, +3 bottom -- both corners inclusive.
+ * An all-zero entry means "nothing to clear". A right of 0xFF means "full
+ * width", which lets the whole span of rows go out in a single DMA. */
+extern u8 gUnk_03002E80[4 * 4];
+extern u8 gUnk_03002E82[]; // == gUnk_03002E80 + 2
+extern u8 gUnk_03002E83[]; // == gUnk_03002E80 + 3
 
 /*
  * Holds key presses as registered by REG_KEYINPUT in each frame.
@@ -169,7 +177,7 @@ extern u8 gUnk_03006070;
 extern u16 gUnk_03006074;
 extern u8 gUnk_03006078;
 extern u8 gUnk_0300607C;
-extern u8 gUnk_03006080[];
+extern u8 gUnk_03006080[0x20];
 extern union Unk_030060A0 gUnk_030060A0;
 extern u16 gOamBuffer[];
 extern u8 gUnk_030068B0;

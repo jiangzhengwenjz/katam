@@ -94,6 +94,14 @@ struct Sprite_20 {
     s8 unk7;
 }; /* size = 0x8 */
 
+struct SpriteTransform {
+    /* 0x00 */ u16 rotation;
+    /* 0x02 */ s16 qScaleX;
+    /* 0x04 */ s16 qScaleY;
+    /* 0x06 */ s16 x;
+    /* 0x08 */ s16 y;
+}; /* size = 0xC */
+
 struct Sprite {
     u32 tilesVram;
     u32 unk4;
@@ -140,8 +148,8 @@ struct AnimCmd_GetTiles {
 struct AnimCmd_GetPalette {
     /* 0x00 */ s32 cmdId;
     /* 0x04 */ s32 palId;
-    /* 0x06 */ u16 numColors;
-    /* 0x08 */ u16 insertOffset;
+    /* 0x08 */ u16 numColors;
+    /* 0x0A */ u16 insertOffset;
 }; /* size = 0xC */
 
 struct AnimCmd_JumpBack {
@@ -178,8 +186,8 @@ struct AnimCmd_8 {
 struct AnimCmd_SetIdAndVariant {
     /* 0x00 */ s32 cmdId;
     /* 0x04 */ u16 animId;
-    /* 0x08 */ u16 variant;
-}; /* size = 0xC */
+    /* 0x06 */ u16 variant;
+}; /* size = 0x8 */
 
 struct AnimCmd_10 {
     /* 0x00 */ s32 cmdId;
@@ -263,16 +271,19 @@ extern const struct SpriteTables *gSpriteTables;
 
 extern u8 gUnk_030035F0[];
 
-extern const u8 gUnk_08D6084C[][2];
+extern u8 gUnk_08D6084C[][2];
+
+struct Background;
 
 s32 sub_08153D78(struct Sprite *);
 u32 sub_0815436C(void);
 void sub_081548A8(u16, s16, s16, s16, s16, s16, s16, struct BgAffineReg *);
 u32 sub_08154B14(void);
-u16 sub_08154FE8(s16, s16); // TODO: return s16?
-u32 sub_08155128(struct Sprite *);
-void sub_0815521C(struct Sprite *, u16);
-void sub_08155604(struct Sprite *, s16 *);
+void sub_08154EA8(struct Background *, u16, u16, u8, u16, u16);
+s16 sub_08154FE8(s16, s16);
+s32 sub_08155128(struct Sprite *);
+s32 sub_0815521C(struct Sprite *, u16);
+void sub_08155604(struct Sprite *, struct SpriteTransform *);
 void DisplaySprite(struct Sprite *);
 void sub_081564D8(struct Sprite *);
 void DrawToOamBuffer(void);

@@ -131,7 +131,7 @@ void *CreateMoley(struct ObjectTemplate *template, u8 a2)
     moley->unkB4 = 1;
     moley->unkB6 = 0;
     moley->unkB5 = 0;
-    if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
+    if (moley->obj2.base.x > moley->obj2.kirby3->base.x)
         moley->obj2.base.flags |= 1;
     else
         moley->obj2.base.flags &= ~1;
@@ -152,11 +152,11 @@ static void sub_080EB2C0(struct Moley *moley)
 {
     moley->obj2.kirby3 = FindTargetKirby(&moley->obj2.base);
     moley->obj2.base.flags |= 4;
-    if (!(moley->obj2.kirby3->base.base.base.unkC & 0x8000)
-        && moley->obj2.base.roomId == moley->obj2.kirby3->base.base.base.roomId
-        && Macro_08039430_1(&moley->obj2.kirby3->base.base.base, &moley->obj2))
+    if (!(moley->obj2.kirby3->base.unkC & 0x8000)
+        && moley->obj2.base.roomId == moley->obj2.kirby3->base.roomId
+        && Macro_08039430_1(&moley->obj2.kirby3->base, &moley->obj2))
     {
-        Macro_081003EC(&moley->obj2, &moley->obj2.kirby3->base.base.base);
+        Macro_081003EC(&moley->obj2, &moley->obj2.kirby3->base);
         sub_080ED54C(moley);
     }
 }
@@ -289,7 +289,7 @@ void sub_080EB848(struct Moley *moley)
         moley->obj2.base.xspeed = 0;
         moley->obj2.base.yspeed = 0;
         moley->obj2.kirby3 = FindTargetKirby(&moley->obj2.base);
-        if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
+        if (moley->obj2.base.x > moley->obj2.kirby3->base.x)
             moley->obj2.base.flags |= 1;
         else
             moley->obj2.base.flags &= ~1;
@@ -556,7 +556,7 @@ static void sub_080EC1F4(struct Moley *moley)
 
     ObjectSetFunc(moley, 8, sub_080EC308);
     moley->obj2.kirby3 = FindTargetKirby(&moley->obj2.base);
-    if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
+    if (moley->obj2.base.x > moley->obj2.kirby3->base.x)
         moley->obj2.base.flags |= 1;
     else
         moley->obj2.base.flags &= ~1;
@@ -624,7 +624,7 @@ static void sub_080EC3B8(struct Moley *moley)
 
     ObjectSetFunc(moley, 8, sub_080EC44C);
     moley->obj2.kirby3 = FindTargetKirby(&moley->obj2.base);
-    if (moley->obj2.base.x > moley->obj2.kirby3->base.base.base.x)
+    if (moley->obj2.base.x > moley->obj2.kirby3->base.x)
         moley->obj2.base.flags |= 1;
     else
         moley->obj2.base.flags &= ~1;
@@ -721,8 +721,8 @@ static void sub_080EC5B4(struct Moley *moley)
         {
             struct Kirby *kirby = gKirbys + i;
 
-            if (kirby->base.base.base.roomId == moley->obj2.base.roomId
-                && kirby->base.base.base.flags & 0x1000000
+            if (kirby->base.roomId == moley->obj2.base.roomId
+                && kirby->base.flags & 0x1000000
                 && (moley->obj2.objTemplate->unk2 != 0 || moley->obj2.objTemplate->unk3 != 0x1F))
             {
                 ++*GetStateSlot(STATE_SLOT_ROOM, moley->obj2.objTemplate->unk4, gCurLevelInfo[moley->obj2.base.unk56].unk65E);
@@ -811,7 +811,7 @@ void sub_080EC8E8(struct Object *obj2)
         if (obj2->objTemplate->subtype1)
             r4 = Rand16() & 0xFF;
         else
-            r4 = abs(kirby->base.base.base.x - moley->obj2.base.x) >> 8;
+            r4 = abs(kirby->base.x - moley->obj2.base.x) >> 8;
         if (r4 < 0x1E)
             obj2->base.xspeed = 0x80;
         else if (r4 < 0x3C)
@@ -1145,7 +1145,7 @@ static void sub_080ED078(struct Moley *moley)
         objBase->counter = 1;
     }
     objBase->sprite.palId = 0;
-    Macro_081050E8(objBase, &objBase->sprite, 0x342, 1);
+    Macro_081050E8(objBase, &objBase->sprite, 0x342, 0, 1);
 }
 
 static void sub_080ED270(void)
@@ -1163,7 +1163,7 @@ static void sub_080ED270(void)
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 1, &objBase->sprite);
         else
             Macro_08107BA8_4(objBase, &objBase->sprite, &sprite, 4, &objBase->sprite);
-        Macro_081050E8(objBase, &objBase->sprite, 0x342, !objBase->sprite.palId);
+        Macro_081050E8(objBase, &objBase->sprite, 0x342, 0, !objBase->sprite.palId);
         if (!ObjectPreUpdate(objBase))
         {
             objBase->flags |= 4;

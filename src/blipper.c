@@ -62,7 +62,7 @@ void *CreateBlipper(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *blipper = tmp;
 
     InitObject(blipper, template, a2);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
@@ -97,8 +97,8 @@ static void sub_080A5188(struct Object *blipper)
     {
         blipper->kirby3 = FindTargetKirby(&blipper->base);
         blipper->unk9E = 0;
-        blipper->unkA0 = blipper->kirby3->base.base.base.x >> 8;
-        blipper->unkA2 = blipper->kirby3->base.base.base.y >> 8;
+        blipper->unkA0 = blipper->kirby3->base.x >> 8;
+        blipper->unkA2 = blipper->kirby3->base.y >> 8;
     }
     lhs = blipper->base.y & ~0xFFF;
     rhs = (blipper->unkA2 * 0x100) & ~0xFFF;
@@ -523,7 +523,7 @@ static void sub_080A5E30(struct Object *blipper)
     {
         blipper->unk85 = 0x10;
         blipper->kirby3 = FindTargetKirby(&blipper->base);
-        if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x4000
+        if (abs(blipper->kirby3->base.x - blipper->base.x) < 0x4000
             && RandLessThan3())
         {
             sub_080A616C(blipper);
@@ -537,13 +537,13 @@ static void sub_080A5E30(struct Object *blipper)
 static void sub_080A616C(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 5, sub_080A6210);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
     if (blipper->objTemplate->subtype1 == 3)
         blipper->base.flags |= 0x100;
-    if (abs(blipper->kirby3->base.base.base.x - blipper->base.x) < 0x2000)
+    if (abs(blipper->kirby3->base.x - blipper->base.x) < 0x2000)
         blipper->base.xspeed = 0x80;
     else
         blipper->base.xspeed = 0x100;
@@ -977,7 +977,7 @@ static void sub_080A6CBC(struct Object *blipper, u8 a2)
         obj4->flags |= 0x2000;
     EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
     obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x327, 1);
+    Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, 1);
 }
 
 static void sub_080A6E44(void)
@@ -991,7 +991,7 @@ static void sub_080A6E44(void)
     else
     {
         Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 6, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x327, !obj4->sprite.palId);
+        Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, !obj4->sprite.palId);
         Macro_0809E55C(obj4);
         blipper = obj4->parent;
         if (blipper)
@@ -1073,7 +1073,7 @@ static void sub_080A71E4(struct Object *blipper)
 {
     blipper->base.xspeed = 0;
     blipper->base.yspeed = 0;
-    if (blipper->base.y > blipper->kirby3->base.base.base.y)
+    if (blipper->base.y > blipper->kirby3->base.y)
         sub_080A7210(blipper);
     else
         sub_080A7238(blipper);
@@ -1118,7 +1118,7 @@ static void sub_080A72AC(struct Object *blipper)
 static void sub_080A72D8(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 7, sub_080A63A0);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;
@@ -1159,7 +1159,7 @@ static void sub_080A7340(struct Object *blipper)
 static void sub_080A73D4(struct Object *blipper)
 {
     ObjectSetFunc(blipper, 8, sub_080A64F0);
-    if (blipper->base.x > blipper->kirby3->base.base.base.x)
+    if (blipper->base.x > blipper->kirby3->base.x)
         blipper->base.flags |= 1;
     else
         blipper->base.flags &= ~1;

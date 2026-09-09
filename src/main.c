@@ -90,7 +90,7 @@ void GameInit(void) {
     gUnk_030068B0 = 0;
     gUnk_03006078 = 0;
     gUnk_030039A4 = 0;
-    DmaFill32(3, 0, gUnk_03002E80, 0x10);
+    DmaFill32(3, 0, gUnk_03002E80, sizeof(gUnk_03002E80));
     DmaWait(3);
     gUnk_030060A0.full = 0;
     DmaFill32(3, 0, gBgScrollRegs, sizeof(gBgScrollRegs));
@@ -106,9 +106,9 @@ void GameInit(void) {
     DmaWait(3);
     DmaFill16(3, 0x200, gUnk_030031C0, 0x400);
     DmaWait(3);
-    DmaFill32(3, ~0, gUnk_03002450, 0x20);
+    DmaFill32(3, ~0, gUnk_03002450, sizeof(gUnk_03002450));
     DmaWait(3);
-    DmaFill32(3, ~0, gUnk_03006080, 0x20);
+    DmaFill32(3, ~0, gUnk_03006080, sizeof(gUnk_03006080));
     DmaWait(3);
     DmaFill32(3, 0, gObjPalette, OBJ_PLTT_SIZE);
     DmaWait(3);

@@ -152,7 +152,7 @@ void *CreatePhanPhan(struct ObjectTemplate *template, u8 a2)
     struct Object *tmp = TaskGetStructPtr(t), *phanPhan = tmp;
 
     InitObject(phanPhan, template, a2);
-    if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+    if (phanPhan->base.x > phanPhan->kirby3->base.x)
         phanPhan->base.flags |= 1;
     else
         phanPhan->base.flags &= ~1;
@@ -178,16 +178,16 @@ static void sub_080CD6C0(struct Object *phanPhan)
 {
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
     phanPhan->base.flags |= 4;
-    if (!(phanPhan->kirby3->base.base.base.unkC & 0x8000)
-        && phanPhan->base.roomId == phanPhan->kirby3->base.base.base.roomId)
+    if (!(phanPhan->kirby3->base.unkC & 0x8000)
+        && phanPhan->base.roomId == phanPhan->kirby3->base.roomId)
     {
-        if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+        if (phanPhan->base.x > phanPhan->kirby3->base.x)
             phanPhan->base.flags |= 1;
         else
             phanPhan->base.flags &= ~1;
-        if (Macro_08039430_2(&phanPhan->kirby3->base.base.base, phanPhan))
+        if (Macro_08039430_2(&phanPhan->kirby3->base, phanPhan))
         {
-            Macro_081003EC(phanPhan, &phanPhan->kirby3->base.base.base);
+            Macro_081003EC(phanPhan, &phanPhan->kirby3->base);
             phanPhan->base.flags &= ~0x200;
             sub_080CF20C(phanPhan);
             sub_080CF44C(phanPhan);
@@ -204,7 +204,7 @@ static void sub_080CD8D4(struct Object *phanPhan)
     u8 c, d;
 
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
-    if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+    if (phanPhan->base.x > phanPhan->kirby3->base.x)
         phanPhan->base.flags |= 1;
     else
         phanPhan->base.flags &= ~1;
@@ -232,9 +232,9 @@ static void sub_080CD8D4(struct Object *phanPhan)
         {
             c = Rand16() & 7;
             d = 0;
-            if (phanPhan->kirby3->base.base.base.flags & 0x20)
+            if (phanPhan->kirby3->base.flags & 0x20)
                 d = 1;
-            else if (phanPhan->kirby3->base.base.base.flags & 0x40)
+            else if (phanPhan->kirby3->base.flags & 0x40)
                 d = 2;
             if (phanPhan->subtype)
                 d = (d+3) & 0xFF;
@@ -248,7 +248,7 @@ static void sub_080CD8D4(struct Object *phanPhan)
     }
     else
     {
-        if (abs(phanPhan->kirby3->base.base.base.x - phanPhan->base.x) < a * 0x100)
+        if (abs(phanPhan->kirby3->base.x - phanPhan->base.x) < a * 0x100)
         {
             if (Rand16() & 1)
             {
@@ -460,7 +460,7 @@ static void sub_080CE464(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 7, sub_080CE4DC);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
-    if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+    if (phanPhan->base.x > phanPhan->kirby3->base.x)
         phanPhan->base.flags |= 1;
     else
         phanPhan->base.flags &= ~1;
@@ -513,7 +513,7 @@ static void sub_080CE758(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0xA, sub_080CE800);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
-    if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+    if (phanPhan->base.x > phanPhan->kirby3->base.x)
         phanPhan->base.flags |= 1;
     else
         phanPhan->base.flags &= ~1;
@@ -563,12 +563,12 @@ static void sub_080CE800(struct Object *phanPhan)
 bool8 sub_080CE94C(struct Object *phanPhan, struct Kirby *kirby)
 {
     if (phanPhan->unk83 == 0x15
-        || kirby->base.base.base.header.kind
+        || kirby->base.header.kind
         || kirby->hp <= 0
         || kirby->animationIndex == 0x27
         || kirby->animationIndex > 0x7A
         || kirby->unk110
-        || kirby->base.base.base.flags & 0x3800B00)
+        || kirby->base.flags & 0x3800B00)
         return FALSE;
     ObjectSetFunc(phanPhan, 0x15, sub_080CEA7C);
     phanPhan->base.xspeed = 0;
@@ -691,7 +691,7 @@ static void sub_080CED7C(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0xC, sub_080CEE04);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
-    if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+    if (phanPhan->base.x > phanPhan->kirby3->base.x)
         phanPhan->base.flags |= 1;
     else
         phanPhan->base.flags &= ~1;
@@ -915,7 +915,7 @@ static void sub_080CF4C8(struct Object *phanPhan)
 {
     ObjectSetFunc(phanPhan, 0x10, sub_080CDE64);
     phanPhan->kirby3 = FindTargetKirby(&phanPhan->base);
-    if (phanPhan->base.x > phanPhan->kirby3->base.base.base.x)
+    if (phanPhan->base.x > phanPhan->kirby3->base.x)
         phanPhan->base.flags |= 1;
     else
         phanPhan->base.flags &= ~1;
@@ -931,7 +931,7 @@ static void sub_080CF51C(struct Object *phanPhan)
     ObjectSetFunc(phanPhan, 0x1D, sub_080CF558);
     phanPhan->base.xspeed = 0;
     phanPhan->base.yspeed = 0;
-    if (kirby->base.base.base.x > phanPhan->base.x)
+    if (kirby->base.x > phanPhan->base.x)
         phanPhan->base.xspeed = -0x80;
     else
         phanPhan->base.xspeed = 0x80;

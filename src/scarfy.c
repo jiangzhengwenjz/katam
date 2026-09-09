@@ -64,7 +64,7 @@ void* CreateScarfy(struct ObjectTemplate* arg0, u8 arg1) {
     obj2 = TaskGetStructPtr(task);
     obj = obj2;
     InitObject(obj, arg0, arg1);
-    if (obj->base.x > obj->kirby3->base.base.base.x) {
+    if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
     }
     else {
@@ -177,7 +177,7 @@ static void sub_080A75C4(struct Object* arg0) {
     arg0->unk9E--;
     if (arg0->base.flags & 2) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -242,8 +242,8 @@ static void sub_080A7A88(struct Object* arg0) {
     if (++arg0->unk9E > 7) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-        arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     
     r3 = (arg0->base.y & ~0xfff);
@@ -330,8 +330,8 @@ static void sub_080A7C0C(struct Object* arg0) {
     if (++arg0->unk9E > 7) {
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         arg0->unk9E = 0;
-        arg0->unkA0 = arg0->kirby3->base.base.base.x >> 8;
-        arg0->unkA2 = arg0->kirby3->base.base.base.y >> 8;
+        arg0->unkA0 = arg0->kirby3->base.x >> 8;
+        arg0->unkA2 = arg0->kirby3->base.y >> 8;
     }
     
     r3 = (arg0->base.y & ~0xfff);
@@ -468,29 +468,29 @@ static void sub_080A7F64(struct Object* arg0) {
     switch (arg0->objTemplate->subtype1) {
     default:
     case 1:
-        arg0->base.x = arg0->kirby3->base.base.base.x - 0x3000;
-        arg0->base.y = arg0->kirby3->base.base.base.y - 0xb000;
+        arg0->base.x = arg0->kirby3->base.x - 0x3000;
+        arg0->base.y = arg0->kirby3->base.y - 0xb000;
         arg0->base.yspeed = -0x300;
         break;
     case 2:
-        arg0->base.x = arg0->kirby3->base.base.base.x + 0x5000;
-        arg0->base.y = arg0->kirby3->base.base.base.y - 0xb000;
+        arg0->base.x = arg0->kirby3->base.x + 0x5000;
+        arg0->base.y = arg0->kirby3->base.y - 0xb000;
         arg0->base.yspeed = -0x300;
         break;
     case 3:
-        arg0->base.x = arg0->kirby3->base.base.base.x - 0x3000;
-        arg0->base.y = arg0->kirby3->base.base.base.y + 0xb000;
+        arg0->base.x = arg0->kirby3->base.x - 0x3000;
+        arg0->base.y = arg0->kirby3->base.y + 0xb000;
         arg0->base.yspeed = 0x300;
         break;
     case 4:
-        arg0->base.x = arg0->kirby3->base.base.base.x + 0x5000;
-        arg0->base.y = arg0->kirby3->base.base.base.y + 0xb000;
+        arg0->base.x = arg0->kirby3->base.x + 0x5000;
+        arg0->base.y = arg0->kirby3->base.y + 0xb000;
         arg0->base.yspeed = 0x300;
         break;
     }
     arg0->base.flags &= ~0x600;
     arg0->base.flags |= 0x2000000;
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -499,7 +499,7 @@ static void sub_080A7F64(struct Object* arg0) {
 }
 
 static void sub_080A8048(struct Object* arg0) {
-    if (abs(arg0->kirby3->base.base.base.y - arg0->base.y) < 0x400) {
+    if (abs(arg0->kirby3->base.y - arg0->base.y) < 0x400) {
         arg0->base.flags &= ~0x02000000;
         ObjectSetFunc(arg0, 0, sub_080A75C4);
         return;
@@ -508,7 +508,7 @@ static void sub_080A8048(struct Object* arg0) {
         arg0->base.flags &= ~0x02000000;
         arg0->kirby3 = FindTargetKirby(&arg0->base);
         ObjectSetFunc(arg0, 1, sub_080A78E4);
-        if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+        if (arg0->base.x > arg0->kirby3->base.x) {
             arg0->base.flags |= 1;
         }
         else {
@@ -525,7 +525,7 @@ void sub_080A80EC(struct Object* arg0) {
 static void sub_080A8100(struct Object* arg0) {
     arg0->kirby3 = FindTargetKirby(&arg0->base);
     ObjectSetFunc(arg0, 1, sub_080A78E4);
-    if (arg0->base.x > arg0->kirby3->base.base.base.x) {
+    if (arg0->base.x > arg0->kirby3->base.x) {
         arg0->base.flags |= 1;
     }
     else {
@@ -560,7 +560,7 @@ static void sub_080A81C4(struct Object* arg0) {
         arg0->base.counter = 0;
         arg0->kirby3 = FindTargetKirby(&arg0->base);
     }
-    if (abs(arg0->kirby3->base.base.base.x - arg0->base.x) < 0xa00) {
+    if (abs(arg0->kirby3->base.x - arg0->base.x) < 0xa00) {
         sub_080A7F64(arg0);
     }
 }

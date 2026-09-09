@@ -23,8 +23,11 @@
 #include <cstring>
 #include <cctype>
 #include <cassert>
+#include <cerrno>
+#include <limits>
 #include <string>
 #include <set>
+#include <map>
 #include "main.h"
 #include "error.h"
 #include "midi.h"
@@ -32,6 +35,7 @@
 
 FILE* g_inputFile = nullptr;
 FILE* g_outputFile = nullptr;
+std::string g_outputFilename;
 
 std::string g_asmLabel;
 int g_masterVolume = 127;
@@ -45,6 +49,13 @@ bool g_deferLoopBegin = false;
 bool g_preferModLoop = false;
 bool g_preferTempoOrVoiceLoop = false;
 bool g_allowCodeInsideLoop = false;
+bool g_deferredLoopFallbackToNote = false;
+bool g_honorEncodingMarkers = false;
+bool g_protectControlFlowPatterns = false;
+bool g_emulateOfficialWrappedWaitBug = false;
+std::set<int> g_noLoopTracks;
+std::map<int, int> g_loopEndDelays;
+std::map<int, int> g_loopJumpOffsets;
 
 [[noreturn]] static void PrintUsage()
 {
@@ -62,52 +73,64 @@ bool g_allowCodeInsideLoop = false;
         "            -X  48 clocks/beat (default:24 clocks/beat)\n"
         "            -E  exact gate-time\n"
         "            -N  no compression\n"
-        "            -A  defer loop before VOL instruction"
-        "            -B  defer loop, preferring before MOD instruction"
-        "            -C  defer loop, preferring before TEMPO or VOICE instructions"
-        "            -D  allow reusing instructions from inside a loop to outside"
+        "            -A  defer loop before VOL instruction\n"
+        "            -B  defer loop, preferring before MOD instruction\n"
+        "            -C  defer loop, preferring before TEMPO or VOICE instructions\n"
+        "            -D  allow reusing instructions from inside a loop to outside\n"
+        "            -F  place a still-deferred loop before the first note\n"
+        "            -I  honor reconstruction-only encoding markers\n"
+        "         -J???  override loop jump target: track:byte-offset,...\n"
+        "            -Q  protect sequence-control boundaries from pattern compression\n"
+        "         -S???  suppress sequence loops on AGB track(s), comma-separated\n"
+        "         -T???  delay loop end on AGB track(s): track:ticks,...\n"
+        "            -U  emulate known MID2AGB 1.06a wrapped-wait bug (unsafe)\n"
     );
     std::exit(1);
 }
 
 static std::string StripExtension(std::string s)
 {
-    std::size_t pos = s.find_last_of('.');
-
-    if (pos > 0 && pos != std::string::npos)
-    {
-        s = s.substr(0, pos);
-    }
-
+    std::size_t slash = s.find_last_of("/\\");
+    std::size_t dot = s.find_last_of('.');
+    if (dot != std::string::npos && (slash == std::string::npos || dot > slash))
+        s.erase(dot);
     return s;
 }
 
-static std::string GetExtension(std::string s)
-{
-    std::size_t pos = s.find_last_of('.');
-
-    if (pos > 0 && pos != std::string::npos)
-    {
-        return s.substr(pos + 1);
-    }
-
-    return "";
-}
 
 static std::string BaseName(std::string s)
 {
-    std::size_t posAfterSlash = s.find_last_of("/\\");
+    std::size_t slash = s.find_last_of("/\\");
+    if (slash != std::string::npos)
+        s.erase(0, slash + 1);
+    return StripExtension(s);
+}
 
-    if (posAfterSlash == std::string::npos)
-        posAfterSlash = 0;
-    else
-        posAfterSlash++;
+static bool ParseOfficialInt(const char *text, int& value)
+{
+    const unsigned char *p = reinterpret_cast<const unsigned char *>(text);
+    while (*p != 0 && std::isspace(*p))
+        ++p;
 
-    std::size_t dotPos = s.find_first_of('.', posAfterSlash);
-    if (dotPos > posAfterSlash && dotPos != std::string::npos)
-        s = s.substr(posAfterSlash, dotPos - posAfterSlash);
+    bool negative = false;
+    if (*p == '+' || *p == '-')
+    {
+        negative = (*p == '-');
+        ++p;
+    }
+    if (!std::isdigit(*p))
+        return false;
 
-    return s;
+    std::uint32_t result = 0;
+    while (std::isdigit(*p))
+    {
+        result = result * 10u + (*p - '0');
+        ++p;
+    }
+    if (negative)
+        result = 0u - result;
+    value = static_cast<std::int32_t>(result);
+    return true;
 }
 
 static const char *GetArgument(int argc, char **argv, int& index)
@@ -153,12 +176,49 @@ int main(int argc, char** argv)
             case 'E':
                 g_exactGateTime = true;
                 break;
+            case 'F':
+                g_deferLoopBegin = true;
+                g_deferredLoopFallbackToNote = true;
+                break;
             case 'G':
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
-                g_voiceGroup = std::stoi(arg);
+                ParseOfficialInt(arg, g_voiceGroup);
                 break;
+            case 'I':
+                g_honorEncodingMarkers = true;
+                break;
+            case 'J':
+            {
+                arg = GetArgument(argc, argv, i);
+                if (arg == nullptr)
+                    PrintUsage();
+
+                const char *pos = arg;
+                while (*pos != '\0')
+                {
+                    char *end;
+                    errno = 0;
+                    long track = std::strtol(pos, &end, 10);
+                    if (errno == ERANGE || end == pos || track <= 0
+                        || track > std::numeric_limits<int>::max() || *end != ':')
+                        PrintUsage();
+                    pos = end + 1;
+                    errno = 0;
+                    long offset = std::strtol(pos, &end, 0);
+                    if (errno == ERANGE || end == pos || offset < 0
+                        || offset > std::numeric_limits<int>::max())
+                        PrintUsage();
+                    g_loopJumpOffsets[static_cast<int>(track)] = static_cast<int>(offset);
+                    if (*end == '\0')
+                        break;
+                    if (*end != ',')
+                        PrintUsage();
+                    pos = end + 1;
+                }
+                break;
+            }
             case 'L':
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
@@ -172,19 +232,79 @@ int main(int argc, char** argv)
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
-                g_priority = std::stoi(arg);
+                ParseOfficialInt(arg, g_priority);
+                break;
+            case 'Q':
+                g_protectControlFlowPatterns = true;
                 break;
             case 'R':
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
-                g_reverb = std::stoi(arg);
+                ParseOfficialInt(arg, g_reverb);
+                break;
+            case 'S':
+            {
+                arg = GetArgument(argc, argv, i);
+                if (arg == nullptr)
+                    PrintUsage();
+
+                const char *pos = arg;
+                while (*pos != '\0')
+                {
+                    char *end;
+                    errno = 0;
+                    long track = std::strtol(pos, &end, 10);
+                    if (errno == ERANGE || end == pos || track <= 0
+                        || track > std::numeric_limits<int>::max())
+                        PrintUsage();
+                    g_noLoopTracks.insert(static_cast<int>(track));
+                    if (*end == '\0')
+                        break;
+                    if (*end != ',')
+                        PrintUsage();
+                    pos = end + 1;
+                }
+                break;
+            }
+            case 'T':
+            {
+                arg = GetArgument(argc, argv, i);
+                if (arg == nullptr)
+                    PrintUsage();
+
+                const char *pos = arg;
+                while (*pos != '\0')
+                {
+                    char *end;
+                    errno = 0;
+                    long track = std::strtol(pos, &end, 10);
+                    if (errno == ERANGE || end == pos || track <= 0
+                        || track > std::numeric_limits<int>::max() || *end != ':')
+                        PrintUsage();
+                    pos = end + 1;
+                    errno = 0;
+                    long delay = std::strtol(pos, &end, 10);
+                    if (errno == ERANGE || end == pos || delay < 0
+                        || delay > std::numeric_limits<int>::max())
+                        PrintUsage();
+                    g_loopEndDelays[static_cast<int>(track)] = static_cast<int>(delay);
+                    if (*end == '\0')
+                        break;
+                    if (*end != ',')
+                        PrintUsage();
+                    pos = end + 1;
+                }
+                break;
+            }
+            case 'U':
+                g_emulateOfficialWrappedWaitBug = true;
                 break;
             case 'V':
                 arg = GetArgument(argc, argv, i);
                 if (arg == nullptr)
                     PrintUsage();
-                g_masterVolume = std::stoi(arg);
+                ParseOfficialInt(arg, g_masterVolume);
                 break;
             case 'X':
                 g_clocksPerBeat = 2;
@@ -221,14 +341,8 @@ int main(int argc, char** argv)
     if (inputFilename.empty())
         PrintUsage();
 
-    if (GetExtension(inputFilename) != "mid")
-        RaiseError("input filename extension is not \"mid\"");
-
     if (outputFilename.empty())
         outputFilename = StripExtension(inputFilename) + ".s";
-
-    if (GetExtension(outputFilename) != "s")
-        RaiseError("output filename extension is not \"s\"");
 
     if (g_asmLabel.empty())
         g_asmLabel = BaseName(outputFilename);
@@ -238,6 +352,7 @@ int main(int argc, char** argv)
     if (g_inputFile == nullptr)
         RaiseError("failed to open \"%s\" for reading", inputFilename.c_str());
 
+    g_outputFilename = outputFilename;
     g_outputFile = std::fopen(outputFilename.c_str(), "w");
 
     if (g_outputFile == nullptr)

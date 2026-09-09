@@ -51,7 +51,7 @@ void *CreateFoley(struct ObjectTemplate * r6, u8 r5) {
     sub_0803E2B0(&r4->base, -5, -3, 5, 8);
     ObjectSetBounds(&r4->base, -6, -4, 6, 10);
     r4->base.flags |= 0x140;
-    if (r4->base.x > sub_0803D5CC(&r4->base)->base.base.base.x)
+    if (r4->base.x > sub_0803D5CC(&r4->base)->base.x)
         r4->base.flags |= 1;
     ObjectInitSprite(r4);
     gUnk_08351648[r4->type].unk10(r4);
@@ -141,7 +141,7 @@ static void sub_080C066C(struct Object *r4) {
     }
     if ((r4->base.counter & 0xF) == 0xF)
         r4->kirby3 = sub_0803D5CC(&r4->base);
-    if (abs(r4->kirby3->base.base.base.x - r4->base.x) < 0x2800)
+    if (abs(r4->kirby3->base.x - r4->base.x) < 0x2800)
         sub_080C09E0(r4);
     else
         ++r4->base.counter;
