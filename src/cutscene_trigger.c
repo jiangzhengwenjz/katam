@@ -875,7 +875,6 @@ static void sub_08021EB0(struct CutsceneTrigger4 *trigger)
         struct Kirby *kirby = &gKirbys[i];
 
         kirby->base.flags |= 0x1000800;
-
         kirby->base.flags &= ~1;
         kirby->animationIndex = 0;
     }
