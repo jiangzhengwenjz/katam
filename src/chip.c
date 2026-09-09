@@ -14,7 +14,6 @@ static void sub_080AB428(struct Object*);
 static void sub_080AB4A4(struct Object*);
 static void sub_080AB4F8(struct Object*);
 static void sub_080AB5F8(struct Object*);
-static void sub_080AB720(struct Object*);
 static void sub_080AB734(struct Object*);
 static void sub_080AB754(struct Object*);
 static u8 sub_080AB78C(struct Object*);
@@ -513,7 +512,7 @@ static void sub_080AB5F8(struct Object* arg0) {
     }
 }
 
-static void sub_080AB720(struct Object* arg0) {
+void sub_080AB720(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, sub_080AB374);
 }
 

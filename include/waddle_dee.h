@@ -6,6 +6,7 @@
 
 void* CreateWaddleDee(struct ObjectTemplate* arg0, u8 arg1);
 void sub_080A3CF0(struct Object*);
+void WaddleDee37ChooseXSpeed(struct Object *);
 
 extern const struct AnimInfo gUnk_08353408[];
 

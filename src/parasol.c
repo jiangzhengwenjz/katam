@@ -4,7 +4,6 @@
 #include "functions.h"
 #include "constants/kirby.h"
 
-static void sub_080C2B28(struct Object *);
 static void sub_080C2FC8(struct Object *);
 static void sub_080C2FF4(struct Object *);
 static void sub_080C3020(struct Object *);
@@ -72,7 +71,7 @@ void *CreateParasol(struct ObjectTemplate *r6, u8 r5) {
     return r4;
 }
 
-static void sub_080C2B28(struct Object *r5) {
+void sub_080C2B28(struct Object *r5) {
     s32 r4, r1;
     u16 sqrt;
     s32 div;

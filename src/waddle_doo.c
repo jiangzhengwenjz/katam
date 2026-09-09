@@ -21,7 +21,6 @@ static const s16 gUnk_0835464C[] = {
     0x0, -0x800,
 };
 
-static void sub_080B6A54(struct Object*);
 static void sub_080B6AD8(struct Object*);
 static void sub_080B6B68(struct Object*);
 static void sub_080B6BFC(struct Object*);
@@ -70,7 +69,7 @@ void* CreateWaddleDoo(struct ObjectTemplate* arg0, u8 arg1) {
     return obj;
 }
 
-static void sub_080B6A54(struct Object* arg0) {
+void sub_080B6A54(struct Object* arg0) {
     arg0->base.flags &= ~0x40;
     switch (arg0->objTemplate->subtype1) {
     case 0:

@@ -8,7 +8,6 @@
 static void WaddleDeeChooseXSpeed0(struct Object*);
 static void WaddleDeeChooseXSpeed1(struct Object*);
 static void WaddleDeeChooseXSpeed2(struct Object*);
-static void WaddleDee37ChooseXSpeed(struct Object*);
 static void WaddleDee37CheckTurnAround(struct Object*);
 static void WaddleDeeReverseXOnCounter(struct Object*);
 static void WaddleDeeReverseX(struct Object*);
@@ -319,7 +318,7 @@ static void sub_080A41F4(struct Object* arg0) {
     }
 }
 
-static void WaddleDee37ChooseXSpeed(struct Object* arg0) {
+void WaddleDee37ChooseXSpeed(struct Object* arg0) {
     ObjectSetFunc(arg0, 0, WaddleDee37CheckTurnAround);
     switch (arg0->subtype) {
     case 0:

@@ -56,7 +56,7 @@ struct CutsceneTrigger5 {
     /* 0x0C9 */ u8 unkC9;
     /* 0x0CA */ s8 unkCA;
     /* 0x0CB */ s8 unkCB;
-    /* 0x0CC */ u8 unkCC;
+    /* 0x0CC */ bool8 unkCC;
     /* 0x0CE */ s16 unkCE[4][2];
     /* 0x0DE */ u8 unkDE[4];
     /* 0x0E2 */ u8 unkE2[4];
@@ -64,14 +64,19 @@ struct CutsceneTrigger5 {
     /* 0x0E8 */ s16 unkE8;
 }; /* size = 0xEC */
 
-extern const u16 gUnk_082DE9FC[][2];
-extern const u16 gUnk_082DEA24[][2];
+struct CutsceneAnimPair {
+    /* 0x0 */ u16 animId;
+    /* 0x2 */ u16 variant;
+}; /* size = 0x4 */
+
+extern const struct CutsceneAnimPair gUnk_082DE9FC[10];
+extern const struct CutsceneAnimPair gUnk_082DEA24[10];
 extern const s16 gUnk_082DEA4C[4][2];
 extern const s16 gUnk_082DEA5C[4][2];
-extern const s16 gUnk_082DEA6C[][2];
-extern const s16 gUnk_082DEA7C[][2];
-extern const s16 gUnk_082DEA8C[][2];
-extern const s16 gUnk_082DEA9C[];
+extern const s16 gUnk_082DEA6C[4][2];
+extern const s16 gUnk_082DEA7C[4][2];
+extern const s16 gUnk_082DEA8C[4][2];
+extern const s16 gUnk_082DEA9C[4];
 
 void *CreateCutsceneTrigger(struct ObjectTemplate *, u8);
 
