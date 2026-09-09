@@ -6,6 +6,7 @@
 
 void *CreateParasol(struct ObjectTemplate *, u8);
 void sub_080C29C0(struct Object *, u8);
+void sub_080C2B28(struct Object *);
 
 extern const struct AnimInfo gUnk_08355464[];
 

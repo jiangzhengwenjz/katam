@@ -9,6 +9,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
+#include "constants/kirby.h"
 #include "constants/object_types.h"
 
 static void sub_08020798(struct CutsceneTrigger0 *);
@@ -108,6 +109,8 @@ void *CreateCutsceneTrigger(struct ObjectTemplate *template, u8 playerId)
     u32 size;
     TaskDestructor dtor;
 
+    // TODO: subtype1 == 3 or > 6 leaves size and dtor uninitialized in the original.
+    // Known spawners use 2, 4, 5, or 6; rule out other runtime templates.
     switch (template->subtype1)
     {
     case 0:
@@ -170,14 +173,15 @@ static void sub_0802084C(struct CutsceneTrigger0 *trigger)
 
         if (kirby->hp <= 0)
             continue;
-        if (trigger2->obj2.base.roomId != kirby->base.base.base.roomId)
+        if (trigger2->obj2.base.roomId != kirby->base.roomId)
             continue;
-        if (!(kirby->base.base.base.flags & 0x1000000))
+        if (!(kirby->base.flags & 0x1000000))
         {
             if (sub_0804BAD8(kirby))
             {
-                kirby->base.base.base.flags = (kirby->base.base.base.flags | 0x1000000) & ~1;
-                kirby->base.base.base.x = (count * -18 + 0x50) * 0x100;
+                kirby->base.flags |= 0x1000000;
+                kirby->base.flags &= ~1;
+                kirby->base.x = (count * -18 + 0x50) * 0x100;
                 kirby->animationIndex = i + 0x4A;
             }
             allReady = FALSE;
@@ -186,7 +190,7 @@ static void sub_0802084C(struct CutsceneTrigger0 *trigger)
         {
             if (kirby->animationIndex >= 0x4A && kirby->animationIndex <= 0x59)
             {
-                if (!(kirby->base.base.base.unk62 & 4))
+                if (!(kirby->base.unk62 & 4))
                 {
                     kirby->animationIndex++;
                     if (kirby->animationIndex > 0x59)
@@ -195,18 +199,18 @@ static void sub_0802084C(struct CutsceneTrigger0 *trigger)
                 else
                 {
                     kirby->animationIndex = 0x14;
-                    kirby->base.base.base.yspeed = 0x200;
-                    sub_0808925C(&kirby->base.base.base);
-                    PlaySfx(&kirby->base.base.base, SE_KIRBY_BOUNCE);
+                    kirby->base.yspeed = 0x200;
+                    sub_0808925C(&kirby->base);
+                    PlaySfx(&kirby->base, SE_KIRBY_BOUNCE);
                 }
                 allReady = FALSE;
             }
             else if (kirby->animationIndex == 0x14)
             {
-                if (kirby->base.base.base.unk62 & 4)
+                if (kirby->base.unk62 & 4)
                 {
                     kirby->animationIndex = 0;
-                    PlaySfx(&kirby->base.base.base, SE_KIRBY_LANDING);
+                    PlaySfx(&kirby->base, SE_KIRBY_LANDING);
                 }
                 allReady = FALSE;
             }
@@ -246,18 +250,18 @@ static void sub_08020A90(struct CutsceneTrigger0 *trigger)
                 case 0:
                     trigger->unkB8[0] = sub_0808B62C(&trigger2->obj2.base, 4, 0x2C3, 0, 0);
                     trigger->unkB8[0]->sprite.palId = 0;
-                    Macro_081050E8(trigger->unkB8[0], &trigger->unkB8[0]->sprite, 0x2C3, trigger->unkB8[0]->sprite.palId == 0);
-                    trigger->unkB8[0]->x = kirby->base.base.base.x;
-                    trigger->unkB8[0]->y = kirby->base.base.base.y - 0x1400;
+                    Macro_081050E8(trigger->unkB8[0], &trigger->unkB8[0]->sprite, 0x2C3, 0, trigger->unkB8[0]->sprite.palId == 0);
+                    trigger->unkB8[0]->x = kirby->base.x;
+                    trigger->unkB8[0]->y = kirby->base.y - 0x1400;
                     trigger->unkD0 = 0;
                     trigger->unkD4 = 1;
                     break;
                 case 1:
                     if (trigger->unkD0++ > 0x1E)
-                            trigger->unkD4 = 2;
+                        trigger->unkD4 = 2;
                     break;
                 case 2:
-                    kirby->base.base.base.flags |= 1;
+                    kirby->base.flags |= 1;
                     trigger->unkB8[0]->flags |= 0x1000;
                     trigger->unkB8[0] = NULL;
                     trigger->unkD0 = 0;
@@ -266,44 +270,44 @@ static void sub_08020A90(struct CutsceneTrigger0 *trigger)
                 case 3:
                     if (trigger->unkD0++ > 0x10)
                     {
-                            if (trigger->unkD2 + 1 != trigger->unkCE)
-                            {
-                                trigger->unkD2++;
-                                trigger->unkD4 = 0;
-                            }
-                            else
-                            {
-                                trigger->unkD0 = 0;
-                                trigger->unkD4 = 4;
-                            }
+                        if (trigger->unkD2 + 1 != trigger->unkCE)
+                        {
+                            trigger->unkD2++;
+                            trigger->unkD4 = 0;
+                        }
+                        else
+                        {
+                            trigger->unkD0 = 0;
+                            trigger->unkD4 = 4;
+                        }
                     }
                     break;
                 case 4:
                     if (trigger->unkD0++ > 0x2D)
                     {
-                            u16 n = 0;
-                            u16 k;
+                        u16 n = 0;
+                        u16 k;
 
-                            for (k = 0; k < 4; k++)
-                            {
-                                if (!(trigger2->unkCC >> k & 1))
-                                    continue;
-                                if (n == trigger->unkCE - 1)
-                                    break;
-                                gKirbys[k].animationIndex = 0x17;
-                                gKirbys[k].base.base.base.x -= 0x600;
-                                n++;
-                            }
-                            trigger->unkD0 = 0;
-                            trigger->unkD4 = 5;
+                        for (k = 0; k < 4; k++)
+                        {
+                            if (!(trigger2->unkCC >> k & 1))
+                                continue;
+                            if (n == trigger->unkCE - 1)
+                                break;
+                            gKirbys[k].animationIndex = 0x17;
+                            gKirbys[k].base.x -= 0x600;
+                            n++;
+                        }
+                        trigger->unkD0 = 0;
+                        trigger->unkD4 = 5;
                     }
                     break;
                 case 5:
                     if (trigger->unkD0++ > 0x78)
                     {
-                            trigger->unkD0 = 0;
-                            trigger->unkD4 = 0;
-                            trigger->unkD2++;
+                        trigger->unkD0 = 0;
+                        trigger->unkD4 = 0;
+                        trigger->unkD2++;
                     }
                     break;
                 }
@@ -313,8 +317,10 @@ static void sub_08020A90(struct CutsceneTrigger0 *trigger)
         if (allDone)
             trigger->unkD4 = 0x64;
     }
-    else switch (trigger->unkD4)
+    else
     {
+        switch (trigger->unkD4)
+        {
         case 0x64:
         {
             u16 n = 0;
@@ -327,8 +333,8 @@ static void sub_08020A90(struct CutsceneTrigger0 *trigger)
                 if (trigger2->unkCC >> k & 1)
                 {
                     kirby->animationIndex = 0;
-                    kirby->base.base.base.x = (n * -18 + 0x50) * 0x100;
-                    kirby->base.base.base.flags &= ~1;
+                    kirby->base.x = (n * -18 + 0x50) * 0x100;
+                    kirby->base.flags &= ~1;
                     n++;
                 }
             }
@@ -340,6 +346,7 @@ static void sub_08020A90(struct CutsceneTrigger0 *trigger)
             if (trigger2->unkD0++ > 0x3C)
                 trigger2->obj2.unk78 = sub_08022E80;
             break;
+        }
     }
 }
 
@@ -358,7 +365,7 @@ static void sub_08020DDC(struct CutsceneTrigger0 *trigger)
             trigger->unkB8[alt]->flags |= 0x1000;
         trigger->unkB8[alt] = sub_0808B62C(&trigger->obj2.base, 4, 0x2C3, 0, 0);
         trigger->unkB8[alt]->sprite.palId = 0;
-        Macro_081050E8(trigger->unkB8[alt], &trigger->unkB8[alt]->sprite, 0x2C3, trigger->unkB8[alt]->sprite.palId == 0);
+        Macro_081050E8(trigger->unkB8[alt], &trigger->unkB8[alt]->sprite, 0x2C3, 0, trigger->unkB8[alt]->sprite.palId == 0);
         if (alt != 0)
         {
             o = trigger2->unkB8[alt];
@@ -396,17 +403,7 @@ static void sub_08020FA8(struct CutsceneTrigger0 *trigger)
         {
             trigger->unkC8 = sub_0808B62C(&trigger->obj2.base, 4, 0x2C3, 0, 0);
             trigger->unkC8->sprite.palId = 0;
-            if (gKirbys[gLocalPlayerId].base.base.base.roomId == trigger->unkC8->roomId)
-            {
-                if (trigger->unkC8->sprite.palId == 0)
-                {
-                    trigger->unkC8->sprite.palId = sub_0803DF24(0x2C3);
-                    if (trigger->unkC8->sprite.palId == 0xFF)
-                        trigger->unkC8->sprite.palId = sub_0803DFAC(0x2C3, 0);
-                }
-            }
-            else
-                trigger->unkC8->sprite.palId = 0;
+            Macro_081050E8(trigger->unkC8, &trigger->unkC8->sprite, 0x2C3, 0, trigger->unkC8->sprite.palId == 0);
             trigger2->unkC8->x = comp->base.x;
             trigger2->unkC8->y = comp->base.y - 0x1400;
             comp->base.xspeed = 0;
@@ -457,21 +454,11 @@ static void sub_0802114C(struct CutsceneTrigger0 *trigger)
             continue;
         kirby = &gKirbys[i];
         kirby->animationIndex = 0xA;
-        trigger3->unkB8[i] = sub_0808B62C(&kirby->base.base.base, 4, 0x2C3, 1, 0);
+        trigger3->unkB8[i] = sub_0808B62C(&kirby->base, 4, 0x2C3, 1, 0);
         trigger3->unkB8[i]->sprite.palId = 0;
-        if (gKirbys[gLocalPlayerId].base.base.base.roomId == trigger3->unkB8[i]->roomId)
-        {
-            if (trigger3->unkB8[i]->sprite.palId == 0)
-            {
-                trigger3->unkB8[i]->sprite.palId = sub_0803DF24(0x2C3);
-                if (trigger3->unkB8[i]->sprite.palId == 0xFF)
-                    trigger3->unkB8[i]->sprite.palId = sub_0803DFAC(0x2C3, 1);
-            }
-        }
-        else
-            trigger3->unkB8[i]->sprite.palId = 0;
-        trigger3->unkB8[i]->x = gKirbys[i].base.base.base.x - 0x800;
-        trigger3->unkB8[i]->y = gKirbys[i].base.base.base.y - 0xC00;
+        Macro_081050E8(trigger3->unkB8[i], &trigger3->unkB8[i]->sprite, 0x2C3, 1, trigger3->unkB8[i]->sprite.palId == 0);
+        trigger3->unkB8[i]->x = gKirbys[i].base.x - 0x800;
+        trigger3->unkB8[i]->y = gKirbys[i].base.y - 0xC00;
         trigger3->unkB8[i]->flags |= 1;
     }
     trigger2->obj2.unk78 = sub_080212C0;
@@ -510,21 +497,21 @@ static void sub_08021360(struct CutsceneTrigger0 *trigger)
     {
         if (!(trigger2->unkCC >> i & 1))
             continue;
-        gKirbys[i].base.base.base.flags &= ~0x1000000;
+        gKirbys[i].base.flags &= ~0x1000000;
         kirby = &gKirbys[i];
-        if (kirby->ability == 0xB)
+        if (kirby->ability == KIRBY_ABILITY_SLEEP)
             sub_080641FC(kirby);
-        else if (kirby->ability == 0xE)
+        else if (kirby->ability == KIRBY_ABILITY_UFO)
             sub_0806A798(kirby);
-        else if (kirby->ability == 0x13 && kirby->base.base.base.flags & 0x40)
+        else if (kirby->ability == KIRBY_ABILITY_CUPID && kirby->base.flags & 0x40)
             sub_08047EF0(kirby);
         else
         {
             struct Kirby *kirby2 = &gKirbys[i];
 
-            if (kirby2->base.base.base.unk58 & 2)
+            if (kirby2->base.unk58 & 2)
                 KirbyStartWaterMovement(kirby2);
-            else if (kirby2->base.base.base.flags & 0x60)
+            else if (kirby2->base.flags & 0x60)
                 sub_08044EA8(kirby2);
             else
                 sub_0803FE74(kirby2);
@@ -547,11 +534,12 @@ static void sub_08021424(struct CutsceneTrigger1 *trigger)
 
         if (kirby->hp <= 0)
             continue;
-        if (trigger->obj2.base.roomId != kirby->base.base.base.roomId)
+        if (trigger->obj2.base.roomId != kirby->base.roomId)
             continue;
-        if (!(gKirbys[i].base.base.base.flags & 0x1000000))
+        if (!(gKirbys[i].base.flags & 0x1000000))
         {
-            kirby->base.base.base.flags = (kirby->base.base.base.flags | 0x1000000) & ~1;
+            kirby->base.flags |= 0x1000000;
+            kirby->base.flags &= ~1;
             allReady = FALSE;
         }
         else if (kirby->animationIndex != 0)
@@ -614,7 +602,6 @@ static void sub_08021634(struct CutsceneTrigger1 *trigger)
 static void sub_0802172C(struct CutsceneTrigger2 *trigger)
 {
     struct CutsceneTrigger2 *trigger2 = trigger;
-    const s16 (*xyTable)[2];
     u16 i;
     u16 n;
 
@@ -625,20 +612,21 @@ static void sub_0802172C(struct CutsceneTrigger2 *trigger)
         struct EffectObject *o;
 
         trigger2->unk294[i] = NULL;
-        xyTable = gUnk_082DEA4C;
-        if (trigger->obj2.base.roomId != gKirbys[i].base.base.base.roomId)
+        if (trigger->obj2.base.roomId != gKirbys[i].base.roomId)
             continue;
         if (gKirbys[i].hp <= 0)
             continue;
-        gKirbys[i].base.base.base.x = (n * -18 + 0x64) * 0x100;
-        gKirbys[i].base.base.base.flags = (gKirbys[i].base.base.base.flags & ~1) | 0x1000000;
+        gKirbys[i].base.x = (n * -18 + 0x64) * 0x100;
+        gKirbys[i].base.flags &= ~1;
+        gKirbys[i].base.flags |= 0x1000000;
         o = sub_0808B62C(&trigger->obj2.base, 0, 0x29C, 0, 0);
         trigger2->unk294[i] = o;
-        o->x = xyTable[n][0] * 0x100;
+        o->x = gUnk_082DEA4C[n][0] * 0x100;
         o->y = gUnk_082DEA4C[n][1] * 0x100;
         o->unk3C = 0;
         o->unk3E = 0;
-        o->sprite.unk8 = (o->sprite.unk8 & ~0x3000) | 0x3000;
+        o->sprite.unk8 &= ~0x3000;
+        o->sprite.unk8 |= 0x3000;
         n++;
         trigger2->unk2B4++;
     }
@@ -648,7 +636,6 @@ static void sub_0802172C(struct CutsceneTrigger2 *trigger)
 static void sub_08021844(struct CutsceneTrigger2 *trigger)
 {
     struct CutsceneTrigger2 *trigger2 = trigger;
-    const s16 (*xyTable2)[2];
     u16 n = 0;
     u16 i;
 
@@ -657,16 +644,16 @@ static void sub_08021844(struct CutsceneTrigger2 *trigger)
         struct EffectObject *o;
 
         trigger2->unk2A4[i] = 0;
-        xyTable2 = gUnk_082DEA5C;
         if (trigger2->unk294[i] != (void *)-1)
             continue;
         o = sub_0808B62C(&trigger->obj2.base, 0x10, 0x2DE, 0, 0);
         trigger2->unk294[i] = o;
-        o->x = xyTable2[n][0] * 0x100;
+        o->x = gUnk_082DEA5C[n][0] * 0x100;
         o->y = gUnk_082DEA5C[n][1] * 0x100;
         o->unk3C = 0;
         o->unk3E = 0;
-        o->sprite.unk8 = (o->sprite.unk8 & ~0x3000) | 0x1000;
+        o->sprite.unk8 &= ~0x3000;
+        o->sprite.unk8 |= 0x1000;
         n++;
     }
     PlaySfx(&trigger->obj2.base, SE_DARK_MIND_WARPSTAR_ENTER);
@@ -678,7 +665,7 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
     struct CutsceneTrigger2 *trigger2 = trigger;
     u16 i;
     u16 j = 0;
-    u16 allDone;
+    bool32 allDone;
 
     for (i = 0; i < 4; i++)
     {
@@ -699,47 +686,28 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
             s32 diff;
             s32 spd;
 
-            if (o->x > kirby->base.base.base.x)
+            if (o->x > kirby->base.x)
             {
-                diff = o->x - kirby->base.base.base.x;
+                diff = o->x - kirby->base.x;
                 spd = (diff >> 8) * gUnk_082DEA6C[j][0];
-                if (spd < gUnk_082DEA7C[j][0])
-                {
-                    u16 lo = gUnk_082DEA7C[j][0];
-
-                    spd = lo;
-                }
-                else
-                {
-                    s32 hi = gUnk_082DEA8C[j][0];
-                    s32 tmp = spd;
-
-                    if (tmp > hi)
-                        tmp = hi;
-                    spd = tmp;
-                }
-                o->unk3C = spd;
+                o->unk3C = spd < gUnk_082DEA7C[j][0]
+                    ? gUnk_082DEA7C[j][0]
+                    : min(gUnk_082DEA8C[j][0], spd);
                 if (o->unk3C < diff)
                 {
-                    o->unk3C = -spd;
+                    o->unk3C = -o->unk3C;
                     done = FALSE;
                 }
                 else
                     o->unk3C = 0;
             }
-            else if (o->x < kirby->base.base.base.x)
+            else if (o->x < kirby->base.x)
             {
-                diff = kirby->base.base.base.x - o->x;
+                diff = kirby->base.x - o->x;
                 spd = (diff >> 8) * gUnk_082DEA6C[j][0];
-                if (spd < gUnk_082DEA7C[j][0])
-                {
-                    u16 lo = gUnk_082DEA7C[j][0];
-
-                    spd = lo;
-                }
-                else if (spd > gUnk_082DEA8C[j][0])
-                    spd = gUnk_082DEA8C[j][0];
-                o->unk3C = spd;
+                o->unk3C = spd < gUnk_082DEA7C[j][0]
+                    ? gUnk_082DEA7C[j][0]
+                    : min(gUnk_082DEA8C[j][0], spd);
                 if (o->unk3C < diff)
                     done = FALSE;
                 else
@@ -747,57 +715,38 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
             }
             else
             {
-                o->x = kirby->base.base.base.x;
+                o->x = kirby->base.x;
                 o->unk3C = 0;
             }
-            if (o->y > kirby->base.base.base.y)
+            if (o->y > kirby->base.y)
             {
-                diff = o->y - kirby->base.base.base.y;
+                diff = o->y - kirby->base.y;
                 spd = (diff >> 8) * gUnk_082DEA6C[j][1];
-                if (spd < gUnk_082DEA7C[j][1])
-                {
-                    u16 lo = gUnk_082DEA7C[j][1];
-
-                    spd = lo;
-                }
-                else if (spd > gUnk_082DEA8C[j][1])
-                    spd = gUnk_082DEA8C[j][1];
-                o->unk3E = spd;
+                o->unk3E = spd < gUnk_082DEA7C[j][1]
+                    ? gUnk_082DEA7C[j][1]
+                    : min(gUnk_082DEA8C[j][1], spd);
                 if (o->unk3E < diff)
                     break;
                 o->unk3E = 0;
             }
-            else if (o->y < kirby->base.base.base.y)
+            else if (o->y < kirby->base.y)
             {
-                diff = kirby->base.base.base.y - o->y;
+                diff = kirby->base.y - o->y;
                 spd = (diff >> 8) * gUnk_082DEA6C[j][1];
-                if (spd < gUnk_082DEA7C[j][1])
-                {
-                    u16 lo = gUnk_082DEA7C[j][1];
-
-                    spd = lo;
-                }
-                else
-                {
-                    s32 hi = gUnk_082DEA8C[j][1];
-                    s32 tmp = spd;
-
-                    if (tmp > hi)
-                        tmp = hi;
-                    spd = tmp;
-                }
-                o->unk3E = spd;
+                o->unk3E = spd < gUnk_082DEA7C[j][1]
+                    ? gUnk_082DEA7C[j][1]
+                    : min(gUnk_082DEA8C[j][1], spd);
                 if (o->unk3E < diff)
                 {
                     done = FALSE;
-                    o->unk3E = -spd;
+                    o->unk3E = -o->unk3E;
                 }
                 else
                     o->unk3E = 0;
             }
             else
             {
-                o->y = kirby->base.base.base.y;
+                o->y = kirby->base.y;
                 o->unk3E = 0;
             }
             if (done)
@@ -806,13 +755,13 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
         }
         case 1:
             sub_080525C0(kirby);
-            CreateEffectObject(&kirby->base.base.base, 0, 0x292, 0);
+            CreateEffectObject(&kirby->base, 0, 0x292, 0);
             kirby->animationIndex = 0x5B;
             slot->x = o->x;
             slot->y = o->y;
             slot->xspeed = 0;
             slot->yspeed = 0;
-            kirby->base.base.base.unk6C = slot;
+            kirby->base.unk6C = slot;
             o->flags |= 0x1000;
             trigger2->unk294[i] = (void *)-1;
             trigger2->unk2AC[i] = 0;
@@ -848,7 +797,7 @@ static void sub_08021984(struct CutsceneTrigger2 *trigger)
         }
         j++;
     }
-    allDone = 1;
+    allDone = TRUE;
     for (i = 0; i < 4; i++)
     {
         if (trigger2->unk294[i] != NULL && trigger2->unk2A4[i] <= 4)
@@ -877,12 +826,12 @@ static void sub_08021DD4(struct Task *t)
             if (gUnk_0203AD10 & 2)
             {
                 if (gLocalPlayerId == gUnk_0203AD24)
-                    UpdateSaveBufferByOffset(1, gSaveID <= 2 ? gSaveID : 0);
+                    UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID <= 2 ? gSaveID : 0);
                 else
                     sub_08031CE4(8);
             }
             else
-                UpdateSaveBufferByOffset(1, gSaveID <= 2 ? gSaveID : 0);
+                UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID <= 2 ? gSaveID : 0);
         }
     }
     ObjectDestroy(t);
@@ -899,35 +848,25 @@ static void sub_08021EB0(struct CutsceneTrigger4 *trigger)
     struct Sprite s;
     u8 i;
 
-    animId = gUnk_082DE9FC[9][0];
-    variant = gUnk_082DE9FC[9][1];
+    animId = gUnk_082DE9FC[9].animId;
+    variant = gUnk_082DE9FC[9].variant;
     trigger->unkBC = sub_0808B62C(&trigger->obj2.base, 1, animId, variant, 0);
     trigger->unkBC->sprite.palId = 0;
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == trigger->unkBC->roomId)
-    {
-        if (trigger->unkBC->sprite.palId == 0)
-        {
-            trigger->unkBC->sprite.palId = sub_0803DF24(animId);
-            if (trigger->unkBC->sprite.palId == 0xFF)
-                trigger->unkBC->sprite.palId = sub_0803DFAC(animId, variant);
-        }
-    }
-    else
-        trigger->unkBC->sprite.palId = 0;
+    Macro_081050E8(trigger->unkBC, &trigger->unkBC->sprite, animId, variant, trigger->unkBC->sprite.palId == 0);
     o = trigger2->unkBC;
     o->y = -0x4000;
     o->x = -0x4000;
-    trigger2->unkC0 = sub_0808B62C(&trigger->obj2.base, 0, gUnk_082DEA24[9][0], gUnk_082DEA24[9][1], 0);
+    trigger2->unkC0 = sub_0808B62C(&trigger->obj2.base, 0, gUnk_082DEA24[9].animId, gUnk_082DEA24[9].variant, 0);
     trigger2->unkC0->sprite.palId = trigger2->unkBC->sprite.palId + 1;
-    SpriteSomething(&s, 0x6000000, gUnk_082DEA24[9][0], gUnk_082DEA24[9][1], 0xFF, 0, 0, 0, 0, 0x10, trigger2->unkC0->sprite.palId & 0xF, 0x80000);
+    SpriteSomething(&s, 0x6000000, gUnk_082DEA24[9].animId, gUnk_082DEA24[9].variant, 0xFF, 0, 0, 0, 0, 0x10, trigger2->unkC0->sprite.palId & 0xF, 0x80000);
     o = trigger2->unkC0;
     o->y = -0x4000;
     o->x = -0x4000;
-    trigger2->unkB4 = sub_0808B62C(&trigger->obj2.base, 0x14, gUnk_082DE9FC[0][0], gUnk_082DE9FC[0][1], 0);
+    trigger2->unkB4 = sub_0808B62C(&trigger->obj2.base, 0x14, gUnk_082DE9FC[0].animId, gUnk_082DE9FC[0].variant, 0);
     trigger2->unkB4->sprite.palId = trigger2->unkBC->sprite.palId;
     trigger2->unkB4->x = 0xC800;
     trigger2->unkB4->y = 0x8800;
-    trigger2->unkB8 = sub_0808B62C(&trigger->obj2.base, 0x14, gUnk_082DEA24[0][0], gUnk_082DEA24[0][1], 0);
+    trigger2->unkB8 = sub_0808B62C(&trigger->obj2.base, 0x14, gUnk_082DEA24[0].animId, gUnk_082DEA24[0].variant, 0);
     trigger2->unkB8->sprite.palId = trigger2->unkC0->sprite.palId;
     trigger2->unkB8->x = 0xC800;
     trigger2->unkB8->y = 0x8800;
@@ -935,7 +874,9 @@ static void sub_08021EB0(struct CutsceneTrigger4 *trigger)
     {
         struct Kirby *kirby = &gKirbys[i];
 
-        kirby->base.base.base.flags = (kirby->base.base.base.flags | 0x1000800) & ~1;
+        kirby->base.flags |= 0x1000800;
+
+        kirby->base.flags &= ~1;
         kirby->animationIndex = 0;
     }
     trigger->obj2.unk78 = sub_08022F50;
@@ -948,12 +889,12 @@ static void sub_08022090(struct CutsceneTrigger4 *trigger)
     trigger->unkC4 = 0x300;
     trigger->unkC6 = -0xA00;
     sprite = &trigger->unkB4->sprite;
-    sprite->animId = gUnk_082DE9FC[6][0];
-    sprite->variant = gUnk_082DE9FC[6][1];
+    sprite->animId = gUnk_082DE9FC[6].animId;
+    sprite->variant = gUnk_082DE9FC[6].variant;
     sub_08155128(sprite);
     sprite = &trigger->unkB8->sprite;
-    sprite->animId = gUnk_082DEA24[6][0];
-    sprite->variant = gUnk_082DEA24[6][1];
+    sprite->animId = gUnk_082DEA24[6].animId;
+    sprite->variant = gUnk_082DEA24[6].variant;
     sub_08155128(sprite);
     m4aSongNumStart(SE_INTRO_CUTSCENE_DMK_JUMP);
     trigger->unkC8 = 0;
@@ -974,7 +915,6 @@ static void sub_08022104(struct CutsceneTrigger4 *trigger)
 static void sub_08022174(struct CutsceneTrigger5 *trigger)
 {
     struct CutsceneTrigger5 *trigger2 = trigger;
-    const u16 (*animTable)[2];
     u16 animId;
     u8 variant;
     u16 animId2;
@@ -983,57 +923,35 @@ static void sub_08022174(struct CutsceneTrigger5 *trigger)
 
     for (i = 0; i < 4; i++)
     {
-        animTable = gUnk_082DE9FC;
         trigger->unkDE[i] = trigger->unkE2[i] = 0;
     }
     trigger2->unkB4 = 0;
-    animId = animTable[4][0];
-    variant = animTable[4][1];
+    animId = gUnk_082DE9FC[4].animId;
+    variant = gUnk_082DE9FC[4].variant;
     trigger2->unkBC = sub_0808B62C(&trigger->obj2.base, 0x14, animId, variant, 0);
     trigger2->unkBC->sprite.palId = 0;
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == trigger2->unkBC->roomId)
-    {
-        if (trigger2->unkBC->sprite.palId == 0)
-        {
-            trigger2->unkBC->sprite.palId = sub_0803DF24(animId);
-            if (trigger2->unkBC->sprite.palId == 0xFF)
-                trigger2->unkBC->sprite.palId = sub_0803DFAC(animId, variant);
-        }
-    }
-    else
-        trigger2->unkBC->sprite.palId = 0;
+    Macro_081050E8(trigger2->unkBC, &trigger2->unkBC->sprite, animId, variant, trigger2->unkBC->sprite.palId == 0);
     trigger2->unkBC->x = 0xB800;
     trigger2->unkBC->y = 0x11C00;
     trigger2->unkBC->flags ^= 1;
-    animId2 = gUnk_082DEA24[4][0];
-    variant2 = gUnk_082DEA24[4][1];
+    animId2 = gUnk_082DEA24[4].animId;
+    variant2 = gUnk_082DEA24[4].variant;
     trigger2->unkC0 = sub_0808B62C(&trigger->obj2.base, 0x14, animId2, variant2, 0);
     trigger2->unkC0->sprite.palId = 0;
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == trigger2->unkC0->roomId)
-    {
-        if (trigger2->unkC0->sprite.palId == 0)
-        {
-            trigger2->unkC0->sprite.palId = sub_0803DF24(animId2);
-            if (trigger2->unkC0->sprite.palId == 0xFF)
-                trigger2->unkC0->sprite.palId = sub_0803DFAC(animId2, variant2);
-        }
-    }
-    else
-        trigger2->unkC0->sprite.palId = 0;
+    Macro_081050E8(trigger2->unkC0, &trigger2->unkC0->sprite, animId2, variant2, trigger2->unkC0->sprite.palId == 0);
     trigger2->unkC0->x = 0xB800;
     trigger2->unkC0->y = 0x11C00;
     trigger2->unkC0->flags ^= 1;
     for (i = 0; i < 4; i++)
     {
         struct Kirby *kirby = &gKirbys[i];
-        u32 flags;
 
         if (kirby->hp <= 0)
             continue;
-        if (kirby->base.base.base.roomId != trigger->obj2.base.roomId)
+        if (kirby->base.roomId != trigger->obj2.base.roomId)
             continue;
-        flags = kirby->base.base.base.flags | 0x1000800;
-        kirby->base.base.base.flags = flags | 0x100;
+        kirby->base.flags |= 0x1000800;
+        kirby->base.flags |= 0x100;
     }
     trigger->obj2.unk78 = sub_080230DC;
 }
@@ -1048,7 +966,7 @@ static void sub_08022350(struct CutsceneTrigger5 *trigger)
     trigger->unkB4++;
     if (trigger->unkB4 & 1)
     {
-        trigger->unkCC = 1;
+        trigger->unkCC = TRUE;
         trigger->unkCA = (Rand32() & 7) - 4;
         trigger->unkCB = (Rand32() & 7) - 4;
         levelInfo->viewportModX_44 += trigger->unkCA;
@@ -1058,15 +976,15 @@ static void sub_08022350(struct CutsceneTrigger5 *trigger)
             kirby = &gKirbys[i];
             if (kirby->hp <= 0)
                 continue;
-            if (kirby->base.base.base.roomId != trigger->obj2.base.roomId)
+            if (kirby->base.roomId != trigger->obj2.base.roomId)
                 continue;
-            kirby->base.base.base.x -= trigger2->unkCA * 0x100;
-            kirby->base.base.base.y -= trigger2->unkCB * 0x100;
+            kirby->base.x -= trigger2->unkCA * 0x100;
+            kirby->base.y -= trigger2->unkCB * 0x100;
         }
     }
     else
     {
-        trigger2->unkCC = 0;
+        trigger2->unkCC = FALSE;
         levelInfo->viewportModX_44 -= trigger2->unkCA;
         levelInfo->viewportModY_46 -= trigger2->unkCB;
         for (i = 0; i < 4; i++)
@@ -1074,10 +992,10 @@ static void sub_08022350(struct CutsceneTrigger5 *trigger)
             kirby = &gKirbys[i];
             if (kirby->hp <= 0)
                 continue;
-            if (kirby->base.base.base.roomId != trigger->obj2.base.roomId)
+            if (kirby->base.roomId != trigger->obj2.base.roomId)
                 continue;
-            kirby->base.base.base.x += trigger2->unkCA * 0x100;
-            kirby->base.base.base.y += trigger2->unkCB * 0x100;
+            kirby->base.x += trigger2->unkCA * 0x100;
+            kirby->base.y += trigger2->unkCB * 0x100;
         }
         trigger2->unkCA = 0;
         trigger2->unkCB = 0;
@@ -1095,9 +1013,9 @@ static void sub_08022350(struct CutsceneTrigger5 *trigger)
     }
     if (trigger2->unkB4 > 0x95 && gBldRegs.bldY == 0)
     {
-        if (trigger2->unkCC != 0)
+        if (trigger2->unkCC)
         {
-            trigger2->unkCC = 0;
+            trigger2->unkCC = FALSE;
             levelInfo->viewportModX_44 -= trigger2->unkCA;
             levelInfo->viewportModY_46 -= trigger2->unkCB;
             for (i = 0; i < 4; i++)
@@ -1105,10 +1023,10 @@ static void sub_08022350(struct CutsceneTrigger5 *trigger)
                 kirby = &gKirbys[i];
                 if (kirby->hp <= 0)
                     continue;
-                if (kirby->base.base.base.roomId != trigger->obj2.base.roomId)
+                if (kirby->base.roomId != trigger->obj2.base.roomId)
                     continue;
-                kirby->base.base.base.x += trigger2->unkCA * 0x100;
-                kirby->base.base.base.y += trigger2->unkCB * 0x100;
+                kirby->base.x += trigger2->unkCA * 0x100;
+                kirby->base.y += trigger2->unkCB * 0x100;
             }
             trigger2->unkCA = 0;
             trigger2->unkCB = 0;
@@ -1126,14 +1044,7 @@ static void sub_0802262C(struct CutsceneTrigger5 *trigger)
     trigger->unkB8 = sub_0808B62C(&trigger->obj2.base, 0x24, 0x399, 0xA, 0);
     o = trigger->unkB8;
     o->sprite.palId = 0;
-    if (gKirbys[gLocalPlayerId].base.base.base.roomId == o->roomId)
-    {
-        o->sprite.palId = sub_0803DF24(0x399);
-        if (o->sprite.palId == 0xFF)
-            o->sprite.palId = sub_0803DFAC(0x399, 0xD);
-    }
-    else
-        o->sprite.palId = 0;
+    Macro_081050E8(o, &o->sprite, 0x399, 0xD, TRUE);
     o->x = 0x17000;
     o->y = 0xE000;
     o->sprite.unk14 = 0x7C0;
@@ -1152,15 +1063,15 @@ static void sub_080226C4(struct CutsceneTrigger5 *trigger)
 
         if (kirby->hp <= 0)
             continue;
-        if (kirby->base.base.base.roomId != trigger->obj2.base.roomId)
+        if (kirby->base.roomId != trigger->obj2.base.roomId)
             continue;
         trigger2->unkCE[i][0] = 0;
-        if (kirby->base.base.base.y >> 8 > 0xDF)
+        if (kirby->base.y >> 8 > 0xDF)
             trigger->unkCE[i][1] = -0x300;
         else
             trigger->unkCE[i][1] = 0x300;
         kirby->animationIndex = i + 0x4A;
-        kirby->base.base.base.flags |= 0x100;
+        kirby->base.flags |= 0x100;
     }
     trigger->obj2.unk78 = sub_08022770;
 }
@@ -1178,46 +1089,38 @@ static void sub_08022770(struct CutsceneTrigger5 *trigger)
 
         if (kirby->hp <= 0)
             continue;
-        if (kirby->base.base.base.roomId != trigger2->obj2.base.roomId)
+        if (kirby->base.roomId != trigger2->obj2.base.roomId)
             continue;
-        kirby->base.base.base.flags |= 0x1000000;
+        kirby->base.flags |= 0x1000000;
         switch (trigger->unkDE[i])
         {
         case 0:
         {
             s16 a[2];
             s16 b[2];
-            s32 spd;
-            u8 t;
             s8 spd8;
             u16 angle;
 
             if (++kirby->animationIndex > 0x59)
                 kirby->animationIndex = 0x4A;
-            spd = trigger->unkB4 / 2; // the u8 t staging and clamp arm order are required for matching
-            if (spd < 0xC8)
-                t = spd;
-            else
-                t = 0xC8;
-            spd8 = t;
+            spd8 = min(trigger->unkB4 / 2, 0xC8);
             a[0] = trigger->unkCE[i][0];
             a[1] = trigger->unkCE[i][1];
-            b[0] = 0x7000 - kirby->base.base.base.x;
-            b[1] = -0x2000 - kirby->base.base.base.y;
+            b[0] = 0x7000 - kirby->base.x;
+            b[1] = -0x2000 - kirby->base.y;
             if (b[0] * a[1] - a[0] * b[1] > 0)
                 spd8 = -spd8;
             angle = (spd8 + 0x400) & 0x3FF;
             trigger->unkCE[i][0] = (a[0] * gSineTable[angle + 0x100] - a[1] * gSineTable[angle]) >> 14;
             trigger->unkCE[i][1] = (a[0] * gSineTable[angle] + a[1] * gSineTable[angle + 0x100]) >> 14;
-            kirby->base.base.base.x += trigger->unkCE[i][0];
-            kirby->base.base.base.y += trigger->unkCE[i][1];
-            if (kirby->base.base.base.x >> 8 >= 0x168 && kirby->base.base.base.x >> 8 <= 0x178
-             && kirby->base.base.base.y >> 8 > 0xD7 && kirby->base.base.base.y >> 8 <= 0xE8)
+            kirby->base.x += trigger->unkCE[i][0];
+            kirby->base.y += trigger->unkCE[i][1];
+            if (kirby->base.x >> 8 >= 0x168 && kirby->base.x >> 8 <= 0x178 && kirby->base.y >> 8 > 0xD7 && kirby->base.y >> 8 <= 0xE8)
             {
-            kirby->base.base.base.x = 0x17000;
-            kirby->base.base.base.y = 0xE000;
-            kirby->base.base.base.flags |= 0x800;
-            trigger->unkDE[i] = 1;
+                kirby->base.x = 0x17000;
+                kirby->base.y = 0xE000;
+                kirby->base.flags |= 0x800;
+                trigger->unkDE[i] = 1;
             }
             done = FALSE;
             break;
@@ -1226,11 +1129,11 @@ static void sub_08022770(struct CutsceneTrigger5 *trigger)
             if (++kirby->animationIndex > 0x59)
                 kirby->animationIndex = 0x4A;
             if (trigger->unkE2[i] & 1)
-                kirby->base.base.base.flags ^= 0x400;
+                kirby->base.flags ^= 0x400;
             if (++trigger->unkE2[i] > 0x3B)
             {
-            kirby->base.base.base.flags |= 0x400;
-            trigger->unkDE[i] = 2;
+                kirby->base.flags |= 0x400;
+                trigger->unkDE[i] = 2;
             }
             done = FALSE;
             break;
@@ -1255,21 +1158,23 @@ static void sub_080229E4(struct CutsceneTrigger5 *trigger)
 
     trigger->unkB4 = 0;
     sprite = &trigger->unkBC->sprite;
-    sprite->animId = gUnk_082DE9FC[7][0];
-    sprite->variant = gUnk_082DE9FC[7][1];
+    sprite->animId = gUnk_082DE9FC[7].animId;
+    sprite->variant = gUnk_082DE9FC[7].variant;
     sprite->unk1C = 0x20;
     sub_08155128(sprite);
     o = trigger->unkBC;
-    o->flags = (o->flags & ~4) | 8;
+    o->flags &= ~4;
+    o->flags |= 8;
     o->unk4 = 1;
     o->header.unk2 = 0x20;
     o->header.unk1 = 2;
     sprite = &trigger->unkC0->sprite;
-    sprite->animId = gUnk_082DEA24[7][0];
-    sprite->variant = gUnk_082DEA24[7][1];
+    sprite->animId = gUnk_082DEA24[7].animId;
+    sprite->variant = gUnk_082DEA24[7].variant;
     sub_08155128(sprite);
     o = trigger->unkC0;
-    o->flags = (o->flags & ~4) | 8;
+    o->flags &= ~4;
+    o->flags |= 8;
     o->unk4 = 1;
     o->header.unk2 = 0x20;
     o->header.unk1 = 2;
@@ -1334,13 +1239,13 @@ static void sub_08022B74(struct CutsceneTrigger5 *trigger)
     {
         struct Sprite *sprite = &trigger->unkBC->sprite;
 
-        sprite->animId = gUnk_082DE9FC[8][0];
-        sprite->variant = gUnk_082DE9FC[8][1];
+        sprite->animId = gUnk_082DE9FC[8].animId;
+        sprite->variant = gUnk_082DE9FC[8].variant;
         sub_08155128(sprite);
         trigger->unkBC->unk4 = 0;
         sprite = &trigger->unkC0->sprite;
-        sprite->animId = gUnk_082DEA24[8][0];
-        sprite->variant = gUnk_082DEA24[8][1];
+        sprite->animId = gUnk_082DEA24[8].animId;
+        sprite->variant = gUnk_082DEA24[8].variant;
         sub_08155128(sprite);
         trigger->unkC0->unk4 = 0;
         trigger->unkC0->x += 0x1400;
@@ -1524,12 +1429,12 @@ static void sub_08022FDC(struct CutsceneTrigger4 *trigger)
 {
     struct Sprite *sprite = &trigger->unkB4->sprite;
 
-    sprite->animId = gUnk_082DE9FC[5][0];
-    sprite->variant = gUnk_082DE9FC[5][1];
+    sprite->animId = gUnk_082DE9FC[5].animId;
+    sprite->variant = gUnk_082DE9FC[5].variant;
     sub_08155128(sprite);
     sprite = &trigger->unkB8->sprite;
-    sprite->animId = gUnk_082DEA24[5][0];
-    sprite->variant = gUnk_082DEA24[5][1];
+    sprite->animId = gUnk_082DEA24[5].animId;
+    sprite->variant = gUnk_082DEA24[5].variant;
     sub_08155128(sprite);
     trigger->unkC8 = 0;
     trigger->obj2.unk78 = sub_08023030;
@@ -1564,7 +1469,7 @@ static void sub_080230A0(struct Object *obj)
     {
         struct Kirby *kirby = &gKirbys[i];
 
-        kirby->base.base.base.flags &= ~0x1000000;
+        kirby->base.flags &= ~0x1000000;
     }
     obj->base.flags |= 0x1000;
 }
@@ -1577,7 +1482,7 @@ static void sub_080230DC(struct CutsceneTrigger5 *trigger)
 
 static void sub_08023100(struct CutsceneTrigger5 *trigger)
 {
-    gBldRegs.bldCnt = 0xBF;
+    gBldRegs.bldCnt = BLDCNT_TGT1_ALL | BLDCNT_EFFECT_LIGHTEN;
     trigger->unkC9 = (Rand32() & 0xF) + 5;
     trigger->unkB4 = 0;
     trigger->unkC8 = 0;
@@ -1621,12 +1526,12 @@ static void sub_080231C0(struct CutsceneTrigger5 *trigger)
 
         if (kirby->hp <= 0)
             continue;
-        if (kirby->base.base.base.roomId != trigger->obj2.base.roomId)
+        if (kirby->base.roomId != trigger->obj2.base.roomId)
             continue;
-        if (kirby->base.base.base.x < trigger2->unkB8->x)
-            kirby->base.base.base.flags &= ~1;
+        if (kirby->base.x < trigger2->unkB8->x)
+            kirby->base.flags &= ~1;
         else
-            kirby->base.base.base.flags |= 1;
+            kirby->base.flags |= 1;
     }
     trigger->obj2.unk78 = sub_08023238;
 }
@@ -1690,8 +1595,8 @@ static void sub_0802331C(struct CutsceneTrigger5 *trigger)
 {
     struct Sprite *sprite = &trigger->unkBC->sprite;
 
-    sprite->animId = gUnk_082DE9FC[0][0];
-    sprite->variant = gUnk_082DE9FC[0][1];
+    sprite->animId = gUnk_082DE9FC[0].animId;
+    sprite->variant = gUnk_082DE9FC[0].variant;
     sub_08155128(sprite);
     sprite = &trigger->unkB8->sprite;
     sprite->animId = 0x399;
@@ -1832,7 +1737,7 @@ static void sub_080235BC(struct CutsceneTrigger1 *trigger)
     for (i = 0; i < 4; i++)
     {
         if (trigger->unkB8 >> i & 1)
-            gKirbys[i].base.base.base.flags &= ~0x1000000;
+            gKirbys[i].base.flags &= ~0x1000000;
     }
     trigger->obj2.base.flags |= 0x1000;
 }

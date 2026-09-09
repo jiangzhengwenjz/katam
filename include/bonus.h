@@ -11,5 +11,7 @@ struct Object* BonusCreateTomatoAt(struct Object* arg0, s16 arg1, s16 arg2);
 struct Object* BonusCreateTomato(struct Kirby* arg0);
 void BonusCreateRandom(struct ObjectBase* arg0, u8 arg1);
 void sub_0812379C(struct Kirby* arg0);
+void BonusSetFunc(struct Object *);
+void sub_08123780(struct Object *);
 
 #endif
