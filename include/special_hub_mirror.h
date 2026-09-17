@@ -6,7 +6,7 @@
 
 struct SpecialHubMirror
 {
-    struct Object obj2;
+    struct Object obj;
     struct EffectObject *unkB4;
     u16 unkB8;
     u16 unkBA;

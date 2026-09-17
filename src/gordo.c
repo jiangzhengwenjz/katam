@@ -17,10 +17,10 @@ const struct AnimInfo gUnk_08352E14[] = {
 };
 
 void* CreateGordo(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x4000;
     obj->base.flags |= 0x8040;

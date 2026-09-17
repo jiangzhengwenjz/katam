@@ -99,7 +99,7 @@ static void sub_080BFD58(struct Object*);
 
 void* CreateHeavyKnight(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x800000;
     obj->base.flags |= 0x200000;
@@ -494,7 +494,7 @@ static void sub_080BF414(struct Object* arg0) {
 
 static void sub_080BF654(struct Object* arg0) {
     struct Task *task = TaskCreate(sub_080BF7D0, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
-    struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct ObjectBase *objBase = TaskGetStructPtr(task), *obj = objBase;
     ClearObjectBase(obj);
     obj->header.kind = 2;
     obj->x = arg0->base.x;
@@ -523,7 +523,7 @@ static void sub_080BF654(struct Object* arg0) {
 }
 
 static void sub_080BF7D0(void) {
-    struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
+    struct ObjectBase *objBase = TaskGetStructPtr(gCurTask), *obj = objBase;
     struct Object *parent = obj->parent;
     if (obj->flags & 0x1000) {
         TaskDestroy(gCurTask);
@@ -559,12 +559,12 @@ static void sub_080BF7D0(void) {
 }
 
 static void sub_080BF914(struct Object* arg0) {
-    register struct ObjectBase *obj2, *obj;
+    register struct ObjectBase *objBase, *obj;
     u32 flags;
     struct Task *task = TaskCreate(sub_080BF9EC, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, NULL);
-    obj2 = TaskGetStructPtr(task);
-    if (task) obj = obj2;
-    obj = obj2;
+    objBase = TaskGetStructPtr(task);
+    if (task) obj = objBase;
+    obj = objBase;
     ClearObjectBase(obj);
     obj->header.kind = 2;
     obj->x = arg0->base.x;
@@ -588,7 +588,7 @@ static void sub_080BF914(struct Object* arg0) {
 }
 
 static void sub_080BF9EC(void) {
-    struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
+    struct ObjectBase *objBase = TaskGetStructPtr(gCurTask), *obj = objBase;
     struct Object *parent = obj->parent;
     if (obj->flags & 0x1000) {
         TaskDestroy(gCurTask);
@@ -610,10 +610,10 @@ static void sub_080BF9EC(void) {
                 }
                 if (parent->unk85 != 0 && parent->unk83 < 7) {
                     if (obj->flags & 0x40000) {
-                        struct ObjectBase *obj2 = obj->unk6C;
+                        struct ObjectBase *objBase = obj->unk6C;
                         obj->flags &= ~0x40000;
-                        if (obj2->parent) {
-                            if (obj2->flags & 0x20000000) {
+                        if (objBase->parent) {
+                            if (objBase->flags & 0x20000000) {
                                 if ((Rand16() & 3) == 3) {
                                     ObjectSetFunc(parent, 1, sub_080BEF58);
                                     parent->base.xspeed = 0;

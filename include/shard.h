@@ -6,8 +6,8 @@
 
 struct Shard
 {
-    struct Object obj2;
-    struct EffectObject *obj4[8];
+    struct Object obj;
+    struct EffectObject *effect[8];
     u16 unkD4;
     u16 unkD6;
     s16 unkD8;

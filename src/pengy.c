@@ -99,7 +99,7 @@ static void sub_080BBD14(struct Object*);
 
 void* CreatePengy(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
@@ -274,7 +274,7 @@ static void sub_080BAFBC(struct Object* arg0) {
 
 void sub_080BB080(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB290, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct ObjectBase *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct ObjectBase *objBase = TaskGetStructPtr(task), *obj = objBase;
     ClearObjectBase(obj);
     obj->header.kind = 2;
     obj->x = arg0->base.x;
@@ -324,7 +324,7 @@ void sub_080BB080(struct Object* arg0, u8 arg1) {
 
 static void sub_080BB290(void) {
     struct Sprite sprite;
-    struct ObjectBase *obj2 = TaskGetStructPtr(gCurTask), *obj = obj2;
+    struct ObjectBase *objBase = TaskGetStructPtr(gCurTask), *obj = objBase;
     if (ObjectPreUpdate(obj) == 0) {
         obj->flags |= 4;
         if (++obj->counter > 0xa) {
@@ -346,7 +346,7 @@ static void sub_080BB290(void) {
 
 void sub_080BB470(struct Object* arg0) {
     struct Task *task = TaskCreate(sub_080BB568, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct EffectObject *tmp = TaskGetStructPtr(task), *obj = tmp;
     ClearEffectObject(obj);
     obj->header.kind = 3;
     obj->x = arg0->base.x;
@@ -425,7 +425,7 @@ static void sub_080BB568(void) {
 
 void sub_080BB804(struct Object* arg0, u8 arg1) {
     struct Task *task = TaskCreate(sub_080BB8FC, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct EffectObject *tmp = TaskGetStructPtr(task), *obj = tmp;
     ClearEffectObject(obj);
     obj->header.kind = 3;
     obj->x = arg0->base.x;

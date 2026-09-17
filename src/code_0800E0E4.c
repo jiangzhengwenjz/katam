@@ -8,19 +8,19 @@
 static void sub_0800E27C(void);
 static void sub_0800EC78(struct Task *);
 
-void sub_0800E0E4(struct Object *obj2, s16 a2, s16 a3)
+void sub_0800E0E4(struct Object *obj, s16 a2, s16 a3)
 {
     struct Task *t = TaskCreate(sub_0800E27C, sizeof(struct Unk_0800E0E4), 0x3500, TASK_USE_IWRAM, sub_0800EC78);
     struct Unk_0800E0E4 *var = TaskGetStructPtr(t);
 
     ClearObjectBase(&var->objBase);
     var->objBase.header.kind = 2;
-    var->objBase.x = obj2->base.x;
-    var->objBase.y = obj2->base.y;
-    var->objBase.parent = obj2;
+    var->objBase.x = obj->base.x;
+    var->objBase.y = obj->base.y;
+    var->objBase.parent = obj;
     var->objBase.counter = 0;
-    var->objBase.roomId = obj2->base.roomId;
-    var->objBase.unk56 = obj2->base.unk56;
+    var->objBase.roomId = obj->base.roomId;
+    var->objBase.unk56 = obj->base.unk56;
     if (Macro_0810B1F4(&var->objBase))
         var->objBase.flags |= 0x2000;
     var->objBase.x = a2 * 0x1000 + 0x800;
@@ -37,10 +37,10 @@ void sub_0800E0E4(struct Object *obj2, s16 a2, s16 a3)
     ObjectBaseInitSprite(&var->objBase, &var->objBase.sprite, 0x6012000, 0x28D, 0, 0xA);
     var->objBase.flags |= 0x4000;
     ObjectBaseInitSprite(&var->objBase, &var->sprite, 0x6012000, 0x28D, 0, 0xA);
-    if (obj2->base.unk68 & 0x10000000)
+    if (obj->base.unk68 & 0x10000000)
     {
-        sub_08085328(obj2->base.parent);
-        RequestScreenShake(2, &obj2->base);
+        sub_08085328(obj->base.parent);
+        RequestScreenShake(2, &obj->base);
     }
 }
 

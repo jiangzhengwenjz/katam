@@ -31,10 +31,10 @@ static const struct Unk_08357260 gUnk_083555A8[] = {
 };
 
 void* CreateBomber(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.unkC |= 0x100;
     if (obj->base.x > obj->kirby3->base.x) {

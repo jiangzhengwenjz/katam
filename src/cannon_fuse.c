@@ -41,31 +41,31 @@ void *CreateCannonFuse(struct ObjectTemplate *template, u8 a2)
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct CannonFuse), 0xFFE, TASK_USE_IWRAM, ObjectDestroy);
     struct CannonFuse *cf = TaskGetStructPtr(t);
 
-    InitObject(&cf->obj2, template, a2);
-    cf->obj2.base.flags |= 0x2618141;
-    cf->obj2.base.unk68 &= ~7;
-    cf->obj2.base.unk5C |= ~7;
-    cf->obj2.base.unk5C &= ~0x10100;
-    cf->obj2.base.unkC |= 1;
-    sub_0803E2B0(&cf->obj2.base, -8, -8, 8, 8);
-    ObjectInitSprite(&cf->obj2);
-    gUnk_08351648[cf->obj2.type].unk10(&cf->obj2);
+    InitObject(&cf->obj, template, a2);
+    cf->obj.base.flags |= 0x2618141;
+    cf->obj.base.unk68 &= ~7;
+    cf->obj.base.unk5C |= ~7;
+    cf->obj.base.unk5C &= ~0x10100;
+    cf->obj.base.unkC |= 1;
+    sub_0803E2B0(&cf->obj.base, -8, -8, 8, 8);
+    ObjectInitSprite(&cf->obj);
+    gUnk_08351648[cf->obj.type].unk10(&cf->obj);
     return cf;
 }
 
 void sub_0811DD94(struct CannonFuse *cf)
 {
-    cf->obj2.base.counter = 0;
+    cf->obj.base.counter = 0;
     cf->unkB4 = 0;
     cf->unkB6 = 0;
-    cf->unkB8 = cf->obj2.objTemplate->x >> 4;
-    cf->unkBA = cf->obj2.objTemplate->y >> 4;
-    cf->unkBC = cf->obj2.objTemplate->x >> 4;
-    cf->unkBE = cf->obj2.objTemplate->y >> 4;
+    cf->unkB8 = cf->obj.objTemplate->x >> 4;
+    cf->unkBA = cf->obj.objTemplate->y >> 4;
+    cf->unkBC = cf->obj.objTemplate->x >> 4;
+    cf->unkBE = cf->obj.objTemplate->y >> 4;
     cf->unkC0 = 0;
     cf->unkC2 = 0;
-    cf->obj2.unk83 = 0;
-    cf->obj2.unk78 = sub_0811E92C;
+    cf->obj.unk83 = 0;
+    cf->obj.unk78 = sub_0811E92C;
 }
 
 static void sub_0811DDFC(struct CannonFuse *cf)
@@ -75,20 +75,20 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     u16 unkB8 = cf->unkB8;
     u16 unkBA = cf->unkBA;
 
-    switch (GetCollisionTile(cf->obj2.base.unk56, unkBC, unkBE))
+    switch (GetCollisionTile(cf->obj.base.unk56, unkBC, unkBE))
     {
     case 0x22:
         if (unkBE >= unkBA)
         {
-            cf->obj2.base.yspeed -= 0x1000;
-            if (cf->obj2.base.yspeed < -0x1000)
-                cf->obj2.base.yspeed = -0x1000;
+            cf->obj.base.yspeed -= 0x1000;
+            if (cf->obj.base.yspeed < -0x1000)
+                cf->obj.base.yspeed = -0x1000;
         }
         else
         {
-            cf->obj2.base.yspeed += 0x1000;
-            if (cf->obj2.base.yspeed > 0x1000)
-                cf->obj2.base.yspeed = 0x1000;
+            cf->obj.base.yspeed += 0x1000;
+            if (cf->obj.base.yspeed > 0x1000)
+                cf->obj.base.yspeed = 0x1000;
         }
         cf->unkBA = unkBE;
         cf->unkBE += unkBE - unkBA;
@@ -96,28 +96,28 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     case 0x23:
         if (unkBC == unkB8)
         {
-            if (cf->obj2.base.flags & 1)
+            if (cf->obj.base.flags & 1)
             {
-                cf->obj2.base.xspeed -= 0x1000;
-                if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
-                else if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
+                cf->obj.base.xspeed -= 0x1000;
+                if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
+                else if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
             }
             else
             {
-                cf->obj2.base.xspeed += 0x1000;
-                if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
-                else if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
+                cf->obj.base.xspeed += 0x1000;
+                if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
+                else if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
             }
         }
         else
         {
-            cf->obj2.base.yspeed -= 0x1000;
-            if (cf->obj2.base.yspeed < -0x1000)
-                cf->obj2.base.yspeed = -0x1000;
+            cf->obj.base.yspeed -= 0x1000;
+            if (cf->obj.base.yspeed < -0x1000)
+                cf->obj.base.yspeed = -0x1000;
         }
         if (unkBC == unkB8)
         {
@@ -133,28 +133,28 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     case 0x24:
         if (unkBC == unkB8)
         {
-            if (cf->obj2.base.flags & 1)
+            if (cf->obj.base.flags & 1)
             {
-                cf->obj2.base.xspeed += 0x1000;
-                if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
-                else if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
+                cf->obj.base.xspeed += 0x1000;
+                if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
+                else if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
             }
             else
             {
-                cf->obj2.base.xspeed -= 0x1000;
-                if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
-                else if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
+                cf->obj.base.xspeed -= 0x1000;
+                if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
+                else if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
             }
         }
         else
         {
-            cf->obj2.base.yspeed -= 0x1000;
-            if (cf->obj2.base.yspeed < -0x1000)
-                cf->obj2.base.yspeed = -0x1000;
+            cf->obj.base.yspeed -= 0x1000;
+            if (cf->obj.base.yspeed < -0x1000)
+                cf->obj.base.yspeed = -0x1000;
         }
         if (unkBC == unkB8)
         {
@@ -170,40 +170,40 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     case 0x25:
         if (unkBC >= unkB8)
         {
-            if (cf->obj2.base.flags & 1)
+            if (cf->obj.base.flags & 1)
             {
-                cf->obj2.base.xspeed -= 0x1000;
-                if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
-                else if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
+                cf->obj.base.xspeed -= 0x1000;
+                if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
+                else if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
             }
             else
             {
-                cf->obj2.base.xspeed += 0x1000;
-                if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
-                else if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
+                cf->obj.base.xspeed += 0x1000;
+                if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
+                else if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
             }
         }
         else
         {
-            if (cf->obj2.base.flags & 1)
+            if (cf->obj.base.flags & 1)
             {
-                cf->obj2.base.xspeed += 0x1000;
-                if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
-                else if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
+                cf->obj.base.xspeed += 0x1000;
+                if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
+                else if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
             }
             else
             {
-                cf->obj2.base.xspeed -= 0x1000;
-                if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
-                else if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
+                cf->obj.base.xspeed -= 0x1000;
+                if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
+                else if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
             }
         }
         cf->unkB8 = unkBC;
@@ -212,28 +212,28 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     case 0x26:
         if (unkBC == unkB8)
         {
-            if (cf->obj2.base.flags & 1)
+            if (cf->obj.base.flags & 1)
             {
-                cf->obj2.base.xspeed -= 0x1000;
-                if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
-                else if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
+                cf->obj.base.xspeed -= 0x1000;
+                if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
+                else if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
             }
             else
             {
-                cf->obj2.base.xspeed += 0x1000;
-                if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
-                else if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
+                cf->obj.base.xspeed += 0x1000;
+                if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
+                else if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
             }
         }
         else
         {
-            cf->obj2.base.yspeed += 0x1000;
-            if (cf->obj2.base.yspeed > 0x1000)
-                cf->obj2.base.yspeed = 0x1000;
+            cf->obj.base.yspeed += 0x1000;
+            if (cf->obj.base.yspeed > 0x1000)
+                cf->obj.base.yspeed = 0x1000;
         }
         if (unkBC == unkB8)
         {
@@ -249,28 +249,28 @@ static void sub_0811DDFC(struct CannonFuse *cf)
     case 0x27:
         if (unkBC == unkB8)
         {
-            if (cf->obj2.base.flags & 1)
+            if (cf->obj.base.flags & 1)
             {
-                cf->obj2.base.xspeed += 0x1000;
-                if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
-                else if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
+                cf->obj.base.xspeed += 0x1000;
+                if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
+                else if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
             }
             else
             {
-                cf->obj2.base.xspeed -= 0x1000;
-                if (cf->obj2.base.xspeed > -0x1000)
-                    cf->obj2.base.xspeed = -0x1000;
-                else if (cf->obj2.base.xspeed < 0x1000)
-                    cf->obj2.base.xspeed = 0x1000;
+                cf->obj.base.xspeed -= 0x1000;
+                if (cf->obj.base.xspeed > -0x1000)
+                    cf->obj.base.xspeed = -0x1000;
+                else if (cf->obj.base.xspeed < 0x1000)
+                    cf->obj.base.xspeed = 0x1000;
             }
         }
         else
         {
-            cf->obj2.base.yspeed += 0x1000;
-            if (cf->obj2.base.yspeed > 0x1000)
-                cf->obj2.base.yspeed = 0x1000;
+            cf->obj.base.yspeed += 0x1000;
+            if (cf->obj.base.yspeed > 0x1000)
+                cf->obj.base.yspeed = 0x1000;
         }
         if (unkBC == unkB8)
         {
@@ -284,36 +284,36 @@ static void sub_0811DDFC(struct CannonFuse *cf)
         }
         break;
     }
-    if (!(cf->obj2.base.flags & 0x800))
+    if (!(cf->obj.base.flags & 0x800))
     {
-        cf->obj2.base.unk48 = cf->obj2.base.x;
-        cf->obj2.base.unk4C = cf->obj2.base.y;
-        cf->obj2.base.x += cf->obj2.base.xspeed;
-        cf->obj2.base.y -= cf->obj2.base.yspeed;
+        cf->obj.base.unk48 = cf->obj.base.x;
+        cf->obj.base.unk4C = cf->obj.base.y;
+        cf->obj.base.x += cf->obj.base.xspeed;
+        cf->obj.base.y -= cf->obj.base.yspeed;
     }
-    if (cf->obj2.base.xspeed < 0)
+    if (cf->obj.base.xspeed < 0)
     {
-        cf->obj2.base.xspeed += 0x7FFF;
-        if (cf->obj2.base.xspeed > 0)
-            cf->obj2.base.xspeed = 0;
-    }
-    else
-    {
-        cf->obj2.base.xspeed -= 0x7FFF;
-        if (cf->obj2.base.xspeed < 0)
-            cf->obj2.base.xspeed = 0;
-    }
-    if (cf->obj2.base.yspeed < 0)
-    {
-        cf->obj2.base.yspeed += 0x7FFF;
-        if (cf->obj2.base.yspeed > 0)
-            cf->obj2.base.yspeed = 0;
+        cf->obj.base.xspeed += 0x7FFF;
+        if (cf->obj.base.xspeed > 0)
+            cf->obj.base.xspeed = 0;
     }
     else
     {
-        cf->obj2.base.yspeed -= 0x7FFF;
-        if (cf->obj2.base.yspeed < 0)
-            cf->obj2.base.yspeed = 0;
+        cf->obj.base.xspeed -= 0x7FFF;
+        if (cf->obj.base.xspeed < 0)
+            cf->obj.base.xspeed = 0;
+    }
+    if (cf->obj.base.yspeed < 0)
+    {
+        cf->obj.base.yspeed += 0x7FFF;
+        if (cf->obj.base.yspeed > 0)
+            cf->obj.base.yspeed = 0;
+    }
+    else
+    {
+        cf->obj.base.yspeed -= 0x7FFF;
+        if (cf->obj.base.yspeed < 0)
+            cf->obj.base.yspeed = 0;
     }
 }
 
@@ -323,46 +323,46 @@ static void sub_0811E2EC(struct CannonFuse *cf)
     u16 unkBE = cf->unkBE;
     u16 unkB8 = cf->unkB8;
     u16 unkBA = cf->unkBA;
-    u8 var = GetCollisionTile(cf->obj2.base.unk56, unkBC, unkBE);
+    u8 var = GetCollisionTile(cf->obj.base.unk56, unkBC, unkBE);
 
-    cf->obj2.base.sprite.unk1B = 0xFF;
+    cf->obj.base.sprite.unk1B = 0xFF;
     switch (var)
     {
     case 0x22:
         if (unkBE >= unkBA)
-            cf->obj2.unk83 = 1;
+            cf->obj.unk83 = 1;
         else
-            cf->obj2.unk83 = 2;
+            cf->obj.unk83 = 2;
         break;
     case 0x23:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 0xA;
+            cf->obj.unk83 = 0xA;
         else
-            cf->obj2.unk83 = 9;
+            cf->obj.unk83 = 9;
         break;
     case 0x24:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 0xC;
+            cf->obj.unk83 = 0xC;
         else
-            cf->obj2.unk83 = 0xB;
+            cf->obj.unk83 = 0xB;
         break;
     case 0x25:
         if (unkBC >= unkB8)
-            cf->obj2.unk83 = 3;
+            cf->obj.unk83 = 3;
         else
-            cf->obj2.unk83 = 4;
+            cf->obj.unk83 = 4;
         break;
     case 0x26:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 5;
+            cf->obj.unk83 = 5;
         else
-            cf->obj2.unk83 = 6;
+            cf->obj.unk83 = 6;
         break;
     case 0x27:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 7;
+            cf->obj.unk83 = 7;
         else
-            cf->obj2.unk83 = 8;
+            cf->obj.unk83 = 8;
         break;
     }
 }
@@ -373,46 +373,46 @@ static void sub_0811E3D0(struct CannonFuse *cf)
     u16 unkBE = cf->unkBE;
     u16 unkB8 = cf->unkB8;
     u16 unkBA = cf->unkBA;
-    u8 var = GetCollisionTile(cf->obj2.base.unk56, unkBC, unkBE);
+    u8 var = GetCollisionTile(cf->obj.base.unk56, unkBC, unkBE);
 
-    cf->obj2.base.sprite.unk1B = 0xFF;
+    cf->obj.base.sprite.unk1B = 0xFF;
     switch (var)
     {
     case 0x22:
         if (unkBE >= unkBA)
-            cf->obj2.unk83 = 0xD;
+            cf->obj.unk83 = 0xD;
         else
-            cf->obj2.unk83 = 0xE;
+            cf->obj.unk83 = 0xE;
         break;
     case 0x23:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 0x16;
+            cf->obj.unk83 = 0x16;
         else
-            cf->obj2.unk83 = 0x15;
+            cf->obj.unk83 = 0x15;
         break;
     case 0x24:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 0x18;
+            cf->obj.unk83 = 0x18;
         else
-            cf->obj2.unk83 = 0x17;
+            cf->obj.unk83 = 0x17;
         break;
     case 0x25:
         if (unkBC >= unkB8)
-            cf->obj2.unk83 = 0xF;
+            cf->obj.unk83 = 0xF;
         else
-            cf->obj2.unk83 = 0x10;
+            cf->obj.unk83 = 0x10;
         break;
     case 0x26:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 0x11;
+            cf->obj.unk83 = 0x11;
         else
-            cf->obj2.unk83 = 0x12;
+            cf->obj.unk83 = 0x12;
         break;
     case 0x27:
         if (unkBC == unkB8)
-            cf->obj2.unk83 = 0x13;
+            cf->obj.unk83 = 0x13;
         else
-            cf->obj2.unk83 = 0x14;
+            cf->obj.unk83 = 0x14;
         break;
     }
 }
@@ -425,10 +425,10 @@ static void sub_0811E4B4(struct CannonFuse *cf)
 
     if (cfAlias->unkC2++ > 3)
     {
-        PlaySfx(&cf->obj2.base, SE_CANNON_FUSE_LIT);
+        PlaySfx(&cf->obj.base, SE_CANNON_FUSE_LIT);
         cfAlias->unkC2 = 0;
     }
-    if (cf->obj2.base.flags & 2)
+    if (cf->obj.base.flags & 2)
     {
         u16 r1, r2;
         s32 var2, x22 = 0x22;
@@ -436,14 +436,14 @@ static void sub_0811E4B4(struct CannonFuse *cf)
         sub_0811DDFC(cfAlias);
         r1 = cfAlias->unkBC;
         r2 = cfAlias->unkBE;
-        var2 = GetCollisionTile(cfAlias->obj2.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
+        var2 = GetCollisionTile(cfAlias->obj.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
         if (var2 > 0x27) var = 0;
         else if (var2 < x22) var = 0;
         else var = var2;
         if (var)
         {
             sub_0811E2EC(cfAlias);
-            unk56 = cfAlias->obj2.base.unk56;
+            unk56 = cfAlias->obj.base.unk56;
             GetCollisionTile(unk56, cfAlias->unkBC, cfAlias->unkBE);
             sub_08001408(unk56,
                 sub_08002624(unk56, cfAlias->unkBC, cfAlias->unkBE, 0),
@@ -453,42 +453,42 @@ static void sub_0811E4B4(struct CannonFuse *cf)
         {
             cfAlias->unkB6 &= ~1;
             ++cfAlias->unkBE;
-            cf->obj2.base.yspeed -= 0x1000;
-            if (cf->obj2.base.yspeed < -0x1000)
-                cf->obj2.base.yspeed = -0x1000;
-            if (!(cf->obj2.base.flags & 0x800))
+            cf->obj.base.yspeed -= 0x1000;
+            if (cf->obj.base.yspeed < -0x1000)
+                cf->obj.base.yspeed = -0x1000;
+            if (!(cf->obj.base.flags & 0x800))
             {
-                cf->obj2.base.unk48 = cf->obj2.base.x;
-                cf->obj2.base.unk4C = cf->obj2.base.y;
-                cf->obj2.base.x += cf->obj2.base.xspeed;
-                cf->obj2.base.y -= cf->obj2.base.yspeed;
+                cf->obj.base.unk48 = cf->obj.base.x;
+                cf->obj.base.unk4C = cf->obj.base.y;
+                cf->obj.base.x += cf->obj.base.xspeed;
+                cf->obj.base.y -= cf->obj.base.yspeed;
             }
-            if (cf->obj2.base.xspeed < 0)
+            if (cf->obj.base.xspeed < 0)
             {
-                cf->obj2.base.xspeed += 0x7FFF;
-                if (cf->obj2.base.xspeed > 0)
-                    cf->obj2.base.xspeed = 0;
-            }
-            else
-            {
-                cf->obj2.base.xspeed -= 0x7FFF;
-                if (cf->obj2.base.xspeed < 0)
-                    cf->obj2.base.xspeed = 0;
-            }
-            if (cf->obj2.base.yspeed < 0)
-            {
-                cf->obj2.base.yspeed += 0x7FFF;
-                if (cf->obj2.base.yspeed > 0)
-                    cf->obj2.base.yspeed = 0;
+                cf->obj.base.xspeed += 0x7FFF;
+                if (cf->obj.base.xspeed > 0)
+                    cf->obj.base.xspeed = 0;
             }
             else
             {
-                cf->obj2.base.yspeed -= 0x7FFF;
-                if (cf->obj2.base.yspeed < 0)
-                    cf->obj2.base.yspeed = 0;
+                cf->obj.base.xspeed -= 0x7FFF;
+                if (cf->obj.base.xspeed < 0)
+                    cf->obj.base.xspeed = 0;
+            }
+            if (cf->obj.base.yspeed < 0)
+            {
+                cf->obj.base.yspeed += 0x7FFF;
+                if (cf->obj.base.yspeed > 0)
+                    cf->obj.base.yspeed = 0;
+            }
+            else
+            {
+                cf->obj.base.yspeed -= 0x7FFF;
+                if (cf->obj.base.yspeed < 0)
+                    cf->obj.base.yspeed = 0;
             }
             sub_0811E2EC(cfAlias);
-            unk56 = cfAlias->obj2.base.unk56;
+            unk56 = cfAlias->obj.base.unk56;
             GetCollisionTile(unk56, cfAlias->unkBC, cfAlias->unkBE);
             sub_08001408(unk56,
                 sub_08002624(unk56, cfAlias->unkBC, cfAlias->unkBE, 0),
@@ -496,11 +496,11 @@ static void sub_0811E4B4(struct CannonFuse *cf)
         }
         else
         {
-            cf->obj2.unk78 = sub_0811E890;
-            cf->obj2.base.flags |= 0x400;
+            cf->obj.unk78 = sub_0811E890;
+            cf->obj.base.flags |= 0x400;
         }
     }
-    ++cf->obj2.base.counter;
+    ++cf->obj.base.counter;
 }
 
 static void sub_0811E6FC(struct CannonFuse *cf)
@@ -508,11 +508,11 @@ static void sub_0811E6FC(struct CannonFuse *cf)
     struct CannonFuse *cfAlias = cf;
     u8 unk56;
 
-    if (cf->obj2.base.flags & 2)
+    if (cf->obj.base.flags & 2)
     {
         if (!(cf->unkB6 & 1))
         {
-            unk56 = cfAlias->obj2.base.unk56;
+            unk56 = cfAlias->obj.base.unk56;
             GetCollisionTile(unk56, cfAlias->unkBC, cfAlias->unkBE);
             sub_08001408(unk56,
                 sub_08002624(unk56, cfAlias->unkBC, cfAlias->unkBE, 1),
@@ -523,41 +523,41 @@ static void sub_0811E6FC(struct CannonFuse *cf)
         {
             cfAlias->unkB6 &= ~1;
             ++cfAlias->unkBE;
-            cf->obj2.base.yspeed -= 0x1000;
-            if (cf->obj2.base.yspeed < -0x1000)
-                cf->obj2.base.yspeed = -0x1000;
-            if (!(cf->obj2.base.flags & 0x800))
+            cf->obj.base.yspeed -= 0x1000;
+            if (cf->obj.base.yspeed < -0x1000)
+                cf->obj.base.yspeed = -0x1000;
+            if (!(cf->obj.base.flags & 0x800))
             {
-                cf->obj2.base.unk48 = cf->obj2.base.x;
-                cf->obj2.base.unk4C = cf->obj2.base.y;
-                cf->obj2.base.x += cf->obj2.base.xspeed;
-                cf->obj2.base.y -= cf->obj2.base.yspeed;
+                cf->obj.base.unk48 = cf->obj.base.x;
+                cf->obj.base.unk4C = cf->obj.base.y;
+                cf->obj.base.x += cf->obj.base.xspeed;
+                cf->obj.base.y -= cf->obj.base.yspeed;
             }
-            if (cf->obj2.base.xspeed < 0)
+            if (cf->obj.base.xspeed < 0)
             {
-                cf->obj2.base.xspeed += 0x7FFF;
-                if (cf->obj2.base.xspeed > 0)
-                    cf->obj2.base.xspeed = 0;
-            }
-            else
-            {
-                cf->obj2.base.xspeed -= 0x7FFF;
-                if (cf->obj2.base.xspeed < 0)
-                    cf->obj2.base.xspeed = 0;
-            }
-            if (cf->obj2.base.yspeed < 0)
-            {
-                cf->obj2.base.yspeed += 0x7FFF;
-                if (cf->obj2.base.yspeed > 0)
-                    cf->obj2.base.yspeed = 0;
+                cf->obj.base.xspeed += 0x7FFF;
+                if (cf->obj.base.xspeed > 0)
+                    cf->obj.base.xspeed = 0;
             }
             else
             {
-                cf->obj2.base.yspeed -= 0x7FFF;
-                if (cf->obj2.base.yspeed < 0)
-                    cf->obj2.base.yspeed = 0;
+                cf->obj.base.xspeed -= 0x7FFF;
+                if (cf->obj.base.xspeed < 0)
+                    cf->obj.base.xspeed = 0;
             }
-            cf->obj2.base.flags &= ~0x400;
+            if (cf->obj.base.yspeed < 0)
+            {
+                cf->obj.base.yspeed += 0x7FFF;
+                if (cf->obj.base.yspeed > 0)
+                    cf->obj.base.yspeed = 0;
+            }
+            else
+            {
+                cf->obj.base.yspeed -= 0x7FFF;
+                if (cf->obj.base.yspeed < 0)
+                    cf->obj.base.yspeed = 0;
+            }
+            cf->obj.base.flags &= ~0x400;
             sub_0811E3D0(cfAlias);
         }
         else
@@ -566,7 +566,7 @@ static void sub_0811E6FC(struct CannonFuse *cf)
             s16 var;
             u16 r1 = cfAlias->unkBC, r2 = cfAlias->unkBE;
 
-            var2 = GetCollisionTile(cfAlias->obj2.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
+            var2 = GetCollisionTile(cfAlias->obj.base.unk56, cfAlias->unkBC, cfAlias->unkBE);
             if (var2 > 0x27) var = 0;
             else if (var2 < x22) var = 0;
             else var = var2;
@@ -574,39 +574,39 @@ static void sub_0811E6FC(struct CannonFuse *cf)
                 sub_0811E3D0(cfAlias);
             else
             {
-                cf->obj2.unk78 = sub_0811DD94;
-                cf->obj2.unk83 = 0;
+                cf->obj.unk78 = sub_0811DD94;
+                cf->obj.unk83 = 0;
             }
         }
     }
-    ++cf->obj2.base.counter;
+    ++cf->obj.base.counter;
 }
 
 static void sub_0811E890(struct CannonFuse *cf)
 {
     if (!(cf->unkB6 & 1))
     {
-        if (cf->obj2.base.flags & 2)
+        if (cf->obj.base.flags & 2)
         {
             cf->unkB8 = cf->unkBC;
             cf->unkBA = cf->unkBE;
             cf->unkB4 = 0x23;
             cf->unkB6 = 5;
-            ++*GetStateSlot(STATE_SLOT_ROOM, cf->obj2.objTemplate->unk4, gCurLevelInfo[cf->obj2.base.unk56].unk65E);
+            ++*GetStateSlot(STATE_SLOT_ROOM, cf->obj.objTemplate->unk4, gCurLevelInfo[cf->obj.base.unk56].unk65E);
         }
     }
     else if (!cf->unkB4--)
-        cf->obj2.unk78 = sub_0811E6FC;
-    ++cf->obj2.base.counter;
+        cf->obj.unk78 = sub_0811E6FC;
+    ++cf->obj.base.counter;
 }
 
 static void sub_0811E92C(struct CannonFuse *cf)
 {
-    if (cf->obj2.base.flags & 0x40000)
+    if (cf->obj.base.flags & 0x40000)
     {
-        cf->obj2.unk78 = sub_0811E4B4;
+        cf->obj.unk78 = sub_0811E4B4;
         cf->unkB6 = 3;
-        sub_08094930(&cf->obj2.base);
+        sub_08094930(&cf->obj.base);
     }
-    ++cf->obj2.base.counter;
+    ++cf->obj.base.counter;
 }

@@ -5,7 +5,7 @@
 
 struct Kracko
 {
-    struct Object obj2;
+    struct Object obj;
     struct EffectObject *unkB4;
     struct EffectObject *unkB8;
     struct Object6 *unkBC;

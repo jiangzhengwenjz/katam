@@ -148,7 +148,7 @@ static void sub_080A3B94(struct Object* arg0);
 
 void* CreateCupie(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -3, 5, 8);
     ObjectSetBounds(&obj->base, -6, -4, 6, 10);
@@ -614,10 +614,10 @@ static void sub_080A35C8(struct Object* arg0) {
 }
 
 void* CreateCupieArrow(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.unk63 = 1;
     obj->base.flags |= 0x40;

@@ -6,7 +6,7 @@
 
 struct LargeStarStoneBlock7D
 {
-    struct Object obj2;
+    struct Object obj;
     u8 fillerB4[0x2D];
     u8 unkE1;
     u8 unkE2;

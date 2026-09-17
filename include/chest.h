@@ -6,7 +6,7 @@
 
 struct Chest
 {
-    struct Object obj2;
+    struct Object obj;
     u8 fillerB4[0x28];
     u32 unkDC;
     u16 unkE0; // item id
@@ -16,7 +16,7 @@ struct Chest
 
 struct ChestItemPopup
 {
-    struct EffectObject obj4;
+    struct EffectObject effect;
     void (*unk48)(struct ChestItemPopup *);
     struct Chest *unk4C;
     u16 unk50; // item id

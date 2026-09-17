@@ -938,93 +938,93 @@ static void sub_080A6AE8(struct Object *blipper) // the same as sub_080A6914
 static void sub_080A6CBC(struct Object *blipper, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080A6E44, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
 
-    ClearEffectObject(obj4);
-    obj4->header.kind = 3;
-    obj4->x = blipper->base.x;
-    obj4->y = blipper->base.y;
-    obj4->parent = blipper;
-    obj4->roomId = blipper->base.roomId;
-    obj4->flags |= 0x4000;
+    ClearEffectObject(effect);
+    effect->header.kind = 3;
+    effect->x = blipper->base.x;
+    effect->y = blipper->base.y;
+    effect->parent = blipper;
+    effect->roomId = blipper->base.roomId;
+    effect->flags |= 0x4000;
     switch (a2)
     {
     case 0:
     default:
-        obj4->unk3C = -0x200;
-        obj4->unk3E = 0x200;
-        obj4->x -= 0xC00;
+        effect->unk3C = -0x200;
+        effect->unk3E = 0x200;
+        effect->x -= 0xC00;
         break;
     case 1:
-        obj4->unk3C = 0x200;
-        obj4->unk3E = 0x200;
-        obj4->x += 0xC00;
+        effect->unk3C = 0x200;
+        effect->unk3E = 0x200;
+        effect->x += 0xC00;
         break;
     case 2:
-        obj4->unk3C = -0x200;
-        obj4->unk3E = 0x280;
-        obj4->y -= 0xC00;
-        obj4->x -= 0x800;
+        effect->unk3C = -0x200;
+        effect->unk3E = 0x280;
+        effect->y -= 0xC00;
+        effect->x -= 0x800;
         break;
     case 3:
-        obj4->unk3C = 0x200;
-        obj4->unk3E = 0x280;
-        obj4->y -= 0xC00;
-        obj4->x += 0x800;
+        effect->unk3C = 0x200;
+        effect->unk3E = 0x280;
+        effect->y -= 0xC00;
+        effect->x += 0x800;
         break;
     }
     if (Macro_0810B1F4(&blipper->base))
-        obj4->flags |= 0x2000;
-    EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x329, 2, 0xC);
-    obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, 1);
+        effect->flags |= 0x2000;
+    EffectObjectInitSprite(effect, &effect->sprite, 6, 0x329, 2, 0xC);
+    effect->sprite.palId = 0;
+    Macro_081050E8(effect, &effect->sprite, 0x327, 0, 1);
 }
 
 static void sub_080A6E44(void)
 {
     struct Sprite sprite;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
     struct Object *blipper;
 
-    if (obj4->flags & 0x1000)
+    if (effect->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 6, &obj4->sprite);
-        Macro_081050E8(obj4, &obj4->sprite, 0x327, 0, !obj4->sprite.palId);
-        Macro_0809E55C(obj4);
-        blipper = obj4->parent;
+        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 6, &effect->sprite);
+        Macro_081050E8(effect, &effect->sprite, 0x327, 0, !effect->sprite.palId);
+        Macro_0809E55C(effect);
+        blipper = effect->parent;
         if (blipper)
         {
             if (blipper->base.header.kind && blipper->base.flags & 0x1000)
             {
-                obj4->parent = NULL;
+                effect->parent = NULL;
                 blipper = NULL;
             }
             if (!blipper)
                 goto label;
-            if (Macro_0810B1F4(&blipper->base) && !(obj4->flags & 0x2000))
+            if (Macro_0810B1F4(&blipper->base) && !(effect->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(obj4);
+                EffectObjectDisplaySprite(effect);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(obj4);
+            KirbySomething(effect);
         }
-        obj4->unk3E -= 0x80;
-        if (obj4->flags & 2)
-            obj4->flags |= 0x1000;
+        effect->unk3E -= 0x80;
+        if (effect->flags & 2)
+            effect->flags |= 0x1000;
         else
         {
-            if (!(obj4->flags & 0x800))
+            if (!(effect->flags & 0x800))
             {
-                obj4->x += obj4->unk3C;
-                obj4->y -= obj4->unk3E;
+                effect->x += effect->unk3C;
+                effect->y -= effect->unk3E;
             }
-            EffectObjectPostUpdate(obj4);
+            EffectObjectPostUpdate(effect);
         }
     }
 }

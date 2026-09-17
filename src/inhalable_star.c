@@ -18,28 +18,28 @@ const struct AnimInfo gUnk_0835366C[] = {
     { 0x295, 1, 0 },
 };
 
-void sub_080A8C28(struct Object *obj2, s16 a2, s16 a3)
+void sub_080A8C28(struct Object *obj, s16 a2, s16 a3)
 {
-    s32 x = obj2->base.flags & 1 ? (obj2->base.x >> 8) - a2 : (obj2->base.x >> 8) + a2;
-    s32 y = (obj2->base.y >> 8) + a3;
-    struct Object *star = CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
+    s32 x = obj->base.flags & 1 ? (obj->base.x >> 8) - a2 : (obj->base.x >> 8) + a2;
+    s32 y = (obj->base.y >> 8) + a3;
+    struct Object *star = CreateObjTemplateAndObj(obj->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    star->base.parent = obj2;
-    if (obj2->base.flags & 1)
+    star->base.parent = obj;
+    if (obj->base.flags & 1)
         star->base.flags |= 1;
     sub_080A8EF4(star);
 }
 
-void sub_080A8D18(struct Object *obj2, s16 a2, s16 a3, u8 a4, u8 a5)
+void sub_080A8D18(struct Object *obj, s16 a2, s16 a3, u8 a4, u8 a5)
 {
-    s32 x = obj2->base.flags & 1 ? (obj2->base.x >> 8) - a2 : (obj2->base.x >> 8) + a2;
-    s32 y = (obj2->base.y >> 8) + a3;
-    struct Object *star = CreateObjTemplateAndObj(obj2->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
+    s32 x = obj->base.flags & 1 ? (obj->base.x >> 8) - a2 : (obj->base.x >> 8) + a2;
+    s32 y = (obj->base.y >> 8) + a3;
+    struct Object *star = CreateObjTemplateAndObj(obj->base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_INHALABLE_STAR,
         a4, 0, a5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    star->base.parent = obj2;
-    if (obj2->base.flags & 1)
+    star->base.parent = obj;
+    if (obj->base.flags & 1)
         star->base.flags |= 1;
     sub_080A8EF4(star);
 }

@@ -5,7 +5,7 @@
 #include "data.h"
 
 struct Moley {
-    struct Object obj2;
+    struct Object obj;
     u8 unkB4;
     u8 unkB5;
     u16 unkB6;

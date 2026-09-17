@@ -6,7 +6,7 @@
 
 struct Gobbler
 {
-    struct Object obj2;
+    struct Object obj;
     struct Object *babies[3];
     u8 unkC0;
     u8 unkC1;

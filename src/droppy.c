@@ -7,10 +7,10 @@
 
 static void sub_080A09A4(struct Object *arg0);
 void* CreateDroppy(struct ObjectTemplate *arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x800000;
     obj->base.flags |= 0x2000000;
@@ -468,21 +468,21 @@ static void sub_080A09A4(struct Object *arg0) {
 
 static void sub_080A0A78(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *obj = tmp;
-    struct Object *obj2 = obj->parent;
-    if (obj->roomId != 0xFFFF && obj2->base.flags & 0x1000) {
+    struct Object *parent = obj->parent;
+    if (obj->roomId != 0xFFFF && parent->base.flags & 0x1000) {
         obj->roomId = 0xFFFF;
     }
-    obj->x = obj2->base.x;
-    obj->y = obj2->base.y;
-    obj->unk56 = obj2->base.unk56;
+    obj->x = parent->base.x;
+    obj->y = parent->base.y;
+    obj->unk56 = parent->base.unk56;
     if (!ObjectPreUpdate(obj)) {
-        if (obj2->base.flags & 1) {
+        if (parent->base.flags & 1) {
             obj->flags |= 1;
         }
         else {
             obj->flags &= ~1;
         }
-        if (obj2->unk83 < 0xb) {
+        if (parent->unk83 < 0xb) {
             if (obj->flags & 0x40000) {
                 obj->flags &= ~0x40000;
             }

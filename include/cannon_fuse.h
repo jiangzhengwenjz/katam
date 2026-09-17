@@ -6,7 +6,7 @@
 
 struct CannonFuse
 {
-    struct Object obj2;
+    struct Object obj;
     u16 unkB4;
     u16 unkB6;
     u16 unkB8;

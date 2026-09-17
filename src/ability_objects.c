@@ -126,7 +126,7 @@ static const u8 gUnk_08353922[] = { 0x00, 0x08, 0x0f, 0x10, 0x00, 0x00, };
 
 void *CreateAbilityStar(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, sub_080AAA14);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x4000;
     obj->base.flags |= 0x2000000;
@@ -292,7 +292,7 @@ static void sub_080A98F4(struct Object* arg0) {
 
 void *CreateUnknown83(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x40;
     obj->base.flags |= 0x400;
@@ -324,7 +324,7 @@ static void sub_080A9BB4(struct Object* arg0) {
 
 void *CreateDustCloud(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x40;
     obj->base.flags |= 0x400;
@@ -450,10 +450,10 @@ static void sub_080A9CEC(struct Object* arg0) {
 
 static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
     s16 r2;
-    struct EffectObject *obj, *obj2;
+    struct EffectObject *obj, *tmp;
     struct Task *task = TaskCreate(sub_080AA108, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     ClearEffectObject(obj);
     obj->header.kind = 3;
     obj->x = arg0->base.x;
@@ -502,19 +502,19 @@ static void sub_080A9FBC(struct Object* arg0, s16 arg1, s16 arg2) {
 
 static void sub_080AA108(void) {
     struct Sprite sprite;
-    struct EffectObject *obj_2 = TaskGetStructPtr(gCurTask), *obj = obj_2;
-    struct Object *obj2 = obj->parent;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj = tmp;
+    struct Object *parent = obj->parent;
     struct Kirby *kirby = &gKirbys[gLocalPlayerId];
     if (obj->flags & 0x1000) {
         TaskDestroy(gCurTask);
     }
     else {
-        if (obj2->base.flags & 0x1000) {
+        if (parent->base.flags & 0x1000) {
             obj->flags |= 0x1000;
         }
         else {
-            if (obj2) {
-                if (Macro_0810B1F4(&obj2->base)) {
+            if (parent) {
+                if (Macro_0810B1F4(&parent->base)) {
                     if (!(obj->flags & 0x2000)) {
                         EffectObjectDisplaySprite(obj);
                         return;
@@ -529,7 +529,7 @@ static void sub_080AA108(void) {
                 && obj->x <= gCurLevelInfo[kirby->base.unk56].viewportPosition.x + 0x10c00
                 && obj->y >= gCurLevelInfo[kirby->base.unk56].viewportPosition.y - 0x1c00
                 && obj->y <= gCurLevelInfo[kirby->base.unk56].viewportPosition.y + 0xbc00) {
-                switch (obj2->objTemplate->subtype1) {
+                switch (parent->objTemplate->subtype1) {
                 case 0:
                     if ((obj->y >> 8) < obj->unk4) {
                         obj->flags |= 0x1000;
@@ -572,7 +572,7 @@ static void sub_080AA108(void) {
 
 void *CreateAbilityStatue(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.unk68 &= ~7;
     obj->base.unk5C |= ~7;
@@ -724,7 +724,7 @@ void sub_080AA960(struct Object* arg0) {
 
 void *CreateAbilityStatueRandom(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x400;
     obj->base.flags |= 0x800;

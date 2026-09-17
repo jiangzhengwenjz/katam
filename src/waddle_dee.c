@@ -31,11 +31,11 @@ const struct AnimInfo gUnk_08353408[] = {
 };
 
 void* CreateWaddleDee(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Kirby* kirby;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     sub_0803E2B0(&obj->base, -5, -4, 5, 7);
     ObjectSetBounds(&obj->base, -6, -5, 6, 9);

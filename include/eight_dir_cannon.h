@@ -7,7 +7,7 @@
 #include "object.h"
 
 struct EightDirCannon {
-    struct Object obj2;
+    struct Object obj;
     u8 unkB4;
     u8 unkB5;
     u8 unkB6;

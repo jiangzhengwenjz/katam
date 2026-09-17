@@ -6,8 +6,8 @@
 
 struct KingGolem
 {
-    struct Object obj2;
-    struct EffectObject *obj4;
+    struct Object obj;
+    struct EffectObject *effect;
     struct Object *enemy; // golem or foley
     u8 unkBC;
     u8 unkBD;

@@ -6,7 +6,7 @@
 
 struct CrazyHand
 {
-    struct Object obj2;
+    struct Object obj;
     struct CrazyHand *unkB4; // ???
     u8 unkB8;
     u8 unkB9;

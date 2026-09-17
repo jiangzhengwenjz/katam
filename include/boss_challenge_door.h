@@ -4,7 +4,7 @@
 #include "data.h"
 
 struct BossChallengeDoor {
-    struct Object obj2;
+    struct Object obj;
     /* 0xB4 */ struct EffectObject *unkB4;
     /* 0xB8 */ struct EffectObject *unkB8;
 }; /* size = 0xBC */

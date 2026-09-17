@@ -6,7 +6,7 @@
 
 struct StarPlatform
 {
-    struct Object obj2;
+    struct Object obj;
     s16 unkB4, unkB6, unkB8, unkBA;
 }; /* size = 0xBC */
 

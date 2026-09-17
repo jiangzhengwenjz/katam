@@ -6,7 +6,7 @@
 
 struct StarShared
 {
-    struct Object obj2;
+    struct Object obj;
     u8 unkB4;
     u8 unkB5;
     u16 unkB6;
@@ -52,7 +52,7 @@ struct GoalStar
 
 struct Unk_0800D9E8
 {
-    struct EffectObject obj4;
+    struct EffectObject effect;
     struct Sprite sprites[3];
     void (*unkC0)(struct Unk_0800D9E8 *);
     struct GoalStar *unkC4;
