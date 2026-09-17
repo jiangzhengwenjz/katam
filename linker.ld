@@ -253,7 +253,7 @@ SECTIONS {
         src/special_doors.o(.text);
         asm/code_0802B4A8.o(.text);
         asm/code_0802E57C.o(.text);
-        asm/code_0802F8D8.o(.text);
+        src/code_0802F8D8.o(.text);
         src/multi_boot_util.o(.text);
         src/multi_08030C94.o(.text);
         src/multi_08032E98.o(.text);

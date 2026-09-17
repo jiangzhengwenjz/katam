@@ -1,5 +1,6 @@
 #include "data.h"
 #include "code_08138D64.h"
+#include "code_0802F8D8.h"
 #include "functions.h"
 #include "main.h"
 #include "bg.h"
