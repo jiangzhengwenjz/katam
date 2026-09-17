@@ -19,10 +19,10 @@ static void sub_0812385C(struct Object*);
 
 void* CreateBonus(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x2f9c, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
 
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x10000000;
     obj->base.unkC |= 1;

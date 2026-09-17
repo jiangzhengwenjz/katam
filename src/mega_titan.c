@@ -274,73 +274,73 @@ void *CreateMegaTitan(struct ObjectTemplate *template, u8 a2)
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct MegaTitan), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct MegaTitan *tmp = TaskGetStructPtr(t), *mt = tmp;
 
-    InitObject(&tmp->obj2, template, a2);
-    mt->obj2.base.unkC |= 1;
-    mt->obj2.base.flags |= 0x2000000;
-    mt->obj2.base.flags |= 0x100;
-    mt->obj2.base.flags &= ~0x4000000;
-    mt->obj2.base.flags |= 0x200000;
+    InitObject(&tmp->obj, template, a2);
+    mt->obj.base.unkC |= 1;
+    mt->obj.base.flags |= 0x2000000;
+    mt->obj.base.flags |= 0x100;
+    mt->obj.base.flags &= ~0x4000000;
+    mt->obj.base.flags |= 0x200000;
     mt->unkC4 = 0;
-    if (mt->obj2.base.x > mt->obj2.kirby3->base.x)
-        mt->obj2.base.flags |= 1;
+    if (mt->obj.base.x > mt->obj.kirby3->base.x)
+        mt->obj.base.flags |= 1;
     else
-        mt->obj2.base.flags &= ~1;
-    mt->obj2.base.unk5C &= ~7;
-    mt->obj2.base.unk5C |= 3;
-    mt->obj2.base.unk5C |= 0x1080A0;
-    sub_0803E2B0(&mt->obj2.base, -0xC, -0x14, 0xC, 0xA);
-    ObjectSetBounds(&mt->obj2.base, -4, -0x10, 4, 6);
-    ObjectInitSprite(&mt->obj2);
-    mt->obj2.base.sprite.unk14 = 0x740;
-    mt->obj2.unk9E = 0;
-    mt->obj2.unk7C = sub_080F4190;
-    Macro_080E7D74(&mt->obj2);
+        mt->obj.base.flags &= ~1;
+    mt->obj.base.unk5C &= ~7;
+    mt->obj.base.unk5C |= 3;
+    mt->obj.base.unk5C |= 0x1080A0;
+    sub_0803E2B0(&mt->obj.base, -0xC, -0x14, 0xC, 0xA);
+    ObjectSetBounds(&mt->obj.base, -4, -0x10, 4, 6);
+    ObjectInitSprite(&mt->obj);
+    mt->obj.base.sprite.unk14 = 0x740;
+    mt->obj.unk9E = 0;
+    mt->obj.unk7C = sub_080F4190;
+    Macro_080E7D74(&mt->obj);
     sub_080F5640(mt);
     return mt;
 }
 
 static void sub_080EDAD0(struct MegaTitan *mt)
 {
-    mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
-    mt->obj2.base.flags |= 4;
-    if (!(mt->obj2.kirby3->base.unkC & 0x8000)
-        && mt->obj2.base.roomId == mt->obj2.kirby3->base.roomId
-        && Macro_08039430_1(&mt->obj2.kirby3->base, &mt->obj2))
+    mt->obj.kirby3 = FindTargetKirby(&mt->obj.base);
+    mt->obj.base.flags |= 4;
+    if (!(mt->obj.kirby3->base.unkC & 0x8000)
+        && mt->obj.base.roomId == mt->obj.kirby3->base.roomId
+        && Macro_08039430_1(&mt->obj.kirby3->base, &mt->obj))
     {
-        mt->obj2.unkA4 = 0x10;
-        mt->obj2.unkA6 = 0x10;
-        mt->obj2.unkA8 = 0xEE;
-        mt->obj2.unkAA = 0x98;
-        mt->obj2.unk9F = 0;
+        mt->obj.unkA4 = 0x10;
+        mt->obj.unkA6 = 0x10;
+        mt->obj.unkA8 = 0xEE;
+        mt->obj.unkAA = 0x98;
+        mt->obj.unk9F = 0;
         sub_080EDC94(mt);
-        mt->obj2.base.counter = 0x5A;
-        Macro_08100F18(&mt->obj2);
-        sub_080EF010(mt, mt->obj2.objTemplate->subtype2);
-        sub_080F1FD8(mt, mt->obj2.objTemplate->subtype2);
-        sub_080F1400(mt, mt->obj2.objTemplate->subtype2);
-        sub_080F2BDC(mt, mt->obj2.objTemplate->subtype2);
+        mt->obj.base.counter = 0x5A;
+        Macro_08100F18(&mt->obj);
+        sub_080EF010(mt, mt->obj.objTemplate->subtype2);
+        sub_080F1FD8(mt, mt->obj.objTemplate->subtype2);
+        sub_080F1400(mt, mt->obj.objTemplate->subtype2);
+        sub_080F2BDC(mt, mt->obj.objTemplate->subtype2);
     }
 }
 
 void sub_080EDC94(struct MegaTitan *mt)
 {
-    u8 unk9F = mt->obj2.unk9F;
-    u8 unk9E = mt->obj2.unk9E;
+    u8 unk9F = mt->obj.unk9F;
+    u8 unk9E = mt->obj.unk9E;
 
-    if (mt->obj2.unk80 <= 0)
+    if (mt->obj.unk80 <= 0)
         sub_080EEC24(mt);
     else
     {
         ObjectSetFunc(mt, 0, sub_080EDD0C);
-        mt->obj2.base.flags &= ~0x20;
-        mt->obj2.base.flags |= 0x40;
-        mt->obj2.base.flags &= ~0x4000000;
-        mt->obj2.base.flags &= ~0x200;
-        mt->obj2.base.counter = 0x168;
-        mt->obj2.unk9F = unk9F;
-        mt->obj2.unk9E = unk9E;
-        if (!mt->obj2.unk9E)
-            mt->obj2.unk83 = 1;
+        mt->obj.base.flags &= ~0x20;
+        mt->obj.base.flags |= 0x40;
+        mt->obj.base.flags &= ~0x4000000;
+        mt->obj.base.flags &= ~0x200;
+        mt->obj.base.counter = 0x168;
+        mt->obj.unk9F = unk9F;
+        mt->obj.unk9E = unk9E;
+        if (!mt->obj.unk9E)
+            mt->obj.unk83 = 1;
     }
 }
 
@@ -348,247 +348,247 @@ static void sub_080EDD0C(struct MegaTitan *mt)
 {
     struct MegaTitan *mt2 = mt;
 
-    ObjXSomething(&mt->obj2);
-    ObjYSomething(&mt->obj2);
-    if (mt->obj2.unk83 == 2 || mt->obj2.unk83 == 0)
-        mt->obj2.base.flags |= 4;
+    ObjXSomething(&mt->obj);
+    ObjYSomething(&mt->obj);
+    if (mt->obj.unk83 == 2 || mt->obj.unk83 == 0)
+        mt->obj.base.flags |= 4;
     if (!mt2->unkC4)
     {
-        if (mt->obj2.base.x > mt->obj2.kirby3->base.x)
-            mt->obj2.base.flags |= 1;
+        if (mt->obj.base.x > mt->obj.kirby3->base.x)
+            mt->obj.base.flags |= 1;
         else
-            mt->obj2.base.flags &= ~1;
-        if (!--mt->obj2.base.counter)
+            mt->obj.base.flags &= ~1;
+        if (!--mt->obj.base.counter)
         {
-            if (mt->obj2.unk80 <= gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
+            if (mt->obj.unk80 <= gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
             {
                 if (Rand16() & 1)
                     mt2->unkC4 = (Rand16() & 3) + 1;
-                mt->obj2.base.counter = 0xB4;
+                mt->obj.base.counter = 0xB4;
             }
             else
             {
                 if (Rand16() & 1)
                     mt2->unkC4 = (Rand16() & 1) + 1;
-                mt->obj2.base.counter = 0xF0;
+                mt->obj.base.counter = 0xF0;
             }
         }
     }
     else
     {
-        if (mt->obj2.base.x > 0x8000)
-            mt->obj2.base.flags |= 1;
+        if (mt->obj.base.x > 0x8000)
+            mt->obj.base.flags |= 1;
         else
-            mt->obj2.base.flags &= ~1;
+            mt->obj.base.flags &= ~1;
     }
-    if (mt->obj2.unk9F)
+    if (mt->obj.unk9F)
     {
-        if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
+        if (mt->obj.subtype || mt->obj.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
         {
-            mt->obj2.base.xspeed += 4;
-            if (mt->obj2.base.xspeed > 0x80)
-                mt->obj2.base.xspeed = 0x80;
+            mt->obj.base.xspeed += 4;
+            if (mt->obj.base.xspeed > 0x80)
+                mt->obj.base.xspeed = 0x80;
         }
         else
         {
-            mt->obj2.base.xspeed += 1;
-            if (mt->obj2.base.xspeed > 0x50)
-                mt->obj2.base.xspeed = 0x50;
+            mt->obj.base.xspeed += 1;
+            if (mt->obj.base.xspeed > 0x50)
+                mt->obj.base.xspeed = 0x50;
         }
     }
     else
     {
-        if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
+        if (mt->obj.subtype || mt->obj.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
         {
-            mt->obj2.base.xspeed -= 4;
-            if (mt->obj2.base.xspeed < -0x80)
-                mt->obj2.base.xspeed = -0x80;
+            mt->obj.base.xspeed -= 4;
+            if (mt->obj.base.xspeed < -0x80)
+                mt->obj.base.xspeed = -0x80;
         }
         else
         {
-            mt->obj2.base.xspeed -= 1;
-            if (mt->obj2.base.xspeed < -0x50)
-                mt->obj2.base.xspeed = -0x50;
+            mt->obj.base.xspeed -= 1;
+            if (mt->obj.base.xspeed < -0x50)
+                mt->obj.base.xspeed = -0x50;
         }
     }
-    if (mt->obj2.unk9E)
+    if (mt->obj.unk9E)
     {
-        mt->obj2.base.yspeed -= 0x10;
-        if (mt->obj2.base.yspeed < -0x160)
-            mt->obj2.base.yspeed = -0x160;
+        mt->obj.base.yspeed -= 0x10;
+        if (mt->obj.base.yspeed < -0x160)
+            mt->obj.base.yspeed = -0x160;
     }
     else
     {
-        mt->obj2.base.yspeed += 6;
-        if (mt->obj2.base.yspeed > 0x120)
-            mt->obj2.base.yspeed = 0x120;
+        mt->obj.base.yspeed += 6;
+        if (mt->obj.base.yspeed > 0x120)
+            mt->obj.base.yspeed = 0x120;
     }
-    if (mt->obj2.subtype || mt->obj2.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
+    if (mt->obj.subtype || mt->obj.unk80 < gUnk_08351530[0x13][gNumHumanPlayers - 1] >> 1)
     {
-        if (mt->obj2.base.x < 0x4400)
+        if (mt->obj.base.x < 0x4400)
         {
-            mt->obj2.unk9F = 1;
-            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
+            mt->obj.unk9F = 1;
+            mt->obj.kirby3 = FindTargetKirby(&mt->obj.base);
         }
-        if (mt->obj2.base.x > 0xC000)
+        if (mt->obj.base.x > 0xC000)
         {
-            mt->obj2.unk9F = 0;
-            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
+            mt->obj.unk9F = 0;
+            mt->obj.kirby3 = FindTargetKirby(&mt->obj.base);
         }
     }
     else
     {
-        if (mt->obj2.base.x < 0x3C00)
+        if (mt->obj.base.x < 0x3C00)
         {
-            mt->obj2.unk9F = 1;
-            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
+            mt->obj.unk9F = 1;
+            mt->obj.kirby3 = FindTargetKirby(&mt->obj.base);
         }
-        if (mt->obj2.base.x > 0xC800)
+        if (mt->obj.base.x > 0xC800)
         {
-            mt->obj2.unk9F = 0;
-            mt->obj2.kirby3 = FindTargetKirby(&mt->obj2.base);
+            mt->obj.unk9F = 0;
+            mt->obj.kirby3 = FindTargetKirby(&mt->obj.base);
         }
     }
-    if (mt->obj2.base.y < 0x3800 && mt->obj2.unk83 == 2)
+    if (mt->obj.base.y < 0x3800 && mt->obj.unk83 == 2)
     {
-        mt->obj2.unk9E = 1;
-        mt->obj2.unk83 = 3;
-        mt->obj2.base.flags &= ~2;
+        mt->obj.unk9E = 1;
+        mt->obj.unk83 = 3;
+        mt->obj.base.flags &= ~2;
     }
-    if (mt->obj2.base.y > 0x4000 && mt->obj2.unk83 == 0)
+    if (mt->obj.base.y > 0x4000 && mt->obj.unk83 == 0)
     {
-        mt->obj2.unk9E = 0;
-        mt->obj2.unk83 = 1;
-        mt->obj2.base.flags &= ~2;
-        PlaySfx(&mt->obj2.base, SE_MEGA_TITAN_FLY);
+        mt->obj.unk9E = 0;
+        mt->obj.unk83 = 1;
+        mt->obj.base.flags &= ~2;
+        PlaySfx(&mt->obj.base, SE_MEGA_TITAN_FLY);
     }
-    if (mt->obj2.unk83 == 1)
+    if (mt->obj.unk83 == 1)
     {
-        if (mt->obj2.base.flags & 2)
+        if (mt->obj.base.flags & 2)
         {
-            mt->obj2.unk83 = 2;
-            mt->obj2.base.flags &= ~2;
+            mt->obj.unk83 = 2;
+            mt->obj.base.flags &= ~2;
             sub_080F37B0(mt);
         }
     }
-    else if (mt->obj2.unk83 == 3)
+    else if (mt->obj.unk83 == 3)
     {
-        if (mt->obj2.base.flags & 2)
+        if (mt->obj.base.flags & 2)
         {
-            mt->obj2.unk83 = 0;
-            mt->obj2.base.flags &= ~2;
+            mt->obj.unk83 = 0;
+            mt->obj.base.flags &= ~2;
         }
     }
 }
 
 static void sub_080EE264(struct MegaTitan *mt)
 {
-    u8 unk9F = mt->obj2.unk9F;
+    u8 unk9F = mt->obj.unk9F;
 
     ObjectSetFunc(mt, 4, sub_080EE358);
-    mt->obj2.base.xspeed = 0;
-    mt->obj2.base.yspeed = 0;
-    mt->obj2.unk98 = 0;
-    sub_080F3974(&mt->obj2, 0x3C, 0x33C, 0x11);
-    mt->obj2.base.flags |= 0x4000000;
-    if (mt->obj2.subtype == 0)
-        mt->obj2.base.flags |= 0x200;
-    mt->obj2.base.counter = 0x24;
-    mt->obj2.unk9F = unk9F;
-    RequestScreenShake(3, &mt->obj2.base);
-    PlaySfx(&mt->obj2.base, SE_MEGA_TITAN_ELECTRIC_WALL);
-    sub_0809E79C(&mt->obj2);
+    mt->obj.base.xspeed = 0;
+    mt->obj.base.yspeed = 0;
+    mt->obj.unk98 = 0;
+    sub_080F3974(&mt->obj, 0x3C, 0x33C, 0x11);
+    mt->obj.base.flags |= 0x4000000;
+    if (mt->obj.subtype == 0)
+        mt->obj.base.flags |= 0x200;
+    mt->obj.base.counter = 0x24;
+    mt->obj.unk9F = unk9F;
+    RequestScreenShake(3, &mt->obj.base);
+    PlaySfx(&mt->obj.base, SE_MEGA_TITAN_ELECTRIC_WALL);
+    sub_0809E79C(&mt->obj);
 }
 
 static void sub_080EE358(struct MegaTitan *mt)
 {
-    mt->obj2.base.flags |= 4;
-    ObjXSomething(&mt->obj2);
-    ObjYSomething(&mt->obj2);
-    mt->obj2.base.flags |= 0x8000;
-    mt->obj2.base.flags |= 0x1000000;
-    if (!--mt->obj2.base.counter)
+    mt->obj.base.flags |= 4;
+    ObjXSomething(&mt->obj);
+    ObjYSomething(&mt->obj);
+    mt->obj.base.flags |= 0x8000;
+    mt->obj.base.flags |= 0x1000000;
+    if (!--mt->obj.base.counter)
         sub_080EE514(mt);
 }
 
 static void sub_080EE514(struct MegaTitan *mt)
 {
-    u8 unk9F = mt->obj2.unk9F;
+    u8 unk9F = mt->obj.unk9F;
 
     ObjectSetFunc(mt, 4, sub_080EE588);
-    if (mt->obj2.base.x <= 0x2400)
-        mt->obj2.base.xspeed = 0x1F0;
-    if (mt->obj2.base.x >= 0xE000)
-        mt->obj2.base.xspeed = -0x1F0;
-    mt->obj2.base.yspeed = 0;
-    mt->obj2.unk98 = 0;
-    mt->obj2.unk80 -= 0xA;
-    if (mt->obj2.unk80 <= 0)
+    if (mt->obj.base.x <= 0x2400)
+        mt->obj.base.xspeed = 0x1F0;
+    if (mt->obj.base.x >= 0xE000)
+        mt->obj.base.xspeed = -0x1F0;
+    mt->obj.base.yspeed = 0;
+    mt->obj.unk98 = 0;
+    mt->obj.unk80 -= 0xA;
+    if (mt->obj.unk80 <= 0)
         sub_080EEC24(mt);
     else
     {
-        mt->obj2.base.counter = 4;
-        mt->obj2.unk9F = unk9F;
+        mt->obj.base.counter = 4;
+        mt->obj.unk9F = unk9F;
     }
 }
 
 static void sub_080EE588(struct MegaTitan *mt)
 {
-    ObjXSomething(&mt->obj2);
-    ObjYSomething(&mt->obj2);
-    mt->obj2.base.flags |= 0x8000;
-    mt->obj2.base.flags |= 0x1000000;
-    mt->obj2.base.flags |= 4;
-    if (mt->obj2.base.xspeed < 0)
+    ObjXSomething(&mt->obj);
+    ObjYSomething(&mt->obj);
+    mt->obj.base.flags |= 0x8000;
+    mt->obj.base.flags |= 0x1000000;
+    mt->obj.base.flags |= 4;
+    if (mt->obj.base.xspeed < 0)
     {
-        mt->obj2.base.xspeed += 2;
-        if (mt->obj2.base.xspeed > 0)
-            mt->obj2.base.xspeed = 0;
+        mt->obj.base.xspeed += 2;
+        if (mt->obj.base.xspeed > 0)
+            mt->obj.base.xspeed = 0;
     }
     else
     {
-        mt->obj2.base.xspeed -= 2;
-        if (mt->obj2.base.xspeed < 0)
-            mt->obj2.base.xspeed = 0;
+        mt->obj.base.xspeed -= 2;
+        if (mt->obj.base.xspeed < 0)
+            mt->obj.base.xspeed = 0;
     }
-    if (!--mt->obj2.base.counter)
+    if (!--mt->obj.base.counter)
         sub_080F566C(mt);
 }
 
 static void sub_080EE76C(struct MegaTitan *mt)
 {
-    ObjXSomething(&mt->obj2);
-    ObjYSomething(&mt->obj2);
-    mt->obj2.base.yspeed -= 0x40;
-    if (mt->obj2.base.yspeed < -0x380)
-        mt->obj2.base.yspeed = -0x380;
-    if (mt->obj2.base.xspeed < 0)
+    ObjXSomething(&mt->obj);
+    ObjYSomething(&mt->obj);
+    mt->obj.base.yspeed -= 0x40;
+    if (mt->obj.base.yspeed < -0x380)
+        mt->obj.base.yspeed = -0x380;
+    if (mt->obj.base.xspeed < 0)
     {
-        mt->obj2.base.xspeed += 2;
-        if (mt->obj2.base.xspeed > 0)
-            mt->obj2.base.xspeed = 0;
+        mt->obj.base.xspeed += 2;
+        if (mt->obj.base.xspeed > 0)
+            mt->obj.base.xspeed = 0;
     }
     else
     {
-        mt->obj2.base.xspeed -= 2;
-        if (mt->obj2.base.xspeed < 0)
-            mt->obj2.base.xspeed = 0;
+        mt->obj.base.xspeed -= 2;
+        if (mt->obj.base.xspeed < 0)
+            mt->obj.base.xspeed = 0;
     }
-    if (mt->obj2.base.unk62 & 4)
+    if (mt->obj.base.unk62 & 4)
     {
-        mt->obj2.base.yspeed = 0;
-        mt->obj2.unk83 = 6;
-        if (!mt->obj2.base.counter)
+        mt->obj.base.yspeed = 0;
+        mt->obj.unk83 = 6;
+        if (!mt->obj.base.counter)
         {
-            RequestScreenShake(3, &mt->obj2.base);
-            sub_08089864(&mt->obj2.base, -0x10, 0xC, 1);
-            sub_08089864(&mt->obj2.base, -0x10, 0xC, 0);
-            mt->obj2.base.xspeed = 0;
-            PlaySfx(&mt->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
+            RequestScreenShake(3, &mt->obj.base);
+            sub_08089864(&mt->obj.base, -0x10, 0xC, 1);
+            sub_08089864(&mt->obj.base, -0x10, 0xC, 0);
+            mt->obj.base.xspeed = 0;
+            PlaySfx(&mt->obj.base, SE_BOSS_GROUND_POUND_ATTACK);
         }
-        if (++mt->obj2.base.counter > 0x18)
+        if (++mt->obj.base.counter > 0x18)
         {
-            mt->obj2.base.flags &= ~0x4000000;
+            mt->obj.base.flags &= ~0x4000000;
             sub_080EDC94(mt);
         }
     }
@@ -596,27 +596,27 @@ static void sub_080EE76C(struct MegaTitan *mt)
 
 static void sub_080EEA2C(struct MegaTitan *mt)
 {
-    ObjXSomething(&mt->obj2);
-    ObjYSomething(&mt->obj2);
-    mt->obj2.base.flags |= 0x8000;
-    mt->obj2.base.flags |= 0x1000000;
-    mt->obj2.base.flags |= 4;
-    if (mt->obj2.base.xspeed < 0)
+    ObjXSomething(&mt->obj);
+    ObjYSomething(&mt->obj);
+    mt->obj.base.flags |= 0x8000;
+    mt->obj.base.flags |= 0x1000000;
+    mt->obj.base.flags |= 4;
+    if (mt->obj.base.xspeed < 0)
     {
-        mt->obj2.base.xspeed += 2;
-        if (mt->obj2.base.xspeed > 0)
-            mt->obj2.base.xspeed = 0;
+        mt->obj.base.xspeed += 2;
+        if (mt->obj.base.xspeed > 0)
+            mt->obj.base.xspeed = 0;
     }
     else
     {
-        mt->obj2.base.xspeed -= 2;
-        if (mt->obj2.base.xspeed < 0)
-            mt->obj2.base.xspeed = 0;
+        mt->obj.base.xspeed -= 2;
+        if (mt->obj.base.xspeed < 0)
+            mt->obj.base.xspeed = 0;
     }
-    if (!--mt->obj2.base.counter)
+    if (!--mt->obj.base.counter)
     {
-        mt->obj2.base.flags &= ~0x8000;
-        mt->obj2.base.flags &= ~0x1000000;
+        mt->obj.base.flags &= ~0x8000;
+        mt->obj.base.flags &= ~0x1000000;
         sub_080EDC94(mt);
     }
 }
@@ -625,24 +625,24 @@ static void sub_080EEC24(struct MegaTitan *mt)
 {
     struct MegaTitan *mt2 = mt;
 
-    mt->obj2.unk9E = 0;
-    mt->obj2.unk7C = 0;
+    mt->obj.unk9E = 0;
+    mt->obj.unk7C = 0;
     ObjectSetFunc(mt, 7, sub_080EED48);
-    mt->obj2.base.unk68 = 0;
-    mt->obj2.base.unk5C |= 0x80;
-    mt->obj2.base.flags |= 0x200;
-    mt->obj2.base.flags &= ~0x20;
-    mt->obj2.base.flags |= 0x40;
-    mt->obj2.base.xspeed = 0;
-    mt->obj2.base.yspeed = 0;
-    mt->obj2.base.flags &= ~2;
-    mt->obj2.base.flags |= 0x200;
-    mt->obj2.base.sprite.unk14 = 0x7C0;
-    sub_08088528(&mt->obj2);
-    PlaySfx(&mt->obj2.base, SE_MINIBOSS_PRE_EXPLODE);
-    mt2->obj2.base.counter = 0;
-    if (mt2->obj2.base.flags & 1)
-        mt2->obj2.base.xspeed = -mt2->obj2.base.xspeed;
+    mt->obj.base.unk68 = 0;
+    mt->obj.base.unk5C |= 0x80;
+    mt->obj.base.flags |= 0x200;
+    mt->obj.base.flags &= ~0x20;
+    mt->obj.base.flags |= 0x40;
+    mt->obj.base.xspeed = 0;
+    mt->obj.base.yspeed = 0;
+    mt->obj.base.flags &= ~2;
+    mt->obj.base.flags |= 0x200;
+    mt->obj.base.sprite.unk14 = 0x7C0;
+    sub_08088528(&mt->obj);
+    PlaySfx(&mt->obj.base, SE_MINIBOSS_PRE_EXPLODE);
+    mt2->obj.base.counter = 0;
+    if (mt2->obj.base.flags & 1)
+        mt2->obj.base.xspeed = -mt2->obj.base.xspeed;
     sub_080F12A8(mt->arms[0]);
     sub_080F12A8(mt->arms[1]);
     sub_080F12A8(mt->arms[2]);
@@ -651,36 +651,36 @@ static void sub_080EEC24(struct MegaTitan *mt)
 
 static void sub_080EED48(struct MegaTitan *mt)
 {
-    ObjXSomething(&mt->obj2);
-    ObjYSomething(&mt->obj2);
-    if (mt->obj2.unk83 == 7)
+    ObjXSomething(&mt->obj);
+    ObjYSomething(&mt->obj);
+    if (mt->obj.unk83 == 7)
     {
-        if (mt->obj2.base.flags & 2)
+        if (mt->obj.base.flags & 2)
         {
-            mt->obj2.unk83 = 8;
+            mt->obj.unk83 = 8;
             sub_080F3D28(mt, 0);
             sub_080F3D28(mt, 1);
-            sub_080F4484(mt, mt->obj2.objTemplate->subtype2);
-            CreateEffectObject(&mt->obj2.base, 0, 0x2B4, 0);
+            sub_080F4484(mt, mt->obj.objTemplate->subtype2);
+            CreateEffectObject(&mt->obj.base, 0, 0x2B4, 0);
         }
     }
     else
     {
-        mt->obj2.base.flags |= 0x20;
-        mt->obj2.base.flags &= ~0x40;
-        if (mt->obj2.base.unk62 & 4)
+        mt->obj.base.flags |= 0x20;
+        mt->obj.base.flags &= ~0x40;
+        if (mt->obj.base.unk62 & 4)
         {
-            mt->obj2.base.yspeed = 0;
-            if (!mt->obj2.base.counter)
+            mt->obj.base.yspeed = 0;
+            if (!mt->obj.base.counter)
             {
-                RequestScreenShake(3, &mt->obj2.base);
-                sub_08089864(&mt->obj2.base, -0x10, 0xC, 1);
-                sub_08089864(&mt->obj2.base, -0x10, 0xC, 0);
-                mt->obj2.base.xspeed = 0;
-                PlaySfx(&mt->obj2.base, SE_BOSS_GROUND_POUND_ATTACK);
+                RequestScreenShake(3, &mt->obj.base);
+                sub_08089864(&mt->obj.base, -0x10, 0xC, 1);
+                sub_08089864(&mt->obj.base, -0x10, 0xC, 0);
+                mt->obj.base.xspeed = 0;
+                PlaySfx(&mt->obj.base, SE_BOSS_GROUND_POUND_ATTACK);
             }
-            if (mt->obj2.base.counter <= 60)
-                ++mt->obj2.base.counter;
+            if (mt->obj.base.counter <= 60)
+                ++mt->obj.base.counter;
             else
                 sub_080F56A8(mt);
         }
@@ -693,12 +693,12 @@ static void sub_080EF010(struct MegaTitan *mt, u8 a2)
     struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
-    if (mt->obj2.base.flags & 1)
-        x = mt->obj2.base.x >> 8;
+    if (mt->obj.base.flags & 1)
+        x = mt->obj.base.x >> 8;
     else
-        x = mt->obj2.base.x >> 8;
-    y = mt->obj2.base.y >> 8;
-    arm = CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_1,
+        x = mt->obj.base.x >> 8;
+    y = mt->obj.base.y >> 8;
+    arm = CreateObjTemplateAndObj(mt->obj.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_1,
         0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     arm->base.parent = mt;
@@ -785,8 +785,8 @@ static void sub_080EF2A0(struct Object *arm)
     s8 a = -0x16, b = -0x18;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 0xC)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -795,7 +795,7 @@ static void sub_080EF2A0(struct Object *arm)
     }
     else if (arm->unk83 == 0xA)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 0xB;
             sub_080F3974(arm, 6, 0x33C, 0xA);
@@ -804,7 +804,7 @@ static void sub_080EF2A0(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0xA;
     }
     arm->base.flags |= 4;
@@ -967,7 +967,7 @@ static void sub_080EF2A0(struct Object *arm)
         }
     }
     arm->base.flags &= ~1;
-    if (mt->obj2.base.flags & 1)
+    if (mt->obj.base.flags & 1)
         sub_080EF6E4(arm);
     else
     {
@@ -1047,8 +1047,8 @@ static void sub_080EF7D8(struct Object *arm)
     s8 a = -0x1C, b = -0xC;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 2)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -1057,7 +1057,7 @@ static void sub_080EF7D8(struct Object *arm)
     }
     else if (arm->unk83 == 0)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 1;
             sub_080F3974(arm, 4, 0x33C, 8);
@@ -1066,7 +1066,7 @@ static void sub_080EF7D8(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0;
     }
     arm->base.flags |= 4;
@@ -1229,7 +1229,7 @@ static void sub_080EF7D8(struct Object *arm)
         }
     }
     arm->base.flags |= 1;
-    if (!(mt->obj2.base.flags & 1))
+    if (!(mt->obj.base.flags & 1))
         sub_080EF1A8(arm);
     else
     {
@@ -1488,7 +1488,7 @@ static void sub_080EFE9C(struct Object *arm)
             }
             if (++arm->unk9F > 0x18)
             {
-                if (!(mt->obj2.base.flags & 1))
+                if (!(mt->obj.base.flags & 1))
                     gUnk_08357018[arm->type - OBJ_TITAN_ARM_1](arm);
                 else
                     gUnk_08357028[arm->type - OBJ_TITAN_ARM_1](arm);
@@ -1568,7 +1568,7 @@ static void sub_080F0554(struct Object *arm)
     arm->base.flags &= ~0x20;
     arm->base.flags |= 0x40;
     arm->base.flags &= ~1;
-    arm->base.flags |= mt->obj2.base.flags & 1;
+    arm->base.flags |= mt->obj.base.flags & 1;
     arm->base.counter = 0x20;
     arm->unk9F = 0;
     arm->kirby3 = FindTargetKirby(&arm->base);
@@ -1866,7 +1866,7 @@ static void sub_080F09E4(struct Object *arm)
             if (++arm->unk9F > 0x18)
             {
                 arm->unk83 = arm->unk85 + 2;
-                if (!(mt->obj2.base.flags & 1))
+                if (!(mt->obj.base.flags & 1))
                     gUnk_08357018[arm->type - OBJ_TITAN_ARM_1](arm);
                 else
                     gUnk_08357028[arm->type - OBJ_TITAN_ARM_1](arm);
@@ -2017,7 +2017,7 @@ static void sub_080F0EAC(struct Object *arm)
             if (++arm->unk9F > 0x18)
             {
                 arm->unk83 = arm->unk85 + 2;
-                if (!(mt->obj2.base.flags & 1))
+                if (!(mt->obj.base.flags & 1))
                     gUnk_08357018[arm->type - OBJ_TITAN_ARM_1](arm);
                 else
                     gUnk_08357028[arm->type - OBJ_TITAN_ARM_1](arm);
@@ -2052,9 +2052,9 @@ static void sub_080F118C(struct Object *arm)
     struct MegaTitan *mt = arm->base.parent;
 
     arm->base.flags |= 4;
-    if (mt->obj2.unk83 == 4)
+    if (mt->obj.unk83 == 4)
     {
-        arm->base.yspeed = mt->obj2.base.yspeed;
+        arm->base.yspeed = mt->obj.base.yspeed;
         arm->base.xspeed = 0;
     }
     else
@@ -2084,7 +2084,7 @@ static void sub_080F118C(struct Object *arm)
                 else
                     arm->unk83 = 2;
                 arm->unk85 = 0;
-                if (!(mt->obj2.base.flags & 1))
+                if (!(mt->obj.base.flags & 1))
                     gUnk_08357018[arm->type - OBJ_TITAN_ARM_1](arm);
                 else
                     gUnk_08357028[arm->type - OBJ_TITAN_ARM_1](arm);
@@ -2139,12 +2139,12 @@ static void sub_080F1400(struct MegaTitan *mt, u8 a2)
     struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
-    if (mt->obj2.base.flags & 1)
-        x = mt->obj2.base.x >> 8;
+    if (mt->obj.base.flags & 1)
+        x = mt->obj.base.x >> 8;
     else
-        x = mt->obj2.base.x >> 8;
-    y = mt->obj2.base.y >> 8;
-    arm = CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_3,
+        x = mt->obj.base.x >> 8;
+    y = mt->obj.base.y >> 8;
+    arm = CreateObjTemplateAndObj(mt->obj.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_3,
         0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     arm->base.parent = mt;
@@ -2231,8 +2231,8 @@ static void sub_080F1690(struct Object *arm)
     s8 a = 0x1C, b = -0xC;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 0xC)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -2241,7 +2241,7 @@ static void sub_080F1690(struct Object *arm)
     }
     else if (arm->unk83 == 0xA)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 0xB;
             sub_080F3974(arm, 4, 0x33C, 8);
@@ -2250,7 +2250,7 @@ static void sub_080F1690(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0xA;
     }
     arm->base.flags |= 4;
@@ -2413,7 +2413,7 @@ static void sub_080F1690(struct Object *arm)
         }
     }
     arm->base.flags &= ~1;
-    if (mt->obj2.base.flags & 1)
+    if (mt->obj.base.flags & 1)
         sub_080F1ABC(arm);
     else
     {
@@ -2493,8 +2493,8 @@ static void sub_080F1BB0(struct Object *arm)
     s8 a = 0x16, b = -0x18;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 2)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -2503,7 +2503,7 @@ static void sub_080F1BB0(struct Object *arm)
     }
     else if (arm->unk83 == 0)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 1;
             sub_080F3974(arm, 6, 0x33C, 0xA);
@@ -2512,7 +2512,7 @@ static void sub_080F1BB0(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0;
     }
     arm->base.flags |= 4;
@@ -2675,7 +2675,7 @@ static void sub_080F1BB0(struct Object *arm)
         }
     }
     arm->base.flags |= 1;
-    if (!(mt->obj2.base.flags & 1))
+    if (!(mt->obj.base.flags & 1))
         sub_080F1598(arm);
     else
     {
@@ -2703,12 +2703,12 @@ static void sub_080F1FD8(struct MegaTitan *mt, u8 a2)
     struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
-    if (mt->obj2.base.flags & 1)
-        x = mt->obj2.base.x >> 8;
+    if (mt->obj.base.flags & 1)
+        x = mt->obj.base.x >> 8;
     else
-        x = mt->obj2.base.x >> 8;
-    y = mt->obj2.base.y >> 8;
-    arm = CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_2,
+        x = mt->obj.base.x >> 8;
+    y = mt->obj.base.y >> 8;
+    arm = CreateObjTemplateAndObj(mt->obj.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_2,
         0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     arm->base.parent = mt;
@@ -2795,8 +2795,8 @@ static void sub_080F2268(struct Object *arm)
     s8 a = -0x14, b = 8;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 0xC)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -2805,7 +2805,7 @@ static void sub_080F2268(struct Object *arm)
     }
     else if (arm->unk83 == 0xA)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 0xB;
             sub_080F3974(arm, 4, 0x33C, 0xB);
@@ -2814,7 +2814,7 @@ static void sub_080F2268(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0xA;
     }
     arm->base.flags |= 4;
@@ -2977,7 +2977,7 @@ static void sub_080F2268(struct Object *arm)
         }
     }
     arm->base.flags &= ~1;
-    if (mt->obj2.base.flags & 1)
+    if (mt->obj.base.flags & 1)
         sub_080F26AC(arm);
     else
     {
@@ -3057,8 +3057,8 @@ static void sub_080F27A0(struct Object *arm)
     s8 a = -0x18, b = 0xA;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 2)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -3067,7 +3067,7 @@ static void sub_080F27A0(struct Object *arm)
     }
     else if (arm->unk83 == 0)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 1;
             sub_080F3974(arm, 4, 0x33C, 9);
@@ -3076,7 +3076,7 @@ static void sub_080F27A0(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0;
     }
     arm->base.flags |= 4;
@@ -3239,7 +3239,7 @@ static void sub_080F27A0(struct Object *arm)
         }
     }
     arm->base.flags |= 1;
-    if (!(mt->obj2.base.flags & 1))
+    if (!(mt->obj.base.flags & 1))
         sub_080F2170(arm);
     else
     {
@@ -3267,12 +3267,12 @@ static void sub_080F2BDC(struct MegaTitan *mt, u8 a2)
     struct Object *arm;
     struct MegaTitan *mt2 = mt;
 
-    if (mt->obj2.base.flags & 1)
-        x = mt->obj2.base.x >> 8;
+    if (mt->obj.base.flags & 1)
+        x = mt->obj.base.x >> 8;
     else
-        x = mt->obj2.base.x >> 8;
-    y = mt->obj2.base.y >> 8;
-    arm = CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_4,
+        x = mt->obj.base.x >> 8;
+    y = mt->obj.base.y >> 8;
+    arm = CreateObjTemplateAndObj(mt->obj.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_ARM_4,
         0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
     arm->base.parent = mt;
@@ -3359,8 +3359,8 @@ static void sub_080F2E6C(struct Object *arm)
     s8 a = 0x18, b = 0xA;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 0xC)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -3369,7 +3369,7 @@ static void sub_080F2E6C(struct Object *arm)
     }
     else if (arm->unk83 == 0xA)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 0xB;
             sub_080F3974(arm, 4, 0x33C, 9);
@@ -3378,7 +3378,7 @@ static void sub_080F2E6C(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0xA;
     }
     arm->base.flags |= 4;
@@ -3541,7 +3541,7 @@ static void sub_080F2E6C(struct Object *arm)
         }
     }
     arm->base.flags &= ~1;
-    if (mt->obj2.base.flags & 1)
+    if (mt->obj.base.flags & 1)
         sub_080F3294(arm);
     else
     {
@@ -3621,8 +3621,8 @@ static void sub_080F3388(struct Object *arm)
     s8 a = 0x14, b = 8;
 
     arm->kirby3 = (void *)mt; // TODO: type of field
-    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj2.base.x >> 8;
-    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj2.base.y >> 8;
+    arm->unkA0 = ((struct MegaTitan *)arm->kirby3)->obj.base.x >> 8;
+    arm->unkA2 = ((struct MegaTitan *)arm->kirby3)->obj.base.y >> 8;
     if (arm->unk83 == 2)
     {
         if (abs(arm->unkA0 + a - (arm->base.x >> 8)) < 6
@@ -3631,7 +3631,7 @@ static void sub_080F3388(struct Object *arm)
     }
     else if (arm->unk83 == 0)
     {
-        if (mt->obj2.unk83 == 1)
+        if (mt->obj.unk83 == 1)
         {
             arm->unk83 = 1;
             sub_080F3974(arm, 4, 0x33C, 0xB);
@@ -3640,7 +3640,7 @@ static void sub_080F3388(struct Object *arm)
     }
     else
     {
-        if (mt->obj2.unk83 == 3)
+        if (mt->obj.unk83 == 3)
             arm->unk83 = 0;
     }
     arm->base.flags |= 4;
@@ -3803,7 +3803,7 @@ static void sub_080F3388(struct Object *arm)
         }
     }
     arm->base.flags |= 1;
-    if (!(mt->obj2.base.flags & 1))
+    if (!(mt->obj.base.flags & 1))
         sub_080F2D74(arm);
     else
     {
@@ -3832,19 +3832,19 @@ static void sub_080F37B0(struct MegaTitan *mt)
 
     ClearObjectBase(objBase);
     objBase->header.kind = 2;
-    objBase->x = mt->obj2.base.x;
-    objBase->y = mt->obj2.base.y;
+    objBase->x = mt->obj.base.x;
+    objBase->y = mt->obj.base.y;
     objBase->parent = mt;
     objBase->counter = 0;
-    objBase->roomId = mt->obj2.base.roomId;
-    objBase->unk56 = mt->obj2.base.unk56;
+    objBase->roomId = mt->obj.base.roomId;
+    objBase->unk56 = mt->obj.base.unk56;
     if (Macro_0810B1F4(objBase))
         objBase->flags |= 0x2000;
     objBase->unk63 = 1;
     objBase->flags = 0x10000400;
     objBase->unk68 = 0x20000103;
     objBase->unk5C |= 0x80000;
-    if (mt->obj2.base.flags & 1)
+    if (mt->obj.base.flags & 1)
         objBase->flags |= 1;
     else
         objBase->flags &= ~1;
@@ -3856,177 +3856,177 @@ static void sub_080F388C(void)
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
     struct MegaTitan *mt = objBase->parent;
 
-    if (mt->obj2.base.flags & 0x1000)
+    if (mt->obj.base.flags & 0x1000)
         objBase->flags |= 0x1000;
-    objBase->unk56 = mt->obj2.base.unk56;
-    objBase->x = mt->obj2.base.x;
-    objBase->y = mt->obj2.base.y;
+    objBase->unk56 = mt->obj.base.unk56;
+    objBase->x = mt->obj.base.x;
+    objBase->y = mt->obj.base.y;
     if (!ObjectPreUpdate(objBase))
     {
-        if (mt->obj2.unk83 != 2)
+        if (mt->obj.unk83 != 2)
             objBase->flags |= 0x1000;
         else
             SetPointerSomething(objBase);
     }
 }
 
-static void sub_080F3974(struct Object *obj2, u32 a2, u16 a3, u8 a4)
+static void sub_080F3974(struct Object *obj, u32 a2, u16 a3, u8 a4)
 {
     struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
     u16 var;
 
-    ClearEffectObject(obj4);
-    obj4->header.kind = 3;
-    obj4->x = obj2->base.x;
-    obj4->y = obj2->base.y;
-    obj4->parent = obj2;
-    obj4->roomId = obj2->base.roomId;
-    if (!(obj2->base.flags & 1))
-        obj4->flags |= 1;
-    var = ((obj2->base.sprite.unk14 & 0x7C0) >> 6) - 1;
+    ClearEffectObject(effect);
+    effect->header.kind = 3;
+    effect->x = obj->base.x;
+    effect->y = obj->base.y;
+    effect->parent = obj;
+    effect->roomId = obj->base.roomId;
+    if (!(obj->base.flags & 1))
+        effect->flags |= 1;
+    var = ((obj->base.sprite.unk14 & 0x7C0) >> 6) - 1;
     if ((a4 > 0xB && a4 < 0x10) || a4 > 0x27)
         ++var;
-    EffectObjectInitSprite(obj4, &obj4->sprite, a2, a3, a4, var);
-    obj4->unk8 = a2;
-    obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, 1);
-    obj4->unk4 = obj2->unk83;
+    EffectObjectInitSprite(effect, &effect->sprite, a2, a3, a4, var);
+    effect->unk8 = a2;
+    effect->sprite.palId = 0;
+    Macro_081050E8(effect, &effect->sprite, 0x33C, 0, 1);
+    effect->unk4 = obj->unk83;
 }
 
 static void sub_080F3A98(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
-    struct Object *obj2 = obj4->parent, *obj2_2;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct Object *obj = effect->parent, *obj_2;
     struct Sprite sprite;
 
-    if (obj4->flags & 0x1000)
+    if (effect->flags & 0x1000)
         TaskDestroy(gCurTask);
-    else if (obj2->base.flags & 0x1000)
-        obj4->flags |= 0x1000;
+    else if (obj->base.flags & 0x1000)
+        effect->flags |= 0x1000;
     else
     {
-        Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, !obj4->sprite.palId);
-        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, obj4->unk8, &obj4->sprite);
-        obj2_2 = obj4->parent;
-        if (obj2_2)
+        Macro_081050E8(effect, &effect->sprite, 0x33C, 0, !effect->sprite.palId);
+        Macro_08107BA8_4(effect, &effect->sprite, &sprite, effect->unk8, &effect->sprite);
+        obj_2 = effect->parent;
+        if (obj_2)
         {
-            if (obj2_2->base.header.kind && obj2_2->base.flags & 0x1000)
+            if (obj_2->base.header.kind && obj_2->base.flags & 0x1000)
             {
-                obj4->parent = NULL;
-                obj2_2 = NULL;
+                effect->parent = NULL;
+                obj_2 = NULL;
             }
-            if (!obj2_2)
+            if (!obj_2)
                 goto _080F3C78;
-            if (Macro_0810B1F4(&obj2_2->base) && !(obj4->flags & 0x2000))
+            if (Macro_0810B1F4(&obj_2->base) && !(effect->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(obj4);
+                EffectObjectDisplaySprite(effect);
                 return;
             }
         }
         else
         {
         _080F3C78:
-            KirbySomething(obj4);
+            KirbySomething(effect);
         }
-        obj4->flags |= 4;
-        obj4->x = obj2->base.x;
-        obj4->y = obj2->base.y;
-        if (obj4->unk4 != obj2->unk83)
-            obj4->flags |= 0x1000;
+        effect->flags |= 4;
+        effect->x = obj->base.x;
+        effect->y = obj->base.y;
+        if (effect->unk4 != obj->unk83)
+            effect->flags |= 0x1000;
         else
-            EffectObjectPostUpdate(obj4);
+            EffectObjectPostUpdate(effect);
     }
 }
 
 static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
 
-    ClearEffectObject(obj4);
-    obj4->header.kind = 3;
-    obj4->x = mt->obj2.base.x;
-    obj4->y = mt->obj2.base.y;
-    obj4->parent = mt;
-    obj4->roomId = mt->obj2.base.roomId;
-    if (!(mt->obj2.base.flags & 1))
-        obj4->flags |= 1;
+    ClearEffectObject(effect);
+    effect->header.kind = 3;
+    effect->x = mt->obj.base.x;
+    effect->y = mt->obj.base.y;
+    effect->parent = mt;
+    effect->roomId = mt->obj.base.roomId;
+    if (!(mt->obj.base.flags & 1))
+        effect->flags |= 1;
     if (a2)
     {
-        obj4->unk3C = 0x100;
-        obj4->unk3E = 0x180;
-        EffectObjectInitSprite(obj4, &obj4->sprite, 9, 0x33C, 0x22, 0x17);
+        effect->unk3C = 0x100;
+        effect->unk3E = 0x180;
+        EffectObjectInitSprite(effect, &effect->sprite, 9, 0x33C, 0x22, 0x17);
     }
     else
     {
-        obj4->unk3C = -0x100;
-        obj4->unk3E = 0x180;
-        EffectObjectInitSprite(obj4, &obj4->sprite, 6, 0x33C, 0x23, 0x17);
+        effect->unk3C = -0x100;
+        effect->unk3E = 0x180;
+        EffectObjectInitSprite(effect, &effect->sprite, 6, 0x33C, 0x23, 0x17);
     }
-    obj4->sprite.palId = 0;
-    Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, 1);
+    effect->sprite.palId = 0;
+    Macro_081050E8(effect, &effect->sprite, 0x33C, 0, 1);
 }
 
 static void sub_080F3E40(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
-    struct MegaTitan *mt, *mt2 = obj4->parent;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct MegaTitan *mt, *mt2 = effect->parent;
     struct Sprite sprite;
 
-    if (obj4->flags & 0x1000)
+    if (effect->flags & 0x1000)
         TaskDestroy(gCurTask);
-    else if (mt2->obj2.base.flags & 0x1000)
-        obj4->flags |= 0x1000;
+    else if (mt2->obj.base.flags & 0x1000)
+        effect->flags |= 0x1000;
     else
     {
-        Macro_081050E8(obj4, &obj4->sprite, 0x33C, 0, !obj4->sprite.palId);
-        Macro_08107BA8_4(obj4, &obj4->sprite, &sprite, 9, &obj4->sprite);
-        mt = obj4->parent;
+        Macro_081050E8(effect, &effect->sprite, 0x33C, 0, !effect->sprite.palId);
+        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 9, &effect->sprite);
+        mt = effect->parent;
         if (mt)
         {
-            if (mt->obj2.base.header.kind && mt->obj2.base.flags & 0x1000)
+            if (mt->obj.base.header.kind && mt->obj.base.flags & 0x1000)
             {
-                obj4->parent = NULL;
+                effect->parent = NULL;
                 mt = NULL;
             }
             if (!mt)
                 goto _080F4020;
-            if (Macro_0810B1F4(&mt->obj2.base) && !(obj4->flags & 0x2000))
+            if (Macro_0810B1F4(&mt->obj.base) && !(effect->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(obj4);
+                EffectObjectDisplaySprite(effect);
                 return;
             }
         }
         else
         {
         _080F4020:
-            KirbySomething(obj4);
+            KirbySomething(effect);
         }
-        if (!obj4->unk4)
+        if (!effect->unk4)
         {
-            if (obj4->x <= 0x1000 || obj4->x >= 0xEB00)
-                obj4->unk3C = 0;
-            if (obj4->y >= 0x8C00)
+            if (effect->x <= 0x1000 || effect->x >= 0xEB00)
+                effect->unk3C = 0;
+            if (effect->y >= 0x8C00)
             {
-                obj4->unk3C = 0;
-                obj4->unk3E = 0;
-                RequestScreenShake(1, &mt2->obj2.base);
-                PlaySfx(&mt2->obj2.base, SE_MEGA_TITAN_FIST_COLLISION);
-                obj4->unk4 = 1;
+                effect->unk3C = 0;
+                effect->unk3E = 0;
+                RequestScreenShake(1, &mt2->obj.base);
+                PlaySfx(&mt2->obj.base, SE_MEGA_TITAN_FIST_COLLISION);
+                effect->unk4 = 1;
             }
             else
             {
-                obj4->flags |= 4;
-                obj4->unk3E -= 0x15;
+                effect->flags |= 4;
+                effect->unk3E -= 0x15;
             }
-            if (!(obj4->flags & 0x800))
+            if (!(effect->flags & 0x800))
             {
-                obj4->x += obj4->unk3C;
-                obj4->y -= obj4->unk3E;
+                effect->x += effect->unk3C;
+                effect->y -= effect->unk3E;
             }
         }
-        EffectObjectPostUpdate(obj4);
+        EffectObjectPostUpdate(effect);
     }
 }
 
@@ -4045,74 +4045,74 @@ static void sub_080F3E40(void)
     } \
 })
 
-static inline void sub_080F3974_wrapper(struct Object *obj2, u32 a, u16 tag, u8 b)
+static inline void sub_080F3974_wrapper(struct Object *obj, u32 a, u16 tag, u8 b)
 {
-    sub_080F3974(obj2, a, tag, b);
+    sub_080F3974(obj, a, tag, b);
 }
 
 static void sub_080F4190(struct MegaTitan *mt)
 {
     struct MegaTitan *mt2 = mt;
 
-    if (Macro_0810B1F4(&mt->obj2.base)) return;
-    if (mt2->obj2.unk98 || mt2->obj2.unk9A)
+    if (Macro_0810B1F4(&mt->obj.base)) return;
+    if (mt2->obj.unk98 || mt2->obj.unk9A)
     {
         if (mt->arms[0]->unk83 != 2 && mt->arms[0]->unk83 != 0xC
             && (mt->arms[0]->unk78 == sub_080EF2A0 || mt->arms[0]->unk78 == sub_080EF6E4))
         {
-            mt->arms[0]->unk98 = mt2->obj2.unk98;
-            mt->arms[0]->unk9A = mt2->obj2.unk9A;
+            mt->arms[0]->unk98 = mt2->obj.unk98;
+            mt->arms[0]->unk9A = mt2->obj.unk9A;
         }
         if (mt->arms[1]->unk83 != 2 && mt->arms[1]->unk83 != 0xC
             && (mt->arms[1]->unk78 == sub_080F2268 || mt->arms[1]->unk78 == sub_080F26AC))
         {
-            mt->arms[1]->unk98 = mt2->obj2.unk98;
-            mt->arms[1]->unk9A = mt2->obj2.unk9A;
+            mt->arms[1]->unk98 = mt2->obj.unk98;
+            mt->arms[1]->unk9A = mt2->obj.unk9A;
         }
         if (mt->arms[2]->unk83 != 2 && mt->arms[2]->unk83 != 0xC
             && (mt->arms[2]->unk78 == sub_080F1690 || mt->arms[2]->unk78 == sub_080F1ABC))
         {
-            mt->arms[2]->unk98 = mt2->obj2.unk98;
-            mt->arms[2]->unk98 = mt2->obj2.unk98; // ?
+            mt->arms[2]->unk98 = mt2->obj.unk98;
+            mt->arms[2]->unk98 = mt2->obj.unk98; // ?
         }
         if (mt->arms[3]->unk83 != 2 && mt->arms[3]->unk83 != 0xC
             && (mt->arms[3]->unk78 == sub_080F2E6C || mt->arms[3]->unk78 == sub_080F3294))
         {
-            mt->arms[3]->unk98 = mt2->obj2.unk98;
-            mt->arms[3]->unk98 = mt2->obj2.unk98; // ?
+            mt->arms[3]->unk98 = mt2->obj.unk98;
+            mt->arms[3]->unk98 = mt2->obj.unk98; // ?
         }
     }
-    if (mt2->obj2.base.x < 0x2400)
-        mt2->obj2.base.x = 0x2400;
-    else if (mt2->obj2.base.x > 0xE000)
-        mt2->obj2.base.x = 0xE000;
-    if (mt2->obj2.base.y < 0)
-        mt2->obj2.base.y = 0;
-    else if (mt2->obj2.base.y > 0x10000)
-        mt2->obj2.base.y = 0x10000;
-    if (mt2->obj2.unk78 != sub_080EE358 && mt2->obj2.unk78 != sub_080EE588)
+    if (mt2->obj.base.x < 0x2400)
+        mt2->obj.base.x = 0x2400;
+    else if (mt2->obj.base.x > 0xE000)
+        mt2->obj.base.x = 0xE000;
+    if (mt2->obj.base.y < 0)
+        mt2->obj.base.y = 0;
+    else if (mt2->obj.base.y > 0x10000)
+        mt2->obj.base.y = 0x10000;
+    if (mt2->obj.unk78 != sub_080EE358 && mt2->obj.unk78 != sub_080EE588)
     {
-        if (mt2->obj2.unk83 == 4)
+        if (mt2->obj.unk83 == 4)
         {
-            if (mt2->obj2.unk78 != sub_080EEA2C)
+            if (mt2->obj.unk78 != sub_080EEA2C)
             {
-                u8 unk9F = mt2->obj2.unk9F;
-                u8 unk9E = mt2->obj2.unk9E;
+                u8 unk9F = mt2->obj.unk9F;
+                u8 unk9E = mt2->obj.unk9E;
 
                 ObjectSetFunc(mt2, 4, sub_080EEA2C);
-                sub_080F3974_wrapper(&mt2->obj2, 0x3C, 0x33C, 0x11);
-                mt2->obj2.base.counter = 0x10;
-                mt2->obj2.unk9F = unk9F;
-                mt2->obj2.unk9E = unk9E;
-                RequestScreenShake(3, &mt2->obj2.base);
+                sub_080F3974_wrapper(&mt2->obj, 0x3C, 0x33C, 0x11);
+                mt2->obj.base.counter = 0x10;
+                mt2->obj.unk9F = unk9F;
+                mt2->obj.unk9E = unk9E;
+                RequestScreenShake(3, &mt2->obj.base);
                 Macro_080F4190(mt->arms[0]);
                 Macro_080F4190(mt->arms[1]);
                 Macro_080F4190(mt->arms[2]);
                 Macro_080F4190(mt->arms[3]);
             }
         }
-        else if ((mt2->obj2.base.x <= 0x2400 || mt2->obj2.base.x >= 0xE000)
-            && (mt2->obj2.base.y >= 0x2800 && mt2->obj2.base.y <= 0x7800))
+        else if ((mt2->obj.base.x <= 0x2400 || mt2->obj.base.x >= 0xE000)
+            && (mt2->obj.base.y >= 0x2800 && mt2->obj.base.y <= 0x7800))
         {
             sub_080EE264(mt2);
             sub_080F1134(mt->arms[0]);
@@ -4127,12 +4127,12 @@ static void sub_080F4484(struct MegaTitan *mt, u8 a2)
 {
     s32 x, y;
 
-    if (mt->obj2.base.flags & 1)
-        x = mt->obj2.base.x >> 8;
+    if (mt->obj.base.flags & 1)
+        x = mt->obj.base.x >> 8;
     else
-        x = mt->obj2.base.x >> 8;
-    y = mt->obj2.base.y >> 8;
-    CreateObjTemplateAndObj(mt->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_HEAD,
+        x = mt->obj.base.x >> 8;
+    y = mt->obj.base.y >> 8;
+    CreateObjTemplateAndObj(mt->obj.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_HEAD,
         0, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
 
@@ -4141,27 +4141,27 @@ void *CreateTitanHead(struct ObjectTemplate *template, u8 a2)
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct TitanHead), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
     struct TitanHead *tmp = TaskGetStructPtr(t), *th = tmp;
 
-    InitObject(&th->obj2, template, a2);
-    th->obj2.base.unkC |= 1;
-    th->obj2.base.flags |= 0x2000000;
-    th->obj2.base.flags |= 0x40;
-    th->obj2.base.flags &= ~0x20;
-    th->obj2.base.flags |= 0x200;
-    th->obj2.base.flags |= 0x100;
-    if (th->obj2.base.x > th->obj2.kirby3->base.x)
-        th->obj2.base.flags |= 1;
+    InitObject(&th->obj, template, a2);
+    th->obj.base.unkC |= 1;
+    th->obj.base.flags |= 0x2000000;
+    th->obj.base.flags |= 0x40;
+    th->obj.base.flags &= ~0x20;
+    th->obj.base.flags |= 0x200;
+    th->obj.base.flags |= 0x100;
+    if (th->obj.base.x > th->obj.kirby3->base.x)
+        th->obj.base.flags |= 1;
     else
-        th->obj2.base.flags &= ~1;
-    th->obj2.base.unk5C &= ~7;
-    th->obj2.base.unk5C |= 3;
-    th->obj2.base.unk5C |= 0x1080A0;
-    sub_0803E2B0(&th->obj2.base, -0xA, -0xA, 0xA, 8);
-    ObjectSetBounds(&th->obj2.base, -0xA, -0x10, 0xA, 6);
-    ObjectInitSprite(&th->obj2);
-    th->obj2.unk9E = 0;
-    th->obj2.unk7C = 0;
-    th->obj2.unk9E = 0;
-    th->obj2.unk9F = 0;
+        th->obj.base.flags &= ~1;
+    th->obj.base.unk5C &= ~7;
+    th->obj.base.unk5C |= 3;
+    th->obj.base.unk5C |= 0x1080A0;
+    sub_0803E2B0(&th->obj.base, -0xA, -0xA, 0xA, 8);
+    ObjectSetBounds(&th->obj.base, -0xA, -0x10, 0xA, 6);
+    ObjectInitSprite(&th->obj);
+    th->obj.unk9E = 0;
+    th->obj.unk7C = 0;
+    th->obj.unk9E = 0;
+    th->obj.unk9F = 0;
     sub_080F462C(th);
     return th;
 }
@@ -4169,356 +4169,356 @@ void *CreateTitanHead(struct ObjectTemplate *template, u8 a2)
 static void sub_080F462C(struct TitanHead *th)
 {
     ObjectSetFunc(th, 1, sub_080F5778);
-    th->obj2.base.yspeed = 0x400;
-    th->obj2.unk85 = 0;
-    PlaySfx(&th->obj2.base, SE_MEGA_TITAN_FIST_ATTACK);
+    th->obj.base.yspeed = 0x400;
+    th->obj.unk85 = 0;
+    PlaySfx(&th->obj.base, SE_MEGA_TITAN_FIST_ATTACK);
 }
 
 static void sub_080F46DC(struct TitanHead *th)
 {
     ObjectSetFunc(th, 0, sub_080F4818);
-    th->obj2.base.yspeed = -0x100;
-    if (th->obj2.base.x > th->obj2.kirby3->base.x)
-        th->obj2.base.flags |= 1;
+    th->obj.base.yspeed = -0x100;
+    if (th->obj.base.x > th->obj.kirby3->base.x)
+        th->obj.base.flags |= 1;
     else
-        th->obj2.base.flags &= ~1;
-    th->obj2.unk85 = 0;
-    Macro_08100F18(&th->obj2);
+        th->obj.base.flags &= ~1;
+    th->obj.unk85 = 0;
+    Macro_08100F18(&th->obj);
 }
 
 static void sub_080F4818(struct TitanHead *th)
 {
-    th->obj2.base.flags |= 4;
-    th->obj2.base.yspeed -= 0x40;
-    if (th->obj2.base.yspeed < -0x1C0)
-        th->obj2.base.yspeed = -0x1C0;
-    if (th->obj2.base.y > 0x5800)
+    th->obj.base.flags |= 4;
+    th->obj.base.yspeed -= 0x40;
+    if (th->obj.base.yspeed < -0x1C0)
+        th->obj.base.yspeed = -0x1C0;
+    if (th->obj.base.y > 0x5800)
     {
-        th->obj2.base.flags &= ~0x200;
-        th->obj2.base.flags &= ~0x100;
+        th->obj.base.flags &= ~0x200;
+        th->obj.base.flags &= ~0x100;
         sub_080F486C(th);
     }
 }
 
 void sub_080F486C(struct TitanHead *th)
 {
-    u8 unk9F = th->obj2.unk9F;
-    u8 unk9E = th->obj2.unk9E;
+    u8 unk9F = th->obj.unk9F;
+    u8 unk9E = th->obj.unk9E;
 
-    if (th->obj2.unk80 <= 0)
+    if (th->obj.unk80 <= 0)
         sub_080F521C(th);
     else
     {
         ObjectSetFunc(th, 0, sub_080F4924);
-        th->obj2.base.flags &= ~0x20;
-        th->obj2.base.flags |= 0x40;
-        th->obj2.base.flags &= ~0x200;
-        th->obj2.unk9F = unk9F;
-        th->obj2.unk9E = unk9E;
-        if (!th->obj2.unk9E)
-            th->obj2.unk83 = 1;
+        th->obj.base.flags &= ~0x20;
+        th->obj.base.flags |= 0x40;
+        th->obj.base.flags &= ~0x200;
+        th->obj.unk9F = unk9F;
+        th->obj.unk9E = unk9E;
+        if (!th->obj.unk9E)
+            th->obj.unk83 = 1;
         switch (Rand16() & 3)
         {
         default:
-            th->obj2.base.counter = 0x58;
+            th->obj.base.counter = 0x58;
             break;
         case 0:
-            th->obj2.base.counter = 0x20;
+            th->obj.base.counter = 0x20;
             break;
         case 1:
-            th->obj2.base.counter = 0x30;
+            th->obj.base.counter = 0x30;
             break;
         case 2:
-            th->obj2.base.counter = 0x40;
+            th->obj.base.counter = 0x40;
             break;
         }
-        th->obj2.kirby3 = FindTargetKirby(&th->obj2.base);
+        th->obj.kirby3 = FindTargetKirby(&th->obj.base);
     }
 }
 
 static void sub_080F4924(struct TitanHead *th)
 {
-    th->obj2.base.flags |= 4;
-    switch (th->obj2.unk9F)
+    th->obj.base.flags |= 4;
+    switch (th->obj.unk9F)
     {
     case 0:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0xC0)
-                th->obj2.base.xspeed = -0xC0;
-            else if (th->obj2.base.xspeed > 0xC0)
-                th->obj2.base.xspeed = 0xC0;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0xC0)
+                th->obj.base.xspeed = -0xC0;
+            else if (th->obj.base.xspeed > 0xC0)
+                th->obj.base.xspeed = 0xC0;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0xC0)
-                th->obj2.base.xspeed = 0xC0;
-            else if (th->obj2.base.xspeed < -0xC0)
-                th->obj2.base.xspeed = -0xC0;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0xC0)
+                th->obj.base.xspeed = 0xC0;
+            else if (th->obj.base.xspeed < -0xC0)
+                th->obj.base.xspeed = -0xC0;
         }
         break;
     case 1:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0xE0)
-                th->obj2.base.xspeed = -0xE0;
-            else if (th->obj2.base.xspeed > 0xE0)
-                th->obj2.base.xspeed = 0xE0;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0xE0)
+                th->obj.base.xspeed = -0xE0;
+            else if (th->obj.base.xspeed > 0xE0)
+                th->obj.base.xspeed = 0xE0;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0xE0)
-                th->obj2.base.xspeed = 0xE0;
-            else if (th->obj2.base.xspeed < -0xE0)
-                th->obj2.base.xspeed = -0xE0;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0xE0)
+                th->obj.base.xspeed = 0xE0;
+            else if (th->obj.base.xspeed < -0xE0)
+                th->obj.base.xspeed = -0xE0;
         }
         break;
     case 3:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0x120)
-                th->obj2.base.xspeed = -0x120;
-            else if (th->obj2.base.xspeed > 0x120)
-                th->obj2.base.xspeed = 0x120;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0x120)
+                th->obj.base.xspeed = -0x120;
+            else if (th->obj.base.xspeed > 0x120)
+                th->obj.base.xspeed = 0x120;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0x120)
-                th->obj2.base.xspeed = 0x120;
-            else if (th->obj2.base.xspeed < -0x120)
-                th->obj2.base.xspeed = -0x120;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0x120)
+                th->obj.base.xspeed = 0x120;
+            else if (th->obj.base.xspeed < -0x120)
+                th->obj.base.xspeed = -0x120;
         }
         break;
     default:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0x100)
-                th->obj2.base.xspeed = -0x100;
-            else if (th->obj2.base.xspeed > 0x100)
-                th->obj2.base.xspeed = 0x100;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0x100)
+                th->obj.base.xspeed = -0x100;
+            else if (th->obj.base.xspeed > 0x100)
+                th->obj.base.xspeed = 0x100;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0x100)
-                th->obj2.base.xspeed = 0x100;
-            else if (th->obj2.base.xspeed < -0x100)
-                th->obj2.base.xspeed = -0x100;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0x100)
+                th->obj.base.xspeed = 0x100;
+            else if (th->obj.base.xspeed < -0x100)
+                th->obj.base.xspeed = -0x100;
         }
         break;
     }
-    if (th->obj2.base.x < 0x3C00)
-        th->obj2.base.flags &= ~1;
-    if (th->obj2.base.x > 0xC800)
-        th->obj2.base.flags |= 1;
-    if (th->obj2.unk9E)
+    if (th->obj.base.x < 0x3C00)
+        th->obj.base.flags &= ~1;
+    if (th->obj.base.x > 0xC800)
+        th->obj.base.flags |= 1;
+    if (th->obj.unk9E)
     {
-        th->obj2.base.yspeed -= 0x40;
-        if (th->obj2.base.yspeed < -0x1C0)
-            th->obj2.base.yspeed = -0x1C0;
+        th->obj.base.yspeed -= 0x40;
+        if (th->obj.base.yspeed < -0x1C0)
+            th->obj.base.yspeed = -0x1C0;
     }
     else
     {
-        th->obj2.base.yspeed += 0x15;
-        if (th->obj2.base.yspeed > 0x1C0)
-            th->obj2.base.yspeed = 0x1C0;
+        th->obj.base.yspeed += 0x15;
+        if (th->obj.base.yspeed > 0x1C0)
+            th->obj.base.yspeed = 0x1C0;
     }
-    if (th->obj2.base.y < 0x3C00 && th->obj2.unk83 == 1)
+    if (th->obj.base.y < 0x3C00 && th->obj.unk83 == 1)
     {
-        th->obj2.unk9E = 1;
-        th->obj2.unk83 = 0;
-        th->obj2.base.flags &= ~2;
+        th->obj.unk9E = 1;
+        th->obj.unk83 = 0;
+        th->obj.base.flags &= ~2;
     }
-    if (th->obj2.base.y > 0x7800 && !th->obj2.unk83)
+    if (th->obj.base.y > 0x7800 && !th->obj.unk83)
     {
-        if (th->obj2.subtype)
-            th->obj2.unk9F = Rand16() & 3;
+        if (th->obj.subtype)
+            th->obj.unk9F = Rand16() & 3;
         else if (RandLessThan3())
-            th->obj2.unk9F = 0;
+            th->obj.unk9F = 0;
         else if (Rand16() & 1)
-            th->obj2.unk9F = 0;
+            th->obj.unk9F = 0;
         else
-            th->obj2.unk9F = 1;
+            th->obj.unk9F = 1;
         if (!RandLessThan3())
-            th->obj2.base.flags ^= 1;
-        th->obj2.unk9E = 0;
-        th->obj2.unk83 = 1;
-        th->obj2.base.flags &= ~2;
-        PlaySfx(&th->obj2.base, SE_MEGA_TITAN_FLY);
+            th->obj.base.flags ^= 1;
+        th->obj.unk9E = 0;
+        th->obj.unk83 = 1;
+        th->obj.base.flags &= ~2;
+        PlaySfx(&th->obj.base, SE_MEGA_TITAN_FLY);
     }
-    if (!--th->obj2.base.counter)
+    if (!--th->obj.base.counter)
         sub_080F4CA8(th);
 }
 
 static void sub_080F4CA8(struct TitanHead *th)
 {
-    u8 unk9F = th->obj2.unk9F;
-    u8 unk9E = th->obj2.unk9E;
+    u8 unk9F = th->obj.unk9F;
+    u8 unk9E = th->obj.unk9E;
 
-    if (!th->obj2.unk9E)
-        th->obj2.unk83 = 1;
+    if (!th->obj.unk9E)
+        th->obj.unk83 = 1;
     ObjectSetFunc(th, 2, sub_080F4DC4);
-    th->obj2.base.flags &= ~0x20;
-    th->obj2.base.flags |= 0x40;
-    th->obj2.base.flags &= ~0x200;
-    th->obj2.base.flags &= ~2;
-    th->obj2.unk9F = unk9F;
-    th->obj2.unk9E = unk9E;
-    th->obj2.base.counter = 0x14;
-    th->obj2.unk85 = th->obj2.base.flags & 1;
-    th->obj2.kirby3 = FindTargetKirby(&th->obj2.base);
-    if (th->obj2.base.x > th->obj2.kirby3->base.x)
-        th->obj2.base.flags |= 1;
+    th->obj.base.flags &= ~0x20;
+    th->obj.base.flags |= 0x40;
+    th->obj.base.flags &= ~0x200;
+    th->obj.base.flags &= ~2;
+    th->obj.unk9F = unk9F;
+    th->obj.unk9E = unk9E;
+    th->obj.base.counter = 0x14;
+    th->obj.unk85 = th->obj.base.flags & 1;
+    th->obj.kirby3 = FindTargetKirby(&th->obj.base);
+    if (th->obj.base.x > th->obj.kirby3->base.x)
+        th->obj.base.flags |= 1;
     else
-        th->obj2.base.flags &= ~1;
-    PlaySfx(&th->obj2.base, SE_SPAWN_OBJECT);
+        th->obj.base.flags &= ~1;
+    PlaySfx(&th->obj.base, SE_SPAWN_OBJECT);
 }
 
 static void sub_080F4DC4(struct TitanHead *th)
 {
-    u32 lsb = th->obj2.base.flags & 1;
+    u32 lsb = th->obj.base.flags & 1;
 
-    th->obj2.base.flags &= ~1;
-    th->obj2.base.flags |= th->obj2.unk85;
-    switch (th->obj2.unk9F)
+    th->obj.base.flags &= ~1;
+    th->obj.base.flags |= th->obj.unk85;
+    switch (th->obj.unk9F)
     {
     case 0:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0xC0)
-                th->obj2.base.xspeed = -0xC0;
-            else if (th->obj2.base.xspeed > 0xC0)
-                th->obj2.base.xspeed = 0xC0;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0xC0)
+                th->obj.base.xspeed = -0xC0;
+            else if (th->obj.base.xspeed > 0xC0)
+                th->obj.base.xspeed = 0xC0;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0xC0)
-                th->obj2.base.xspeed = 0xC0;
-            else if (th->obj2.base.xspeed < -0xC0)
-                th->obj2.base.xspeed = -0xC0;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0xC0)
+                th->obj.base.xspeed = 0xC0;
+            else if (th->obj.base.xspeed < -0xC0)
+                th->obj.base.xspeed = -0xC0;
         }
         break;
     case 1:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0xE0)
-                th->obj2.base.xspeed = -0xE0;
-            else if (th->obj2.base.xspeed > 0xE0)
-                th->obj2.base.xspeed = 0xE0;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0xE0)
+                th->obj.base.xspeed = -0xE0;
+            else if (th->obj.base.xspeed > 0xE0)
+                th->obj.base.xspeed = 0xE0;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0xE0)
-                th->obj2.base.xspeed = 0xE0;
-            else if (th->obj2.base.xspeed < -0xE0)
-                th->obj2.base.xspeed = -0xE0;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0xE0)
+                th->obj.base.xspeed = 0xE0;
+            else if (th->obj.base.xspeed < -0xE0)
+                th->obj.base.xspeed = -0xE0;
         }
         break;
     case 3:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0x120)
-                th->obj2.base.xspeed = -0x120;
-            else if (th->obj2.base.xspeed > 0x120)
-                th->obj2.base.xspeed = 0x120;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0x120)
+                th->obj.base.xspeed = -0x120;
+            else if (th->obj.base.xspeed > 0x120)
+                th->obj.base.xspeed = 0x120;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0x120)
-                th->obj2.base.xspeed = 0x120;
-            else if (th->obj2.base.xspeed < -0x120)
-                th->obj2.base.xspeed = -0x120;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0x120)
+                th->obj.base.xspeed = 0x120;
+            else if (th->obj.base.xspeed < -0x120)
+                th->obj.base.xspeed = -0x120;
         }
         break;
     default:
-        if (th->obj2.base.flags & 1)
+        if (th->obj.base.flags & 1)
         {
-            th->obj2.base.xspeed -= 8;
-            if (th->obj2.base.xspeed < -0x100)
-                th->obj2.base.xspeed = -0x100;
-            else if (th->obj2.base.xspeed > 0x100)
-                th->obj2.base.xspeed = 0x100;
+            th->obj.base.xspeed -= 8;
+            if (th->obj.base.xspeed < -0x100)
+                th->obj.base.xspeed = -0x100;
+            else if (th->obj.base.xspeed > 0x100)
+                th->obj.base.xspeed = 0x100;
         }
         else
         {
-            th->obj2.base.xspeed += 8;
-            if (th->obj2.base.xspeed > 0x100)
-                th->obj2.base.xspeed = 0x100;
-            else if (th->obj2.base.xspeed < -0x100)
-                th->obj2.base.xspeed = -0x100;
+            th->obj.base.xspeed += 8;
+            if (th->obj.base.xspeed > 0x100)
+                th->obj.base.xspeed = 0x100;
+            else if (th->obj.base.xspeed < -0x100)
+                th->obj.base.xspeed = -0x100;
         }
         break;
     }
-    th->obj2.base.flags &= ~1;
-    th->obj2.base.flags |= lsb;
-    if (th->obj2.base.x < 0x3C00)
-        th->obj2.unk85 &= ~1;
-    if (th->obj2.base.x > 0xC800)
-        th->obj2.unk85 |= 1;
-    if (th->obj2.unk9E)
+    th->obj.base.flags &= ~1;
+    th->obj.base.flags |= lsb;
+    if (th->obj.base.x < 0x3C00)
+        th->obj.unk85 &= ~1;
+    if (th->obj.base.x > 0xC800)
+        th->obj.unk85 |= 1;
+    if (th->obj.unk9E)
     {
-        th->obj2.base.yspeed -= 0x40;
-        if (th->obj2.base.yspeed < -0x1C0)
-            th->obj2.base.yspeed = -0x1C0;
+        th->obj.base.yspeed -= 0x40;
+        if (th->obj.base.yspeed < -0x1C0)
+            th->obj.base.yspeed = -0x1C0;
     }
     else
     {
-        th->obj2.base.yspeed += 0x15;
-        if (th->obj2.base.yspeed > 0x1C0)
-            th->obj2.base.yspeed = 0x1C0;
+        th->obj.base.yspeed += 0x15;
+        if (th->obj.base.yspeed > 0x1C0)
+            th->obj.base.yspeed = 0x1C0;
     }
-    if (th->obj2.base.y < 0x3C00 && !th->obj2.unk9E)
-        th->obj2.unk9E = 1;
-    if (th->obj2.base.y > 0x7800 && th->obj2.unk9E)
+    if (th->obj.base.y < 0x3C00 && !th->obj.unk9E)
+        th->obj.unk9E = 1;
+    if (th->obj.base.y > 0x7800 && th->obj.unk9E)
     {
         if (RandLessThan3())
-            th->obj2.unk9F = 0;
+            th->obj.unk9F = 0;
         else if (Rand16() & 1)
-            th->obj2.unk9F = 0;
+            th->obj.unk9F = 0;
         else
-            th->obj2.unk9F = 1;
+            th->obj.unk9F = 1;
         if (!RandLessThan3())
-            th->obj2.unk85 ^= 1;
-        th->obj2.unk9E = 0;
-        PlaySfx(&th->obj2.base, SE_MEGA_TITAN_FLY);
+            th->obj.unk85 ^= 1;
+        th->obj.unk9E = 0;
+        PlaySfx(&th->obj.base, SE_MEGA_TITAN_FLY);
     }
-    switch (th->obj2.unk83)
+    switch (th->obj.unk83)
     {
     case 2:
-        if (th->obj2.base.header.unk1 == 0x20)
-            PlaySfx(&th->obj2.base, SE_BOSS_THROW_OBJECT);
-        if (th->obj2.base.flags & 2)
+        if (th->obj.base.header.unk1 == 0x20)
+            PlaySfx(&th->obj.base, SE_BOSS_THROW_OBJECT);
+        if (th->obj.base.flags & 2)
         {
-            th->obj2.base.flags &= ~2;
-            th->obj2.unk83 = 3;
+            th->obj.base.flags &= ~2;
+            th->obj.unk83 = 3;
         }
         break;
     case 3:
-        if (th->obj2.base.counter == 0xA)
-            sub_080F53A0(th, th->obj2.objTemplate->subtype2);
-        if (th->obj2.base.counter >= 0xA && th->obj2.base.counter <= 0xD)
-            th->obj2.base.objBase54 = gUnk_08357038[th->obj2.base.counter - 0xA];
-        if (!--th->obj2.base.counter)
+        if (th->obj.base.counter == 0xA)
+            sub_080F53A0(th, th->obj.objTemplate->subtype2);
+        if (th->obj.base.counter >= 0xA && th->obj.base.counter <= 0xD)
+            th->obj.base.objBase54 = gUnk_08357038[th->obj.base.counter - 0xA];
+        if (!--th->obj.base.counter)
         {
-            th->obj2.base.flags &= ~2;
-            th->obj2.unk83 = 4;
+            th->obj.base.flags &= ~2;
+            th->obj.unk83 = 4;
         }
         break;
     case 4:
-        if (th->obj2.base.flags & 2)
+        if (th->obj.base.flags & 2)
             sub_080F486C(th);
         break;
     }
@@ -4527,45 +4527,45 @@ static void sub_080F4DC4(struct TitanHead *th)
 static void sub_080F521C(struct TitanHead *th)
 {
     ObjectSetFunc(th, 5, sub_080F5284);
-    th->obj2.base.yspeed = 0;
-    if (th->obj2.base.xspeed > 0xA0)
-        th->obj2.base.xspeed = 0xA0;
-    if (th->obj2.base.xspeed < -0xA0)
-        th->obj2.base.xspeed = -0xA0;
-    th->obj2.base.flags |= 0x20;
-    th->obj2.base.flags |= 0x100;
-    th->obj2.base.flags &= ~0x40;
-    th->obj2.base.flags |= 0x200;
-    th->obj2.base.flags &= ~0x800;
-    th->obj2.unk9F = 0;
-    th->obj2.unk9E = 0xC;
+    th->obj.base.yspeed = 0;
+    if (th->obj.base.xspeed > 0xA0)
+        th->obj.base.xspeed = 0xA0;
+    if (th->obj.base.xspeed < -0xA0)
+        th->obj.base.xspeed = -0xA0;
+    th->obj.base.flags |= 0x20;
+    th->obj.base.flags |= 0x100;
+    th->obj.base.flags &= ~0x40;
+    th->obj.base.flags |= 0x200;
+    th->obj.base.flags &= ~0x800;
+    th->obj.unk9F = 0;
+    th->obj.unk9E = 0xC;
 }
 
 static void sub_080F5284(struct TitanHead *th)
 {
-    if (!(++th->obj2.base.counter & 7)
-        && (Rand16() & 1 || !(++th->obj2.base.counter & 0xF)))
+    if (!(++th->obj.base.counter & 7)
+        && (Rand16() & 1 || !(++th->obj.base.counter & 0xF)))
     {
-        struct EffectObject *obj4 = CreateEffectObject(&th->obj2.base, 0, 0x292, Rand16() & 3);
+        struct EffectObject *effect = CreateEffectObject(&th->obj.base, 0, 0x292, Rand16() & 3);
 
-        obj4->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
-        obj4->y += (0x10 - (Rand16() & 0x1F)) * 0x100;
+        effect->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
+        effect->y += (0x10 - (Rand16() & 0x1F)) * 0x100;
     }
-    if (!(++th->obj2.unk9E & 0x1F))
-        th->obj2.unk9F = 0x10;
-    if (th->obj2.unk9F)
+    if (!(++th->obj.unk9E & 0x1F))
+        th->obj.unk9F = 0x10;
+    if (th->obj.unk9F)
     {
-        th->obj2.base.flags |= 4;
-        th->obj2.unk83 = 1;
-        th->obj2.base.yspeed += 0x25;
-        if (th->obj2.base.yspeed > 0x1C0)
-            th->obj2.base.yspeed = 0x1C0;
-        --th->obj2.unk9F;
+        th->obj.base.flags |= 4;
+        th->obj.unk83 = 1;
+        th->obj.base.yspeed += 0x25;
+        if (th->obj.base.yspeed > 0x1C0)
+            th->obj.base.yspeed = 0x1C0;
+        --th->obj.unk9F;
     }
     else
-        th->obj2.unk83 = 5;
-    if (th->obj2.base.y > 0x10000)
-        th->obj2.base.flags |= 0x1000;
+        th->obj.unk83 = 5;
+    if (th->obj.base.y > 0x10000)
+        th->obj.base.flags |= 0x1000;
 }
 
 static void sub_080F53A0(struct TitanHead *th, u8 a2)
@@ -4573,13 +4573,13 @@ static void sub_080F53A0(struct TitanHead *th, u8 a2)
     s32 x, y;
     struct Object *missile;
 
-    if (th->obj2.base.flags & 1)
-        x = (th->obj2.base.x >> 8) - 0x10;
+    if (th->obj.base.flags & 1)
+        x = (th->obj.base.x >> 8) - 0x10;
     else
-        x = (th->obj2.base.x >> 8) + 0x10;
-    y = (th->obj2.base.y >> 8) - 6;
-    missile = CreateObjTemplateAndObj(th->obj2.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_HEAD_MISSILE,
-        th->obj2.base.flags & 1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+        x = (th->obj.base.x >> 8) + 0x10;
+    y = (th->obj.base.y >> 8) - 6;
+    missile = CreateObjTemplateAndObj(th->obj.base.unk56, 1, 0x24, x, y, 0, 0x1F, 0, 0, OBJ_TITAN_HEAD_MISSILE,
+        th->obj.base.flags & 1, 0, a2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     missile->base.parent = th;
 }
 
@@ -4624,32 +4624,32 @@ void sub_080F55A8(struct Object *missile)
 static void sub_080F5640(struct MegaTitan *mt)
 {
     ObjectSetFunc(mt, 0, sub_080EDAD0);
-    mt->obj2.base.xspeed = 0;
-    mt->obj2.base.yspeed = 0;
-    mt->obj2.base.flags |= 0x40;
+    mt->obj.base.xspeed = 0;
+    mt->obj.base.yspeed = 0;
+    mt->obj.base.flags |= 0x40;
 }
 
 static void sub_080F566C(struct MegaTitan *mt)
 {
-    u8 unk9F = mt->obj2.unk9F;
+    u8 unk9F = mt->obj.unk9F;
 
     ObjectSetFunc(mt, 5, sub_080EE76C);
-    mt->obj2.base.flags |= 0x20;
-    mt->obj2.base.flags &= ~0x40;
-    mt->obj2.base.flags &= ~0x8000;
-    mt->obj2.base.flags &= ~0x1000000;
-    mt->obj2.unk9F = unk9F;
+    mt->obj.base.flags |= 0x20;
+    mt->obj.base.flags &= ~0x40;
+    mt->obj.base.flags &= ~0x8000;
+    mt->obj.base.flags &= ~0x1000000;
+    mt->obj.unk9F = unk9F;
 }
 
 static void sub_080F56A8(struct MegaTitan *mt)
 {
     ObjectSetFunc(mt, 8, sub_080F56E8);
-    mt->obj2.base.flags |= 0x100;
-    mt->obj2.base.flags |= 0x800;
-    mt->obj2.base.xspeed = 0;
-    mt->obj2.base.yspeed = 0;
-    mt->obj2.base.flags &= ~2;
-    mt->obj2.base.flags |= 0x2000;
+    mt->obj.base.flags |= 0x100;
+    mt->obj.base.flags |= 0x800;
+    mt->obj.base.xspeed = 0;
+    mt->obj.base.yspeed = 0;
+    mt->obj.base.flags &= ~2;
+    mt->obj.base.flags |= 0x2000;
 }
 
 static void sub_080F56E8(struct MegaTitan *mt)
@@ -4660,10 +4660,10 @@ static void sub_080F56E8(struct MegaTitan *mt)
     for (i = 0; i < gNumKirbys; ++i) // the same as the loop in sub_080F12F8, but performed on struct MegaTitan???
     {
         kirby = gKirbys + i;
-        if (kirby->base.roomId == mt->obj2.base.roomId)
+        if (kirby->base.roomId == mt->obj.base.roomId)
         {
             if (kirby->base.flags & 0x1000000)
-                mt->obj2.base.flags |= 0x1000;
+                mt->obj.base.flags |= 0x1000;
             break;
         }
     }
@@ -4673,7 +4673,7 @@ static void sub_080F5744(struct Object *arm)
 {
     struct MegaTitan *mt = arm->base.parent;
 
-    if (mt->obj2.base.flags & 0x1000 && !(arm->base.unkC & 0x400))
+    if (mt->obj.base.flags & 0x1000 && !(arm->base.unkC & 0x400))
     {
         arm->unk80 = 0;
         arm->base.flags |= 0x1000;
@@ -4683,13 +4683,13 @@ static void sub_080F5744(struct Object *arm)
 
 static void sub_080F5778(struct TitanHead *th)
 {
-    th->obj2.base.flags |= 4;
-    if (th->obj2.base.y <= -0x1000)
+    th->obj.base.flags |= 4;
+    if (th->obj.base.y <= -0x1000)
     {
-        th->obj2.base.yspeed = 0;
-        if (++th->obj2.base.counter > 0x60)
+        th->obj.base.yspeed = 0;
+        if (++th->obj.base.counter > 0x60)
         {
-            th->obj2.base.y = -0x1000;
+            th->obj.base.y = -0x1000;
             sub_080F46DC(th);
         }
     }

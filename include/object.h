@@ -147,57 +147,57 @@
     CreateObject((playerIdVal), &gUnk_020229E0[_i]); \
 })
 
-#define CreateObjTemplateAndObjWithSettingParent(obj2, spawnTableVal, unk1Val, xVal, yVal, \
+#define CreateObjTemplateAndObjWithSettingParent(obj, spawnTableVal, unk1Val, xVal, yVal, \
     unk2Val, unk3Val, unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, \
     unk1CVal, unk1EVal, unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val) ({ \
-    void *_obj = CreateObjTemplateAndObj((obj2)->base.unk56, spawnTableVal, unk1Val, xVal, yVal, unk2Val, unk3Val, \
+    void *_obj = CreateObjTemplateAndObj((obj)->base.unk56, spawnTableVal, unk1Val, xVal, yVal, unk2Val, unk3Val, \
         unk4Val, unk5Val, typeVal, subtype1Val, unkFVal, subtype2Val, unk22Val, unk1AVal, unk1CVal, unk1EVal, \
         unk20Val, unk11Val, unk12Val, unk14Val, unk16Val, unk18Val); \
  \
-    ((struct Object *)_obj)->base.parent = (obj2); \
+    ((struct Object *)_obj)->base.parent = (obj); \
     _obj; \
 })
 
-#define Macro_080E7D74(obj2) ({ \
-    u8 _unk65E = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
+#define Macro_080E7D74(obj) ({ \
+    u8 _unk65E = gCurLevelInfo[(obj)->base.unk56].unk65E; \
  \
     sub_08002A44(_unk65E, GetRoomMusicId(_unk65E), 0); \
     SetRoomMusicId(_unk65E, 0); \
-    if (gKirbys[gLocalPlayerId].base.roomId == (obj2)->base.roomId \
+    if (gKirbys[gLocalPlayerId].base.roomId == (obj)->base.roomId \
         && !(gUnk_0203AD20 & 4)) \
         m4aSongNumStartOrChange(GetRoomMusicId(_unk65E)); \
 })
 
-#define Macro_08100F18(obj2) ({ \
+#define Macro_08100F18(obj) ({ \
     s16 _r3; \
     u8 _r6; \
-    struct Object5 *_r1 = sub_08034E14(obj2); \
+    struct Object5 *_r1 = sub_08034E14(obj); \
  \
     if (_r1) _r1->unk9 = 0; \
-    _r3 = ObjTypeAltIdx(obj2); \
-    _r6 = gCurLevelInfo[(obj2)->base.unk56].unk65E; \
+    _r3 = ObjTypeAltIdx(obj); \
+    _r6 = gCurLevelInfo[(obj)->base.unk56].unk65E; \
     if (_r3 >= 0 && gUnk_08352D80[_r3] \
-        && !((obj2)->objTemplate->unk22 & 4)) { \
+        && !((obj)->objTemplate->unk22 & 4)) { \
         u8 _i; \
  \
-        if (!ObjType43To52(obj2)) { \
+        if (!ObjType43To52(obj)) { \
             for (_i = 1; _i < 2; ++_i) \
                 sub_08002A44(_r6, sub_08002A2C(_r6, _i - 1), _i); \
             sub_08002A44(_r6, GetRoomMusicId(_r6), 0); \
         } \
         SetRoomMusicId(_r6, gUnk_08352D80[_r3]); \
-        if (gKirbys[gLocalPlayerId].base.roomId == (obj2)->base.roomId && !(gUnk_0203AD20 & 4)) \
+        if (gKirbys[gLocalPlayerId].base.roomId == (obj)->base.roomId && !(gUnk_0203AD20 & 4)) \
             m4aSongNumStartOrChange(GetRoomMusicId(_r6)); \
     } \
 })
 
-#define Macro_0809E55C(obj4 /* objBase */) ({ \
+#define Macro_0809E55C(effect /* objBase */) ({ \
     bool32 _flag = TRUE; \
     u8 _i = gNumKirbys; \
  \
     if (gNumKirbys) { \
         while (1) { \
-            if (gCurLevelInfo[_i - 1].currentRoom == (obj4)->roomId && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
+            if (gCurLevelInfo[_i - 1].currentRoom == (effect)->roomId && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
                 _flag = FALSE; \
                 break; \
             } \
@@ -207,20 +207,20 @@
         } \
     } \
     if (_flag) { \
-        (obj4)->flags |= 0x1000; \
+        (effect)->flags |= 0x1000; \
     } \
 })
 
 #define Macro_0810B1F4(objBase) (gUnk_03000510.unk4 & ((1 << (objBase)->unk56) | 0x10))
 
-#define Macro_081003EC(obj2, objBase) ({ \
-    (obj2)->unkA4 = gCurLevelInfo[(objBase)->unk56].unkA0 >> 8; \
-    (obj2)->unkA6 = gCurLevelInfo[(objBase)->unk56].unkA4 >> 8; \
-    (obj2)->unkA8 = gCurLevelInfo[(objBase)->unk56].unkA8 >> 8; \
-    (obj2)->unkAA = gCurLevelInfo[(objBase)->unk56].unkAC >> 8; \
+#define Macro_081003EC(obj, objBase) ({ \
+    (obj)->unkA4 = gCurLevelInfo[(objBase)->unk56].unkA0 >> 8; \
+    (obj)->unkA6 = gCurLevelInfo[(objBase)->unk56].unkA4 >> 8; \
+    (obj)->unkA8 = gCurLevelInfo[(objBase)->unk56].unkA8 >> 8; \
+    (obj)->unkAA = gCurLevelInfo[(objBase)->unk56].unkAC >> 8; \
 })
 
-#define Macro_08107BA8_1(objBase /* obj4 */, src, dst, numTiles, sprite) \
+#define Macro_08107BA8_1(objBase /* effect */, src, dst, numTiles, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
@@ -231,7 +231,7 @@
     _spr->unk8 = (sprite)->unk8 | 0x80000; \
 })
 
-#define Macro_08107BA8_2(objBase /* obj4 */, src, dst, numTiles, sprite) \
+#define Macro_08107BA8_2(objBase /* effect */, src, dst, numTiles, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
@@ -241,7 +241,7 @@
     sub_0815521C(dst, (objBase)->header.unk1); \
 })
 
-#define Macro_08107BA8_3(objBase /* obj4 */, sprite) \
+#define Macro_08107BA8_3(objBase /* effect */, sprite) \
 ({ \
     if ((sprite)->tilesVram && !((objBase)->flags & 0x4000)) \
     { \
@@ -251,7 +251,7 @@
     (sprite)->unk8 |= 0x80000; \
 })
 
-#define Macro_08107BA8_4(objBase /* obj4 */, src, dst, numTiles, sprite) \
+#define Macro_08107BA8_4(objBase /* effect */, src, dst, numTiles, sprite) \
 ({ \
     if (gKirbys[gLocalPlayerId].base.roomId == (objBase)->roomId) \
     { \
@@ -267,9 +267,9 @@
         Macro_08107BA8_3(objBase, sprite); \
 })
 
-#define Macro_081050E8(obj4 /* objBase */, sprite, animId, variant, cond) \
+#define Macro_081050E8(effect /* objBase */, sprite, animId, variant, cond) \
 ({ \
-    if (gKirbys[gLocalPlayerId].base.roomId == (obj4)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.roomId == (effect)->roomId) \
     { \
         if (cond) \
         { \
@@ -282,15 +282,15 @@
         (sprite)->palId = 0; \
 })
 
-#define Macro_0803DBC8(obj4 /* objBase */, sprite) \
+#define Macro_0803DBC8(effect /* objBase */, sprite) \
 ({ \
-    if ((obj4)->flags & 0x4000) \
+    if ((effect)->flags & 0x4000) \
         sub_081564D8(sprite); \
     else \
         DisplaySprite(sprite); \
 })
 
-#define Macro_080FC150(objBase /* obj4 */, sprite) ({ \
+#define Macro_080FC150(objBase /* effect */, sprite) ({ \
     if ((objBase)->flags & 1) \
     { \
         struct Sprite *_r0 = (sprite); \
@@ -340,40 +340,40 @@
     } \
 })
 
-#define CollisionAttributesAtTile(obj2, tileX, tileY) \
+#define CollisionAttributesAtTile(obj, tileX, tileY) \
 ({ \
     const u32 *_table = gCollisionAttributes; \
     u8 _var = 0; \
  \
-    if ((tileX) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.x >> 12 \
-        && (tileX) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.x >> 12 \
-        && (tileY) <= gCurLevelInfo[(obj2)->base.unk56].levelMaxPosition.y >> 12 \
-        && (tileY) >= gCurLevelInfo[(obj2)->base.unk56].levelMinPosition.y >> 12) \
-        _var = GetCollisionTile((obj2)->base.unk56, tileX, tileY); \
+    if ((tileX) <= gCurLevelInfo[(obj)->base.unk56].levelMaxPosition.x >> 12 \
+        && (tileX) >= gCurLevelInfo[(obj)->base.unk56].levelMinPosition.x >> 12 \
+        && (tileY) <= gCurLevelInfo[(obj)->base.unk56].levelMaxPosition.y >> 12 \
+        && (tileY) >= gCurLevelInfo[(obj)->base.unk56].levelMinPosition.y >> 12) \
+        _var = GetCollisionTile((obj)->base.unk56, tileX, tileY); \
     &_table[_var]; \
 })
 
-#define CollisionAttributesAt(obj2, xOffset, yOffset) \
-    CollisionAttributesAtTile(obj2, ((obj2)->base.x + (xOffset)) >> 12, \
-        ((obj2)->base.y + (yOffset)) >> 12)
+#define CollisionAttributesAt(obj, xOffset, yOffset) \
+    CollisionAttributesAtTile(obj, ((obj)->base.x + (xOffset)) >> 12, \
+        ((obj)->base.y + (yOffset)) >> 12)
 
 // need the ({}) to match
-#define Macro_080A561C(table, obj2) \
+#define Macro_080A561C(table, obj) \
 ({ \
-    --(obj2)->unk9E; \
-    if (!(table)[(u8)((obj2)->unk9F + 1)].unk8 && !(obj2)->unk9E) \
-        (obj2)->unk9F = 0xFF; \
+    --(obj)->unk9E; \
+    if (!(table)[(u8)((obj)->unk9F + 1)].unk8 && !(obj)->unk9E) \
+        (obj)->unk9F = 0xFF; \
 })
 
-#define Macro_08039430_1(objBase, obj2) sub_08039430(objBase, \
-    (obj2)->base.x, (obj2)->base.y, \
-    (obj2)->objTemplate->unk1A, (obj2)->objTemplate->unk1C, \
-    (obj2)->objTemplate->unk1E, (obj2)->objTemplate->unk20)
+#define Macro_08039430_1(objBase, obj) sub_08039430(objBase, \
+    (obj)->base.x, (obj)->base.y, \
+    (obj)->objTemplate->unk1A, (obj)->objTemplate->unk1C, \
+    (obj)->objTemplate->unk1E, (obj)->objTemplate->unk20)
 
-#define Macro_08039430_2(objBase, obj2) sub_08039430(objBase, \
-    (obj2)->objTemplate->x * 0x100, (obj2)->objTemplate->y * 0x100, \
-    (obj2)->objTemplate->unk1A, (obj2)->objTemplate->unk1C, \
-    (obj2)->objTemplate->unk1E, (obj2)->objTemplate->unk20)
+#define Macro_08039430_2(objBase, obj) sub_08039430(objBase, \
+    (obj)->objTemplate->x * 0x100, (obj)->objTemplate->y * 0x100, \
+    (obj)->objTemplate->unk1A, (obj)->objTemplate->unk1C, \
+    (obj)->objTemplate->unk1E, (obj)->objTemplate->unk20)
 
 void ObjectMain(void);
 void ObjectDestroy(struct Task *);

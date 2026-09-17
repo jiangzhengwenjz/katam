@@ -40,7 +40,7 @@ static void sub_080BE9FC(struct Object*);
 
 void *CreateRocky(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.x)

@@ -6,7 +6,7 @@
 
 struct Boxy
 {
-    struct Object obj2;
+    struct Object obj;
     struct Object *unkB4;
     u8 unkB8;
 }; /* size = 0xBC */

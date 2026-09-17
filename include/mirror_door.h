@@ -6,7 +6,7 @@
 
 struct MirrorDoor
 {
-    struct Object obj2;
+    struct Object obj;
     struct EffectObject *unkB4[2];
     u16 unkBC;
     u16 unkBE;

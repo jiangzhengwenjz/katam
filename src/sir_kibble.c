@@ -15,10 +15,10 @@ const struct AnimInfo gUnk_08353F54[] = {
 static void sub_080B2160(struct Object *arg0);
 static void sub_080B2210(struct Object *arg0);
 void* CreateSirKibble(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
@@ -221,10 +221,10 @@ const struct AnimInfo gUnk_08353F6C[] = {
 };
 
 void* CreateUnknownA0(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x02000140;
     obj->base.unk5C |= 0x20;
@@ -397,10 +397,10 @@ static void sub_080B1DF8(struct Object *arg0) {
 
 static void sub_080B2224(struct Object *arg0);
 void* CreateSirKibbleCutter(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.unk63 = 1;
     obj->base.flags |= 0x40;

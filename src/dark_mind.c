@@ -1299,9 +1299,9 @@ static void sub_08101350(struct DarkMindForm1 *r4)
     }
 }
 
-#define Macro_081013C8(obj2, r3) \
+#define Macro_081013C8(obj, r3) \
 ({ \
-    (r3) = CreateEffectObject(&(obj2)->base, 0, 0x292, Rand16() & 3); \
+    (r3) = CreateEffectObject(&(obj)->base, 0, 0x292, Rand16() & 3); \
  \
     (r3)->x += (0x40 - (Rand16() & 0x7F)) * 0x100; \
     (r3)->y += (0x20 - (Rand16() & 0x3F)) * 0x100; \
@@ -3602,24 +3602,24 @@ static void sub_08105698(void)
     }
 }
 
-#define Macro_081059A8_3(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val, unk1AVal, unk1CVal, unk1EVal, unk20Val) \
+#define Macro_081059A8_3(obj, xVal, yVal, typeVal, subtype1Val, subtype2Val, unk1AVal, unk1CVal, unk1EVal, unk20Val) \
 ({ \
-    CreateObjTemplateAndObj((obj2)->base.unk56, 1, 36, xVal, yVal, 0, 31, 0, 0, \
+    CreateObjTemplateAndObj((obj)->base.unk56, 1, 36, xVal, yVal, 0, 31, 0, 0, \
         typeVal, subtype1Val, 0, subtype2Val, 0, unk1AVal, unk1CVal, unk1EVal, unk20Val, \
         0, 0, 0, 0, 0); \
 })
 
-#define Macro_081059A8_2(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
+#define Macro_081059A8_2(obj, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
 ({ \
-    Macro_081059A8_3(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val, 0, 0, 0, 0); \
+    Macro_081059A8_3(obj, xVal, yVal, typeVal, subtype1Val, subtype2Val, 0, 0, 0, 0); \
 })
 
-#define Macro_081059A8(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
+#define Macro_081059A8(obj, xVal, yVal, typeVal, subtype1Val, subtype2Val) \
 ({ \
     void *_r0; \
  \
-    _r0 = Macro_081059A8_2(obj2, xVal, yVal, typeVal, subtype1Val, subtype2Val); \
-    ((struct Object *)_r0)->base.parent = (obj2); \
+    _r0 = Macro_081059A8_2(obj, xVal, yVal, typeVal, subtype1Val, subtype2Val); \
+    ((struct Object *)_r0)->base.parent = (obj); \
     _r0; \
 })
 
@@ -3668,16 +3668,16 @@ void *CreateShadowKirbyBomb(struct ObjectTemplate *r6, u8 r5)
     return r4;
 }
 
-#define Macro_08105BF0(obj2, parent) \
+#define Macro_08105BF0(obj, parent) \
 ({ \
     s32 _v1, _v2; \
  \
-    (obj2)->base.x = (parent)->base.x; \
-    (obj2)->base.y = (parent)->base.y; \
-    _v1 = (obj2)->unkA0 * (gSineTable[(obj2)->base.counter + 0x100] >> 6) * 0x100; \
-    _v2 = (obj2)->unkA0 * (gSineTable[(obj2)->base.counter] >> 6) * 0x100; \
-    (obj2)->base.x += _v1 >> 16; \
-    (obj2)->base.y += _v2 >> 16; \
+    (obj)->base.x = (parent)->base.x; \
+    (obj)->base.y = (parent)->base.y; \
+    _v1 = (obj)->unkA0 * (gSineTable[(obj)->base.counter + 0x100] >> 6) * 0x100; \
+    _v2 = (obj)->unkA0 * (gSineTable[(obj)->base.counter] >> 6) * 0x100; \
+    (obj)->base.x += _v1 >> 16; \
+    (obj)->base.y += _v2 >> 16; \
 })
 
 static void sub_08105BF0(struct Object *r7)
@@ -4084,21 +4084,21 @@ static void sub_08106AD0(struct Object *r5)
     }
 }
 
-#define Macro_08106BE0(obj4, sprite) \
+#define Macro_08106BE0(effect, sprite) \
 ({ \
-    if (!((obj4)->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == (obj4)->roomId) \
+    if (!((effect)->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == (effect)->roomId) \
     { \
         (sprite)->x += gUnk_0203AD18[0]; \
         (sprite)->y += gUnk_0203AD18[1]; \
-        Macro_0803DBC8(obj4, sprite); \
+        Macro_0803DBC8(effect, sprite); \
     } \
 })
 
-#define Macro_08108368(obj4, c1, c2) \
+#define Macro_08108368(effect, c1, c2) \
 ({ \
-    (obj4)->sprite.x = (((obj4)->x + (c1)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8); \
-    (obj4)->sprite.y = (((obj4)->y + (c2)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8); \
-    Macro_08106BE0(obj4, &(obj4)->sprite); \
+    (effect)->sprite.x = (((effect)->x + (c1)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8); \
+    (effect)->sprite.y = (((effect)->y + (c2)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8); \
+    Macro_08106BE0(effect, &(effect)->sprite); \
 })
 
 static void sub_08106BE0(void)

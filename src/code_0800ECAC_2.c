@@ -748,7 +748,7 @@ struct Object *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     return sp;
 }
 
-bool32 sub_08010818(struct Unk_02038590 *a1, struct Object *obj2) {
+bool32 sub_08010818(struct Unk_02038590 *a1, struct Object *obj) {
     s16 var;
 
     switch (a1->unkDC) {
@@ -759,13 +759,13 @@ bool32 sub_08010818(struct Unk_02038590 *a1, struct Object *obj2) {
     }
     if (a1->unk40->base.xspeed) {
         if (a1->unk40->base.flags & 1) {
-            if (a1->unk40->base.x <= obj2->base.x)
+            if (a1->unk40->base.x <= obj->base.x)
                 return FALSE;
         } else {
-            if (a1->unk40->base.x >= obj2->base.x)
+            if (a1->unk40->base.x >= obj->base.x)
                 return FALSE;
         }
-        var = (a1->unk40->base.y - obj2->base.y) >> 8;
+        var = (a1->unk40->base.y - obj->base.y) >> 8;
         if (var + 7 >= 0 && var + 7 <= 0x1E) {
             if (a1->unkDC != 7) {
                 a1->unkDE = (Rand16() & 1) + 3;

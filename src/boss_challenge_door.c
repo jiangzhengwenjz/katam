@@ -22,16 +22,16 @@ void *CreateBossChallengeDoor(struct ObjectTemplate *template, u8 a2) {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct BossChallengeDoor), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
 
     door = TaskGetStructPtr(t);
-    InitObject(&door->obj2, template, a2);
-    door->obj2.base.flags |= 0x201CB40;
-    door->obj2.base.unk68 &= ~7;
-    door->obj2.base.unk5C |= 0x20;
-    door->obj2.base.y += 0x800;
-    sub_0803E2B0(&door->obj2.base, -8, -8, 8, 8);
-    ObjectSetBounds(&door->obj2.base, -8, -8, 8, 8);
-    ObjectInitSprite(&door->obj2);
-    door->obj2.base.sprite.unk14 = 0x7C0;
-    gUnk_08351648[door->obj2.type].unk10(&door->obj2);
+    InitObject(&door->obj, template, a2);
+    door->obj.base.flags |= 0x201CB40;
+    door->obj.base.unk68 &= ~7;
+    door->obj.base.unk5C |= 0x20;
+    door->obj.base.y += 0x800;
+    sub_0803E2B0(&door->obj.base, -8, -8, 8, 8);
+    ObjectSetBounds(&door->obj.base, -8, -8, 8, 8);
+    ObjectInitSprite(&door->obj);
+    door->obj.base.sprite.unk14 = 0x7C0;
+    gUnk_08351648[door->obj.type].unk10(&door->obj);
     return door;
 }
 
@@ -44,22 +44,22 @@ void sub_08118C18(struct BossChallengeDoor *door) {
     sub_08119094(d2);
     bossIdx = (*GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF) & 0xF0000) >> 16;
     if (bossIdx != 0xC) {
-        if (d2->obj2.objTemplate->unk22 & 0x100)
-            d2->unkB4 = sub_08092944(&d2->obj2.base, 0, 0x294, 10);
+        if (d2->obj.objTemplate->unk22 & 0x100)
+            d2->unkB4 = sub_08092944(&d2->obj.base, 0, 0x294, 10);
         else
-            d2->unkB4 = sub_08092944(&d2->obj2.base, 0, 0x294, 3);
+            d2->unkB4 = sub_08092944(&d2->obj.base, 0, 0x294, 3);
         door->unkB4->sprite.unk14 = 0x780;
         bossIdx =(*GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF) & 0xF0000) >> 16;
-        sign = sub_0808B62C(&d2->obj2.base, gUnk_08357B3E[bossIdx][2], gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], 0);
+        sign = sub_0808B62C(&d2->obj.base, gUnk_08357B3E[bossIdx][2], gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], 0);
         door->unkB8 = sign;
         sign->sprite.palId = 0;
         Macro_081050E8(door->unkB8, &door->unkB8->sprite, gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], door->unkB8->sprite.palId == 0);
         door->unkB8->sprite.unk14 = 0x780;
-        door->unkB8->y = d2->obj2.base.y - 0x3C00;
+        door->unkB8->y = d2->obj.base.y - 0x3C00;
         ObjectSetFunc(d2, 0, sub_08119184);
     }
     else {
-        d2->obj2.base.flags |= 0x1400;
+        d2->obj.base.flags |= 0x1400;
         ObjectSetFunc(d2, 2, sub_081191A8);
     }
 }
@@ -74,9 +74,9 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
     u8 sp28, sp29;
 
     d2 = door;
-    door->obj2.base.flags |= 4;
+    door->obj.base.flags |= 4;
     bossIdx = (*GetStateSlot(STATE_SLOT_SESSION, 9, 0xFF) & 0xF0000) >> 16;
-    if (gCurLevelInfo[door->obj2.base.unk56].currentRoom == gCurLevelInfo[gLocalPlayerId].currentRoom) {
+    if (gCurLevelInfo[door->obj.base.unk56].currentRoom == gCurLevelInfo[gLocalPlayerId].currentRoom) {
         if (d2->unkB8->sprite.palId == 0) {
             Macro_081050E8(d2->unkB8, &d2->unkB8->sprite, gUnk_08357B3E[bossIdx][0], gUnk_08357B3E[bossIdx][1], 1);
         }
@@ -87,15 +87,15 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
         }
     }
 
-    level = &gCurLevelInfo[door->obj2.base.unk56];
+    level = &gCurLevelInfo[door->obj.base.unk56];
     {
         struct S32Vec2 pos = {
-            .x = door->obj2.base.x + (door->obj2.base.unk3C * 0x100),
-            .y = door->obj2.base.y + (door->obj2.base.unk3D * 0x100),
+            .x = door->obj.base.x + (door->obj.base.unk3C * 0x100),
+            .y = door->obj.base.y + (door->obj.base.unk3D * 0x100),
         };
         struct S32Vec2 measure = {
-            .x = (door->obj2.base.unk3E - door->obj2.base.unk3C) * 0x100,
-            .y = (door->obj2.base.unk3F - door->obj2.base.unk3D) * 0x100,
+            .x = (door->obj.base.unk3E - door->obj.base.unk3C) * 0x100,
+            .y = (door->obj.base.unk3F - door->obj.base.unk3D) * 0x100,
         };
         touched = FALSE;
         for (i = 0; i < gNumHumanPlayers; i++) {
@@ -123,7 +123,7 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
         u32 tmp;
         for (j = 0; j < gNumHumanPlayers; j++)
             ;
-        tmp = (*GetStateSlot(STATE_SLOT_SESSION, 9, gCurLevelInfo[door->obj2.base.unk56].unk65E) & 0xF0000) >> 16;
+        tmp = (*GetStateSlot(STATE_SLOT_SESSION, 9, gCurLevelInfo[door->obj.base.unk56].unk65E) & 0xF0000) >> 16;
         for (i = 0; i < 4; i++) {
             struct Kirby *kirby = &gKirbys[i];
             if (kirby->hp <= 0)
@@ -134,16 +134,16 @@ static void sub_08118D80(struct BossChallengeDoor *door) {
             gKirbys[i].base.unkC |= 0x800000;
             sub_0805BDF4(kirby, gUnk_08357B24[tmp], sp28, sp29);
         }
-        door->obj2.unk78 = sub_081191B4;
+        door->obj.unk78 = sub_081191B4;
     }
-    door->obj2.base.counter++;
+    door->obj.base.counter++;
 }
 
 static void sub_08119094(struct BossChallengeDoor *door) {
     u32 *ptr;
     u32 field;
 
-    ptr = GetStateSlot(STATE_SLOT_SESSION, 9, gCurLevelInfo[door->obj2.base.unk56].unk65E);
+    ptr = GetStateSlot(STATE_SLOT_SESSION, 9, gCurLevelInfo[door->obj.base.unk56].unk65E);
     field = (*ptr & 0xF0000) >> 16;
     if (field == 0)
         *ptr |= 0x80000000;
@@ -181,16 +181,16 @@ static void sub_08119094(struct BossChallengeDoor *door) {
 
 static void sub_08119184(struct BossChallengeDoor *door) {
     door->unkB4->flags &= ~0x400;
-    door->obj2.unk83 = 0;
-    door->obj2.unk78 = sub_08118D80;
+    door->obj.unk83 = 0;
+    door->obj.unk78 = sub_08118D80;
 }
 
 static void sub_081191A8(struct BossChallengeDoor *door) {
-    door->obj2.base.flags |= 0x1400;
+    door->obj.base.flags |= 0x1400;
 }
 
 static void sub_081191B4(struct BossChallengeDoor *door) {
-    door->obj2.unk78 = nullsub_126;
+    door->obj.unk78 = nullsub_126;
 }
 
 static void nullsub_126(struct BossChallengeDoor *door) {

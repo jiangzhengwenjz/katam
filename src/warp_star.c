@@ -1720,7 +1720,7 @@ void *CreateWarpStar(struct ObjectTemplate *template, u8 a2)
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct WarpStar), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct WarpStar *ws = TaskGetStructPtr(t);
 
-    InitObject(&ws->unk0.obj2, template, a2);
+    InitObject(&ws->unk0.obj, template, a2);
     ws->unk0.unkB6 = 0;
     ws->unk0.unkB8 = 0;
     ws->unk0.unkBA = 0;
@@ -1729,16 +1729,16 @@ void *CreateWarpStar(struct ObjectTemplate *template, u8 a2)
     ws->unkBE = template->unk1E;
     ws->unkC0 = template->unk1A;
     ws->unkC2 = template->unk1C;
-    ws->unk0.obj2.base.flags |= 0x221C140;
-    ws->unk0.obj2.base.unk68 &= ~7;
-    ws->unk0.obj2.base.unk5C = ~0x80;
-    ws->unk0.obj2.base.unk5C &= ~7; // do nothing
-    ws->unk0.obj2.base.unkC |= 1;
-    sub_0803E2B0(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    ObjectSetBounds(&ws->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    ws->unk0.obj2.unk83 = 0;
-    ObjectInitSprite(&ws->unk0.obj2);
-    ws->unk0.obj2.unk78 = sub_0800DC5C;
+    ws->unk0.obj.base.flags |= 0x221C140;
+    ws->unk0.obj.base.unk68 &= ~7;
+    ws->unk0.obj.base.unk5C = ~0x80;
+    ws->unk0.obj.base.unk5C &= ~7; // do nothing
+    ws->unk0.obj.base.unkC |= 1;
+    sub_0803E2B0(&ws->unk0.obj.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&ws->unk0.obj.base, -0x10, -0x10, 0x10, 0x10);
+    ws->unk0.obj.unk83 = 0;
+    ObjectInitSprite(&ws->unk0.obj);
+    ws->unk0.obj.unk78 = sub_0800DC5C;
     return ws;
 }
 
@@ -1747,22 +1747,22 @@ void *CreateGoalStar(struct ObjectTemplate *template, u8 a2)
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct GoalStar), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
     struct GoalStar *gs = TaskGetStructPtr(t);
 
-    InitObject(&gs->unk0.obj2, template, a2);
+    InitObject(&gs->unk0.obj, template, a2);
     gs->unk0.unkB6 = 0;
     gs->unk0.unkB8 = 0;
     gs->unk0.unkBA = 0;
     gs->unk0.unkB4 = template->subtype1;
     gs->unk0.unkB5 = 0;
-    gs->unk0.obj2.base.flags |= 0x221C140;
-    gs->unk0.obj2.base.unk68 &= ~7;
-    gs->unk0.obj2.base.unk5C = ~0x80;
-    gs->unk0.obj2.base.unk5C &= ~7; // do nothing
-    gs->unk0.obj2.base.unkC |= 1;
-    sub_0803E2B0(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    ObjectSetBounds(&gs->unk0.obj2.base, -0x10, -0x10, 0x10, 0x10);
-    gs->unk0.obj2.unk83 = 0;
-    ObjectInitSprite(&gs->unk0.obj2);
-    gs->unk0.obj2.unk78 = sub_0800DC8C;
+    gs->unk0.obj.base.flags |= 0x221C140;
+    gs->unk0.obj.base.unk68 &= ~7;
+    gs->unk0.obj.base.unk5C = ~0x80;
+    gs->unk0.obj.base.unk5C &= ~7; // do nothing
+    gs->unk0.obj.base.unkC |= 1;
+    sub_0803E2B0(&gs->unk0.obj.base, -0x10, -0x10, 0x10, 0x10);
+    ObjectSetBounds(&gs->unk0.obj.base, -0x10, -0x10, 0x10, 0x10);
+    gs->unk0.obj.unk83 = 0;
+    ObjectInitSprite(&gs->unk0.obj);
+    gs->unk0.obj.unk78 = sub_0800DC8C;
     return gs;
 }
 
@@ -1779,7 +1779,7 @@ static void sub_0800BFC8(struct StarShared *ss)
 
         ss->unkB8 = 0;
         ++ss->unkB6;
-        sub_0800D5D8(ss, ss->obj2.base.x + gUnk_082DDE3C[r][0], ss->obj2.base.y + gUnk_082DDE3C[r][1]);
+        sub_0800D5D8(ss, ss->obj.base.x + gUnk_082DDE3C[r][0], ss->obj.base.y + gUnk_082DDE3C[r][1]);
         if (gUnk_082DDE34[ss->unkB6] == 0xFFFF)
             ss->unkB6 = 0;
     }
@@ -1789,13 +1789,13 @@ static bool32 sub_0800C084(struct WarpStar *ws, bool32 a2)
 {
     struct Kirby *kirby, *kirby2;
 
-    if (ws->unk0.obj2.base.flags & 0x40000
-        && !(kirby2 = (struct Kirby *)ws->unk0.obj2.base.unk6C)->base.header.kind
+    if (ws->unk0.obj.base.flags & 0x40000
+        && !(kirby2 = (struct Kirby *)ws->unk0.obj.base.unk6C)->base.header.kind
         && (!a2 || kirby2->base.unk56 < gNumHumanPlayers)
         && sub_080525C0(kirby2))
     {
         ws->unk0.unkB5 |= 1 << kirby2->base.unk56;
-        kirby = (struct Kirby *)ws->unk0.obj2.base.unk6C;
+        kirby = (struct Kirby *)ws->unk0.obj.base.unk6C;
         gCurLevelInfo[kirby->base.unk56].unk1EC = 0;
         kirby->roomId = ws->unkBE;
         kirby->spawnLocation.x = ws->unkC0;
@@ -1809,25 +1809,25 @@ static void sub_0800C124(struct WarpStar *ws)
 {
     if (sub_0800C084(ws, TRUE))
     {
-        ws->unk0.obj2.base.flags |= 0x400;
-        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
-        ws->unk0.obj2.unk78 = sub_0800DC78;
+        ws->unk0.obj.base.flags |= 0x400;
+        CreateEffectObject(&ws->unk0.obj.base, 0, 0x292, 0);
+        ws->unk0.obj.unk78 = sub_0800DC78;
     }
     else
     {
         s32 a[2];
 
         ws->unk0.unkBA = (ws->unk0.unkBA + 8) & 0x3FF;
-        a[0] = ws->unk0.obj2.objTemplate->x * 0x100;
-        ws->unk0.obj2.base.x = ws->unk0.obj2.objTemplate->x * 0x100;
-        a[1] = ws->unk0.obj2.objTemplate->y * 0x100;
-        ws->unk0.obj2.base.y = ws->unk0.obj2.objTemplate->y * 0x100;
+        a[0] = ws->unk0.obj.objTemplate->x * 0x100;
+        ws->unk0.obj.base.x = ws->unk0.obj.objTemplate->x * 0x100;
+        a[1] = ws->unk0.obj.objTemplate->y * 0x100;
+        ws->unk0.obj.base.y = ws->unk0.obj.objTemplate->y * 0x100;
         a[1] += 8 * (gSineTable[ws->unk0.unkBA] >> 6);
-        ws->unk0.obj2.base.xspeed = a[0] - ws->unk0.obj2.base.x; // always 0
-        ws->unk0.obj2.base.yspeed = a[1] - ws->unk0.obj2.base.y;
-        ws->unk0.obj2.base.yspeed = -ws->unk0.obj2.base.yspeed;
+        ws->unk0.obj.base.xspeed = a[0] - ws->unk0.obj.base.x; // always 0
+        ws->unk0.obj.base.yspeed = a[1] - ws->unk0.obj.base.y;
+        ws->unk0.obj.base.yspeed = -ws->unk0.obj.base.yspeed;
         sub_0800BFC8(&ws->unk0);
-        ws->unk0.obj2.base.flags |= 4;
+        ws->unk0.obj.base.flags |= 4;
     }
 }
 
@@ -1837,26 +1837,26 @@ static void sub_0800C1C4(struct WarpStar *ws)
     struct WarpStar *wsAlias = ws;
 
     if (sub_0800C084(ws, FALSE))
-        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
-    a[0] = ws->unk0.obj2.objTemplate->x * 0x100;
-    ws->unk0.obj2.base.x = ws->unk0.obj2.objTemplate->x * 0x100;
-    a[1] = ws->unk0.obj2.objTemplate->y * 0x100;
-    ws->unk0.obj2.base.y = ws->unk0.obj2.objTemplate->y * 0x100;
-    ws->unk0.obj2.base.xspeed = a[0] - ws->unk0.obj2.base.x; // always 0
-    ws->unk0.obj2.base.yspeed = a[1] - ws->unk0.obj2.base.y; // always 0
-    if (ws->unk0.obj2.base.xspeed > 0x80)
-        ws->unk0.obj2.base.xspeed = 0x80;
-    else if (ws->unk0.obj2.base.xspeed < -0x80)
-        ws->unk0.obj2.base.xspeed = -0x80;
-    wsAlias->unk0.obj2.base.yspeed = a[1] - wsAlias->unk0.obj2.base.y;
-    if (wsAlias->unk0.obj2.base.yspeed > 0x80)
-        wsAlias->unk0.obj2.base.yspeed = 0x80;
-    else if (wsAlias->unk0.obj2.base.yspeed < -0x80)
-        wsAlias->unk0.obj2.base.yspeed = -0x80;
-    wsAlias->unk0.obj2.base.yspeed = -wsAlias->unk0.obj2.base.yspeed;
-    if (!wsAlias->unk0.obj2.base.xspeed && !wsAlias->unk0.obj2.base.yspeed)
+        CreateEffectObject(&ws->unk0.obj.base, 0, 0x292, 0);
+    a[0] = ws->unk0.obj.objTemplate->x * 0x100;
+    ws->unk0.obj.base.x = ws->unk0.obj.objTemplate->x * 0x100;
+    a[1] = ws->unk0.obj.objTemplate->y * 0x100;
+    ws->unk0.obj.base.y = ws->unk0.obj.objTemplate->y * 0x100;
+    ws->unk0.obj.base.xspeed = a[0] - ws->unk0.obj.base.x; // always 0
+    ws->unk0.obj.base.yspeed = a[1] - ws->unk0.obj.base.y; // always 0
+    if (ws->unk0.obj.base.xspeed > 0x80)
+        ws->unk0.obj.base.xspeed = 0x80;
+    else if (ws->unk0.obj.base.xspeed < -0x80)
+        ws->unk0.obj.base.xspeed = -0x80;
+    wsAlias->unk0.obj.base.yspeed = a[1] - wsAlias->unk0.obj.base.y;
+    if (wsAlias->unk0.obj.base.yspeed > 0x80)
+        wsAlias->unk0.obj.base.yspeed = 0x80;
+    else if (wsAlias->unk0.obj.base.yspeed < -0x80)
+        wsAlias->unk0.obj.base.yspeed = -0x80;
+    wsAlias->unk0.obj.base.yspeed = -wsAlias->unk0.obj.base.yspeed;
+    if (!wsAlias->unk0.obj.base.xspeed && !wsAlias->unk0.obj.base.yspeed)
     {
-        wsAlias->unk0.obj2.unk78 = sub_0800C270;
+        wsAlias->unk0.obj.unk78 = sub_0800C270;
         ws->unk0.unkBA = 0;
         ws->unkBC = 0;
     }
@@ -1874,14 +1874,14 @@ static void sub_0800C270(struct WarpStar *ws)
     u16 exp;
 
     if (sub_0800C084(ws, FALSE))
-        CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
+        CreateEffectObject(&ws->unk0.obj.base, 0, 0x292, 0);
     for (i = 0; i < gNumKirbys; ++i)
         if ((ws->unk0.unkB5 >> i) & 1 && gCurLevelInfo[i].unk1EC == 1)
             gCurLevelInfo[i].unk1EC = 2;
-    a[0] = ws->unk0.obj2.objTemplate->x * 0x100;
-    ws->unk0.obj2.base.x = ws->unk0.obj2.objTemplate->x * 0x100;
-    a[1] = ws->unk0.obj2.objTemplate->y * 0x100;
-    ws->unk0.obj2.base.y = ws->unk0.obj2.objTemplate->y * 0x100;
+    a[0] = ws->unk0.obj.objTemplate->x * 0x100;
+    ws->unk0.obj.base.x = ws->unk0.obj.objTemplate->x * 0x100;
+    a[1] = ws->unk0.obj.objTemplate->y * 0x100;
+    ws->unk0.obj.base.y = ws->unk0.obj.objTemplate->y * 0x100;
     exp = ws->unkBC * 3u / 2;
     if (exp > 1)
     {
@@ -1893,22 +1893,22 @@ static void sub_0800C270(struct WarpStar *ws)
         var = 2;
     ws->unk0.unkBA = (ws->unk0.unkBA + var) % 0x400;
     a[1] += 2 * (gSineTable[ws->unk0.unkBA] >> 6);
-    ws->unk0.obj2.base.xspeed = a[0] - ws->unk0.obj2.base.x; // always 0
-    ws->unk0.obj2.base.yspeed = a[1] - ws->unk0.obj2.base.y;
-    ws->unk0.obj2.base.yspeed = -ws->unk0.obj2.base.yspeed;
+    ws->unk0.obj.base.xspeed = a[0] - ws->unk0.obj.base.x; // always 0
+    ws->unk0.obj.base.yspeed = a[1] - ws->unk0.obj.base.y;
+    ws->unk0.obj.base.yspeed = -ws->unk0.obj.base.yspeed;
     if (++ws->unkBC > 0x12C)
     {
         // TODO: The two expressions need << 8 instead of * 0x100 to match. UB?
-        ws->unk0.obj2.base.xspeed = (ws->unk0.obj2.objTemplate->x << 8) - ws->unk0.obj2.base.x;
-        ws->unk0.obj2.base.yspeed = (ws->unk0.obj2.objTemplate->y << 8) - ws->unk0.obj2.base.y;
-        ws->unk0.obj2.base.yspeed = -ws->unk0.obj2.base.yspeed;
+        ws->unk0.obj.base.xspeed = (ws->unk0.obj.objTemplate->x << 8) - ws->unk0.obj.base.x;
+        ws->unk0.obj.base.yspeed = (ws->unk0.obj.objTemplate->y << 8) - ws->unk0.obj.base.y;
+        ws->unk0.obj.base.yspeed = -ws->unk0.obj.base.yspeed;
 #ifndef NONMATCHING
-        if ((u16)ws->unk0.obj2.base.yspeed & 0x10000)
-            ws->unk0.obj2.unk78 = sub_0800DCC0;
+        if ((u16)ws->unk0.obj.base.yspeed & 0x10000)
+            ws->unk0.obj.unk78 = sub_0800DCC0;
         else
-            ws->unk0.obj2.unk78 = sub_0800DCC0;
+            ws->unk0.obj.unk78 = sub_0800DCC0;
 #else
-        ws->unk0.obj2.unk78 = sub_0800DCC0;
+        ws->unk0.obj.unk78 = sub_0800DCC0;
 #endif
     }
 }
@@ -1917,13 +1917,13 @@ static bool32 sub_0800C3BC(struct GoalStar *gs)
 {
     struct Kirby *kirby, *kirby2;
 
-    if (gs->unk0.obj2.base.flags & 0x40000
-        && !(kirby2 = (struct Kirby *)gs->unk0.obj2.base.unk6C)->base.header.kind
+    if (gs->unk0.obj.base.flags & 0x40000
+        && !(kirby2 = (struct Kirby *)gs->unk0.obj.base.unk6C)->base.header.kind
         && kirby2->base.unk56 < gNumHumanPlayers
         && sub_080525C0(kirby2))
     {
         gs->unk0.unkB5 |= 1 << kirby2->base.unk56;
-        kirby = (struct Kirby *)gs->unk0.obj2.base.unk6C;
+        kirby = (struct Kirby *)gs->unk0.obj.base.unk6C;
         gCurLevelInfo[kirby->base.unk56].unk1EC = 2;
 
         return TRUE;
@@ -1989,10 +1989,10 @@ static void sub_0800C558(struct GoalStar *gs)
 
     if (sub_0800C3BC(gs))
     {
-        gs->unk0.obj2.base.flags |= 0x400;
-        CreateEffectObject(&gs->unk0.obj2.base, 0, 0x292, 0);
+        gs->unk0.obj.base.flags |= 0x400;
+        CreateEffectObject(&gs->unk0.obj.base, 0, 0x292, 0);
     }
-    roomId = gs->unk0.obj2.base.roomId;
+    roomId = gs->unk0.obj.base.roomId;
     i = 0;
     for (j = 0; j < gNumHumanPlayers; ++j)
     {
@@ -2009,7 +2009,7 @@ static void sub_0800C558(struct GoalStar *gs)
     if (i)
     {
         sub_0800C42C(gsAlias);
-        gs->unk0.obj2.unk78 = sub_0800DCAC;
+        gs->unk0.obj.unk78 = sub_0800DCAC;
     }
     else
     {
@@ -2017,14 +2017,14 @@ static void sub_0800C558(struct GoalStar *gs)
         u16 *ptr = &gsAlias->unk0.unkBA;
 
         gsAlias->unk0.unkBA = (gsAlias->unk0.unkBA + 8) & 0x3FF;
-        a[0] = gs->unk0.obj2.objTemplate->x * 0x100;
-        a[1] = gs->unk0.obj2.objTemplate->y * 0x100;
+        a[0] = gs->unk0.obj.objTemplate->x * 0x100;
+        a[1] = gs->unk0.obj.objTemplate->y * 0x100;
         a[1] += 8 * (gSineTable[*ptr] >> 6);
-        gs->unk0.obj2.base.xspeed = a[0] - gs->unk0.obj2.base.x;
-        gs->unk0.obj2.base.yspeed = a[1] - gs->unk0.obj2.base.y;
-        gs->unk0.obj2.base.yspeed = -gs->unk0.obj2.base.yspeed;
+        gs->unk0.obj.base.xspeed = a[0] - gs->unk0.obj.base.x;
+        gs->unk0.obj.base.yspeed = a[1] - gs->unk0.obj.base.y;
+        gs->unk0.obj.base.yspeed = -gs->unk0.obj.base.yspeed;
         sub_0800BFC8(&gsAlias->unk0);
-        gs->unk0.obj2.base.flags |= 4;
+        gs->unk0.obj.base.flags |= 4;
     }
 }
 
@@ -2033,23 +2033,23 @@ static void sub_0800C660(struct GoalStar *gs)
     struct GoalStar *gsAlias = gs;
     s32 a[2];
 
-    a[0] = gs->unk0.obj2.objTemplate->x * 0x100;
-    a[1] = gs->unk0.obj2.objTemplate->y * 0x100;
-    gs->unk0.obj2.base.xspeed = a[0] - gs->unk0.obj2.base.x;
-    gs->unk0.obj2.base.yspeed = a[1] - gs->unk0.obj2.base.y;
-    if (gs->unk0.obj2.base.xspeed > 0x80)
-        gs->unk0.obj2.base.xspeed = 0x80;
-    else if (gs->unk0.obj2.base.xspeed < -0x80)
-        gs->unk0.obj2.base.xspeed = -0x80;
-    gsAlias->unk0.obj2.base.yspeed = a[1] - gsAlias->unk0.obj2.base.y;
-    if (gsAlias->unk0.obj2.base.yspeed > 0x80)
-        gsAlias->unk0.obj2.base.yspeed = 0x80;
-    else if (gsAlias->unk0.obj2.base.yspeed < -0x80)
-        gsAlias->unk0.obj2.base.yspeed = -0x80;
-    gsAlias->unk0.obj2.base.yspeed = -gsAlias->unk0.obj2.base.yspeed;
-    if (!gsAlias->unk0.obj2.base.xspeed && !gsAlias->unk0.obj2.base.yspeed)
+    a[0] = gs->unk0.obj.objTemplate->x * 0x100;
+    a[1] = gs->unk0.obj.objTemplate->y * 0x100;
+    gs->unk0.obj.base.xspeed = a[0] - gs->unk0.obj.base.x;
+    gs->unk0.obj.base.yspeed = a[1] - gs->unk0.obj.base.y;
+    if (gs->unk0.obj.base.xspeed > 0x80)
+        gs->unk0.obj.base.xspeed = 0x80;
+    else if (gs->unk0.obj.base.xspeed < -0x80)
+        gs->unk0.obj.base.xspeed = -0x80;
+    gsAlias->unk0.obj.base.yspeed = a[1] - gsAlias->unk0.obj.base.y;
+    if (gsAlias->unk0.obj.base.yspeed > 0x80)
+        gsAlias->unk0.obj.base.yspeed = 0x80;
+    else if (gsAlias->unk0.obj.base.yspeed < -0x80)
+        gsAlias->unk0.obj.base.yspeed = -0x80;
+    gsAlias->unk0.obj.base.yspeed = -gsAlias->unk0.obj.base.yspeed;
+    if (!gsAlias->unk0.obj.base.xspeed && !gsAlias->unk0.obj.base.yspeed)
     {
-        gsAlias->unk0.obj2.unk78 = sub_0800C6E8;
+        gsAlias->unk0.obj.unk78 = sub_0800C6E8;
         gs->unk0.unkBA = 0;
         gs->unkBC = 0;
     }
@@ -2070,14 +2070,14 @@ static void sub_0800C6E8(struct GoalStar *gs)
     }
     if (gsAlias->unkC2 == 1)
     {
-        PlaySfx(&gs->unk0.obj2.base, SE_08D5B2A8);
-        gs->unk0.obj2.unk78 = sub_0800DD40;
+        PlaySfx(&gs->unk0.obj.base, SE_08D5B2A8);
+        gs->unk0.obj.unk78 = sub_0800DD40;
     }
     else
     {
-        CreateEffectObject(&gs->unk0.obj2.base, 0, 0x292, 0);
-        PlaySfx(&gs->unk0.obj2.base, SE_08D5C258);
-        gs->unk0.obj2.unk78 = sub_0800C89C;
+        CreateEffectObject(&gs->unk0.obj.base, 0, 0x292, 0);
+        PlaySfx(&gs->unk0.obj.base, SE_08D5C258);
+        gs->unk0.obj.unk78 = sub_0800C89C;
     }
 }
 
@@ -2107,7 +2107,7 @@ static void sub_0800C89C(struct GoalStar *gs)
         }
     }
     if (var)
-        gs->unk0.obj2.unk78 = sub_0800DD40;
+        gs->unk0.obj.unk78 = sub_0800DD40;
 }
 
 static void sub_0800C918(struct GoalStar *gs)
@@ -2126,7 +2126,7 @@ static void sub_0800C918(struct GoalStar *gs)
     }
     if (gKirbys[gsAlias->unkBE[0]].base.yspeed >= 0)
     {
-        PlaySfx(&gs->unk0.obj2.base, SE_SUBGAME_WAVE_RIDE_JUMP);
+        PlaySfx(&gs->unk0.obj.base, SE_SUBGAME_WAVE_RIDE_JUMP);
         for (i = 0; i < gsAlias->unkC2; ++i)
         {
             struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
@@ -2134,7 +2134,7 @@ static void sub_0800C918(struct GoalStar *gs)
             sub_0800D6C0(gs, kirby->base.x, kirby->base.y + 0x1000);
             kirby->base.yspeed = 0x400;
         }
-        gs->unk0.obj2.unk78 = sub_0800CA84;
+        gs->unk0.obj.unk78 = sub_0800CA84;
     }
 }
 
@@ -2157,7 +2157,7 @@ static void sub_0800CA84(struct GoalStar *gs)
         if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
             sub_0803CA20(gLocalPlayerId);
         gsAlias->unkCC = 0;
-        gs->unk0.obj2.unk78 = sub_0800CB54;
+        gs->unk0.obj.unk78 = sub_0800CB54;
     }
 }
 
@@ -2176,7 +2176,7 @@ static void sub_0800CB54(struct GoalStar *gs)
             : -0x800);
     }
     if (gsAlias->unkCC++ > 0x1E)
-        gs->unk0.obj2.unk78 = sub_0800CBF0;
+        gs->unk0.obj.unk78 = sub_0800CBF0;
 }
 
 static void sub_0800CBF0(struct GoalStar *gs)
@@ -2215,10 +2215,10 @@ static void sub_0800CBF0(struct GoalStar *gs)
     gsAlias->unkDC = (Rand16() & 0xFF) < 0x1A;
     gsAlias->unkE0 = 1;
     gsAlias->unkE2 = 0;
-    gsAlias->unkE4 = gUnk_082DDE7C[gsAlias->unk0.unkB4] / (gForegroundPalettes[gRoomProps[gs->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0]->unk4[0] - 1);
+    gsAlias->unkE4 = gUnk_082DDE7C[gsAlias->unk0.unkB4] / (gForegroundPalettes[gRoomProps[gs->unk0.obj.base.roomId].paletteDataIdx]->unk4[0]->unk4[0] - 1);
     if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
         sub_0803C95C(gLocalPlayerId);
-    gs->unk0.obj2.unk78 = sub_0800DDAC;
+    gs->unk0.obj.unk78 = sub_0800DDAC;
 }
 
 static void sub_0800CDE8(struct GoalStar *gs)
@@ -2254,15 +2254,15 @@ static void sub_0800CDE8(struct GoalStar *gs)
             }
             if (i < 0x14 && j < 8)
             {
-                CreateObjTemplateAndObj(gsAlias->unk0.obj2.base.unk56, 1, 0x24,
-                    gUnk_082DE40C[j], (gCurLevelInfo[gsAlias->unk0.obj2.base.unk56].viewportPosition.y >> 8) - 0x10,
+                CreateObjTemplateAndObj(gsAlias->unk0.obj.base.unk56, 1, 0x24,
+                    gUnk_082DE40C[j], (gCurLevelInfo[gsAlias->unk0.obj.base.unk56].viewportPosition.y >> 8) - 0x10,
                     0, 0x1F, 0, 0, OBJ_GOAL_GAME_BONUS, i, 0, gsAlias->unkDC, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             }
         }
     }
     if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
     {
-        struct ForegroundPalette_4pp *r4 = gForegroundPalettes[gRoomProps[gsAlias->unk0.obj2.base.roomId].paletteDataIdx]->unk4[0];
+        struct ForegroundPalette_4pp *r4 = gForegroundPalettes[gRoomProps[gsAlias->unk0.obj.base.roomId].paletteDataIdx]->unk4[0];
 
         if (gsAlias->unkE0 < r4->unk4[0]
             && ++gsAlias->unkE2 >= gsAlias->unkE4)
@@ -2281,7 +2281,7 @@ static void sub_0800CDE8(struct GoalStar *gs)
     }
     ++gsAlias->unkDA;
     if (gUnk_082DDE7C[gsAlias->unk0.unkB4] < gsAlias->unkDA)
-        gs->unk0.obj2.unk78 = sub_0800DDB8;
+        gs->unk0.obj.unk78 = sub_0800DDB8;
 }
 
 static void sub_0800D0EC(struct GoalStar *gs)
@@ -2302,7 +2302,7 @@ static void sub_0800D0EC(struct GoalStar *gs)
             li->unk98 = li->unkA8 = li->unk_S32Vec2_74.x;
             li->unk9C = li->unkAC = li->unk_S32Vec2_74.y;
         }
-        gs->unk0.obj2.unk78 = sub_0800D194;
+        gs->unk0.obj.unk78 = sub_0800D194;
     }
 }
 
@@ -2329,7 +2329,7 @@ static void sub_0800D194(struct GoalStar *gs)
         }
     }
     if (gCurLevelInfo[gsAlias->unkBE[0]].viewportPosition.y <= 0x5800)
-        gs->unk0.obj2.unk78 = sub_0800D264;
+        gs->unk0.obj.unk78 = sub_0800D264;
 }
 
 static void sub_0800D264(struct GoalStar *gs)
@@ -2353,7 +2353,7 @@ static void sub_0800D264(struct GoalStar *gs)
     if (var == gsAlias->unkC2)
     {
         gsAlias->unkCE = 0;
-        gs->unk0.obj2.unk78 = sub_0800D2E0;
+        gs->unk0.obj.unk78 = sub_0800D2E0;
     }
 }
 
@@ -2377,115 +2377,115 @@ static void sub_0800D2E0(struct GoalStar *gs)
         }
         gsAlias->unkCE = 0;
         gsAlias->unkD0 = 0;
-        gs->unk0.obj2.unk78 = sub_0800DE20;
+        gs->unk0.obj.unk78 = sub_0800DE20;
     }
 }
 
 static void sub_0800D3B0(struct GoalStar *gs)
 {
-    s32 a[] = { gs->unk0.obj2.objTemplate->x * 0x100, gs->unk0.obj2.objTemplate->y * 0x100 };
+    s32 a[] = { gs->unk0.obj.objTemplate->x * 0x100, gs->unk0.obj.objTemplate->y * 0x100 };
 
-    gs->unk0.obj2.base.xspeed += 3;
-    if (gs->unk0.obj2.base.xspeed > -0x80)
-        gs->unk0.obj2.base.xspeed = -0x80;
-    gs->unk0.obj2.base.yspeed += 8;
-    if (gs->unk0.obj2.base.yspeed > -0x40)
-        gs->unk0.obj2.base.yspeed = -0x40;
-    if (gs->unk0.obj2.base.x < a[0])
+    gs->unk0.obj.base.xspeed += 3;
+    if (gs->unk0.obj.base.xspeed > -0x80)
+        gs->unk0.obj.base.xspeed = -0x80;
+    gs->unk0.obj.base.yspeed += 8;
+    if (gs->unk0.obj.base.yspeed > -0x40)
+        gs->unk0.obj.base.yspeed = -0x40;
+    if (gs->unk0.obj.base.x < a[0])
     {
-        gs->unk0.obj2.base.xspeed = 0;
-        gs->unk0.obj2.base.x = a[0];
+        gs->unk0.obj.base.xspeed = 0;
+        gs->unk0.obj.base.x = a[0];
     }
-    if (gs->unk0.obj2.base.y > a[1])
+    if (gs->unk0.obj.base.y > a[1])
     {
-        gs->unk0.obj2.base.yspeed = 0;
-        gs->unk0.obj2.base.y = a[1];
+        gs->unk0.obj.base.yspeed = 0;
+        gs->unk0.obj.base.y = a[1];
     }
-    if (gs->unk0.obj2.base.x == a[0] && gs->unk0.obj2.base.y == a[1])
+    if (gs->unk0.obj.base.x == a[0] && gs->unk0.obj.base.y == a[1])
     {
-        gs->unk0.obj2.base.yspeed = 0;
-        gs->unk0.obj2.unk78 = sub_0800DC8C;
+        gs->unk0.obj.base.yspeed = 0;
+        gs->unk0.obj.unk78 = sub_0800DC8C;
     }
-    gs->unk0.obj2.base.flags |= 4;
+    gs->unk0.obj.base.flags |= 4;
 }
 
 static void sub_0800D450(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *obj4 = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
 
-    if (obj4->flags & 0x1000)
+    if (effect->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        struct StarShared *ss = obj4->parent;
+        struct StarShared *ss = effect->parent;
 
         if (ss)
         {
-            if (ss->obj2.base.header.kind && ss->obj2.base.flags & 0x1000)
+            if (ss->obj.base.header.kind && ss->obj.base.flags & 0x1000)
             {
-                obj4->parent = NULL;
+                effect->parent = NULL;
                 ss = NULL;
             }
             if (!ss)
                 goto label;
-            if (Macro_0810B1F4(&ss->obj2.base) && !(obj4->flags & 0x2000))
+            if (Macro_0810B1F4(&ss->obj.base) && !(effect->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(obj4);
+                EffectObjectDisplaySprite(effect);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(obj4);
+            KirbySomething(effect);
         }
-        Macro_0809E55C(obj4);
-        if (obj4->flags & 2)
-            obj4->flags |= 0x1000;
-        EffectObjectPostUpdate(obj4);
+        Macro_0809E55C(effect);
+        if (effect->flags & 2)
+            effect->flags |= 0x1000;
+        EffectObjectPostUpdate(effect);
     }
 }
 
 static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 {
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct EffectObject *obj4 = TaskGetStructPtr(t);
+    struct EffectObject *effect = TaskGetStructPtr(t);
 
-    ClearEffectObject(obj4);
-    obj4->header.kind = 3;
-    obj4->x = ss->obj2.base.x;
-    obj4->y = ss->obj2.base.y;
-    obj4->parent = ss;
-    obj4->roomId = ss->obj2.base.roomId;
-    obj4->flags |= 0x4000;
-    obj4->x = a2;
-    obj4->y = a3;
-    obj4->unk4 = 0;
-    if (Macro_0810B1F4(&ss->obj2.base))
-        obj4->flags |= 0x2000;
-    obj4->flags |= 0x4000; // why do it twice lol
-    EffectObjectInitSprite(obj4, &obj4->sprite, 0x6012000, 0x2AE, 0, 0xA);
+    ClearEffectObject(effect);
+    effect->header.kind = 3;
+    effect->x = ss->obj.base.x;
+    effect->y = ss->obj.base.y;
+    effect->parent = ss;
+    effect->roomId = ss->obj.base.roomId;
+    effect->flags |= 0x4000;
+    effect->x = a2;
+    effect->y = a3;
+    effect->unk4 = 0;
+    if (Macro_0810B1F4(&ss->obj.base))
+        effect->flags |= 0x2000;
+    effect->flags |= 0x4000; // why do it twice lol
+    EffectObjectInitSprite(effect, &effect->sprite, 0x6012000, 0x2AE, 0, 0xA);
 }
 
 static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
 {
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct EffectObject *obj4 = TaskGetStructPtr(t);
+    struct EffectObject *effect = TaskGetStructPtr(t);
 
-    ClearEffectObject(obj4);
-    obj4->header.kind = 3;
-    obj4->x = gs->unk0.obj2.base.x;
-    obj4->y = gs->unk0.obj2.base.y;
-    obj4->parent = gs;
-    obj4->roomId = gs->unk0.obj2.base.roomId;
-    obj4->flags |= 0x4000;
-    obj4->x = a2;
-    obj4->y = a3;
-    obj4->unk4 = 0;
-    if (Macro_0810B1F4(&gs->unk0.obj2.base))
-        obj4->flags |= 0x2000;
-    obj4->flags |= 0x4000; // why do it twice lol
-    EffectObjectInitSprite(obj4, &obj4->sprite, 0x6012000, 0x29B, 0, 0xA);
+    ClearEffectObject(effect);
+    effect->header.kind = 3;
+    effect->x = gs->unk0.obj.base.x;
+    effect->y = gs->unk0.obj.base.y;
+    effect->parent = gs;
+    effect->roomId = gs->unk0.obj.base.roomId;
+    effect->flags |= 0x4000;
+    effect->x = a2;
+    effect->y = a3;
+    effect->unk4 = 0;
+    if (Macro_0810B1F4(&gs->unk0.obj.base))
+        effect->flags |= 0x2000;
+    effect->flags |= 0x4000; // why do it twice lol
+    EffectObjectInitSprite(effect, &effect->sprite, 0x6012000, 0x29B, 0, 0xA);
 }
 
 static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
@@ -2507,17 +2507,17 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
         {
             var = FALSE;
             sprite->variant = stack[i];
-            Macro_080FC150(&a1->obj4, sprite);
-            sprite->x = (a1->obj4.x >> 8) + 0x10 * i + 2 * i;
-            sprite->y = a1->obj4.y >> 8;
-            a1->obj4.flags &= ~0x400;
-            if (gKirbys[gLocalPlayerId].base.roomId == a1->obj4.roomId)
+            Macro_080FC150(&a1->effect, sprite);
+            sprite->x = (a1->effect.x >> 8) + 0x10 * i + 2 * i;
+            sprite->y = a1->effect.y >> 8;
+            a1->effect.flags &= ~0x400;
+            if (gKirbys[gLocalPlayerId].base.roomId == a1->effect.roomId)
             {
                 sprite->x += gUnk_0203AD18[0];
                 sprite->y += gUnk_0203AD18[1];
-                Macro_0803DBC8(&a1->obj4, sprite);
+                Macro_0803DBC8(&a1->effect, sprite);
             }
-            a1->obj4.flags |= 0x400;
+            a1->effect.flags |= 0x400;
         }
     }
 }
@@ -2528,54 +2528,54 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
     u16 i;
 
-    ClearEffectObject(&var->obj4);
-    var->obj4.header.kind = 3;
-    var->obj4.x = gs->unk0.obj2.base.x;
-    var->obj4.y = gs->unk0.obj2.base.y;
-    var->obj4.parent = gs;
-    var->obj4.roomId = gs->unk0.obj2.base.roomId;
-    var->obj4.flags |= 0x400;
-    var->obj4.x = a2 * 0x100;
-    var->obj4.y = a3 * 0x100;
+    ClearEffectObject(&var->effect);
+    var->effect.header.kind = 3;
+    var->effect.x = gs->unk0.obj.base.x;
+    var->effect.y = gs->unk0.obj.base.y;
+    var->effect.parent = gs;
+    var->effect.roomId = gs->unk0.obj.base.roomId;
+    var->effect.flags |= 0x400;
+    var->effect.x = a2 * 0x100;
+    var->effect.y = a3 * 0x100;
     var->unkC0 = sub_0800DEE8;
     var->unkC4 = gs;
-    if (Macro_0810B1F4(&gs->unk0.obj2.base))
-        var->obj4.flags |= 0x2000;
+    if (Macro_0810B1F4(&gs->unk0.obj.base))
+        var->effect.flags |= 0x2000;
     for (i = 0; i < 3; ++i)
-        EffectObjectInitSprite(&var->obj4, &var->sprites[i], 6, 0x2E6, 0, 0xA);
+        EffectObjectInitSprite(&var->effect, &var->sprites[i], 6, 0x2E6, 0, 0xA);
 }
 
 static void sub_0800DAD8(void)
 {
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
 
-    if (var->obj4.flags & 0x1000)
+    if (var->effect.flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        struct GoalStar *gs = var->obj4.parent;
+        struct GoalStar *gs = var->effect.parent;
 
         if (gs)
         {
-            if (gs->unk0.obj2.base.header.kind && gs->unk0.obj2.base.flags & 0x1000)
+            if (gs->unk0.obj.base.header.kind && gs->unk0.obj.base.flags & 0x1000)
             {
-                var->obj4.parent = NULL;
+                var->effect.parent = NULL;
                 gs = NULL;
             }
             if (!gs)
                 goto label;
-            if (Macro_0810B1F4(&gs->unk0.obj2.base) && !(var->obj4.flags & 0x2000))
+            if (Macro_0810B1F4(&gs->unk0.obj.base) && !(var->effect.flags & 0x2000))
             {
-                EffectObjectDisplaySprite(&var->obj4);
+                EffectObjectDisplaySprite(&var->effect);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(&var->obj4);
+            KirbySomething(&var->effect);
         }
-        Macro_0809E55C(&var->obj4);
+        Macro_0809E55C(&var->effect);
         var->unkC0(var);
     }
 }
@@ -2590,12 +2590,12 @@ static void sub_0800DC5C(struct WarpStar *ws)
 {
     ws->unk0.unkBA = 0;
     ws->unk0.unkB5 = 0;
-    ws->unk0.obj2.unk78 = sub_0800C124;
+    ws->unk0.obj.unk78 = sub_0800C124;
 }
 
 static void sub_0800DC78(struct WarpStar *ws)
 {
-    ws->unk0.obj2.unk78 = sub_0800C1C4;
+    ws->unk0.obj.unk78 = sub_0800C1C4;
     sub_0800C1C4(ws);
 }
 
@@ -2605,12 +2605,12 @@ static void sub_0800DC8C(struct GoalStar *gs)
     gs->unk0.unkB8 = 0;
     gs->unk0.unkBA = 0;
     gs->unk0.unkB5 = 0;
-    gs->unk0.obj2.unk78 = sub_0800C558;
+    gs->unk0.obj.unk78 = sub_0800C558;
 }
 
 static void sub_0800DCAC(struct GoalStar *gs)
 {
-    gs->unk0.obj2.unk78 = sub_0800C660;
+    gs->unk0.obj.unk78 = sub_0800C660;
     sub_0800C660(gs);
 }
 
@@ -2627,7 +2627,7 @@ static void sub_0800DCC0(struct WarpStar *ws)
             sub_080531B4(&gKirbys[i], gUnk_08D60A84[wsAlias->unk0.unkB4]);
         }
     }
-    ws->unk0.obj2.unk78 = sub_0800DFC8;
+    ws->unk0.obj.unk78 = sub_0800DFC8;
 }
 
 static void sub_0800DD40(struct GoalStar *gs)
@@ -2642,12 +2642,12 @@ static void sub_0800DD40(struct GoalStar *gs)
         kirby->base.xspeed = 0;
         kirby->base.yspeed = -0x180;
     }
-    gs->unk0.obj2.unk78 = sub_0800C918;
+    gs->unk0.obj.unk78 = sub_0800C918;
 }
 
 static void sub_0800DDAC(struct GoalStar *gs)
 {
-    gs->unk0.obj2.unk78 = sub_0800CDE8;
+    gs->unk0.obj.unk78 = sub_0800CDE8;
 }
 
 static void sub_0800DDB8(struct GoalStar *gs)
@@ -2664,7 +2664,7 @@ static void sub_0800DDB8(struct GoalStar *gs)
         kirby->base.xspeed = 0;
         kirby->base.yspeed = 0;
     }
-    gs->unk0.obj2.unk78 = sub_0800D0EC;
+    gs->unk0.obj.unk78 = sub_0800D0EC;
 }
 
 static void sub_0800DE20(struct GoalStar *gs)
@@ -2676,13 +2676,13 @@ static void sub_0800DE20(struct GoalStar *gs)
     {
         struct Kirby *kirby = gKirbys + gsAlias->unkBE[i];
 
-        if (kirby->base.roomId == gs->unk0.obj2.base.roomId)
+        if (kirby->base.roomId == gs->unk0.obj.base.roomId)
             break;
     }
     if (i == gsAlias->unkC2)
     {
         sub_080027A8();
-        gs->unk0.obj2.unk78 = sub_0800DFD4;
+        gs->unk0.obj.unk78 = sub_0800DFD4;
     }
 }
 
@@ -2726,32 +2726,32 @@ static void sub_0800DF5C(struct Unk_0800D9E8 *a1)
 
 static void sub_0800DF88(struct Unk_0800D9E8 *a1)
 {
-    a1->obj4.y += 0x100;
-    if (a1->obj4.y > 0xB000)
+    a1->effect.y += 0x100;
+    if (a1->effect.y > 0xB000)
         a1->unkC0 = sub_0800DFB8;
     sub_0800D7A8(a1, 0);
 }
 
 static void sub_0800DFB8(struct Unk_0800D9E8 *a1)
 {
-    a1->obj4.flags |= 0x1000;
+    a1->effect.flags |= 0x1000;
 }
 
 static void sub_0800DFC8(struct WarpStar *ws)
 {
-    ws->unk0.obj2.unk78 = sub_0800E02C;
+    ws->unk0.obj.unk78 = sub_0800E02C;
 }
 
 static void sub_0800DFD4(struct GoalStar *gs)
 {
-    struct LevelInfo *li = gCurLevelInfo + gs->unk0.obj2.base.unk56;
+    struct LevelInfo *li = gCurLevelInfo + gs->unk0.obj.base.unk56;
 
-    gs->unk0.obj2.base.x = li->levelMaxPosition.x + 0x2000;
-    gs->unk0.obj2.base.y = (gs->unk0.obj2.objTemplate->y - 0x40) * 0x100;
-    gs->unk0.obj2.base.xspeed = -0x1F0;
-    gs->unk0.obj2.base.yspeed = -0x200;
-    gs->unk0.obj2.base.flags &= ~0x400;
-    gs->unk0.obj2.unk78 = sub_0800D3B0;
+    gs->unk0.obj.base.x = li->levelMaxPosition.x + 0x2000;
+    gs->unk0.obj.base.y = (gs->unk0.obj.objTemplate->y - 0x40) * 0x100;
+    gs->unk0.obj.base.xspeed = -0x1F0;
+    gs->unk0.obj.base.yspeed = -0x200;
+    gs->unk0.obj.base.flags &= ~0x400;
+    gs->unk0.obj.unk78 = sub_0800D3B0;
 }
 
 static void sub_0800E02C(struct WarpStar *ws)
@@ -2769,19 +2769,19 @@ static void sub_0800E02C(struct WarpStar *ws)
             break;
         }
     }
-    if (b) ws->unk0.obj2.unk78 = sub_0800E0A0;
+    if (b) ws->unk0.obj.unk78 = sub_0800E0A0;
 }
 
 static void sub_0800E0A0(struct WarpStar *ws)
 {
-    ws->unk0.obj2.unk78 = sub_0800E0AC;
+    ws->unk0.obj.unk78 = sub_0800E0AC;
 }
 
 static void sub_0800E0AC(struct WarpStar *ws)
 {
-    CreateEffectObject(&ws->unk0.obj2.base, 0, 0x292, 0);
-    ws->unk0.obj2.base.flags &= ~0x400;
-    ws->unk0.obj2.base.xspeed = 0;
-    ws->unk0.obj2.base.yspeed = 0;
-    ws->unk0.obj2.unk78 = sub_0800DC5C;
+    CreateEffectObject(&ws->unk0.obj.base, 0, 0x292, 0);
+    ws->unk0.obj.base.flags &= ~0x400;
+    ws->unk0.obj.base.xspeed = 0;
+    ws->unk0.obj.base.yspeed = 0;
+    ws->unk0.obj.unk78 = sub_0800DC5C;
 }

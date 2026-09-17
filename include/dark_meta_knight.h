@@ -6,7 +6,7 @@
 
 struct DarkMetaKnight
 {
-    struct Object obj2;
+    struct Object obj;
     struct ObjectBase *unkB4;
     struct EffectObject *unkB8;
     struct EffectObject *unkBC;

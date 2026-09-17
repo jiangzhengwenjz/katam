@@ -6,7 +6,7 @@
 #include "object.h"
 
 struct VertSlidingDoor {
-    struct Object obj2;
+    struct Object obj;
     u16 unkB4;
     s8 unkB6;
     s8 unkB7;

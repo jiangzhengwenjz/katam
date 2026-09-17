@@ -25,67 +25,67 @@ void *CreateChest(struct ObjectTemplate *arg0, u8 arg1) {
     void *ptr = TaskGetStructPtr(task);
     chest2 = ptr;
     chest = chest2;
-    InitObject(&chest2->obj2, arg0, arg1);
+    InitObject(&chest2->obj, arg0, arg1);
     chest2->unkDC = 0;
     chest2->unkE0 = arg0->subtype1;
     chest2->unkE2 = arg0->unk11;
-    chest2->obj2.base.flags |= 0x2018200;
+    chest2->obj.base.flags |= 0x2018200;
     if (arg0->unk22 & 1) {
-        chest2->obj2.base.flags &= ~1;
+        chest2->obj.base.flags &= ~1;
     }
     else {
-        chest2->obj2.base.flags |= 1;
+        chest2->obj.base.flags |= 1;
     }
-    chest2->obj2.base.unk68 &= ~7;
-    if (chest2->obj2.type == OBJ_SMALL_CHEST) {
-        ObjectSetBounds(&chest2->obj2.base, -8, -8, 8, 8);
+    chest2->obj.base.unk68 &= ~7;
+    if (chest2->obj.type == OBJ_SMALL_CHEST) {
+        ObjectSetBounds(&chest2->obj.base, -8, -8, 8, 8);
     }
     else {
-        ObjectSetBounds(&chest2->obj2.base, -0x10, -0x10, 0x10, 0x10);
+        ObjectSetBounds(&chest2->obj.base, -0x10, -0x10, 0x10, 0x10);
     }
-    chest2->obj2.base.unk4C = chest2->obj2.base.y = ((chest2->obj2.base.y + (chest2->obj2.base.unk3F << 8) + 0xFFF) & ~0xFFF) - (chest2->obj2.base.unk3F << 8) - 1;
+    chest2->obj.base.unk4C = chest2->obj.base.y = ((chest2->obj.base.y + (chest2->obj.base.unk3F << 8) + 0xFFF) & ~0xFFF) - (chest2->obj.base.unk3F << 8) - 1;
     if (HasChest(chest->unkE2)) {
         if (chest->unkE0 != 0x63) {
-            chest2->obj2.unk83 = 1;
+            chest2->obj.unk83 = 1;
         }
         else {
-            chest2->obj2.unk83 = 3;
+            chest2->obj.unk83 = 3;
         }
     }
     else {
         if (chest->unkE0 != 0x63) {
-            chest2->obj2.unk83 = 0;
+            chest2->obj.unk83 = 0;
         }
         else {
-            chest2->obj2.unk83 = 2;
+            chest2->obj.unk83 = 2;
         }
     }
-    ObjectInitSprite(&chest2->obj2);
-    chest2->obj2.base.sprite.unk14 = 0x780;
-    gUnk_08351648[chest2->obj2.type].unk10(&chest2->obj2);
+    ObjectInitSprite(&chest2->obj);
+    chest2->obj.base.sprite.unk14 = 0x780;
+    gUnk_08351648[chest2->obj.type].unk10(&chest2->obj);
     return chest2;
 }
 
 static void sub_0800AEB0(struct Chest *chest) {
     struct Kirby *kirby;
     u16 i;
-    struct Object *obj2 = &chest->obj2;
-    const struct LevelInfo *level = &gCurLevelInfo[obj2->base.unk56];
+    struct Object *obj = &chest->obj;
+    const struct LevelInfo *level = &gCurLevelInfo[obj->base.unk56];
 
-    if ((level->roomHeight << 8) + 0x4000 < obj2->base.y) {
-        obj2->base.y = (level->roomHeight << 8) + 0x4000;
+    if ((level->roomHeight << 8) + 0x4000 < obj->base.y) {
+        obj->base.y = (level->roomHeight << 8) + 0x4000;
     }
 
     kirby = gKirbys;
 
     {
         struct S32Vec2 pos = {
-            .x = obj2->base.x + (obj2->base.unk3C * 0x100),
-            .y = obj2->base.y + (obj2->base.unk3D * 0x100),
+            .x = obj->base.x + (obj->base.unk3C * 0x100),
+            .y = obj->base.y + (obj->base.unk3D * 0x100),
         };
         struct S32Vec2 measure = {
-            .x = (obj2->base.unk3E - obj2->base.unk3C) * 0x100,
-            .y = (obj2->base.unk3F - obj2->base.unk3D) * 0x100,
+            .x = (obj->base.unk3E - obj->base.unk3C) * 0x100,
+            .y = (obj->base.unk3F - obj->base.unk3D) * 0x100,
         }; // width and height
 
         for (i = 0; i < gNumHumanPlayers; i++, kirby++) {
@@ -94,7 +94,7 @@ static void sub_0800AEB0(struct Chest *chest) {
              && pos.y <= kirby->base.y && pos.y + measure.y >= kirby->base.y
              && sub_0804B6FC(kirby)) {
                 chest->unkE4 = i;
-                obj2->unk78 = sub_0800AFC8;
+                obj->unk78 = sub_0800AFC8;
                 break;
             }
         }
@@ -104,35 +104,35 @@ static void sub_0800AEB0(struct Chest *chest) {
 static void sub_0800AFC8(struct Chest *chest) {
     struct Chest *chest2 = chest;
     if (chest2->unkE0 != 0x63) {
-        chest2->obj2.unk83 = 1;
+        chest2->obj.unk83 = 1;
     }
     else {
-        chest2->obj2.unk83 = 3;
+        chest2->obj.unk83 = 3;
     }
     CollectChest(chest2->unkE2);
-    sub_08002B30(chest->obj2.base.roomId, chest->obj2.objTemplate->x, chest->obj2.objTemplate->y);
+    sub_08002B30(chest->obj.base.roomId, chest->obj.objTemplate->x, chest->obj.objTemplate->y);
     switch (chest2->unkE0) {
     case 6:
-        PlaySfx(&chest->obj2.base, SE_CHEST_OPEN);
+        PlaySfx(&chest->obj.base, SE_CHEST_OPEN);
         CollectVitality();
         break;
     case 0xA ... 0x13:
-        PlaySfx(&chest->obj2.base, SE_CHEST_OPEN);
+        PlaySfx(&chest->obj.base, SE_CHEST_OPEN);
         CollectBigChest(chest2->unkE0 - 0xA);
         break;
     case 0x14 ... 0x21:
-        PlaySfx(&chest->obj2.base, SE_CHEST_OPEN);
+        PlaySfx(&chest->obj.base, SE_CHEST_OPEN);
         CollectSprayPaint(chest2->unkE0 - 0x14);
         break;
     case 0x28 ... 0x32:
-        PlaySfx(&chest->obj2.base, SE_CHEST_OPEN);
+        PlaySfx(&chest->obj.base, SE_CHEST_OPEN);
         CollectMusicPlayerOrSheet(chest2->unkE0 - 0x28);
         break;
     case 0x63:
-        PlaySfx(&chest->obj2.base, SE_CHEST_OPEN);
+        PlaySfx(&chest->obj.base, SE_CHEST_OPEN);
         break;
     default:
-        PlaySfx(&chest->obj2.base, SE_CHEST_COLLECT_ITEM);
+        PlaySfx(&chest->obj.base, SE_CHEST_COLLECT_ITEM);
         break;
     }
     if (!(gUnk_0203AD10 & 0x10)) {
@@ -148,8 +148,8 @@ static void sub_0800AFC8(struct Chest *chest) {
             UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
         }
     }
-    sub_0800B414(chest2, chest2->obj2.base.x >> 8, chest2->obj2.base.y >> 8, chest2->unkE0);
-    chest->obj2.unk78 = sub_0800BD9C;
+    sub_0800B414(chest2, chest2->obj.base.x >> 8, chest2->obj.base.y >> 8, chest2->unkE0);
+    chest->obj.unk78 = sub_0800BD9C;
 }
 
 static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
@@ -161,20 +161,20 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     void *ptr = TaskGetStructPtr(task);
     popup = ptr;
     popup2 = popup;
-    ClearEffectObject(&popup->obj4);
-    popup->obj4.header.kind = 3;
-    popup->obj4.x = chest->obj2.base.x;
-    popup->obj4.y = chest->obj2.base.y;
-    popup->obj4.parent = chest;
-    popup->obj4.roomId = chest->obj2.base.roomId;
-    popup->obj4.x = x * 0x100;
-    popup->obj4.y = y * 0x100;
-    popup->obj4.unk4 = 0;
+    ClearEffectObject(&popup->effect);
+    popup->effect.header.kind = 3;
+    popup->effect.x = chest->obj.base.x;
+    popup->effect.y = chest->obj.base.y;
+    popup->effect.parent = chest;
+    popup->effect.roomId = chest->obj.base.roomId;
+    popup->effect.x = x * 0x100;
+    popup->effect.y = y * 0x100;
+    popup->effect.unk4 = 0;
     popup->unk48 = sub_0800BDB4;
     popup->unk4C = chest;
     popup->unk50 = item;
-    if (Macro_0810B1F4(&chest->obj2.base)) {
-        popup->obj4.flags |= 0x2000;
+    if (Macro_0810B1F4(&chest->obj.base)) {
+        popup->effect.flags |= 0x2000;
     }
     switch (item) {
     case 0:
@@ -239,16 +239,16 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
         break;
     }
     if (numTiles != 0) {
-        EffectObjectInitSprite(&popup2->obj4, &popup2->obj4.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
+        EffectObjectInitSprite(&popup2->effect, &popup2->effect.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
     }
     else {
-        popup2->obj4.flags |= 0x400;
+        popup2->effect.flags |= 0x400;
     }
     if ((item >= 0xA && item <= 0x21) || (item >= 0x29 && item <= 0x32)) {
-        popup->obj4.sprite.palId = chest->obj2.base.sprite.palId;
+        popup->effect.sprite.palId = chest->obj.base.sprite.palId;
     }
     else {
-        popup->obj4.sprite.palId = 0xF;
+        popup->effect.sprite.palId = 0xF;
     }
 }
 
@@ -258,46 +258,46 @@ static void sub_0800B7A4(void) {
     struct Chest *parent;
     u16 item = popup->unk50;
     if ((item >= 0xA && item <= 0x21) || (item >= 0x29 && item <= 0x32)) {
-        popup->obj4.sprite.palId = popup->unk4C->obj2.base.sprite.palId;
+        popup->effect.sprite.palId = popup->unk4C->obj.base.sprite.palId;
     }
     else {
-        popup->obj4.sprite.palId = 0xF;
+        popup->effect.sprite.palId = 0xF;
     }
-    if (popup->obj4.flags & 0x1000) {
+    if (popup->effect.flags & 0x1000) {
         TaskDestroy(gCurTask);
         return;
     }
-    parent = popup->obj4.parent;
+    parent = popup->effect.parent;
     if (parent) {
-        if (parent->obj2.base.header.kind && parent->obj2.base.flags & 0x1000) {
-            popup->obj4.parent = NULL;
+        if (parent->obj.base.header.kind && parent->obj.base.flags & 0x1000) {
+            popup->effect.parent = NULL;
             parent = NULL;
         }
         if (!parent) {
             goto _0800B870;
         }
-        if (Macro_0810B1F4(&parent->obj2.base) && !(popup->obj4.flags & 0x2000)) {
-            EffectObjectDisplaySprite(&popup->obj4);
+        if (Macro_0810B1F4(&parent->obj.base) && !(popup->effect.flags & 0x2000)) {
+            EffectObjectDisplaySprite(&popup->effect);
             return;
         }
     }
     else {
     _0800B870:
-        KirbySomething(&popup->obj4);
+        KirbySomething(&popup->effect);
     }
-    Macro_0809E55C(&popup->obj4);
+    Macro_0809E55C(&popup->effect);
     tmp->unk48(tmp);
-    if (!(popup->obj4.flags & 0x800)) {
-        popup->obj4.x += popup->obj4.unk3C;
-        popup->obj4.y -= popup->obj4.unk3E;
+    if (!(popup->effect.flags & 0x800)) {
+        popup->effect.x += popup->effect.unk3C;
+        popup->effect.y -= popup->effect.unk3E;
     }
-    EffectObjectPostUpdate(&popup->obj4);
+    EffectObjectPostUpdate(&popup->effect);
 }
 
 static void sub_0800B97C(struct ChestItemPopup *popup) {
-    popup->obj4.unk3C = 0;
-    popup->obj4.unk3E -= 8;
-    if (popup->obj4.unk4++ > 0x1E) {
+    popup->effect.unk3C = 0;
+    popup->effect.unk3E -= 8;
+    if (popup->effect.unk4++ > 0x1E) {
         if (popup->unk4C->unkE0 <= 5) {
             u16 type;
             struct Object *obj;
@@ -321,7 +321,7 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
                 type = OBJ_SMALL_FOOD;
                 break;
             }
-            obj = CreateObjTemplateAndObj(popup->unk4C->obj2.base.unk56, 1, 0x24,
+            obj = CreateObjTemplateAndObj(popup->unk4C->obj.base.unk56, 1, 0x24,
                 gKirbys[popup->unk4C->unkE4].base.x >> 8,
                 gKirbys[popup->unk4C->unkE4].base.y >> 8,
                 0, 0x1F, 0, 0, type, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -339,51 +339,51 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
                 BonusCreateTomato(gKirbys);
                 PlaySfx(&gKirbys[0].base, SE_ITEM_COLLECT);
             }
-            sub_080029F4(gCurLevelInfo[popup->unk4C->obj2.base.unk56].unk65E, 1);
+            sub_080029F4(gCurLevelInfo[popup->unk4C->obj.base.unk56].unk65E, 1);
         }
         else if (popup->unk4C->unkE0 == 0x63) {
-            sub_080029F4(gCurLevelInfo[popup->unk4C->obj2.base.unk56].unk65E, 1);
+            sub_080029F4(gCurLevelInfo[popup->unk4C->obj.base.unk56].unk65E, 1);
         }
         else {
             PlaySfx(&gKirbys[popup->unk4C->unkE4].base, SE_ITEM_COLLECT);
-            sub_080029F4(gCurLevelInfo[popup->unk4C->obj2.base.unk56].unk65E, 1);
+            sub_080029F4(gCurLevelInfo[popup->unk4C->obj.base.unk56].unk65E, 1);
         }
-        popup->obj4.flags |= 0x1000;
+        popup->effect.flags |= 0x1000;
     }
 }
 
 void sub_0800BD4C(struct Chest *arg0) {
     struct Chest *chest = arg0;
     if (HasChest(chest->unkE2)) {
-        chest->obj2.unk78 = sub_0800BD9C;
-        sub_080029F4(gCurLevelInfo[chest->obj2.base.unk56].unk65E, 1);
+        chest->obj.unk78 = sub_0800BD9C;
+        sub_080029F4(gCurLevelInfo[chest->obj.base.unk56].unk65E, 1);
     }
     else {
-        chest->obj2.unk78 = sub_0800AEB0;
+        chest->obj.unk78 = sub_0800AEB0;
     }
 }
 
 static void sub_0800BD9C(struct Chest *chest) {
     if (chest->unkE0 != 0) {
-        chest->obj2.base.flags |= 4;
+        chest->obj.base.flags |= 4;
     }
 }
 
 static void sub_0800BDB4(struct ChestItemPopup *popup) {
-    popup->obj4.unk3C = 0;
-    popup->obj4.unk3E = 0x200;
-    if (popup->obj4.unk4++ > 0xA) {
-        popup->obj4.unk4 = 0;
+    popup->effect.unk3C = 0;
+    popup->effect.unk3E = 0x200;
+    if (popup->effect.unk4++ > 0xA) {
+        popup->effect.unk4 = 0;
         popup->unk48 = sub_0800BDE0;
     }
 }
 
 static void sub_0800BDE0(struct ChestItemPopup *popup) {
-    popup->obj4.unk3C = 0;
-    popup->obj4.unk3E = 0;
-    if (popup->obj4.unk4++ > 0xA) {
-        popup->obj4.unk4 = 0;
-        popup->obj4.unk3E = -0x20;
+    popup->effect.unk3C = 0;
+    popup->effect.unk3E = 0;
+    if (popup->effect.unk4++ > 0xA) {
+        popup->effect.unk4 = 0;
+        popup->effect.unk3E = -0x20;
         popup->unk48 = sub_0800B97C;
     }
 }

@@ -27,10 +27,10 @@ extern const struct Kirby_110 gUnk_083539B4[];
 extern const struct Kirby_110 gUnk_083539D4[];
 
 void *CreateSoarar(struct ObjectTemplate *arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;
@@ -512,7 +512,7 @@ void sub_080AC45C(struct Object *obj) {
 // that every nonzero value has the full struct Object layout.
 bool32 sub_080AC5E0(struct Object *obj, struct ObjectHeader *a2) {
     struct Kirby *kirby = (struct Kirby *)a2;
-    struct Object *obj2 = (struct Object *)a2;
+    struct Object *other = (struct Object *)a2;
 
     if (obj->unk83 > 1) {
         return FALSE;
@@ -536,7 +536,7 @@ bool32 sub_080AC5E0(struct Object *obj, struct ObjectHeader *a2) {
         // TODO: Prove that every nonzero a2 reaching this branch has a full
         // struct Object layout. The interaction dispatch alone does not
         // establish that invariant.
-        if (!ObjType5ETo6C(obj2)) {
+        if (!ObjType5ETo6C(other)) {
             return FALSE;
         }
         ObjectSetFunc(obj, 2, sub_080AC824);

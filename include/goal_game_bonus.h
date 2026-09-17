@@ -4,7 +4,7 @@
 #include "data.h"
 
 struct GoalGameBonus {
-    struct Object obj2;
+    struct Object obj;
     u32 unkB4;
     u32 unkB8;
     struct Kirby *kirby;

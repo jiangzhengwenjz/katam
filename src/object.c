@@ -178,8 +178,8 @@ static const u16 gUnk_08352DF8[] = {
 };
 
 void ObjectMain(void) {
-    struct Object* obj2 = TaskGetStructPtr(gCurTask);
-    struct Object* obj = obj2;
+    struct Object* tmp = TaskGetStructPtr(gCurTask);
+    struct Object* obj = tmp;
     void (*fp)(struct Object *), (*fp2)(struct Object *);
     if (obj->base.flags & 0x1000) {
         if (obj->unk80 <= 0) {
@@ -324,7 +324,7 @@ void ObjectMain(void) {
 
 void ObjectDestroy(struct Task* arg0) {
     u8 sb = 0;
-    struct Object *obj2 = TaskGetStructPtr(arg0), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(arg0), *obj = tmp;
     if (obj->kirbyAbility == KIRBY_ABILITY_MASTER) {
         if (obj->type != OBJ_MASTER_SWORD_STAND) {
             gUnk_0203AD34 = 0;
@@ -2245,16 +2245,16 @@ static void sub_0809F6BC(struct Object *r5) {
     }
 }
 
-void ObjectSetFunc(void *obj, s16 a2, void *func) {
-    struct Object *obj2 = obj;
+void ObjectSetFunc(void *ptr, s16 a2, void *func) {
+    struct Object *obj = ptr;
 
-    obj2->base.counter = 0;
-    obj2->unk9E = 0;
+    obj->base.counter = 0;
+    obj->unk9E = 0;
     if (a2 != -1)
-        obj2->unk83 = a2;
-    obj2->unk78 = func;
-    obj2->unk9F = -1;
-    obj2->base.flags |= 4;
+        obj->unk83 = a2;
+    obj->unk78 = func;
+    obj->unk9F = -1;
+    obj->base.flags |= 4;
 }
 
 static void sub_0809F818(struct Object *obj) {
@@ -2284,18 +2284,18 @@ static void sub_0809F88C(struct Object *obj) {
 }
 
 static void sub_0809F8BC(struct Object *obj) {
-    struct ThrowAbilityObject *obj3 = obj->base.parent;
+    struct ThrowAbilityObject *throwObj = obj->base.parent;
 
     obj->base.flags |= 0x2F00;
     obj->base.sprite.unk8 &= ~0x800;
-    obj->base.sprite.unk8 |= obj3->base.sprite.unk8 & 0x800;
+    obj->base.sprite.unk8 |= throwObj->base.sprite.unk8 & 0x800;
     obj->base.flags &= ~1;
-    obj->base.flags |= (obj3->base.flags & 1);
-    obj->base.x = obj3->base.x;
-    obj->base.y = obj3->base.y;
-    obj->base.objBase54 = obj3->base.objBase54;
-    obj->base.objBase55 = obj3->base.objBase55;
-    if (obj3->base.flags & 0x1000)
+    obj->base.flags |= (throwObj->base.flags & 1);
+    obj->base.x = throwObj->base.x;
+    obj->base.y = throwObj->base.y;
+    obj->base.objBase54 = throwObj->base.objBase54;
+    obj->base.objBase55 = throwObj->base.objBase55;
+    if (throwObj->base.flags & 0x1000)
         obj->base.flags |= 0x1000;
 }
 

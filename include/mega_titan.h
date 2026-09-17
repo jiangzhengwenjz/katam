@@ -6,14 +6,14 @@
 
 struct MegaTitan
 {
-    struct Object obj2;
+    struct Object obj;
     struct Object *arms[4];
     u8 unkC4;
 }; /* size = 0xC8 */
 
 struct TitanHead
 {
-    struct Object obj2;
+    struct Object obj;
     u32 unused[5];
 }; /* size = 0xC8 */
 

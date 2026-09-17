@@ -5,7 +5,7 @@
 #include "data.h"
 
 struct CutsceneTrigger0 {
-    /* 0x000 */ struct Object obj2;
+    /* 0x000 */ struct Object obj;
     /* 0x0B4 */ struct Object *unkB4;
     /* 0x0B8 */ struct EffectObject *unkB8[4];
     /* 0x0C8 */ struct EffectObject *unkC8;
@@ -17,7 +17,7 @@ struct CutsceneTrigger0 {
 }; /* size = 0xD8 */
 
 struct CutsceneTrigger1 {
-    /* 0x000 */ struct Object obj2;
+    /* 0x000 */ struct Object obj;
     /* 0x0B4 */ struct Object *unkB4;
     /* 0x0B8 */ u16 unkB8;
     /* 0x0BA */ u16 unkBA;
@@ -25,7 +25,7 @@ struct CutsceneTrigger1 {
 }; /* size = 0xC0 */
 
 struct CutsceneTrigger2 {
-    /* 0x000 */ struct Object obj2;
+    /* 0x000 */ struct Object obj;
     /* 0x0B4 */ struct ObjectBase unkB4[4];
     /* 0x294 */ struct EffectObject *unk294[4]; // NULL = empty, (void *)-1 = consumed
     /* 0x2A4 */ u16 unk2A4[4];
@@ -35,7 +35,7 @@ struct CutsceneTrigger2 {
 }; /* size = 0x2B8 */
 
 struct CutsceneTrigger4 {
-    /* 0x000 */ struct Object obj2;
+    /* 0x000 */ struct Object obj;
     /* 0x0B4 */ struct EffectObject *unkB4;
     /* 0x0B8 */ struct EffectObject *unkB8;
     /* 0x0BC */ struct EffectObject *unkBC;
@@ -46,7 +46,7 @@ struct CutsceneTrigger4 {
 }; /* size = 0xCC */
 
 struct CutsceneTrigger5 {
-    /* 0x000 */ struct Object obj2;
+    /* 0x000 */ struct Object obj;
     /* 0x0B4 */ s16 unkB4;
     /* 0x0B8 */ struct EffectObject *unkB8;
     /* 0x0BC */ struct EffectObject *unkBC;

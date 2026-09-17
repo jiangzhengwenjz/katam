@@ -91,7 +91,7 @@ const struct AnimInfo gUnk_083560FC[] = {
 
 void *CreateBonkers(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.unkC |= 1;
     obj->base.flags |= 0x2000000;
@@ -710,7 +710,7 @@ static void BonkersThrowNut(struct Object *arg0) {
 
 void *CreateBonkersNut(struct ObjectTemplate *arg0, u8 arg1) {
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x10000;
     obj->base.unkC |= 2;

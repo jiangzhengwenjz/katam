@@ -5,8 +5,8 @@
 #include "kirby.h"
 #include "constants/kirby.h"
 
-extern void sub_080A2748(struct Object *obj2);
-extern void sub_080A1FB8(struct Object *obj2);
+extern void sub_080A2748(struct Object *obj);
+extern void sub_080A1FB8(struct Object *obj);
 extern void sub_080A2710(struct Object *prank);
 extern void sub_080A2534(struct Object *prank);
 extern void sub_080A24B0(struct Object *prank);
@@ -22,7 +22,7 @@ extern const struct Kirby_110 gUnk_08352F84[];
 void* CreatePrank(struct ObjectTemplate* arg0, u8 arg1)
 {
     struct Task* task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct Object *obj2 = TaskGetStructPtr(task), *obj = obj2;
+    struct Object *tmp = TaskGetStructPtr(task), *obj = tmp;
     InitObject(obj, arg0, arg1);
     obj->base.flags |= 0x02000000;
     if (obj->base.x > obj->kirby3->base.x)

@@ -62,10 +62,10 @@ static bool8 sub_080BE2A8(struct Unk_080C4EDC*);
 static bool8 sub_080BE2C4(struct Unk_080C4EDC*);
 
 void* CreateMetalGuardian(struct ObjectTemplate* arg0, u8 arg1) {
-    struct Object *obj, *obj2;
+    struct Object *obj, *tmp;
     struct Task *task = TaskCreate(ObjectMain, sizeof(struct Object), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    obj2 = TaskGetStructPtr(task);
-    obj = obj2;
+    tmp = TaskGetStructPtr(task);
+    obj = tmp;
     InitObject(obj, arg0, arg1);
     if (obj->base.x > obj->kirby3->base.x) {
         obj->base.flags |= 1;

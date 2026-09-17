@@ -6,7 +6,7 @@
 
 struct FlameColumn
 {
-    struct Object obj2;
+    struct Object obj;
     s16 unkB4;
     u16 unkB6;
     u16 unkB8;

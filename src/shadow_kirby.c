@@ -831,7 +831,7 @@ static void sub_08024B44(void)
 
 void sub_08024E20(struct Object *sk)
 {
-    struct Object *obj2;
+    struct Object *obj;
     u8 type;
     u8 subtype1 = 0;
 
@@ -841,7 +841,7 @@ void sub_08024E20(struct Object *sk)
     {
         sk->base.unkC |= 0x10000;
         type = gUnk_082DEAF4[Rand16() & 0xF] + OBJ_SMALL_FOOD;
-        obj2 = CreateObjTemplateAndObj(sk->base.unk56, 1, 0x24, sk->base.x >> 8, sk->base.y >> 8, 0, 0x1F, 0, 0, type,
+        obj = CreateObjTemplateAndObj(sk->base.unk56, 1, 0x24, sk->base.x >> 8, sk->base.y >> 8, 0, 0x1F, 0, 0, type,
             subtype1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         CreateEffectObject(&sk->base, 0, 0x2B4, 0);
     }
