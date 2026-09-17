@@ -439,7 +439,7 @@ struct Object9 {
 }; /* size = 0x78 */
 
 struct Object14 {
-    struct EffectObject effect;
+    struct EffectObject effectObject;
     bool8 (*func48)(struct Object14 *);
     void (*func4C)(struct Object14 *);
 }; /* size = 0x50 */

@@ -60,8 +60,8 @@ void *CreateDoorToHub(struct ObjectTemplate *template, u8 a2)
     struct DoorToHub *tmp = TaskGetStructPtr(t), *door = tmp;
 
     InitObject(&door->obj, template, a2);
-    door->effect[0] = NULL;
-    door->effect[1] = NULL;
+    door->effectObjects[0] = NULL;
+    door->effectObjects[1] = NULL;
     door->obj.base.flags |= 0x340;
     door->obj.base.unkC |= 1;
     sub_0803E2B0(&door->obj.base, -8, -0x10, 8, 0);
@@ -77,10 +77,10 @@ void *CreateDoorToHub(struct ObjectTemplate *template, u8 a2)
     else if (gCollisionAttributes[GetCollisionTile(a2, door->obj.base.x >> 12, (door->obj.base.y - 0x800) >> 12)] & 0x4000)
     {
         door->obj.base.flags &= ~0x400;
-        door->effect[0] = sub_0808B62C(&door->obj.base, 8,
+        door->effectObjects[0] = sub_0808B62C(&door->obj.base, 8,
                                      gUnk_082EB444[0].animId,
                                      gUnk_082EB444[0].variant, 0);
-        door->effect[0]->sprite.unk14 = 0x7C0;
+        door->effectObjects[0]->sprite.unk14 = 0x7C0;
         sub_0802AC5C(door);
         door->obj.unk78 = sub_0802B0D0;
     }
@@ -98,21 +98,21 @@ static void sub_0802AC5C(struct DoorToHub *door)
 
     if (!sub_08002BA8(door->obj.base.roomId, var->unk08, var->unk0A, var->unk0B))
     {
-        if (!door->effect[1])
+        if (!door->effectObjects[1])
         {
-            door->effect[1] = sub_0808B62C(&door->obj.base, 0, 0x2CF, 0, 0);
-            door->effect[1]->flags |= 1;
-            door->effect[1]->x = door->obj.base.x;
-            door->effect[1]->y = door->obj.base.y - 0x2800;
-            door->effect[1]->sprite.unk14 = 0x780;
+            door->effectObjects[1] = sub_0808B62C(&door->obj.base, 0, 0x2CF, 0, 0);
+            door->effectObjects[1]->flags |= 1;
+            door->effectObjects[1]->x = door->obj.base.x;
+            door->effectObjects[1]->y = door->obj.base.y - 0x2800;
+            door->effectObjects[1]->sprite.unk14 = 0x780;
         }
     }
     else
     {
-        if (door->effect[1])
+        if (door->effectObjects[1])
         {
-            door->effect[1]->flags |= 0x1000;
-            door->effect[1] = NULL;
+            door->effectObjects[1]->flags |= 0x1000;
+            door->effectObjects[1] = NULL;
         }
     }
 }
@@ -126,10 +126,10 @@ static void sub_0802AD00(struct DoorToHub *door)
 
         sub_08001408(playerId, var, NULL, NULL);
         door->obj.base.flags &= ~0x400;
-        door->effect[0] = sub_0808B62C(&door->obj.base, 8,
+        door->effectObjects[0] = sub_0808B62C(&door->obj.base, 8,
                                      gUnk_082EB444[0].animId,
                                      gUnk_082EB444[0].variant, 0);
-        door->effect[0]->sprite.unk14 = 0x7C0;
+        door->effectObjects[0]->sprite.unk14 = 0x7C0;
         sub_0802AC5C(door);
         door->obj.unk78 = sub_0802B0D0;
         sub_0802B0D0(door);
@@ -141,26 +141,26 @@ static void sub_0802ADAC(struct DoorToHub *door)
     if (!(gCollisionAttributes[GetCollisionTile(door->obj.base.unk56, door->obj.base.x >> 12, (door->obj.base.y >> 12) - 1)] & 0x200))
     {
         door->obj.base.flags &= ~0x400;
-        door->effect[0] = sub_0808B62C(&door->obj.base, 8,
+        door->effectObjects[0] = sub_0808B62C(&door->obj.base, 8,
                                      gUnk_082EB444[1].animId,
                                      gUnk_082EB444[1].variant, 0);
-        door->effect[0]->sprite.unk14 = 0x7C0;
-        door->effect[0]->flags |= 0x8000;
-        door->effect[1] = sub_0808B62C(&door->obj.base, 0, 0x294, 0xA, 0);
-        door->effect[1]->x = door->obj.base.x;
-        door->effect[1]->y = door->obj.base.y - 0x800;
-        door->effect[1]->sprite.unk14 = 0x780;
+        door->effectObjects[0]->sprite.unk14 = 0x7C0;
+        door->effectObjects[0]->flags |= 0x8000;
+        door->effectObjects[1] = sub_0808B62C(&door->obj.base, 0, 0x294, 0xA, 0);
+        door->effectObjects[1]->x = door->obj.base.x;
+        door->effectObjects[1]->y = door->obj.base.y - 0x800;
+        door->effectObjects[1]->sprite.unk14 = 0x780;
         door->obj.unk78 = sub_0802B0FC;
     }
 }
 
 static void sub_0802AE58(struct DoorToHub *door)
 {
-    door->effect[0]->sprite.animId = gUnk_082EB444[3].animId;
-    door->effect[0]->sprite.variant = gUnk_082EB444[3].variant;
-    door->effect[0]->sprite.unk1B = 0xFF;
-    door->effect[0]->flags &= ~2;
-    door->effect[0]->unk4 = 1;
+    door->effectObjects[0]->sprite.animId = gUnk_082EB444[3].animId;
+    door->effectObjects[0]->sprite.variant = gUnk_082EB444[3].variant;
+    door->effectObjects[0]->sprite.unk1B = 0xFF;
+    door->effectObjects[0]->flags &= ~2;
+    door->effectObjects[0]->unk4 = 1;
     door->obj.unk78 = sub_0802B150;
 }
 
@@ -229,11 +229,11 @@ static void sub_0802AE9C(struct DoorToHub *door)
 
 static void sub_0802B088(struct DoorToHub *door)
 {
-    door->effect[0]->sprite.animId = gUnk_082EB444[2].animId;
-    door->effect[0]->sprite.variant = gUnk_082EB444[2].variant;
-    door->effect[0]->sprite.unk1B = 0xFF;
-    door->effect[0]->flags &= ~2;
-    door->effect[0]->unk4 = 1;
+    door->effectObjects[0]->sprite.animId = gUnk_082EB444[2].animId;
+    door->effectObjects[0]->sprite.variant = gUnk_082EB444[2].variant;
+    door->effectObjects[0]->sprite.unk1B = 0xFF;
+    door->effectObjects[0]->flags &= ~2;
+    door->effectObjects[0]->unk4 = 1;
     door->obj.unk78 = sub_0802B170;
 }
 
@@ -248,16 +248,16 @@ static void sub_0802B0D0(struct DoorToHub *door)
 static void sub_0802B0DC(struct DoorToHub *door)
 {
     door->obj.base.flags |= 0x400;
-    door->effect[0]->flags |= 0x400;
+    door->effectObjects[0]->flags |= 0x400;
     door->obj.unk78 = sub_0802ADAC;
 }
 
 static void sub_0802B0FC(struct DoorToHub *door)
 {
-    door->effect[0]->sprite.animId = gUnk_082EB444[1].animId;
-    door->effect[0]->sprite.variant = gUnk_082EB444[1].variant;
-    door->effect[0]->sprite.unk1B = 0xFF;
-    door->effect[0]->unk4 = 0;
+    door->effectObjects[0]->sprite.animId = gUnk_082EB444[1].animId;
+    door->effectObjects[0]->sprite.variant = gUnk_082EB444[1].variant;
+    door->effectObjects[0]->sprite.unk1B = 0xFF;
+    door->effectObjects[0]->unk4 = 0;
     door->obj.unk78 = sub_0802B134;
 }
 
@@ -269,22 +269,22 @@ static void sub_0802B134(struct DoorToHub *door)
 
 static void sub_0802B150(struct DoorToHub *door)
 {
-    if (door->effect[0]->flags & 2)
+    if (door->effectObjects[0]->flags & 2)
         door->obj.unk78 = sub_0802B190;
 }
 
 static void sub_0802B170(struct DoorToHub *door)
 {
-    if (door->effect[0]->flags & 2)
+    if (door->effectObjects[0]->flags & 2)
         door->obj.unk78 = sub_0802B0FC;
 }
 
 static void sub_0802B190(struct DoorToHub *door)
 {
-    door->effect[0]->sprite.animId = gUnk_082EB444[0].animId;
-    door->effect[0]->sprite.variant = gUnk_082EB444[0].variant;
-    door->effect[0]->sprite.unk1B = 0xFF;
-    door->effect[0]->unk4 = 0;
+    door->effectObjects[0]->sprite.animId = gUnk_082EB444[0].animId;
+    door->effectObjects[0]->sprite.variant = gUnk_082EB444[0].variant;
+    door->effectObjects[0]->sprite.unk1B = 0xFF;
+    door->effectObjects[0]->unk4 = 0;
     door->obj.unk78 = sub_0802AE9C;
 }
 
@@ -294,7 +294,7 @@ void *CreateAreaDoor(struct ObjectTemplate *template, u8 a2)
     struct AreaDoor *tmp = TaskGetStructPtr(t), *door = tmp;
 
     InitObject(&door->obj, template, a2);
-    door->effect = 0;
+    door->effectObject = 0;
     door->obj.base.flags |= 0x18B40;
     door->obj.base.unkC |= 1;
     door->obj.base.unk68 &= ~7;
@@ -324,46 +324,46 @@ static void sub_0802B2F4(struct AreaDoor *door)
 
     if (!sub_08002BA8(door->obj.base.roomId, var->unk08, var->unk0A, var->unk0B))
     {
-        if (!door->effect)
+        if (!door->effectObject)
         {
             if (door->obj.objTemplate->unk22 & 0x100)
             {
-                door->effect = sub_0808B62C(&door->obj.base, 0, 0x294, 0xA, 0);
-                door->effect->x = door->obj.base.x;
-                door->effect->y = door->obj.base.y - 0xA00;
+                door->effectObject = sub_0808B62C(&door->obj.base, 0, 0x294, 0xA, 0);
+                door->effectObject->x = door->obj.base.x;
+                door->effectObject->y = door->obj.base.y - 0xA00;
             }
             else
             {
-                door->effect = sub_0808B62C(&door->obj.base, 0, 0x2CF, 0, 0);
-                door->effect->flags |= 1;
-                door->effect->x = door->obj.base.x;
-                door->effect->y = door->obj.base.y - 0x2800;
+                door->effectObject = sub_0808B62C(&door->obj.base, 0, 0x2CF, 0, 0);
+                door->effectObject->flags |= 1;
+                door->effectObject->x = door->obj.base.x;
+                door->effectObject->y = door->obj.base.y - 0x2800;
             }
-            door->effect->sprite.unk14 = 0x780;
+            door->effectObject->sprite.unk14 = 0x780;
         }
     }
     else
     {
         if (door->obj.objTemplate->unk22 & 0x100)
         {
-            if (!door->effect)
+            if (!door->effectObject)
             {
-                door->effect = sub_0808B62C(&door->obj.base, 0, 0x294, 9, 0);
-                door->effect->x = door->obj.base.x;
-                door->effect->y = door->obj.base.y - 0xA00;
+                door->effectObject = sub_0808B62C(&door->obj.base, 0, 0x294, 9, 0);
+                door->effectObject->x = door->obj.base.x;
+                door->effectObject->y = door->obj.base.y - 0xA00;
             }
-            else if (door->effect->sprite.variant != 9)
+            else if (door->effectObject->sprite.variant != 9)
             {
-                door->effect->sprite.animId = 0x294;
-                door->effect->sprite.variant = 9;
-                door->effect->sprite.unk1B = 0xFF;
+                door->effectObject->sprite.animId = 0x294;
+                door->effectObject->sprite.variant = 9;
+                door->effectObject->sprite.unk1B = 0xFF;
             }
-            door->effect->sprite.unk14 = 0x780;
+            door->effectObject->sprite.unk14 = 0x780;
         }
         else
         {
-            door->effect->flags |= 0x1000;
-            door->effect = NULL;
+            door->effectObject->flags |= 0x1000;
+            door->effectObject = NULL;
         }
     }
 }

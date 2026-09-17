@@ -2411,81 +2411,81 @@ static void sub_0800D3B0(struct GoalStar *gs)
 
 static void sub_0800D450(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        struct StarShared *ss = effect->parent;
+        struct StarShared *ss = effectObject->parent;
 
         if (ss)
         {
             if (ss->obj.base.header.kind && ss->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 ss = NULL;
             }
             if (!ss)
                 goto label;
-            if (Macro_0810B1F4(&ss->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&ss->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        Macro_0809E55C(effect);
-        if (effect->flags & 2)
-            effect->flags |= 0x1000;
-        EffectObjectPostUpdate(effect);
+        Macro_0809E55C(effectObject);
+        if (effectObject->flags & 2)
+            effectObject->flags |= 0x1000;
+        EffectObjectPostUpdate(effectObject);
     }
 }
 
 static void sub_0800D5D8(struct StarShared *ss, s32 a2, s32 a3)
 {
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct EffectObject *effect = TaskGetStructPtr(t);
+    struct EffectObject *effectObject = TaskGetStructPtr(t);
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = ss->obj.base.x;
-    effect->y = ss->obj.base.y;
-    effect->parent = ss;
-    effect->roomId = ss->obj.base.roomId;
-    effect->flags |= 0x4000;
-    effect->x = a2;
-    effect->y = a3;
-    effect->unk4 = 0;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = ss->obj.base.x;
+    effectObject->y = ss->obj.base.y;
+    effectObject->parent = ss;
+    effectObject->roomId = ss->obj.base.roomId;
+    effectObject->flags |= 0x4000;
+    effectObject->x = a2;
+    effectObject->y = a3;
+    effectObject->unk4 = 0;
     if (Macro_0810B1F4(&ss->obj.base))
-        effect->flags |= 0x2000;
-    effect->flags |= 0x4000; // why do it twice lol
-    EffectObjectInitSprite(effect, &effect->sprite, 0x6012000, 0x2AE, 0, 0xA);
+        effectObject->flags |= 0x2000;
+    effectObject->flags |= 0x4000; // why do it twice lol
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x6012000, 0x2AE, 0, 0xA);
 }
 
 static void sub_0800D6C0(struct GoalStar *gs, s32 a2, s32 a3)
 {
     struct Task *t = TaskCreate(sub_0800D450, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct EffectObject *effect = TaskGetStructPtr(t);
+    struct EffectObject *effectObject = TaskGetStructPtr(t);
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = gs->unk0.obj.base.x;
-    effect->y = gs->unk0.obj.base.y;
-    effect->parent = gs;
-    effect->roomId = gs->unk0.obj.base.roomId;
-    effect->flags |= 0x4000;
-    effect->x = a2;
-    effect->y = a3;
-    effect->unk4 = 0;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = gs->unk0.obj.base.x;
+    effectObject->y = gs->unk0.obj.base.y;
+    effectObject->parent = gs;
+    effectObject->roomId = gs->unk0.obj.base.roomId;
+    effectObject->flags |= 0x4000;
+    effectObject->x = a2;
+    effectObject->y = a3;
+    effectObject->unk4 = 0;
     if (Macro_0810B1F4(&gs->unk0.obj.base))
-        effect->flags |= 0x2000;
-    effect->flags |= 0x4000; // why do it twice lol
-    EffectObjectInitSprite(effect, &effect->sprite, 0x6012000, 0x29B, 0, 0xA);
+        effectObject->flags |= 0x2000;
+    effectObject->flags |= 0x4000; // why do it twice lol
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x6012000, 0x29B, 0, 0xA);
 }
 
 static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
@@ -2507,17 +2507,17 @@ static void sub_0800D7A8(struct Unk_0800D9E8 *a1, s16 a2)
         {
             var = FALSE;
             sprite->variant = stack[i];
-            Macro_080FC150(&a1->effect, sprite);
-            sprite->x = (a1->effect.x >> 8) + 0x10 * i + 2 * i;
-            sprite->y = a1->effect.y >> 8;
-            a1->effect.flags &= ~0x400;
-            if (gKirbys[gLocalPlayerId].base.roomId == a1->effect.roomId)
+            Macro_080FC150(&a1->effectObject, sprite);
+            sprite->x = (a1->effectObject.x >> 8) + 0x10 * i + 2 * i;
+            sprite->y = a1->effectObject.y >> 8;
+            a1->effectObject.flags &= ~0x400;
+            if (gKirbys[gLocalPlayerId].base.roomId == a1->effectObject.roomId)
             {
                 sprite->x += gUnk_0203AD18[0];
                 sprite->y += gUnk_0203AD18[1];
-                Macro_0803DBC8(&a1->effect, sprite);
+                Macro_0803DBC8(&a1->effectObject, sprite);
             }
-            a1->effect.flags |= 0x400;
+            a1->effectObject.flags |= 0x400;
         }
     }
 }
@@ -2528,54 +2528,54 @@ static void sub_0800D9E8(struct GoalStar *gs, s16 a2, s16 a3)
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(t), *var = tmp;
     u16 i;
 
-    ClearEffectObject(&var->effect);
-    var->effect.header.kind = 3;
-    var->effect.x = gs->unk0.obj.base.x;
-    var->effect.y = gs->unk0.obj.base.y;
-    var->effect.parent = gs;
-    var->effect.roomId = gs->unk0.obj.base.roomId;
-    var->effect.flags |= 0x400;
-    var->effect.x = a2 * 0x100;
-    var->effect.y = a3 * 0x100;
+    ClearEffectObject(&var->effectObject);
+    var->effectObject.header.kind = 3;
+    var->effectObject.x = gs->unk0.obj.base.x;
+    var->effectObject.y = gs->unk0.obj.base.y;
+    var->effectObject.parent = gs;
+    var->effectObject.roomId = gs->unk0.obj.base.roomId;
+    var->effectObject.flags |= 0x400;
+    var->effectObject.x = a2 * 0x100;
+    var->effectObject.y = a3 * 0x100;
     var->unkC0 = sub_0800DEE8;
     var->unkC4 = gs;
     if (Macro_0810B1F4(&gs->unk0.obj.base))
-        var->effect.flags |= 0x2000;
+        var->effectObject.flags |= 0x2000;
     for (i = 0; i < 3; ++i)
-        EffectObjectInitSprite(&var->effect, &var->sprites[i], 6, 0x2E6, 0, 0xA);
+        EffectObjectInitSprite(&var->effectObject, &var->sprites[i], 6, 0x2E6, 0, 0xA);
 }
 
 static void sub_0800DAD8(void)
 {
     struct Unk_0800D9E8 *tmp = TaskGetStructPtr(gCurTask), *var = tmp;
 
-    if (var->effect.flags & 0x1000)
+    if (var->effectObject.flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        struct GoalStar *gs = var->effect.parent;
+        struct GoalStar *gs = var->effectObject.parent;
 
         if (gs)
         {
             if (gs->unk0.obj.base.header.kind && gs->unk0.obj.base.flags & 0x1000)
             {
-                var->effect.parent = NULL;
+                var->effectObject.parent = NULL;
                 gs = NULL;
             }
             if (!gs)
                 goto label;
-            if (Macro_0810B1F4(&gs->unk0.obj.base) && !(var->effect.flags & 0x2000))
+            if (Macro_0810B1F4(&gs->unk0.obj.base) && !(var->effectObject.flags & 0x2000))
             {
-                EffectObjectDisplaySprite(&var->effect);
+                EffectObjectDisplaySprite(&var->effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(&var->effect);
+            KirbySomething(&var->effectObject);
         }
-        Macro_0809E55C(&var->effect);
+        Macro_0809E55C(&var->effectObject);
         var->unkC0(var);
     }
 }
@@ -2726,15 +2726,15 @@ static void sub_0800DF5C(struct Unk_0800D9E8 *a1)
 
 static void sub_0800DF88(struct Unk_0800D9E8 *a1)
 {
-    a1->effect.y += 0x100;
-    if (a1->effect.y > 0xB000)
+    a1->effectObject.y += 0x100;
+    if (a1->effectObject.y > 0xB000)
         a1->unkC0 = sub_0800DFB8;
     sub_0800D7A8(a1, 0);
 }
 
 static void sub_0800DFB8(struct Unk_0800D9E8 *a1)
 {
-    a1->effect.flags |= 0x1000;
+    a1->effectObject.flags |= 0x1000;
 }
 
 static void sub_0800DFC8(struct WarpStar *ws)

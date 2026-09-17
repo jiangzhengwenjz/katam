@@ -911,88 +911,88 @@ static void sub_080CAEB8(struct Object *batafire, u8 a2)
 static void sub_080CAF60(struct Object *batafire)
 {
     struct Task *t = TaskCreate(sub_080CB02C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *effect = TaskGetStructPtr(t);
+    struct EffectObject *effectObject = TaskGetStructPtr(t);
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = batafire->base.x;
-    effect->y = batafire->base.y;
-    effect->parent = batafire;
-    effect->roomId = batafire->base.roomId;
-    EffectObjectInitSprite(effect, &effect->sprite, 8, 0x2E7, 0xE, 0x19);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x2E7, 0, 1);
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = batafire->base.x;
+    effectObject->y = batafire->base.y;
+    effectObject->parent = batafire;
+    effectObject->roomId = batafire->base.roomId;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 8, 0x2E7, 0xE, 0x19);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x2E7, 0, 1);
 }
 
 static void sub_080CB02C(void)
 {
     struct EffectObject *tmp = TaskGetStructPtr(gCurTask);
-    struct EffectObject *effect = tmp;
-    struct Object *batafire = effect->parent, *batafire2;
+    struct EffectObject *effectObject = tmp;
+    struct Object *batafire = effectObject->parent, *batafire2;
     struct Sprite sprite;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (batafire->base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 8, &effect->sprite);
-        Macro_081050E8(effect, &effect->sprite, 0x2E7, 0, !effect->sprite.palId);
-        batafire2 = effect->parent;
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 8, &effectObject->sprite);
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x2E7, 0, !effectObject->sprite.palId);
+        batafire2 = effectObject->parent;
         if (batafire2)
         {
             if (batafire2->base.header.kind && batafire2->base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 batafire2 = NULL;
             }
             if (!batafire2)
                 goto label;
-            if (Macro_0810B1F4(&batafire2->base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&batafire2->base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        Macro_0809E55C(effect);
-        if (effect->flags & 2)
+        Macro_0809E55C(effectObject);
+        if (effectObject->flags & 2)
         {
-            ++effect->unk4;
-            effect->flags |= 4;
-            if (effect->unk4 > 2)
-                effect->unk4 = 0;
+            ++effectObject->unk4;
+            effectObject->flags |= 4;
+            if (effectObject->unk4 > 2)
+                effectObject->unk4 = 0;
         }
         if (batafire->base.flags & 1)
-            effect->flags &= ~1;
+            effectObject->flags &= ~1;
         else
-            effect->flags |= 1;
+            effectObject->flags |= 1;
         if (batafire->unk83 > 2 && batafire->unk83 < 7)
         {
-            effect->sprite.animId = 0x2E7;
-            effect->sprite.variant = 0xF;
+            effectObject->sprite.animId = 0x2E7;
+            effectObject->sprite.variant = 0xF;
         }
         else
         {
-            effect->sprite.animId = 0x2E7;
-            effect->sprite.variant = 0xE;
+            effectObject->sprite.animId = 0x2E7;
+            effectObject->sprite.variant = 0xE;
         }
         if (batafire->base.flags & 1)
-            effect->x = batafire->base.x + (gUnk_08355C68[2 * effect->unk4] * 0x100);
+            effectObject->x = batafire->base.x + (gUnk_08355C68[2 * effectObject->unk4] * 0x100);
         else
-            effect->x = batafire->base.x - (gUnk_08355C68[2 * effect->unk4] * 0x100);
-        effect->y = batafire->base.y + (gUnk_08355C68[2 * effect->unk4 + 1] * 0x100);
-        if (!(effect->flags & 0x800))
+            effectObject->x = batafire->base.x - (gUnk_08355C68[2 * effectObject->unk4] * 0x100);
+        effectObject->y = batafire->base.y + (gUnk_08355C68[2 * effectObject->unk4 + 1] * 0x100);
+        if (!(effectObject->flags & 0x800))
         {
-            effect->x += effect->unk3C;
-            effect->y -= effect->unk3E;
+            effectObject->x += effectObject->unk3C;
+            effectObject->y -= effectObject->unk3E;
         }
-        EffectObjectPostUpdate(effect);
+        EffectObjectPostUpdate(effectObject);
     }
 }
 

@@ -7,7 +7,7 @@
 struct KingGolem
 {
     struct Object obj;
-    struct EffectObject *effect;
+    struct EffectObject *effectObject;
     struct Object *enemy; // golem or foley
     u8 unkBC;
     u8 unkBD;

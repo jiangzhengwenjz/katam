@@ -161,20 +161,20 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
     void *ptr = TaskGetStructPtr(task);
     popup = ptr;
     popup2 = popup;
-    ClearEffectObject(&popup->effect);
-    popup->effect.header.kind = 3;
-    popup->effect.x = chest->obj.base.x;
-    popup->effect.y = chest->obj.base.y;
-    popup->effect.parent = chest;
-    popup->effect.roomId = chest->obj.base.roomId;
-    popup->effect.x = x * 0x100;
-    popup->effect.y = y * 0x100;
-    popup->effect.unk4 = 0;
+    ClearEffectObject(&popup->effectObject);
+    popup->effectObject.header.kind = 3;
+    popup->effectObject.x = chest->obj.base.x;
+    popup->effectObject.y = chest->obj.base.y;
+    popup->effectObject.parent = chest;
+    popup->effectObject.roomId = chest->obj.base.roomId;
+    popup->effectObject.x = x * 0x100;
+    popup->effectObject.y = y * 0x100;
+    popup->effectObject.unk4 = 0;
     popup->unk48 = sub_0800BDB4;
     popup->unk4C = chest;
     popup->unk50 = item;
     if (Macro_0810B1F4(&chest->obj.base)) {
-        popup->effect.flags |= 0x2000;
+        popup->effectObject.flags |= 0x2000;
     }
     switch (item) {
     case 0:
@@ -239,16 +239,16 @@ static void sub_0800B414(struct Chest *chest, s16 x, s16 y, u16 item) {
         break;
     }
     if (numTiles != 0) {
-        EffectObjectInitSprite(&popup2->effect, &popup2->effect.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
+        EffectObjectInitSprite(&popup2->effectObject, &popup2->effectObject.sprite, VramMalloc(numTiles), spriteId, variant, 0xB);
     }
     else {
-        popup2->effect.flags |= 0x400;
+        popup2->effectObject.flags |= 0x400;
     }
     if ((item >= 0xA && item <= 0x21) || (item >= 0x29 && item <= 0x32)) {
-        popup->effect.sprite.palId = chest->obj.base.sprite.palId;
+        popup->effectObject.sprite.palId = chest->obj.base.sprite.palId;
     }
     else {
-        popup->effect.sprite.palId = 0xF;
+        popup->effectObject.sprite.palId = 0xF;
     }
 }
 
@@ -258,46 +258,46 @@ static void sub_0800B7A4(void) {
     struct Chest *parent;
     u16 item = popup->unk50;
     if ((item >= 0xA && item <= 0x21) || (item >= 0x29 && item <= 0x32)) {
-        popup->effect.sprite.palId = popup->unk4C->obj.base.sprite.palId;
+        popup->effectObject.sprite.palId = popup->unk4C->obj.base.sprite.palId;
     }
     else {
-        popup->effect.sprite.palId = 0xF;
+        popup->effectObject.sprite.palId = 0xF;
     }
-    if (popup->effect.flags & 0x1000) {
+    if (popup->effectObject.flags & 0x1000) {
         TaskDestroy(gCurTask);
         return;
     }
-    parent = popup->effect.parent;
+    parent = popup->effectObject.parent;
     if (parent) {
         if (parent->obj.base.header.kind && parent->obj.base.flags & 0x1000) {
-            popup->effect.parent = NULL;
+            popup->effectObject.parent = NULL;
             parent = NULL;
         }
         if (!parent) {
             goto _0800B870;
         }
-        if (Macro_0810B1F4(&parent->obj.base) && !(popup->effect.flags & 0x2000)) {
-            EffectObjectDisplaySprite(&popup->effect);
+        if (Macro_0810B1F4(&parent->obj.base) && !(popup->effectObject.flags & 0x2000)) {
+            EffectObjectDisplaySprite(&popup->effectObject);
             return;
         }
     }
     else {
     _0800B870:
-        KirbySomething(&popup->effect);
+        KirbySomething(&popup->effectObject);
     }
-    Macro_0809E55C(&popup->effect);
+    Macro_0809E55C(&popup->effectObject);
     tmp->unk48(tmp);
-    if (!(popup->effect.flags & 0x800)) {
-        popup->effect.x += popup->effect.unk3C;
-        popup->effect.y -= popup->effect.unk3E;
+    if (!(popup->effectObject.flags & 0x800)) {
+        popup->effectObject.x += popup->effectObject.unk3C;
+        popup->effectObject.y -= popup->effectObject.unk3E;
     }
-    EffectObjectPostUpdate(&popup->effect);
+    EffectObjectPostUpdate(&popup->effectObject);
 }
 
 static void sub_0800B97C(struct ChestItemPopup *popup) {
-    popup->effect.unk3C = 0;
-    popup->effect.unk3E -= 8;
-    if (popup->effect.unk4++ > 0x1E) {
+    popup->effectObject.unk3C = 0;
+    popup->effectObject.unk3E -= 8;
+    if (popup->effectObject.unk4++ > 0x1E) {
         if (popup->unk4C->unkE0 <= 5) {
             u16 type;
             struct Object *obj;
@@ -348,7 +348,7 @@ static void sub_0800B97C(struct ChestItemPopup *popup) {
             PlaySfx(&gKirbys[popup->unk4C->unkE4].base, SE_ITEM_COLLECT);
             sub_080029F4(gCurLevelInfo[popup->unk4C->obj.base.unk56].unk65E, 1);
         }
-        popup->effect.flags |= 0x1000;
+        popup->effectObject.flags |= 0x1000;
     }
 }
 
@@ -370,20 +370,20 @@ static void sub_0800BD9C(struct Chest *chest) {
 }
 
 static void sub_0800BDB4(struct ChestItemPopup *popup) {
-    popup->effect.unk3C = 0;
-    popup->effect.unk3E = 0x200;
-    if (popup->effect.unk4++ > 0xA) {
-        popup->effect.unk4 = 0;
+    popup->effectObject.unk3C = 0;
+    popup->effectObject.unk3E = 0x200;
+    if (popup->effectObject.unk4++ > 0xA) {
+        popup->effectObject.unk4 = 0;
         popup->unk48 = sub_0800BDE0;
     }
 }
 
 static void sub_0800BDE0(struct ChestItemPopup *popup) {
-    popup->effect.unk3C = 0;
-    popup->effect.unk3E = 0;
-    if (popup->effect.unk4++ > 0xA) {
-        popup->effect.unk4 = 0;
-        popup->effect.unk3E = -0x20;
+    popup->effectObject.unk3C = 0;
+    popup->effectObject.unk3E = 0;
+    if (popup->effectObject.unk4++ > 0xA) {
+        popup->effectObject.unk4 = 0;
+        popup->effectObject.unk3E = -0x20;
         popup->unk48 = sub_0800B97C;
     }
 }

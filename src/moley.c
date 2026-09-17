@@ -1041,48 +1041,48 @@ static void sub_080ECDE0(struct Object *obj)
 static void sub_080ECEC0(struct Moley *moley)
 {
     struct Task *t = TaskCreate(sub_080ECF6C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *effect = TaskGetStructPtr(t);
+    struct EffectObject *effectObject = TaskGetStructPtr(t);
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = moley->obj.base.x;
-    effect->y = moley->obj.base.y;
-    effect->parent = moley;
-    effect->roomId = moley->obj.base.roomId;
-    effect->y -= 0x1000;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = moley->obj.base.x;
+    effectObject->y = moley->obj.base.y;
+    effectObject->parent = moley;
+    effectObject->roomId = moley->obj.base.roomId;
+    effectObject->y -= 0x1000;
     if (!(moley->obj.base.flags & 1))
-        effect->flags |= 1;
-    effect->flags |= 0x4000;
-    EffectObjectInitSprite(effect, &effect->sprite, 0x6012000, 0x340, 0, 0x17);
+        effectObject->flags |= 1;
+    effectObject->flags |= 0x4000;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x6012000, 0x340, 0, 0x17);
 }
 
 static void sub_080ECF6C(void)
 {
-    struct EffectObject *tmp, *effect;
+    struct EffectObject *tmp, *effectObject;
     struct Moley *moley;
 
     tmp = TaskGetStructPtr(gCurTask);
-    effect = tmp;
-    if (effect->flags & 0x1000)
+    effectObject = tmp;
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
-    else if (((struct Moley *)effect->parent)->obj.base.flags & 0x1000)
-        effect->flags |= 0x1000;
+    else if (((struct Moley *)effectObject->parent)->obj.base.flags & 0x1000)
+        effectObject->flags |= 0x1000;
     else
     {
-        moley = effect->parent;
+        moley = effectObject->parent;
         if (moley)
         {
             do {
                 if (moley->obj.base.header.kind && moley->obj.base.flags & 0x1000)
                 {
-                    effect->parent = NULL;
+                    effectObject->parent = NULL;
                     moley = NULL;
                 }
                 if (!moley)
                     goto _080ECFF4;
-                if (Macro_0810B1F4(&moley->obj.base) && !(effect->flags & 0x2000))
+                if (Macro_0810B1F4(&moley->obj.base) && !(effectObject->flags & 0x2000))
                 {
-                    EffectObjectDisplaySprite(effect);
+                    EffectObjectDisplaySprite(effectObject);
                     return;
                 }
             } while (0); // never required elsewhere
@@ -1090,10 +1090,10 @@ static void sub_080ECF6C(void)
         else
         {
         _080ECFF4:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        effect->flags |= 4;
-        EffectObjectPostUpdate(effect);
+        effectObject->flags |= 4;
+        EffectObjectPostUpdate(effectObject);
     }
 }
 

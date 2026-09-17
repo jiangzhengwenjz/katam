@@ -3873,160 +3873,160 @@ static void sub_080F388C(void)
 static void sub_080F3974(struct Object *obj, u32 a2, u16 a3, u8 a4)
 {
     struct Task *t = TaskCreate(sub_080F3A98, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
     u16 var;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = obj->base.x;
-    effect->y = obj->base.y;
-    effect->parent = obj;
-    effect->roomId = obj->base.roomId;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = obj->base.x;
+    effectObject->y = obj->base.y;
+    effectObject->parent = obj;
+    effectObject->roomId = obj->base.roomId;
     if (!(obj->base.flags & 1))
-        effect->flags |= 1;
+        effectObject->flags |= 1;
     var = ((obj->base.sprite.unk14 & 0x7C0) >> 6) - 1;
     if ((a4 > 0xB && a4 < 0x10) || a4 > 0x27)
         ++var;
-    EffectObjectInitSprite(effect, &effect->sprite, a2, a3, a4, var);
-    effect->unk8 = a2;
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x33C, 0, 1);
-    effect->unk4 = obj->unk83;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, a2, a3, a4, var);
+    effectObject->unk8 = a2;
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x33C, 0, 1);
+    effectObject->unk4 = obj->unk83;
 }
 
 static void sub_080F3A98(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
-    struct Object *obj = effect->parent, *obj_2;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
+    struct Object *obj = effectObject->parent, *obj_2;
     struct Sprite sprite;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (obj->base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_081050E8(effect, &effect->sprite, 0x33C, 0, !effect->sprite.palId);
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, effect->unk8, &effect->sprite);
-        obj_2 = effect->parent;
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x33C, 0, !effectObject->sprite.palId);
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, effectObject->unk8, &effectObject->sprite);
+        obj_2 = effectObject->parent;
         if (obj_2)
         {
             if (obj_2->base.header.kind && obj_2->base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 obj_2 = NULL;
             }
             if (!obj_2)
                 goto _080F3C78;
-            if (Macro_0810B1F4(&obj_2->base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&obj_2->base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         _080F3C78:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        effect->flags |= 4;
-        effect->x = obj->base.x;
-        effect->y = obj->base.y;
-        if (effect->unk4 != obj->unk83)
-            effect->flags |= 0x1000;
+        effectObject->flags |= 4;
+        effectObject->x = obj->base.x;
+        effectObject->y = obj->base.y;
+        if (effectObject->unk4 != obj->unk83)
+            effectObject->flags |= 0x1000;
         else
-            EffectObjectPostUpdate(effect);
+            EffectObjectPostUpdate(effectObject);
     }
 }
 
 static void sub_080F3D28(struct MegaTitan *mt, u8 a2)
 {
     struct Task *t = TaskCreate(sub_080F3E40, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = mt->obj.base.x;
-    effect->y = mt->obj.base.y;
-    effect->parent = mt;
-    effect->roomId = mt->obj.base.roomId;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = mt->obj.base.x;
+    effectObject->y = mt->obj.base.y;
+    effectObject->parent = mt;
+    effectObject->roomId = mt->obj.base.roomId;
     if (!(mt->obj.base.flags & 1))
-        effect->flags |= 1;
+        effectObject->flags |= 1;
     if (a2)
     {
-        effect->unk3C = 0x100;
-        effect->unk3E = 0x180;
-        EffectObjectInitSprite(effect, &effect->sprite, 9, 0x33C, 0x22, 0x17);
+        effectObject->unk3C = 0x100;
+        effectObject->unk3E = 0x180;
+        EffectObjectInitSprite(effectObject, &effectObject->sprite, 9, 0x33C, 0x22, 0x17);
     }
     else
     {
-        effect->unk3C = -0x100;
-        effect->unk3E = 0x180;
-        EffectObjectInitSprite(effect, &effect->sprite, 6, 0x33C, 0x23, 0x17);
+        effectObject->unk3C = -0x100;
+        effectObject->unk3E = 0x180;
+        EffectObjectInitSprite(effectObject, &effectObject->sprite, 6, 0x33C, 0x23, 0x17);
     }
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x33C, 0, 1);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x33C, 0, 1);
 }
 
 static void sub_080F3E40(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
-    struct MegaTitan *mt, *mt2 = effect->parent;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
+    struct MegaTitan *mt, *mt2 = effectObject->parent;
     struct Sprite sprite;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (mt2->obj.base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_081050E8(effect, &effect->sprite, 0x33C, 0, !effect->sprite.palId);
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 9, &effect->sprite);
-        mt = effect->parent;
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x33C, 0, !effectObject->sprite.palId);
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 9, &effectObject->sprite);
+        mt = effectObject->parent;
         if (mt)
         {
             if (mt->obj.base.header.kind && mt->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 mt = NULL;
             }
             if (!mt)
                 goto _080F4020;
-            if (Macro_0810B1F4(&mt->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&mt->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         _080F4020:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        if (!effect->unk4)
+        if (!effectObject->unk4)
         {
-            if (effect->x <= 0x1000 || effect->x >= 0xEB00)
-                effect->unk3C = 0;
-            if (effect->y >= 0x8C00)
+            if (effectObject->x <= 0x1000 || effectObject->x >= 0xEB00)
+                effectObject->unk3C = 0;
+            if (effectObject->y >= 0x8C00)
             {
-                effect->unk3C = 0;
-                effect->unk3E = 0;
+                effectObject->unk3C = 0;
+                effectObject->unk3E = 0;
                 RequestScreenShake(1, &mt2->obj.base);
                 PlaySfx(&mt2->obj.base, SE_MEGA_TITAN_FIST_COLLISION);
-                effect->unk4 = 1;
+                effectObject->unk4 = 1;
             }
             else
             {
-                effect->flags |= 4;
-                effect->unk3E -= 0x15;
+                effectObject->flags |= 4;
+                effectObject->unk3E -= 0x15;
             }
-            if (!(effect->flags & 0x800))
+            if (!(effectObject->flags & 0x800))
             {
-                effect->x += effect->unk3C;
-                effect->y -= effect->unk3E;
+                effectObject->x += effectObject->unk3C;
+                effectObject->y -= effectObject->unk3E;
             }
         }
-        EffectObjectPostUpdate(effect);
+        EffectObjectPostUpdate(effectObject);
     }
 }
 
@@ -4546,10 +4546,10 @@ static void sub_080F5284(struct TitanHead *th)
     if (!(++th->obj.base.counter & 7)
         && (Rand16() & 1 || !(++th->obj.base.counter & 0xF)))
     {
-        struct EffectObject *effect = CreateEffectObject(&th->obj.base, 0, 0x292, Rand16() & 3);
+        struct EffectObject *effectObject = CreateEffectObject(&th->obj.base, 0, 0x292, Rand16() & 3);
 
-        effect->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
-        effect->y += (0x10 - (Rand16() & 0x1F)) * 0x100;
+        effectObject->x += (0x10 - (Rand16() & 0x1F)) * 0x100;
+        effectObject->y += (0x10 - (Rand16() & 0x1F)) * 0x100;
     }
     if (!(++th->obj.unk9E & 0x1F))
         th->obj.unk9F = 0x10;

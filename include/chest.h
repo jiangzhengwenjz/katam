@@ -16,7 +16,7 @@ struct Chest
 
 struct ChestItemPopup
 {
-    struct EffectObject effect;
+    struct EffectObject effectObject;
     void (*unk48)(struct ChestItemPopup *);
     struct Chest *unk4C;
     u16 unk50; // item id

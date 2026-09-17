@@ -131,69 +131,69 @@ static void sub_080AF16C(struct Object *bullet)
 static void sub_080AF204(struct Object *glunk)
 {
     struct Task *t = TaskCreate(sub_080AF330, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *r6 = TaskGetStructPtr(t), *effect = r6;
+    struct EffectObject *r6 = TaskGetStructPtr(t), *effectObject = r6;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = glunk->base.x;
-    effect->y = glunk->base.y;
-    effect->parent = glunk;
-    effect->roomId = glunk->base.roomId;
-    effect->flags |= 0x4000;
-    effect->unk3C = 0;
-    effect->unk3E = 0x200;
-    effect->y -= 0x800;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = glunk->base.x;
+    effectObject->y = glunk->base.y;
+    effectObject->parent = glunk;
+    effectObject->roomId = glunk->base.roomId;
+    effectObject->flags |= 0x4000;
+    effectObject->unk3C = 0;
+    effectObject->unk3E = 0x200;
+    effectObject->y -= 0x800;
     if (Macro_0810B1F4(&glunk->base))
-        effect->flags |= 0x2000;
+        effectObject->flags |= 0x2000;
     EffectObjectInitSprite(r6, &r6->sprite, 6, 0x329, 1, 0xC);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x327, 0, 1);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x327, 0, 1);
 }
 
 static void sub_080AF330(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct Sprite sprite;
     struct Object *glunk;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 6, &effect->sprite);
-        Macro_081050E8(effect, &effect->sprite, 0x327, 0, !effect->sprite.palId);
-        glunk = effect->parent;
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 6, &effectObject->sprite);
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x327, 0, !effectObject->sprite.palId);
+        glunk = effectObject->parent;
         if (glunk)
         {
             if (glunk->base.header.kind && glunk->base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 glunk = NULL;
             }
             if (!glunk)
                 goto _080AF4F4;
-            if (Macro_0810B1F4(&glunk->base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&glunk->base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         _080AF4F4:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        Macro_0809E55C(effect);
-        if (++effect->unk4 > 8)
-            effect->flags |= 0x1000;
+        Macro_0809E55C(effectObject);
+        if (++effectObject->unk4 > 8)
+            effectObject->flags |= 0x1000;
         else
         {
-            if (!(effect->flags & 0x800))
+            if (!(effectObject->flags & 0x800))
             {
-                effect->x += effect->unk3C;
-                effect->y -= effect->unk3E;
+                effectObject->x += effectObject->unk3C;
+                effectObject->y -= effectObject->unk3E;
             }
-            EffectObjectPostUpdate(effect);
+            EffectObjectPostUpdate(effectObject);
         }
     }
 }

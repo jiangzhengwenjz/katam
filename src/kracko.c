@@ -890,101 +890,101 @@ static void sub_080DCEA8(struct Kracko *kracko)
 static struct EffectObject *sub_080DCF18(struct Kracko *kracko)
 {
     struct Task *t = TaskCreate(sub_080DD044, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = kracko->obj.base.x;
-    effect->y = kracko->obj.base.y;
-    effect->parent = kracko;
-    effect->roomId = kracko->obj.base.roomId;
-    EffectObjectInitSprite(effect, &effect->sprite, 0x30, 0x339, 9, 0x19);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x33B, 0, 1);
-    effect->unk8 = effect->sprite.palId;
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x33A, 0, 1);
-    effect->unk4 = effect->sprite.palId;
-    return effect;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = kracko->obj.base.x;
+    effectObject->y = kracko->obj.base.y;
+    effectObject->parent = kracko;
+    effectObject->roomId = kracko->obj.base.roomId;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x30, 0x339, 9, 0x19);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x33B, 0, 1);
+    effectObject->unk8 = effectObject->sprite.palId;
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x33A, 0, 1);
+    effectObject->unk4 = effectObject->sprite.palId;
+    return effectObject;
 }
 
 static void sub_080DD044(void)
 {
     struct Sprite sprite;
     bool32 r8 = FALSE;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct Kracko *kracko;
 
-    kracko = effect->parent;
-    if (effect->flags & 0x1000)
+    kracko = effectObject->parent;
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (kracko->obj.base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 0x30, &effect->sprite);
-        if (!effect->sprite.palId) r8 = TRUE;
-        Macro_081050E8(effect, &effect->sprite, 0x33B, 0, !effect->sprite.palId);
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 0x30, &effectObject->sprite);
+        if (!effectObject->sprite.palId) r8 = TRUE;
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x33B, 0, !effectObject->sprite.palId);
         if (r8)
         {
-            effect->unk8 = effect->sprite.palId;
-            effect->sprite.palId = 0;
-            Macro_081050E8(effect, &effect->sprite, 0x33A, 0, 1);
-            effect->unk4 = effect->sprite.palId;
-            effect->sprite.palId = effect->unk8;
+            effectObject->unk8 = effectObject->sprite.palId;
+            effectObject->sprite.palId = 0;
+            Macro_081050E8(effectObject, &effectObject->sprite, 0x33A, 0, 1);
+            effectObject->unk4 = effectObject->sprite.palId;
+            effectObject->sprite.palId = effectObject->unk8;
         }
-        if (!effect->sprite.palId)
+        if (!effectObject->sprite.palId)
         {
-            effect->unk8 = 0;
-            effect->unk4 = 0;
+            effectObject->unk8 = 0;
+            effectObject->unk4 = 0;
         }
         if (Macro_0810B1F4(&kracko->obj.base) && !(kracko->obj.base.flags & 0x2000))
         {
-            effect->sprite.palId = effect->unk8;
-            effect->sprite.unk8 &= ~0x800;
-            EffectObjectDisplaySprite(effect);
-            effect->sprite.palId = effect->unk4;
-            effect->sprite.unk8 |= 0x800;
-            EffectObjectDisplaySprite(effect);
+            effectObject->sprite.palId = effectObject->unk8;
+            effectObject->sprite.unk8 &= ~0x800;
+            EffectObjectDisplaySprite(effectObject);
+            effectObject->sprite.palId = effectObject->unk4;
+            effectObject->sprite.unk8 |= 0x800;
+            EffectObjectDisplaySprite(effectObject);
             return;
         }
-        effect->x = kracko->obj.base.x;
-        effect->y = kracko->obj.base.y;
-        effect->objBase54 = kracko->obj.base.objBase54;
-        effect->objBase55 = kracko->obj.base.objBase55;
+        effectObject->x = kracko->obj.base.x;
+        effectObject->y = kracko->obj.base.y;
+        effectObject->objBase54 = kracko->obj.base.objBase54;
+        effectObject->objBase55 = kracko->obj.base.objBase55;
         switch (kracko->obj.unk83)
         {
         case 0:
-            effect->flags |= 4;
-            effect->sprite.variant = 0xA;
+            effectObject->flags |= 4;
+            effectObject->sprite.variant = 0xA;
             break;
         case 2:
-            effect->sprite.variant = 0x12;
+            effectObject->sprite.variant = 0x12;
             break;
         case 1:
         default:
-            effect->flags |= 4;
-            effect->sprite.variant = 9;
+            effectObject->flags |= 4;
+            effectObject->sprite.variant = 9;
             break;
         }
-        Macro_080FC150(effect, &effect->sprite);
-        effect->sprite.unk8 &= ~0x800;
-        effect->sprite.palId = effect->unk8;
-        if (!(effect->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == effect->roomId)
+        Macro_080FC150(effectObject, &effectObject->sprite);
+        effectObject->sprite.unk8 &= ~0x800;
+        effectObject->sprite.palId = effectObject->unk8;
+        if (!(effectObject->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == effectObject->roomId)
         {
-            effect->sprite.x += gUnk_0203AD18[0];
-            effect->sprite.y += gUnk_0203AD18[1];
-            Macro_0803DBC8(effect, &effect->sprite);
+            effectObject->sprite.x += gUnk_0203AD18[0];
+            effectObject->sprite.y += gUnk_0203AD18[1];
+            Macro_0803DBC8(effectObject, &effectObject->sprite);
         }
-        effect->sprite.unk8 |= 0x800;
-        effect->sprite.palId = effect->unk4;
-        effect->sprite.x = ((effect->x + kracko->obj.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8);
-        effect->sprite.y = ((effect->y + kracko->obj.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8);
-        if (!(effect->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == effect->roomId)
+        effectObject->sprite.unk8 |= 0x800;
+        effectObject->sprite.palId = effectObject->unk4;
+        effectObject->sprite.x = ((effectObject->x + kracko->obj.base.objBase54 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8);
+        effectObject->sprite.y = ((effectObject->y + kracko->obj.base.objBase55 * 0x100) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8);
+        if (!(effectObject->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == effectObject->roomId)
         {
-            effect->sprite.x += gUnk_0203AD18[0];
-            effect->sprite.y += gUnk_0203AD18[1];
-            Macro_0803DBC8(effect, &effect->sprite);
+            effectObject->sprite.x += gUnk_0203AD18[0];
+            effectObject->sprite.y += gUnk_0203AD18[1];
+            Macro_0803DBC8(effectObject, &effectObject->sprite);
         }
     }
 }
@@ -992,207 +992,207 @@ static void sub_080DD044(void)
 static struct EffectObject *sub_080DD55C(struct Kracko *kracko)
 {
     struct Task *t = TaskCreate(sub_080DD62C, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = kracko->obj.base.x;
-    effect->y = kracko->obj.base.y;
-    effect->parent = kracko;
-    effect->roomId = kracko->obj.base.roomId;
-    EffectObjectInitSprite(effect, &effect->sprite, 0x40, 0x339, 0xC, 0x19);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x33B, 0, 1);
-    return effect;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = kracko->obj.base.x;
+    effectObject->y = kracko->obj.base.y;
+    effectObject->parent = kracko;
+    effectObject->roomId = kracko->obj.base.roomId;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x40, 0x339, 0xC, 0x19);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x33B, 0, 1);
+    return effectObject;
 }
 
 static void sub_080DD62C(void)
 {
     struct Sprite sprite;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct Kracko *kracko, *kracko2;
 
-    kracko = effect->parent;
-    if (effect->flags & 0x1000)
+    kracko = effectObject->parent;
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (kracko->obj.base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 0x40, &effect->sprite);
-        Macro_081050E8(effect, &effect->sprite, 0x33B, 0, !effect->sprite.palId);
-        kracko2 = effect->parent;
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 0x40, &effectObject->sprite);
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x33B, 0, !effectObject->sprite.palId);
+        kracko2 = effectObject->parent;
         if (kracko2)
         {
             if (kracko2->obj.base.header.kind && kracko2->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 kracko2 = NULL;
             }
             if (!kracko2)
                 goto label;
-            if (Macro_0810B1F4(&kracko2->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&kracko2->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
         switch (kracko->obj.unk83)
         {
         case 0:
-            effect->flags |= 4;
-            effect->sprite.variant = 0xD;
+            effectObject->flags |= 4;
+            effectObject->sprite.variant = 0xD;
             break;
         case 2:
-            effect->sprite.variant = 0x11;
+            effectObject->sprite.variant = 0x11;
             break;
         case 1:
         default:
-            effect->flags |= 4;
-            effect->sprite.variant = 0xC;
+            effectObject->flags |= 4;
+            effectObject->sprite.variant = 0xC;
             break;
         }
-        effect->x = kracko->obj.base.x;
-        effect->y = kracko->obj.base.y;
-        EffectObjectPostUpdate(effect);
+        effectObject->x = kracko->obj.base.x;
+        effectObject->y = kracko->obj.base.y;
+        EffectObjectPostUpdate(effectObject);
     }
 }
 
 static struct EffectObject *sub_080DD8D8(struct Kracko *kracko)
 {
     struct Task *t = TaskCreate(sub_080DD9B4, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = kracko->obj.base.x;
-    effect->y = kracko->obj.base.y;
-    effect->parent = kracko;
-    effect->roomId = kracko->obj.base.roomId;
-    EffectObjectInitSprite(effect, &effect->sprite, 9, 0x339, 0, 0x18);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x339, 0, 1);
-    return effect;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = kracko->obj.base.x;
+    effectObject->y = kracko->obj.base.y;
+    effectObject->parent = kracko;
+    effectObject->roomId = kracko->obj.base.roomId;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 9, 0x339, 0, 0x18);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x339, 0, 1);
+    return effectObject;
 }
 
 static void sub_080DD9B4(void)
 {
     struct Sprite sprite;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct Kracko *kracko, *kracko2;
 
-    kracko = effect->parent;
-    if (effect->flags & 0x1000)
+    kracko = effectObject->parent;
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (kracko->obj.base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 9, &effect->sprite);
-        Macro_081050E8(effect, &effect->sprite, 0x339, 0, !effect->sprite.palId);
-        kracko2 = effect->parent;
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 9, &effectObject->sprite);
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x339, 0, !effectObject->sprite.palId);
+        kracko2 = effectObject->parent;
         if (kracko2)
         {
             if (kracko2->obj.base.header.kind && kracko2->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 kracko2 = NULL;
             }
             if (!kracko2)
                 goto label;
-            if (Macro_0810B1F4(&kracko2->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&kracko2->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        effect->flags |= 4;
-        effect->x = kracko->obj.base.x;
-        effect->y = kracko->obj.base.y;
-        effect->objBase54 = kracko->obj.base.objBase54;
-        effect->objBase55 = kracko->obj.base.objBase55;
-        sub_080DDFB4(effect, kracko);
-        EffectObjectPostUpdate(effect);
+        effectObject->flags |= 4;
+        effectObject->x = kracko->obj.base.x;
+        effectObject->y = kracko->obj.base.y;
+        effectObject->objBase54 = kracko->obj.base.objBase54;
+        effectObject->objBase55 = kracko->obj.base.objBase55;
+        sub_080DDFB4(effectObject, kracko);
+        EffectObjectPostUpdate(effectObject);
     }
 }
 
 static struct EffectObject *sub_080DDC44(struct ObjectBase *objBase, s8 a, s8 b)
 {
     struct Task *t = TaskCreate(sub_080DDD60, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = objBase->x;
-    effect->y = objBase->y;
-    effect->parent = objBase;
-    effect->roomId = objBase->roomId;
-    effect->flags |= 0x4000;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = objBase->x;
+    effectObject->y = objBase->y;
+    effectObject->parent = objBase;
+    effectObject->roomId = objBase->roomId;
+    effectObject->flags |= 0x4000;
     if (objBase->flags & 1)
     {
-        effect->x -= a * 0x100;
-        effect->flags |= 1;
+        effectObject->x -= a * 0x100;
+        effectObject->flags |= 1;
     }
     else
-        effect->x += a * 0x100;
-    effect->y += b * 0x100;
-    EffectObjectInitSprite(effect, &effect->sprite, 0x20, 0x33B, 0xE, 0x1A);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x33B, 0, 1);
-    return effect;
+        effectObject->x += a * 0x100;
+    effectObject->y += b * 0x100;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x20, 0x33B, 0xE, 0x1A);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x33B, 0, 1);
+    return effectObject;
 }
 
 static void sub_080DDD60(void)
 {
     struct Sprite sprite;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct ObjectBase *objBase;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 9, &effect->sprite);
-        Macro_081050E8(effect, &effect->sprite, 0x339, 0, !effect->sprite.palId);
-        objBase = effect->parent;
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 9, &effectObject->sprite);
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x339, 0, !effectObject->sprite.palId);
+        objBase = effectObject->parent;
         if (objBase)
         {
             if (objBase->header.kind && objBase->flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 objBase = NULL;
             }
             if (!objBase)
                 goto label;
-            if (Macro_0810B1F4(objBase) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(objBase) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        if (effect->flags & 2)
-            effect->flags |= 0x1000;
+        if (effectObject->flags & 2)
+            effectObject->flags |= 0x1000;
         else
-            EffectObjectPostUpdate(effect);
+            EffectObjectPostUpdate(effectObject);
     }
 }
 
-static void sub_080DDFB4(struct EffectObject *effect, struct Kracko *kracko)
+static void sub_080DDFB4(struct EffectObject *effectObject, struct Kracko *kracko)
 {
     s32 dx = (kracko->obj.kirby3->base.x - kracko->obj.base.x) * 0x100;
     s32 dy = (kracko->obj.kirby3->base.y - kracko->obj.base.y) * 0x100;
@@ -1200,28 +1200,28 @@ static void sub_080DDFB4(struct EffectObject *effect, struct Kracko *kracko)
     switch ((((s16)ArcTan2(dx >> 0x10, dy >> 0x10) + 0x1000) >> 13) & 7)
     {
     case 0:
-        effect->sprite.variant = 0;
+        effectObject->sprite.variant = 0;
         break;
     case 1:
-        effect->sprite.variant = 7;
+        effectObject->sprite.variant = 7;
         break;
     case 2:
-        effect->sprite.variant = 6;
+        effectObject->sprite.variant = 6;
         break;
     case 3:
-        effect->sprite.variant = 5;
+        effectObject->sprite.variant = 5;
         break;
     case 4:
-        effect->sprite.variant = 4;
+        effectObject->sprite.variant = 4;
         break;
     case 5:
-        effect->sprite.variant = 3;
+        effectObject->sprite.variant = 3;
         break;
     case 6:
-        effect->sprite.variant = 2;
+        effectObject->sprite.variant = 2;
         break;
     case 7:
-        effect->sprite.variant = 1;
+        effectObject->sprite.variant = 1;
         break;
     }
 }
