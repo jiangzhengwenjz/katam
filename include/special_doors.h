@@ -7,13 +7,13 @@
 struct DoorToHub
 {
     struct Object obj;
-    struct EffectObject *effect[2];
+    struct EffectObject *effectObjects[2];
 }; /* size = 0xBC */
 
 struct AreaDoor
 {
     struct Object obj;
-    struct EffectObject *effect;
+    struct EffectObject *effectObject;
 }; /* size = 0xB8 */
 
 void *CreateDoorToHub(struct ObjectTemplate *, u8);

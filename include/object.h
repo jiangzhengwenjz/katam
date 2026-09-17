@@ -191,13 +191,13 @@
     } \
 })
 
-#define Macro_0809E55C(effect /* objBase */) ({ \
+#define Macro_0809E55C(effectObject /* objBase */) ({ \
     bool32 _flag = TRUE; \
     u8 _i = gNumKirbys; \
  \
     if (gNumKirbys) { \
         while (1) { \
-            if (gCurLevelInfo[_i - 1].currentRoom == (effect)->roomId && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
+            if (gCurLevelInfo[_i - 1].currentRoom == (effectObject)->roomId && !(gUnk_02026D50[gCurLevelInfo[_i - 1].unk65E] & 8)) { \
                 _flag = FALSE; \
                 break; \
             } \
@@ -207,7 +207,7 @@
         } \
     } \
     if (_flag) { \
-        (effect)->flags |= 0x1000; \
+        (effectObject)->flags |= 0x1000; \
     } \
 })
 
@@ -220,7 +220,7 @@
     (obj)->unkAA = gCurLevelInfo[(objBase)->unk56].unkAC >> 8; \
 })
 
-#define Macro_08107BA8_1(objBase /* effect */, src, dst, numTiles, sprite) \
+#define Macro_08107BA8_1(objBase /* effectObject */, src, dst, numTiles, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
@@ -231,7 +231,7 @@
     _spr->unk8 = (sprite)->unk8 | 0x80000; \
 })
 
-#define Macro_08107BA8_2(objBase /* effect */, src, dst, numTiles, sprite) \
+#define Macro_08107BA8_2(objBase /* effectObject */, src, dst, numTiles, sprite) \
 ({ \
     struct Sprite *_spr; \
  \
@@ -241,7 +241,7 @@
     sub_0815521C(dst, (objBase)->header.unk1); \
 })
 
-#define Macro_08107BA8_3(objBase /* effect */, sprite) \
+#define Macro_08107BA8_3(objBase /* effectObject */, sprite) \
 ({ \
     if ((sprite)->tilesVram && !((objBase)->flags & 0x4000)) \
     { \
@@ -251,7 +251,7 @@
     (sprite)->unk8 |= 0x80000; \
 })
 
-#define Macro_08107BA8_4(objBase /* effect */, src, dst, numTiles, sprite) \
+#define Macro_08107BA8_4(objBase /* effectObject */, src, dst, numTiles, sprite) \
 ({ \
     if (gKirbys[gLocalPlayerId].base.roomId == (objBase)->roomId) \
     { \
@@ -267,9 +267,9 @@
         Macro_08107BA8_3(objBase, sprite); \
 })
 
-#define Macro_081050E8(effect /* objBase */, sprite, animId, variant, cond) \
+#define Macro_081050E8(effectObject /* objBase */, sprite, animId, variant, cond) \
 ({ \
-    if (gKirbys[gLocalPlayerId].base.roomId == (effect)->roomId) \
+    if (gKirbys[gLocalPlayerId].base.roomId == (effectObject)->roomId) \
     { \
         if (cond) \
         { \
@@ -282,15 +282,15 @@
         (sprite)->palId = 0; \
 })
 
-#define Macro_0803DBC8(effect /* objBase */, sprite) \
+#define Macro_0803DBC8(effectObject /* objBase */, sprite) \
 ({ \
-    if ((effect)->flags & 0x4000) \
+    if ((effectObject)->flags & 0x4000) \
         sub_081564D8(sprite); \
     else \
         DisplaySprite(sprite); \
 })
 
-#define Macro_080FC150(objBase /* effect */, sprite) ({ \
+#define Macro_080FC150(objBase /* effectObject */, sprite) ({ \
     if ((objBase)->flags & 1) \
     { \
         struct Sprite *_r0 = (sprite); \

@@ -4084,21 +4084,21 @@ static void sub_08106AD0(struct Object *r5)
     }
 }
 
-#define Macro_08106BE0(effect, sprite) \
+#define Macro_08106BE0(effectObject, sprite) \
 ({ \
-    if (!((effect)->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == (effect)->roomId) \
+    if (!((effectObject)->flags & 0x400) && gKirbys[gLocalPlayerId].base.roomId == (effectObject)->roomId) \
     { \
         (sprite)->x += gUnk_0203AD18[0]; \
         (sprite)->y += gUnk_0203AD18[1]; \
-        Macro_0803DBC8(effect, sprite); \
+        Macro_0803DBC8(effectObject, sprite); \
     } \
 })
 
-#define Macro_08108368(effect, c1, c2) \
+#define Macro_08108368(effectObject, c1, c2) \
 ({ \
-    (effect)->sprite.x = (((effect)->x + (c1)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8); \
-    (effect)->sprite.y = (((effect)->y + (c2)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8); \
-    Macro_08106BE0(effect, &(effect)->sprite); \
+    (effectObject)->sprite.x = (((effectObject)->x + (c1)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.x >> 8); \
+    (effectObject)->sprite.y = (((effectObject)->y + (c2)) >> 8) - (gCurLevelInfo[gLocalPlayerId].viewportPosition.y >> 8); \
+    Macro_08106BE0(effectObject, &(effectObject)->sprite); \
 })
 
 static void sub_08106BE0(void)
@@ -4179,25 +4179,25 @@ static struct DarkMindBomb *sub_08107254(struct Object *r3)
 void *CreateDarkMindBomb(struct ObjectTemplate *r5, u8 r4)
 {
     struct Task *t = TaskCreate(ObjectMain, sizeof(struct DarkMindBomb), 0x1000, TASK_USE_EWRAM, ObjectDestroy);
-    struct DarkMindBomb *obj8 = TaskGetStructPtr(t);
+    struct DarkMindBomb *bomb = TaskGetStructPtr(t);
 
-    InitObject(&obj8->unk0, r5, r4);
-    obj8->unkB4 = NULL;
-    obj8->unk0.base.unkC |= 1;
-    obj8->unk0.base.unkC |= 4;
-    obj8->unk0.base.unkC |= 0x800;
-    obj8->unk0.base.flags |= 0x4000000;
-    obj8->unk0.base.unk5C &= ~7;
-    obj8->unk0.base.unk5C |= 3;
-    obj8->unk0.unk9E = 0;
-    obj8->unk0.unk7C = sub_0810A034;
-    sub_0803E2B0(&obj8->unk0.base, -4, -4, 4, 4);
-    ObjectSetBounds(&obj8->unk0.base, -4, -4, 4, 4);
-    ObjectInitSprite(&obj8->unk0);
-    obj8->unk0.base.sprite.unk14 = 0x600;
-    sub_081099A4(obj8);
-    obj8->unk0.base.counter = 200;
-    return obj8;
+    InitObject(&bomb->unk0, r5, r4);
+    bomb->unkB4 = NULL;
+    bomb->unk0.base.unkC |= 1;
+    bomb->unk0.base.unkC |= 4;
+    bomb->unk0.base.unkC |= 0x800;
+    bomb->unk0.base.flags |= 0x4000000;
+    bomb->unk0.base.unk5C &= ~7;
+    bomb->unk0.base.unk5C |= 3;
+    bomb->unk0.unk9E = 0;
+    bomb->unk0.unk7C = sub_0810A034;
+    sub_0803E2B0(&bomb->unk0.base, -4, -4, 4, 4);
+    ObjectSetBounds(&bomb->unk0.base, -4, -4, 4, 4);
+    ObjectInitSprite(&bomb->unk0);
+    bomb->unk0.base.sprite.unk14 = 0x600;
+    sub_081099A4(bomb);
+    bomb->unk0.base.counter = 200;
+    return bomb;
 }
 
 static void sub_08107408(struct DarkMindBomb *r4)

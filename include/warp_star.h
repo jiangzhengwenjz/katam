@@ -52,7 +52,7 @@ struct GoalStar
 
 struct Unk_0800D9E8
 {
-    struct EffectObject effect;
+    struct EffectObject effectObject;
     struct Sprite sprites[3];
     void (*unkC0)(struct Unk_0800D9E8 *);
     struct GoalStar *unkC4;

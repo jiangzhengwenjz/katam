@@ -11286,10 +11286,10 @@ void sub_0805177C(struct Kirby *kirby)
     }
     if (kirby->animationIndex == 80 || kirby->animationIndex == 88)
     {
-        struct EffectObject *effect = CreateEffectObject(&kirby->base, 0, 0x2A8, 5);
+        struct EffectObject *effectObject = CreateEffectObject(&kirby->base, 0, 0x2A8, 5);
 
-        effect->sprite.unk14 = 0x640;
-        effect->unk3E = -0x80;
+        effectObject->sprite.unk14 = 0x640;
+        effectObject->unk3E = -0x80;
     }
     if (kirby->base.x > gCurLevelInfo[kirby->base.unk56].levelMaxPosition.x
         || kirby->base.x < gCurLevelInfo[kirby->base.unk56].levelMinPosition.x
@@ -15353,7 +15353,7 @@ void sub_0805C954(struct Kirby *kirby)
 {
     if (kirby->base.counter == 4)
     {
-        struct EffectObject *effect;
+        struct EffectObject *effectObject;
 
         switch (kirby->ability)
         {
@@ -15362,10 +15362,10 @@ void sub_0805C954(struct Kirby *kirby)
             sub_0808F0E8(kirby);
             break;
         case KIRBY_ABILITY_LASER:
-            effect = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010380, 0xEB, 0, 0);
-            effect->sprite.palId = kirby->base.sprite.palId;
-            effect = sub_0808BA6C(&kirby->base, (kirby->base.unk56 << 11) + 0x6010400, 0xEC, 0);
-            effect->flags |= 0x4000;
+            effectObject = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010380, 0xEB, 0, 0);
+            effectObject->sprite.palId = kirby->base.sprite.palId;
+            effectObject = sub_0808BA6C(&kirby->base, (kirby->base.unk56 << 11) + 0x6010400, 0xEC, 0);
+            effectObject->flags |= 0x4000;
             sub_0807BCE0(kirby);
             break;
         case KIRBY_ABILITY_CUTTER:
@@ -15890,7 +15890,7 @@ void sub_0805DA8C(struct Kirby *kirby)
 
 void sub_0805DBA4(struct Kirby *kirby)
 {
-    struct EffectObject *effect;
+    struct EffectObject *effectObject;
 
     kirby->animationIndex = 53;
     kirby->base.counter = 0;
@@ -15908,16 +15908,16 @@ void sub_0805DBA4(struct Kirby *kirby)
         kirby->base.xspeed = -kirby->base.xspeed;
     sub_080897A0(&kirby->base);
     sub_08091614(kirby);
-    effect = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010600, 0x163, 0, 0);
-    effect->sprite.palId = kirby->base.sprite.palId + 4;
-    effect->flags |= 0x4000;
+    effectObject = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010600, 0x163, 0, 0);
+    effectObject->sprite.palId = kirby->base.sprite.palId + 4;
+    effectObject->flags |= 0x4000;
     kirby->stateFn = sub_0805DC70;
 }
 
 void sub_0805DC70(struct Kirby *kirby)
 {
     struct Sprite sprite;
-    struct EffectObject *effect;
+    struct EffectObject *effectObject;
 
     if (kirby->base.unk58 & 2)
     {
@@ -15940,9 +15940,9 @@ void sub_0805DC70(struct Kirby *kirby)
         sub_080897A0(&kirby->base);
         sub_08091B5C(kirby);
         sub_08091F38(kirby);
-        effect = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010600, 0x163, 1, 0);
-        effect->sprite.palId = kirby->base.sprite.palId + 4;
-        effect->flags |= 0x4000;
+        effectObject = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010600, 0x163, 1, 0);
+        effectObject->sprite.palId = kirby->base.sprite.palId + 4;
+        effectObject->flags |= 0x4000;
     }
     else
     {
@@ -17551,17 +17551,17 @@ void sub_08060F00(struct Kirby *kirby)
         kirby->idleTimer = 1;
     if (!(kirby->base.header.unk1 & 7))
     {
-        struct EffectObject *effect = CreateEffectObject(&kirby->base, 0, 0x293, 1);
+        struct EffectObject *effectObject = CreateEffectObject(&kirby->base, 0, 0x293, 1);
 
-        effect->flags |= kirby->base.flags & 1;
-        effect->x -= 0x800;
-        effect->y += 0x800;
-        effect->unk3C = -0x80;
-        effect->unk3E = 0x180;
+        effectObject->flags |= kirby->base.flags & 1;
+        effectObject->x -= 0x800;
+        effectObject->y += 0x800;
+        effectObject->unk3C = -0x80;
+        effectObject->unk3E = 0x180;
         if (kirby->base.flags & 1)
         {
-            effect->unk3C = 0x80;
-            effect->x += 0x1000;
+            effectObject->unk3C = 0x80;
+            effectObject->x += 0x1000;
         }
     }
     if (kirby->base.flags & 2)
@@ -18766,14 +18766,14 @@ void sub_08063E50(struct Kirby *kirby)
     sub_0805BE80(kirby);
     if (kirby->base.flags & 2)
     {
-        struct EffectObject *effect;
+        struct EffectObject *effectObject;
 
         kirby->animationIndex = 52;
         kirby->stateFn = sub_08063F74;
-        effect = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010380, 0xEB, 0, 0);
-        effect->sprite.palId = kirby->base.sprite.palId;
-        effect = sub_0808BA6C(&kirby->base, (kirby->base.unk56 << 11) + 0x6010400, 0xEC, 0);
-        effect->flags |= 0x4000;
+        effectObject = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010380, 0xEB, 0, 0);
+        effectObject->sprite.palId = kirby->base.sprite.palId;
+        effectObject = sub_0808BA6C(&kirby->base, (kirby->base.unk56 << 11) + 0x6010400, 0xEC, 0);
+        effectObject->flags |= 0x4000;
         sub_0807BCE0(kirby);
     }
     Macro_080435F8(kirby);
@@ -20173,12 +20173,12 @@ void sub_0806724C(struct Kirby *kirby)
         if ((!(kirby->idleTimer & 0xF) && kirby->unkD9)
             || (!(kirby->idleTimer & 7) && !kirby->unkD9))
         {
-            struct EffectObject *effect = CreateEffectObject(&kirby->base, 0, 0x2BA, 1);
+            struct EffectObject *effectObject = CreateEffectObject(&kirby->base, 0, 0x2BA, 1);
 
-            effect->x -= 4 * kirby->base.xspeed;
-            effect->y += 4 * kirby->base.yspeed;
-            effect->unk3C = -(kirby->base.xspeed >> 1);
-            effect->unk3E = -(kirby->base.yspeed >> 1);
+            effectObject->x -= 4 * kirby->base.xspeed;
+            effectObject->y += 4 * kirby->base.yspeed;
+            effectObject->unk3C = -(kirby->base.xspeed >> 1);
+            effectObject->unk3E = -(kirby->base.yspeed >> 1);
         }
         sub_08095714(kirby);
     }
@@ -20751,7 +20751,7 @@ void sub_08068204(struct Kirby *kirby)
 
 void sub_08068320(struct Kirby *kirby)
 {
-    struct EffectObject *effect;
+    struct EffectObject *effectObject;
 
     kirby->base.counter = 0;
     kirby->idleTimer = 0;
@@ -20770,13 +20770,13 @@ void sub_08068320(struct Kirby *kirby)
     sub_08033540(kirby->base.unk56);
     if (kirby->base.y - gCurLevelInfo[kirby->base.unk56].unk94 < 0x4000)
     {
-        effect = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010200, 0x233, 2, 0x4000);
-        effect->flags |= 0x4000;
+        effectObject = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010200, 0x233, 2, 0x4000);
+        effectObject->flags |= 0x4000;
     }
     else
     {
-        effect = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010200, 0x233, 1, 0x4000);
-        effect->flags |= 0x4000;
+        effectObject = sub_0808BEA4(kirby, (kirby->base.unk56 << 11) + 0x6010200, 0x233, 1, 0x4000);
+        effectObject->flags |= 0x4000;
     }
     RequestScreenShake(4, &kirby->base);
     PlaySfx(&kirby->base, SE_ABILITY_CRASH_ATTACK);
@@ -20987,13 +20987,13 @@ void sub_08068AB8(struct Kirby *kirby)
 {
     if (kirby->base.counter == 0xC)
     {
-        struct EffectObject *effect = CreateEffectObject(&kirby->base, 0, 0x2B6, 0);
+        struct EffectObject *effectObject = CreateEffectObject(&kirby->base, 0, 0x2B6, 0);
 
-        effect->y -= 0x1800;
+        effectObject->y -= 0x1800;
         if (kirby->base.flags & 1)
-            effect->x -= 0xB00;
+            effectObject->x -= 0xB00;
         else
-            effect->x += 0xB00;
+            effectObject->x += 0xB00;
         kirby->flyTimer = Rand16() & 7;
         sub_08096AC4(kirby, gUnk_0834C490[kirby->flyTimer]);
         PlaySfx(&kirby->base, SE_ABILITY_MAGIC_CAST);
@@ -21533,22 +21533,22 @@ void sub_0806A03C(struct Kirby *kirby)
         kirby->base.counter = 8;
         if (kirby->base.unk62 & 4)
         {
-            struct EffectObject *effect = CreateEffectObject(&kirby->base, 0, 0x293, 2);
+            struct EffectObject *effectObject = CreateEffectObject(&kirby->base, 0, 0x293, 2);
 
-            effect->unk3C = -0x300;
-            effect->unk3E = 0x200;
-            effect->unk4 = 0x60;
-            effect->unk8 = -0x40;
-            effect->y += 0x400;
+            effectObject->unk3C = -0x300;
+            effectObject->unk3E = 0x200;
+            effectObject->unk4 = 0x60;
+            effectObject->unk8 = -0x40;
+            effectObject->y += 0x400;
             if (kirby->base.flags & 1)
             {
-                effect->unk3C = -effect->unk3C;
-                effect->unk4 = -effect->unk4;
-                effect->x += 0x800;
+                effectObject->unk3C = -effectObject->unk3C;
+                effectObject->unk4 = -effectObject->unk4;
+                effectObject->x += 0x800;
             }
             else
             {
-                effect->x -= 0x800;
+                effectObject->x -= 0x800;
             }
         }
     }

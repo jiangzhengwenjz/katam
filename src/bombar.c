@@ -1507,13 +1507,13 @@ static void sub_080D9A04(struct Object *missile)
     }
     if (!(missile->base.counter & 7))
     {
-        struct EffectObject *effect = CreateEffectObject(&missile->base, 0, 0x298, 0);
+        struct EffectObject *effectObject = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
-        effect->x -= 4 * missile->base.xspeed;
-        effect->y += 4 * missile->base.yspeed;
-        effect->unk3C = -(missile->base.xspeed >> 1);
-        effect->unk3E = -(missile->base.yspeed >> 1);
-        effect->sprite.unk14 = 0x740;
+        effectObject->x -= 4 * missile->base.xspeed;
+        effectObject->y += 4 * missile->base.yspeed;
+        effectObject->unk3C = -(missile->base.xspeed >> 1);
+        effectObject->unk3E = -(missile->base.yspeed >> 1);
+        effectObject->sprite.unk14 = 0x740;
     }
     if (!missile->base.counter)
     {
@@ -1528,13 +1528,13 @@ static void sub_080D9E34(struct Object *missile)
 {
     if (!(++missile->base.counter & 7))
     {
-        struct EffectObject *effect = CreateEffectObject(&missile->base, 0, 0x298, 0);
+        struct EffectObject *effectObject = CreateEffectObject(&missile->base, 0, 0x298, 0);
 
-        effect->x -= 4 * missile->base.xspeed;
-        effect->y += 4 * missile->base.yspeed;
-        effect->unk3C = -(missile->base.xspeed >> 1);
-        effect->unk3E = -(missile->base.yspeed >> 1);
-        effect->sprite.unk14 = 0x740;
+        effectObject->x -= 4 * missile->base.xspeed;
+        effectObject->y += 4 * missile->base.yspeed;
+        effectObject->unk3C = -(missile->base.xspeed >> 1);
+        effectObject->unk3E = -(missile->base.yspeed >> 1);
+        effectObject->sprite.unk14 = 0x740;
     }
 }
 

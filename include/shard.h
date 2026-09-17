@@ -7,7 +7,7 @@
 struct Shard
 {
     struct Object obj;
-    struct EffectObject *effect[8];
+    struct EffectObject *effectObjects[8];
     u16 unkD4;
     u16 unkD6;
     s16 unkD8;

@@ -73,7 +73,7 @@ void *CreateShard(struct ObjectTemplate *template, u8 a2)
     shard->unkD8 = template->x;
     shard->unkDA = template->y;
     for (i = 0; i < 8; ++i)
-        shard->effect[i] = NULL;
+        shard->effectObjects[i] = NULL;
     shard->obj.base.flags |= 0x12218141;
     shard->obj.base.unkC |= 1;
     shard->obj.base.unk68 &= ~7;
@@ -170,9 +170,9 @@ static bool32 sub_0801BBA8(struct Shard *shard)
     {
         for (i = 0; i < 8; ++i)
         {
-            if (shard->effect[i])
-                shard->effect[i]->flags |= 0x1000;
-            shard->effect[i] = NULL;
+            if (shard->effectObjects[i])
+                shard->effectObjects[i]->flags |= 0x1000;
+            shard->effectObjects[i] = NULL;
         }
         return TRUE;
     }
@@ -180,10 +180,10 @@ static bool32 sub_0801BBA8(struct Shard *shard)
     {
         for (i = 0; i < 8; ++i)
         {
-            if (HasShard(i) && !shard->effect[i])
+            if (HasShard(i) && !shard->effectObjects[i])
             {
-                shard->effect[i] = sub_0801C0A8(shard, i);
-                shard->effect[i]->sprite.unk14 = 0x780;
+                shard->effectObjects[i] = sub_0801C0A8(shard, i);
+                shard->effectObjects[i]->sprite.unk14 = 0x780;
             }
         }
         return FALSE;
@@ -334,55 +334,55 @@ static void sub_0801C004(struct Shard *shard)
 static struct EffectObject *sub_0801C0A8(struct Shard *shard, u16 a2)
 {
     struct Task *t = TaskCreate(sub_0801C194, sizeof(struct EffectObject), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
-    struct EffectObject *effect = TaskGetStructPtr(t);
+    struct EffectObject *effectObject = TaskGetStructPtr(t);
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = shard->obj.base.x;
-    effect->y = shard->obj.base.y;
-    effect->parent = shard;
-    effect->roomId = shard->obj.base.roomId;
-    effect->x = shard->obj.base.x;
-    effect->y = shard->obj.base.y;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = shard->obj.base.x;
+    effectObject->y = shard->obj.base.y;
+    effectObject->parent = shard;
+    effectObject->roomId = shard->obj.base.roomId;
+    effectObject->x = shard->obj.base.x;
+    effectObject->y = shard->obj.base.y;
     if (Macro_0810B1F4(&shard->obj.base))
-        effect->flags |= 0x2000;
-    EffectObjectInitSprite(effect, &effect->sprite, VramMalloc(gUnk_082DE5E0[a2][2]), gUnk_082DE5E0[a2][0], gUnk_082DE5E0[a2][1], 0x19);
-    effect->sprite.palId = shard->obj.base.sprite.palId;
-    return effect;
+        effectObject->flags |= 0x2000;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, VramMalloc(gUnk_082DE5E0[a2][2]), gUnk_082DE5E0[a2][0], gUnk_082DE5E0[a2][1], 0x19);
+    effectObject->sprite.palId = shard->obj.base.sprite.palId;
+    return effectObject;
 }
 
 static void sub_0801C194(void)
 {
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct Shard *shard;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        shard = effect->parent;
+        shard = effectObject->parent;
         if (shard)
         {
             if (shard->obj.base.header.kind && shard->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 shard = NULL;
             }
             if (!shard)
                 goto label;
-            if (Macro_0810B1F4(&shard->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&shard->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        Macro_0809E55C(effect);
-        EffectObjectPostUpdate(effect);
+        Macro_0809E55C(effectObject);
+        EffectObjectPostUpdate(effectObject);
     }
 }
 
@@ -537,8 +537,8 @@ static void sub_0801C5CC(struct Shard *shard)
         u16 i;
 
         for (i = 0; i < 8; ++i)
-            if (shard->effect[i])
-                shard->effect[i]->sprite.palId = shard->obj.base.sprite.palId;
+            if (shard->effectObjects[i])
+                shard->effectObjects[i]->sprite.palId = shard->obj.base.sprite.palId;
         shard->obj.base.flags |= 4;
     }
 }

@@ -1393,140 +1393,140 @@ static void sub_080E5D04(struct Gobbler *gobbler)
 static void sub_080E5E58(struct Gobbler *gobbler)
 {
     struct Task *t = TaskCreate(sub_080E5F20, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *effect = TaskGetStructPtr(t);
+    struct EffectObject *effectObject = TaskGetStructPtr(t);
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = gobbler->obj.base.x;
-    effect->y = gobbler->obj.base.y;
-    effect->parent = gobbler;
-    effect->roomId = gobbler->obj.base.roomId;
-    EffectObjectInitSprite(effect, &effect->sprite, 0x10, 0x30C, 0x12, 0x1D);
-    effect->sprite.palId = 0;
-    Macro_081050E8(effect, &effect->sprite, 0x30C, 0, 1);
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = gobbler->obj.base.x;
+    effectObject->y = gobbler->obj.base.y;
+    effectObject->parent = gobbler;
+    effectObject->roomId = gobbler->obj.base.roomId;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x10, 0x30C, 0x12, 0x1D);
+    effectObject->sprite.palId = 0;
+    Macro_081050E8(effectObject, &effectObject->sprite, 0x30C, 0, 1);
 }
 
 static void sub_080E5F20(void)
 {
     struct Gobbler *gobbler, *gobbler2;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
     struct Sprite sprite;
 
-    gobbler2 = effect->parent;
-    if (effect->flags & 0x1000)
+    gobbler2 = effectObject->parent;
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else if (gobbler2->obj.base.flags & 0x1000)
-        effect->flags |= 0x1000;
+        effectObject->flags |= 0x1000;
     else
     {
-        Macro_08107BA8_4(effect, &effect->sprite, &sprite, 0x10, &effect->sprite);
-        Macro_081050E8(effect, &effect->sprite, 0x30C, 0, !effect->sprite.palId);
-        effect->flags &= ~0x400;
-        effect->flags |= gobbler2->obj.base.flags & 0x400;
-        effect->flags &= ~1;
-        effect->flags |= ~gobbler2->obj.base.flags & 1;
-        effect->x = gobbler2->obj.base.x;
-        effect->y = gobbler2->obj.base.y;
-        effect->objBase54 = gobbler2->obj.base.objBase54;
-        effect->objBase55 = gobbler2->obj.base.objBase55;
-        gobbler = effect->parent;
+        Macro_08107BA8_4(effectObject, &effectObject->sprite, &sprite, 0x10, &effectObject->sprite);
+        Macro_081050E8(effectObject, &effectObject->sprite, 0x30C, 0, !effectObject->sprite.palId);
+        effectObject->flags &= ~0x400;
+        effectObject->flags |= gobbler2->obj.base.flags & 0x400;
+        effectObject->flags &= ~1;
+        effectObject->flags |= ~gobbler2->obj.base.flags & 1;
+        effectObject->x = gobbler2->obj.base.x;
+        effectObject->y = gobbler2->obj.base.y;
+        effectObject->objBase54 = gobbler2->obj.base.objBase54;
+        effectObject->objBase55 = gobbler2->obj.base.objBase55;
+        gobbler = effectObject->parent;
         if (gobbler)
         {
             if (gobbler->obj.base.header.kind && gobbler->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 gobbler = NULL;
             }
             if (!gobbler)
                 goto label;
-            if (Macro_0810B1F4(&gobbler->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&gobbler->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        effect->flags |= 4;
+        effectObject->flags |= 4;
         if (gobbler2->obj.unk83 == 1 || gobbler2->obj.unk83 == 7 || gobbler2->obj.unk83 > 0xC)
-            effect->flags |= 0x400;
-        EffectObjectPostUpdate(effect);
-        if (!(effect->flags & 0x400))
+            effectObject->flags |= 0x400;
+        EffectObjectPostUpdate(effectObject);
+        if (!(effectObject->flags & 0x400))
         {
-            if (!(effect->unk4 & 0x3F))
+            if (!(effectObject->unk4 & 0x3F))
             {
                 sub_080E625C(gobbler2, (Rand16() & 7) - 0x1B, (Rand16() & 7) - 3);
-                effect->unk4 += Rand16() & 0xF;
+                effectObject->unk4 += Rand16() & 0xF;
             }
         }
-        ++effect->unk4;
+        ++effectObject->unk4;
     }
 }
 
 static void sub_080E625C(struct Gobbler *gobbler, s8 a2, s8 a3)
 {
     struct Task *t = TaskCreate(sub_080E6320, sizeof(struct EffectObject), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
-    struct EffectObject *tmp = TaskGetStructPtr(t), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(t), *effectObject = tmp;
 
-    ClearEffectObject(effect);
-    effect->header.kind = 3;
-    effect->x = gobbler->obj.base.x;
-    effect->y = gobbler->obj.base.y;
-    effect->parent = gobbler;
-    effect->roomId = gobbler->obj.base.roomId;
-    effect->unk3E = 0x80;
+    ClearEffectObject(effectObject);
+    effectObject->header.kind = 3;
+    effectObject->x = gobbler->obj.base.x;
+    effectObject->y = gobbler->obj.base.y;
+    effectObject->parent = gobbler;
+    effectObject->roomId = gobbler->obj.base.roomId;
+    effectObject->unk3E = 0x80;
     if (gobbler->obj.base.flags & 1)
-        effect->x -= a2 * 0x100;
+        effectObject->x -= a2 * 0x100;
     else
-        effect->x += a2 * 0x100;
-    effect->y += a3 * 0x100;
-    effect->flags |= 0x4000;
-    EffectObjectInitSprite(effect, &effect->sprite, 0x6012000, 0x2A0, 0, 0xA);
+        effectObject->x += a2 * 0x100;
+    effectObject->y += a3 * 0x100;
+    effectObject->flags |= 0x4000;
+    EffectObjectInitSprite(effectObject, &effectObject->sprite, 0x6012000, 0x2A0, 0, 0xA);
 }
 
 static void sub_080E6320(void)
 {
     struct Gobbler *gobbler;
-    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effect = tmp;
+    struct EffectObject *tmp = TaskGetStructPtr(gCurTask), *effectObject = tmp;
 
-    if (effect->flags & 0x1000)
+    if (effectObject->flags & 0x1000)
         TaskDestroy(gCurTask);
     else
     {
-        gobbler = effect->parent;
+        gobbler = effectObject->parent;
         if (gobbler)
         {
             if (gobbler->obj.base.header.kind && gobbler->obj.base.flags & 0x1000)
             {
-                effect->parent = NULL;
+                effectObject->parent = NULL;
                 gobbler = NULL;
             }
             if (!gobbler)
                 goto label;
-            if (Macro_0810B1F4(&gobbler->obj.base) && !(effect->flags & 0x2000))
+            if (Macro_0810B1F4(&gobbler->obj.base) && !(effectObject->flags & 0x2000))
             {
-                EffectObjectDisplaySprite(effect);
+                EffectObjectDisplaySprite(effectObject);
                 return;
             }
         }
         else
         {
         label:
-            KirbySomething(effect);
+            KirbySomething(effectObject);
         }
-        effect->flags |= 4;
-        if (!(effect->flags & 0x800))
+        effectObject->flags |= 4;
+        if (!(effectObject->flags & 0x800))
         {
-            effect->x += effect->unk3C;
-            effect->y -= effect->unk3E;
+            effectObject->x += effectObject->unk3C;
+            effectObject->y -= effectObject->unk3E;
         }
-        if (effect->y <= 0xE800)
-            effect->flags |= 0x1000;
+        if (effectObject->y <= 0xE800)
+            effectObject->flags |= 0x1000;
         else
-            EffectObjectPostUpdate(effect);
+            EffectObjectPostUpdate(effectObject);
     }
 }
 
