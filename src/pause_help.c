@@ -1,5 +1,5 @@
 #include "hud.h"
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "palette_effects.h"
 #include "pause_help.h"
 #include "constants/languages.h"
@@ -258,7 +258,7 @@ static inline u32 GetPlayerRoomFlags(void) {
 }
 
 // Selects which menu to show when pressing START
-// Called in OpenTransitionScreen with function table sTransitionScreens
+// Called in OpenInGameInterludeScreen with function table sInGameInterludeScreens
 void CreatePauseMenu(void) {
     struct Task* task = CreatePauseMenuTask();
     u32 playerRoomFlags;
@@ -314,7 +314,7 @@ void CreateHelpMenu(void) {
     u16 language = gLanguage;
     u16 color = RGB_WHITE;
 
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     CpuFill32(0, (u32*)BG_VRAM, BG_VRAM_SIZE);
     DmaFill32(3, 0, (u32*)(BG_VRAM + (gBgCntRegs[0] & 0xc) * 0x1000), 0x40);
 
@@ -495,7 +495,7 @@ static void HelpMenuToGame(void) {
 
     if (helpmenu->toGameCounter++ > 18) {
         TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
-        FinishTransitionScreen();
+        FinishInGameInterludeScreen();
         TaskDestroy(gCurTask);
     }
     else if (!(gUnk_0203AD10 & 4)) {

@@ -1,4 +1,4 @@
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "palette_effects.h"
 #include "pause_world_map.h"
 #include "code_0801DA58.h"
@@ -1254,7 +1254,7 @@ static void WorldMapUnlockInitBg(void) {
     SaveObjPaletteColors(0x80, 0x7f);
     SaveBgPaletteColors(0x00, 0xff);
     white = RGB_WHITE;
-    LoadBgPaletteAndBase(&white, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&white, 0, 1);
 }
 
 static void WorldMapUnlockInitKirbyAndDoors(void) {
@@ -1377,7 +1377,7 @@ static void WorldMapUnlockMain(void) {
         }
         else {
             TaskDestroy(gCurTask);
-            FinishTransitionScreen();
+            FinishInGameInterludeScreen();
         }
     }
     else {
@@ -1555,7 +1555,7 @@ static void WorldMapToGame(void) {
     if (worldmap->closeCounter++ > 18) {
         TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
         TaskDestroy(gCurTask);
-        FinishTransitionScreen();
+        FinishInGameInterludeScreen();
     }
     WorldMapDrawKirbys(worldmap);
 }

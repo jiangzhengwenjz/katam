@@ -1,6 +1,6 @@
 #include "cutscene_trigger.h"
 #include "palette_effects.h"
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "functions.h"
 #include "code_0806F780.h"
 #include "kirby.h"
@@ -1645,9 +1645,9 @@ static void sub_080233E0(struct Object *obj)
 
 static void sub_08023414(struct Object *obj)
 {
-    if (CanStartScreenTransition())
+    if (CanStartInGameInterlude())
     {
-        StartScreenTransition(0x1A);
+        StartInGameInterlude(0x1A);
         obj->unk78 = nullsub_113;
     }
 }

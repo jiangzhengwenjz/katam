@@ -16,8 +16,8 @@ SECTIONS {
         . = 0x00020EE0; gKirbys = .;
         . = 0x00021580; gUnk_02021580 = .;
         . = 0x00021590; gUnk_02021590 = .;
-        . = 0x00022120; gBasePalettes = .;
-        . = 0x00022520; gBasePalettesBackup = .;
+        . = 0x00022120; gSourcePalettes = .;
+        . = 0x00022520; gSourcePalettesBackup = .;
         . = 0x00022920; gPaletteEffectsTask = .;
         . = 0x00022930; gPaletteEffectManager = .;
         . = 0x000229D0; gShadowKirbyEncounters = .;
@@ -78,7 +78,7 @@ SECTIONS {
         . = 0x0003AD40; gUnk_0203AD40 = .;
         . = 0x0003AD44; gNumKirbys = .;
         . = 0x0003AD48; gSaveID = .;
-        . = 0x0003AD4C; gUnk_0203AD4C = .;
+        . = 0x0003AD4C; gInGameInterludeTask = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;
         . = 0x0003ADE0; gUnk_0203ADE0 = .;
         . = 0x0003ADE4; ewram_end = .;
@@ -259,7 +259,7 @@ SECTIONS {
         src/code_080332BC.o(.text);
         src/hud.o(.text);
         src/object_collision.o(.text);
-        src/screen_transition.o(.text);
+        src/in_game_interlude.o(.text);
         src/palette_effects.o(.text);
         src/kirby.o(.text);
         src/code_0806F780.o(.text);
@@ -440,7 +440,7 @@ SECTIONS {
         data/data_6.o(.rodata);
         src/hud.o(.rodata);
         src/object_collision.o(.rodata);
-        src/screen_transition.o(.rodata);
+        src/in_game_interlude.o(.rodata);
         src/palette_effects.o(.rodata);
         src/kirby.o(.rodata);
         src/code_0806F780.o(.rodata);

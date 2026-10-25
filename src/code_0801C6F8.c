@@ -1,4 +1,4 @@
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "palette_effects.h"
 #include "code_0801C6F8.h"
 #include "task.h"
@@ -92,7 +92,7 @@ static void sub_0801C6F8(u16 a1)
     struct Unk_0801C6F8 *var;
     u16 color = RGB_WHITE;
 
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     var = TaskGetStructPtr(t);
     var->unk208 = sub_0801D530;
     var->unk20C = 0x20000000;
@@ -282,8 +282,8 @@ static void sub_0801CC30(struct Unk_0801C6F8 *var)
     const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     struct PaletteEffect *unkStruct;
 
-    LoadBgPaletteAndBase(r2->palette, 0, 0x60);
-    LoadBgPaletteAndBase(bg->palette, bg->paletteOffset, bg->paletteSize);
+    LoadBgPaletteAndPaletteEffectSource(r2->palette, 0, 0x60);
+    LoadBgPaletteAndPaletteEffectSource(bg->palette, bg->paletteOffset, bg->paletteSize);
     unkStruct = CreatePaletteFadeFromWhite(7);
     unkStruct->unk8 |= 0x180;
     unkStruct->unk4 = 0xFFFF;
@@ -540,7 +540,7 @@ static void sub_0801D584(struct Unk_0801C6F8 *var)
     unkStruct->unk8 |= 0x180;
     unkStruct->unk4 = 0xFFFF;
     unkStruct->unk6 = 0xFFFF;
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     var->unk20C |= 0x20000000;
     var->unk21C = 0;
     var->unk208 = sub_0801D8C8;
@@ -718,7 +718,7 @@ static void sub_0801D948(struct Unk_0801C6F8 *var)
             UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
     }
     sub_080027A8();
-    FinishTransitionScreen();
+    FinishInGameInterludeScreen();
     TaskDestroy(gCurTask);
 }
 

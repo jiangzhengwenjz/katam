@@ -1,12 +1,12 @@
-#ifndef GUARD_SCREEN_TRANSITION_H
-#define GUARD_SCREEN_TRANSITION_H
+#ifndef GUARD_IN_GAME_INTERLUDE_H
+#define GUARD_IN_GAME_INTERLUDE_H
 
 #include "global.h"
 
-void ResetScreenTransition(void);
-bool32 CanStartScreenTransition(void);
-void StartScreenTransition(u16 screen);
-void FinishTransitionScreen(void);
+void ResetInGameInterlude(void);
+bool32 CanStartInGameInterlude(void);
+void StartInGameInterlude(u16 screen);
+void FinishInGameInterludeScreen(void);
 void sub_080396BC(void);
 void StartWorldMapUnlockMoonlightMansion(void);
 void StartWorldMapUnlockRainbowRouteEast(void);

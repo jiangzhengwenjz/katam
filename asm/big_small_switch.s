@@ -1282,7 +1282,7 @@ _08119B74:
 	ands r0, r1
 	cmp r0, #0
 	beq _08119BA4
-	bl CanStartScreenTransition
+	bl CanStartInGameInterlude
 	cmp r0, #0
 	beq _08119BA4
 	ldr r1, _08119BAC @ =gUnk_08357B8C

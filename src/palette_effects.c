@@ -1,24 +1,5 @@
 #include "global.h"
 
-struct PaletteEffect;
-struct Task;
-
-// Keep inline declarations in ROM order; agbcc emits the surviving
-// out-of-line copies after ordinary functions.
-// Declare the whole sequence here before palette_effects.h exposes part of it.
-inline bool8 IsPaletteEffectFinished(u8 arg0);
-inline bool32 UNUSED AreKirbyPaletteEffectsInactive(void);
-inline void DestroyPaletteEffectsTask(u32 arg0 UNUSED);
-inline void LoadBgPaletteAndBase(const u16 *palette, u8 offset, u16 num);
-inline void LoadLevelBasePalettes(const u16 **arg0, const u16 **arg1);
-inline void SaveObjPaletteColors(u8 offset, u8 num);
-inline void SaveBgPaletteColors(u8 offset, u8 num);
-inline void BackupBasePalettes(void);
-inline void RestoreBasePalettes(void);
-inline struct PaletteEffect *GetPaletteEffect(u8 arg0);
-static inline void PaletteEffectsTaskDestructor(struct Task *task UNUSED);
-static inline void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 arg1);
-
 #include "data.h"
 #include "kirby.h"
 #include "main.h"
@@ -28,13 +9,24 @@ static inline void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 
 #include "palette_effects.h"
 #include "functions.h"
 
-struct BasePalettes {
+struct PaletteEffect;
+struct Task;
+
+inline void SaveObjPaletteColors(u8 offset, u8 num);
+inline void SaveBgPaletteColors(u8 offset, u8 num);
+inline void BackupPaletteEffectSourcePalettes(void);
+inline void RestorePaletteEffectSourcePalettes(void);
+inline struct PaletteEffect *GetPaletteEffect(u8 arg0);
+static inline void PaletteEffectsTaskDestructor(struct Task *task UNUSED);
+static inline void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 arg1);
+
+struct SourcePalettes {
     /* 0x000 */ u16 bg[0x100];
     /* 0x200 */ u16 obj[0x100];
 }; /* size = 0x400 */
 
-extern struct BasePalettes gBasePalettes ALIGNED(4);
-extern struct BasePalettes gBasePalettesBackup ALIGNED(4);
+extern struct SourcePalettes gSourcePalettes ALIGNED(4);
+extern struct SourcePalettes gSourcePalettesBackup ALIGNED(4);
 
 static void UpdatePaletteEffects(void);
 
@@ -212,11 +204,11 @@ static void UpdatePaletteEffects(void)
                 if ((state->unk0[i].unk8 & 4)
                     && (!(gMainFlags & 0x800) || !(flags & 0x100) || (state->unk0[i].unk8 & 0x80))) {
                     if (state->unk0[i].unk6 && !bgRestored) {
-                        CpuCopy32(gBasePalettes.bg, gBgPalette, sizeof(gBgPalette));
+                        CpuCopy32(gSourcePalettes.bg, gBgPalette, sizeof(gBgPalette));
                         bgRestored = TRUE;
                     }
                     if (state->unk0[i].unk4 && !objRestored) {
-                        CpuCopy32(gBasePalettes.obj, gObjPalette, sizeof(gObjPalette));
+                        CpuCopy32(gSourcePalettes.obj, gObjPalette, sizeof(gObjPalette));
                         objRestored = TRUE;
                     }
                 }
@@ -821,65 +813,24 @@ void EnablePaletteEffectsForCurrentRoom(void)
     }
 }
 
-inline bool8 IsPaletteEffectFinished(u8 slot)
-{
-    if (gPaletteEffectManager.unk0[slot].unk8 & 1)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-// TODO(match): Static linkage omits this unused 0x40-byte out-of-line body.
-inline bool32 UNUSED AreKirbyPaletteEffectsInactive(void)
-{
-    if (!(gPaletteEffectManager.unk0[0].unk8 & 4)
-        && !(gPaletteEffectManager.unk0[1].unk8 & 4)
-        && !(gPaletteEffectManager.unk0[2].unk8 & 4)
-        && !(gPaletteEffectManager.unk0[3].unk8 & 4))
-        return TRUE;
-    else
-        return FALSE;
-}
-
-inline void DestroyPaletteEffectsTask(u32 arg0 UNUSED)
-{
-    TaskDestroy(gPaletteEffectsTask);
-}
-
-inline void LoadBgPaletteAndBase(const u16 *palette, u8 offset, u16 num)
-{
-    u16 *destination = gBgPalette;
-    destination += offset;
-    CpuSet(palette, destination, num);
-    destination = gBasePalettes.bg;
-    destination += offset;
-    CpuSet(palette, destination, num);
-}
-
-inline void LoadLevelBasePalettes(const u16 **arg0, const u16 **arg1)
-{
-    CpuCopy32(*arg0, gBasePalettes.bg, 0xC0);
-    CpuCopy32(*arg1, &gBasePalettes.bg[0x60], 0x100);
-}
-
 inline void SaveObjPaletteColors(u8 offset, u8 num)
 {
-    CpuCopy16(&gObjPalette[offset], &gBasePalettes.obj[offset], num << 1);
+    CpuCopy16(&gObjPalette[offset], &gSourcePalettes.obj[offset], num << 1);
 }
 
 inline void SaveBgPaletteColors(u8 offset, u8 num)
 {
-    CpuCopy16(&gBgPalette[offset], &gBasePalettes.bg[offset], num << 1);
+    CpuCopy16(&gBgPalette[offset], &gSourcePalettes.bg[offset], num << 1);
 }
 
-inline void BackupBasePalettes(void)
+inline void BackupPaletteEffectSourcePalettes(void)
 {
-    CpuFastCopy(&gBasePalettes, &gBasePalettesBackup, sizeof(gBasePalettes));
+    CpuFastCopy(&gSourcePalettes, &gSourcePalettesBackup, sizeof(gSourcePalettes));
 }
 
-inline void RestoreBasePalettes(void)
+inline void RestorePaletteEffectSourcePalettes(void)
 {
-    CpuFastCopy(&gBasePalettesBackup, &gBasePalettes, sizeof(gBasePalettes));
+    CpuFastCopy(&gSourcePalettesBackup, &gSourcePalettes, sizeof(gSourcePalettes));
 }
 
 inline struct PaletteEffect *GetPaletteEffect(u8 slot)
@@ -1045,4 +996,44 @@ void OffsetSpriteAnimationPalette(u8 paletteId, u16 anim, u8 variant, s8 red, s8
     }
     gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     SaveObjPaletteColors(paletteId * 16, 16);
+}
+
+bool8 IsPaletteEffectFinished(u8 slot)
+{
+    if (gPaletteEffectManager.unk0[slot].unk8 & 1)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 UNUSED AreKirbyPaletteEffectsInactive(void)
+{
+    if (!(gPaletteEffectManager.unk0[0].unk8 & 4)
+        && !(gPaletteEffectManager.unk0[1].unk8 & 4)
+        && !(gPaletteEffectManager.unk0[2].unk8 & 4)
+        && !(gPaletteEffectManager.unk0[3].unk8 & 4))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void DestroyPaletteEffectsTask(u32 arg0 UNUSED)
+{
+    TaskDestroy(gPaletteEffectsTask);
+}
+
+void LoadBgPaletteAndPaletteEffectSource(const u16 *palette, u8 offset, u16 num)
+{
+    u16 *destination = gBgPalette;
+    destination += offset;
+    CpuSet(palette, destination, num);
+    destination = gSourcePalettes.bg;
+    destination += offset;
+    CpuSet(palette, destination, num);
+}
+
+void LoadLevelPaletteEffectSourcePalettes(const u16 **arg0, const u16 **arg1)
+{
+    CpuCopy32(*arg0, gSourcePalettes.bg, 0xC0);
+    CpuCopy32(*arg1, &gSourcePalettes.bg[0x60], 0x100);
 }

@@ -7989,7 +7989,7 @@ void sub_080838DC(struct Kirby *kirby, struct Kirby *kirby2) {
     sub_0803E2B0(objBase, -0x28, -0x50, 0, 0x50);
     ObjectBaseInitSprite(objBase, &objBase->sprite, (kirby2->base.unk56 << 0xB) + 0x6010400, 0x209, 0, 8);
     objBase->sprite.palId = kirby2->base.unk56 + 4;
-    objBase->unk74 = kirby2;
+    objBase->unk74 = &kirby2->base;
     v8 = gCurLevelInfo[objBase->unk56].viewportPosition.x;
     objBase->x = v8 + 0x7800; // dead code
     v9 = gCurLevelInfo[objBase->unk56].viewportPosition.y;
@@ -8006,7 +8006,7 @@ void sub_080838DC(struct Kirby *kirby, struct Kirby *kirby2) {
 
 void sub_08083B04(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Kirby *kirby2 = objBase->unk74, *kirby = objBase->parent;
+    struct Kirby *kirby2 = (struct Kirby *)objBase->unk74, *kirby = objBase->parent;
 
     objBase->sprite.palId = kirby2->base.unk56 + 4;
     if (kirby2->ability != KIRBY_ABILITY_MAGIC) {
@@ -9018,7 +9018,7 @@ void sub_080860A8(struct ObjectBase *objBase, const struct Unk_08357260 *a2) {
     unk->unk0 = (gDispCnt & (DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON)) >> 8;
     unk->unk1 = a2->unk3;
     if (gKirbys[gLocalPlayerId].base.roomId == unk->roomId) {
-        LoadBgPaletteAndBase(&a2->unk0, 0, 1);
+        LoadBgPaletteAndPaletteEffectSource(&a2->unk0, 0, 1);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         if (unk->unk4->unk2 == 1) {
             gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
@@ -9039,7 +9039,7 @@ void sub_08086194(void) {
         ++unk->unk4;
         unk->unk1 = unk->unk4->unk3;
         if (gKirbys[gLocalPlayerId].base.roomId == unk->roomId) {
-            LoadBgPaletteAndBase(&unk->unk4->unk0, 0, 1);
+            LoadBgPaletteAndPaletteEffectSource(&unk->unk4->unk0, 0, 1);
             gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
         if (!unk->unk1) TaskDestroy(gCurTask);

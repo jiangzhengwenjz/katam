@@ -969,7 +969,7 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
                         object->yspeed &= 0xFF;
                     else
                         object->yspeed = 0;
-                    object->unk74 = solid;
+                    object->unk74 = &solid->base;
                 }
             }
         }
@@ -1032,7 +1032,7 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
                         object->yspeed &= 0xFF;
                     else
                         object->yspeed = 0;
-                    object->unk74 = solid;
+                    object->unk74 = &solid->base;
                 }
             }
             tolerance = 0x200 - object->yspeed;
@@ -1084,7 +1084,7 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
                         object->yspeed &= 0xFF;
                     else
                         object->yspeed = 0;
-                    object->unk74 = solid;
+                    object->unk74 = &solid->base;
                 } else if (object->yspeed > 0) {
                     s32 tolerance = object->yspeed + 0x300;
                     if (abs((object->y + a[1] * 0x100) - (solid->base.y + b[3] * 0x100)) < tolerance) {
@@ -1141,40 +1141,6 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
         || ((kirby)->ability == KIRBY_ABILITY_UFO \
             && ((kirby)->animationIndex <= 0x12 || ((kirby)->animationIndex >= 0x21 && (kirby)->animationIndex <= 0x2E))))
 
-static inline bool32 CanKirbyUseSharingAnimationByIndex(struct Kirby *kirbys, s32 kirbyId)
-{
-    if (kirbys[kirbyId].ability != KIRBY_ABILITY_UFO) {
-        if ((kirbys[kirbyId].animationIndex <= 0x15 || kirbys[kirbyId].animationIndex == 0x19 || kirbys[kirbyId].animationIndex == 0x2F)
-            && kirbys[kirbyId].animationIndex != 0xD)
-            return TRUE;
-        if (kirbys[kirbyId].animationIndex >= 0x38 && kirbys[kirbyId].animationIndex <= 0x3F)
-            return TRUE;
-    }
-    if (kirbys[kirbyId].ability == KIRBY_ABILITY_UFO
-        && (kirbys[kirbyId].animationIndex <= 0x12 || (kirbys[kirbyId].animationIndex >= 0x21 && kirbys[kirbyId].animationIndex <= 0x2E)))
-        return TRUE;
-    return FALSE;
-}
-
-static inline bool32 CanKirbyUseSharingAnimationFromAbility(struct Kirby *kirbys, s32 kirbyId, u8 ability)
-{
-    if (ability != KIRBY_ABILITY_UFO) {
-        if ((kirbys[kirbyId].animationIndex <= 0x15 || kirbys[kirbyId].animationIndex == 0x19 || kirbys[kirbyId].animationIndex == 0x2F)
-            && kirbys[kirbyId].animationIndex != 0xD)
-            return TRUE;
-        {
-            struct Kirby *current = kirbys;
-            if (current[kirbyId].animationIndex >= 0x38 && current[kirbyId].animationIndex <= 0x3F)
-                return TRUE;
-            if (current[kirbyId].ability != KIRBY_ABILITY_UFO)
-                return FALSE;
-        }
-    }
-    if (kirbys[kirbyId].animationIndex <= 0x12 || (kirbys[kirbyId].animationIndex >= 0x21 && kirbys[kirbyId].animationIndex <= 0x2E))
-        return TRUE;
-    return FALSE;
-}
-
 static inline void StartKirbyShare(struct Kirby *sharing, u8 sharingId, struct Kirby *other, u8 otherId)
 {
     sub_08053DAC(sharing, otherId);
@@ -1212,10 +1178,8 @@ static void ProcessKirbyContacts(void)
                 if (gKirbys[secondId].ability != KIRBY_ABILITY_MINI
                     && first->unkE5 != 0 && !((first->unkE1 >> secondId) & 1)) {
                     if (CanKirbyUseSharingAnimation(first)) {
-                        u8 ability = gKirbys[secondId].ability;
-                        struct Kirby *kirbys = gKirbys;
-                        if (CanKirbyUseSharingAnimationFromAbility(kirbys, secondId, ability)
-                            && (first->base.unk56 < gNumHumanPlayers || kirbys[secondId].base.unk56 < gNumHumanPlayers)) {
+                        if (CanKirbyUseSharingAnimation(&gKirbys[secondId])
+                            && (first->base.unk56 < gNumHumanPlayers || gKirbys[secondId].base.unk56 < gNumHumanPlayers)) {
                             sub_08053DAC(first, secondId);
                             sub_08054414(&gKirbys[secondId], firstId);
                             first->unkE1 |= 1 << secondId;
@@ -1225,13 +1189,12 @@ static void ProcessKirbyContacts(void)
                     }
                 } else if (first->ability != KIRBY_ABILITY_MINI) {
                     u8 ability = gKirbys[secondId].ability;
-                    struct Kirby *kirbys = gKirbys;
                     if (ability != KIRBY_ABILITY_MINI
                         && gKirbys[secondId].unkE5 != 0 && !((gKirbys[secondId].unkE1 >> firstId) & 1)) {
                         if (CanKirbyUseSharingAnimation(first)) {
-                            if (CanKirbyUseSharingAnimationByIndex(kirbys, secondId)
-                                && (first->base.unk56 < gNumHumanPlayers || kirbys[secondId].base.unk56 < gNumHumanPlayers)) {
-                                StartKirbyShare(&kirbys[secondId], secondId, first, firstId);
+                            if (CanKirbyUseSharingAnimation(&gKirbys[secondId])
+                                && (first->base.unk56 < gNumHumanPlayers || gKirbys[secondId].base.unk56 < gNumHumanPlayers)) {
+                                StartKirbyShare(&gKirbys[secondId], secondId, first, firstId);
                                 ++secondId;
                                 continue;
                             }

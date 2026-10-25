@@ -30,8 +30,8 @@ enum WorldMapDoor {
 
 void CreateWorldMap(enum WorldMapDoor);
 
-// Addresses to these functions held by sTransitionScreens
-// Called in OpenTransitionScreen when big switch is activated
+// Addresses to these functions held by sInGameInterludeScreens
+// Called in OpenInGameInterludeScreen when big switch is activated
 void WorldMapUnlockMoonlightMansion(void);
 void WorldMapUnlockRainbowRouteEast(void);
 void WorldMapUnlockRainbowRouteSouth(void);

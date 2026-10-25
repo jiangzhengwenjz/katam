@@ -1,4 +1,4 @@
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "palette_effects.h"
 #include "pause_area_map.h"
 #include "bg.h"
@@ -2652,7 +2652,7 @@ inline void AreaMapToGame(void) {
     if (areamap->toGameCounter++ > 18) {
         TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
         TaskDestroy(gCurTask);
-        FinishTransitionScreen();
+        FinishInGameInterludeScreen();
     }
 }
 

@@ -38,12 +38,12 @@ void BlendSpriteAnimationPalettes(u8 paletteId, u16 sourceAnim, u8 sourceVariant
 void OffsetSpriteAnimationPalette(u8 paletteId, u16 anim, u8 variant, s8 red, s8 green, s8 blue, u16 amount);
 bool8 IsPaletteEffectFinished(u8 arg0);
 void DestroyPaletteEffectsTask(u32 arg0);
-void LoadBgPaletteAndBase(const u16 *palette, u8 offset, u16 num);
-void LoadLevelBasePalettes(const u16 **arg0, const u16 **arg1);
+void LoadBgPaletteAndPaletteEffectSource(const u16 *palette, u8 offset, u16 num);
+void LoadLevelPaletteEffectSourcePalettes(const u16 **arg0, const u16 **arg1);
 void SaveObjPaletteColors(u8 offset, u8 num);
 void SaveBgPaletteColors(u8 offset, u8 num);
-void BackupBasePalettes(void);
-void RestoreBasePalettes(void);
+void BackupPaletteEffectSourcePalettes(void);
+void RestorePaletteEffectSourcePalettes(void);
 struct PaletteEffect *GetPaletteEffect(u8 arg0);
 
 #endif

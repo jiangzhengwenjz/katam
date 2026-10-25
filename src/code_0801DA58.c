@@ -1,4 +1,4 @@
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "palette_effects.h"
 #include "code_0801DA58.h"
 #include "task.h"
@@ -40,7 +40,7 @@ void sub_0801DA58(u16 a1)
     u16 *dst;
     struct Sprite *sprite;
 
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     gDispCnt = DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG3_ON;
     gDispCnt |= DISPCNT_OBJ_1D_MAP;
     var = TaskGetStructPtr(t);
@@ -230,8 +230,8 @@ static void sub_0801E03C(struct Unk_0801DA58 *var)
 
     var->unkDE = 0;
     sub_0801DE00(var);
-    LoadBgPaletteAndBase(r6->palette, 0, 0x60);
-    LoadBgPaletteAndBase(bg->palette, bg->paletteOffset, bg->paletteSize);
+    LoadBgPaletteAndPaletteEffectSource(r6->palette, 0, 0x60);
+    LoadBgPaletteAndPaletteEffectSource(bg->palette, bg->paletteOffset, bg->paletteSize);
     CreatePaletteFadeFromWhite(7)->unk8 |= 0x180;
     var->unkD8 = sub_0801E0B0;
 }
@@ -317,7 +317,7 @@ static void sub_0801E238(struct Unk_0801DA58 *var)
     unkStruct->unk8 |= 0x180;
     unkStruct->unk4 = 0xFFFF;
     unkStruct->unk6 = 0xFFFF;
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     var->unkD8 = sub_0801E28C;
 }
 
@@ -329,6 +329,6 @@ static void sub_0801E28C(struct Unk_0801DA58 *var)
 
 static void sub_0801E2B4(struct Unk_0801DA58 *var)
 {
-    FinishTransitionScreen();
+    FinishInGameInterludeScreen();
     TaskDestroy(gCurTask);
 }

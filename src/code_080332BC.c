@@ -1,6 +1,6 @@
 #include "hud.h"
 #include "object_collision.h"
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "code_080332BC.h"
 #include "code_0800ECAC.h"
 #include "demo.h"
@@ -48,7 +48,7 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     if (aiKirbyState > 199) {
         startRoomId = 0x321;
     }
-    ResetScreenTransition();
+    ResetInGameInterlude();
     InitLevelTasks();
 
     for (curKirbyId = 0; curKirbyId < 4; curKirbyId++) {

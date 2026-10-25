@@ -2275,7 +2275,7 @@ static void sub_0800CDE8(struct GoalStar *gs)
                 DmaCopy16(3, r4->unk0.u16ppp[gsAlias->unkE0][0], &gBgPalette[r4->unk4[1]], r4->unk8 * sizeof(u16));
                 gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
             }
-            LoadBgPaletteAndBase(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
+            LoadBgPaletteAndPaletteEffectSource(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
             gsAlias->unkE2 = 0;
             ++gsAlias->unkE0;
         }

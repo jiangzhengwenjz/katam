@@ -65,7 +65,7 @@ static void DrawLifeSharingHudMessage(u8);
 static void UpdateTrackedHudEnemy(struct GameplayHud *);
 static void AnimateHudEnemyHealth(struct GameplayHud *);
 static void UpdateGameplayHud(void);
-static void DisableDemoOtherRoomKirbyTileUpdates(void);
+static void sub_08034034(void);
 static void DrawHudOtherKirbys(struct GameplayHud *);
 static void DrawHudPhoneBattery(struct Kirby *);
 static void DrawKirbyHealthBar(struct Kirby *);
@@ -106,7 +106,7 @@ void CreateGameplayHud(void)
     kirby = &gKirbys[gLocalPlayerId];
     if (gUnk_0203AD10 & 0x10) {
         DrawDemoHud();
-        task->main = DisableDemoOtherRoomKirbyTileUpdates;
+        task->main = sub_08034034;
         return;
     }
     LoadGameplayHudGraphics();
@@ -278,7 +278,7 @@ static void UpdateGameplayHud(void)
     DrawHudOtherKirbys(hud);
 }
 
-static void DisableDemoOtherRoomKirbyTileUpdates(void)
+static void sub_08034034(void)
 {
     u8 i;
     for (i = 0; i < gNumKirbys; i++) {
@@ -984,7 +984,7 @@ static void AnimateHudEnemyHealth(struct GameplayHud *hud)
 
 void LoadAbilityIconGraphicsAndPalette(void *tilesVram, u8 paletteId, u8 abilityIconId)
 {
-    LoadBgPaletteAndBase(sAbilityIconPalettes[abilityIconId], paletteId * 16, 16);
+    LoadBgPaletteAndPaletteEffectSource(sAbilityIconPalettes[abilityIconId], paletteId * 16, 16);
     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     if (abilityIconId > KIRBY_ABILITY_COUNT) {
         gUnk_03002EC0[gUnk_030039A4].unk0 = (uintptr_t)sAbilityIconGraphics[gLanguage][abilityIconId];
@@ -1049,7 +1049,7 @@ static inline void LoadGameplayHudGraphics(void)
 {
     u8 color = gKirbys[gLocalPlayerId].color;
     void *tiles = BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185);
-    LoadBgPaletteAndBase(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
     CpuCopy16(gUnk_082EC7A0, tiles, TILE_SIZE_4BPP * 0x38);
     tiles += TILE_OFFSET_4BPP(0x38);
     CpuCopy16(sHudEnemyAndAreaNameGraphics[gLanguage], tiles, TILE_SIZE_4BPP * 8);
@@ -1092,7 +1092,7 @@ static inline void DrawDemoHud(void)
     u8 color = gKirbys[gLocalPlayerId].color;
     u16 *tiles = BG_SCREEN_ADDR(28) + 0x198;
     u8 i;
-    LoadBgPaletteAndBase(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
     CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
     for (i = 0; i < 6; i++)
         *tiles++ = (i + 0x1B5) | 0xF000;
@@ -1188,7 +1188,7 @@ void RefreshGameplayHud(struct Kirby *kirby)
         DrawDemoHud();
         return;
     }
-    LoadBgPaletteAndBase(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
     if (gGameplayHudTask->main == UpdateGameOverHudIndicators) {
         DrawGameOverMessage();
         return;

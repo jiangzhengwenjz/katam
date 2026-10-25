@@ -1,4 +1,4 @@
-#include "screen_transition.h"
+#include "in_game_interlude.h"
 #include "palette_effects.h"
 #include "data.h"
 #include "code_0814A828.h"
@@ -268,10 +268,10 @@ void sub_0814A828(void) {
     struct Unk_0814A828 *var;
 
     if (gUnk_0203AD10 & 0x10)
-        FinishTransitionScreen();
+        FinishInGameInterludeScreen();
     else if (gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
         color = RGB_WHITE;
-        LoadBgPaletteAndBase(&color, 0, 1);
+        LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
         gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
         m4aSoundVSyncOn();
         for (i = 0; i < gNumHumanPlayers; ++i)
@@ -402,13 +402,13 @@ static void sub_0814ACA8(struct Unk_0814A828 *a1) {
     u16 color = RGB_WHITE;
     struct PaletteEffect *var2;
 
-    LoadBgPaletteAndBase(var->palette, 0, 0x60);
-    LoadBgPaletteAndBase(bg->palette, bg->paletteOffset, bg->paletteSize);
+    LoadBgPaletteAndPaletteEffectSource(var->palette, 0, 0x60);
+    LoadBgPaletteAndPaletteEffectSource(bg->palette, bg->paletteOffset, bg->paletteSize);
     var2 = CreatePaletteFadeFromWhite(7);
     var2->unk8 |= 0x180;
     var2->unk4 = 0xFFFF;
     var2->unk6 = 0xFFFF;
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     a1->unkC = 0;
     a1->unk8 = sub_0814E0E8;
     a1->unk10.unk16 = 0x100;
@@ -474,7 +474,7 @@ static void sub_0814AF04(struct Unk_0814A828 *a1) {
             UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
         }
     }
-    FinishTransitionScreen();
+    FinishInGameInterludeScreen();
     for (i = 0; i < 2; ++i) {
         if (a1->unkA8[i]) {
             TaskDestroy(a1->unkA8[i]);
@@ -2329,7 +2329,7 @@ static void sub_0814E290(struct Unk_0814A828 *a1) {
     var->unk8 |= 0x180;
     var->unk4 = 0xFFFF;
     var->unk6 = 0xFFFF;
-    LoadBgPaletteAndBase(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     a1->unk4 |= 0x80000000;
     m4aMPlayFadeOut(&gMPlayInfo_0, 2);
     m4aMPlayFadeOut(&gMPlayInfo_1, 2);
