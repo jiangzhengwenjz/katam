@@ -1,27 +1,5 @@
 #include "global.h"
 
-struct ObjectBase;
-struct Kirby;
-struct Task;
-
-// Keep inline declarations in ROM order; agbcc emits the surviving
-// out-of-line copies after ordinary functions.
-// Declare the whole sequence here before hud.h exposes part of it.
-inline void LoadHudAbilityIcon(u8 ability);
-inline void StartHudAbilityIconExpansion(struct ObjectBase *object);
-inline void HoldExpandedHudAbilityIcon(struct ObjectBase *object);
-inline void ScheduleHudAbilityIconCollapse(struct ObjectBase *object);
-inline void CollapseHudAbilityIcon(struct ObjectBase *object);
-static inline void UpdateGameOverHudIndicators(void);
-static inline void GameplayHudDestructor(struct Task *task);
-static inline void LoadGameplayHudGraphics(void);
-static inline void DrawHudLivesLabel(void);
-static inline void DrawHudLivesCount(struct Kirby *kirby);
-static inline void DrawDemoHud(void);
-static inline void DrawHudPhoneIcon(void);
-static inline void ClearHudPhoneIcon(void);
-static inline void DrawHudNameTiles(void);
-
 #include "data.h"
 #include "kirby.h"
 #include "main.h"
@@ -59,7 +37,6 @@ extern const u16 gUnk_08351628[4][4];
 static void DrawBorrowLifeNoCursor(void);
 static void DrawBorrowLifeYesCursor(void);
 
-static inline void DrawGameOverMessage(void);
 static void DrawHudCallMessage(u8);
 static void DrawLifeSharingHudMessage(u8);
 static void UpdateTrackedHudEnemy(struct GameplayHud *);
@@ -69,6 +46,113 @@ static void sub_08034034(void);
 static void DrawHudOtherKirbys(struct GameplayHud *);
 static void DrawHudPhoneBattery(struct Kirby *);
 static void DrawKirbyHealthBar(struct Kirby *);
+
+static void UpdateGameOverHudIndicators(void);
+static void GameplayHudDestructor(struct Task *task UNUSED);
+static void LoadGameplayHudGraphics(void);
+static void DrawHudLivesLabel(void);
+static void DrawHudLivesCount(struct Kirby *kirby);
+static void DrawDemoHud(void);
+static void DrawHudPhoneIcon(void);
+static void ClearHudPhoneIcon(void);
+static void DrawHudNameTiles(void);
+static void DrawGameOverMessage(void);
+
+// RefreshGameplayHud uses these inline forms; other callers use the ordinary functions below.
+static inline void LoadHudAbilityIconInline(u8 ability)
+{
+    LoadAbilityIconGraphicsAndPalette(BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x1C5), 0xE, ability);
+}
+
+static inline void LoadGameplayHudGraphicsInline(void)
+{
+    u8 color = gKirbys[gLocalPlayerId].color;
+    void *tiles = BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185);
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    CpuCopy16(gUnk_082EC7A0, tiles, TILE_SIZE_4BPP * 0x38);
+    tiles += TILE_OFFSET_4BPP(0x38);
+    CpuCopy16(sHudEnemyAndAreaNameGraphics[gLanguage], tiles, TILE_SIZE_4BPP * 8);
+}
+
+static inline void DrawHudLivesLabelInline(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x48E;
+    *tiles++ = 0xF18F;
+    *tiles++ = 0xF190;
+    *tiles = 0xF191;
+    tiles += 30;
+    *tiles++ = 0xF19F;
+    *tiles++ = 0xF59F;
+    *tiles = 0xF1A1;
+}
+
+static inline void DrawHudLivesCountInline(struct Kirby *kirby)
+{
+    u8 lives = kirby->lives;
+    u16 i;
+    if (lives > 99)
+        lives = 99;
+    for (i = 0; i < 2; i++) {
+        u32 column = i + 10;
+        u16 *tiles = (u16 *)(BG_SCREEN_ADDR(28) + 0x480) + column;
+        u32 quotient;
+        u16 digit;
+        quotient = lives / sHudDecimalDivisors[i + 6];
+        digit = quotient;
+        lives -= sHudDecimalDivisors[i + 6] * quotient;
+        *tiles = (digit + 0x185) | 0xF000;
+        tiles = (u16 *)(BG_SCREEN_ADDR(28) + 0x4C0) + column;
+        *tiles = (digit + 0x195) | 0xF000;
+    }
+}
+
+static inline void DrawDemoHudInline(void)
+{
+    u8 color = gKirbys[gLocalPlayerId].color;
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x198;
+    u8 i;
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
+    for (i = 0; i < 6; i++)
+        *tiles++ = (i + 0x1B5) | 0xF000;
+}
+
+static inline void DrawHudPhoneIconInline(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x2;
+    tiles[0] = 0xF1B0;
+    tiles[32] = 0xF1B1;
+}
+
+static inline void ClearHudPhoneIconInline(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x2;
+    *tiles = 0xF184;
+    tiles += 32;
+    *tiles = 0xF184;
+}
+
+static inline void DrawHudNameTilesInline(void)
+{
+    if (!(gUnk_0203AD10 & 0x10)) {
+        u16 *tiles = BG_SCREEN_ADDR(28) + 0x4AA;
+        u16 i;
+        for (i = 0; i < 8; i++)
+            *tiles++ = (i + 0x1BD) | 0xF000;
+    }
+}
+
+static inline void DrawGameOverMessageInline(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x18E;
+    u8 y, x;
+    CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
+    for (y = 0; y < 3; y++) {
+        for (x = 0; x < 16; x++)
+            *tiles++ = (y * 16 + (x + 0x185)) | 0xF000;
+        tiles += 16;
+    }
+}
 
 static inline void DisplayCallingKirby(struct GameplayHud *hud)
 {
@@ -998,184 +1082,6 @@ void LoadAbilityIconGraphicsAndPalette(void *tilesVram, u8 paletteId, u8 ability
     gUnk_030039A4 = (gUnk_030039A4 + 1) & 0x3F;
 }
 
-inline void LoadHudAbilityIcon(u8 ability)
-{
-    LoadAbilityIconGraphicsAndPalette(BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x1C5), 0xE, ability);
-}
-
-inline void StartHudAbilityIconExpansion(struct ObjectBase *object)
-{
-    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
-    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId) {
-        hud->unk4 = 0;
-        DrawHudAbilityIconRows(2);
-    }
-}
-
-inline void HoldExpandedHudAbilityIcon(struct ObjectBase *object)
-{
-    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
-    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId) {
-        hud->unk4 = 0x80;
-        DrawHudAbilityIconRows(6);
-    }
-}
-
-inline void ScheduleHudAbilityIconCollapse(struct ObjectBase *object)
-{
-    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
-    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId)
-        hud->unk4 = 0xC;
-}
-
-inline void CollapseHudAbilityIcon(struct ObjectBase *object)
-{
-    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
-    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId)
-        hud->unk4 = 0x7C;
-}
-
-static inline void UpdateGameOverHudIndicators(void)
-{
-    struct GameplayHud *hud = TaskGetStructPtr(gCurTask);
-    DrawHudOtherKirbys(hud);
-}
-
-static inline void GameplayHudDestructor(struct Task *task UNUSED)
-{
-}
-
-static inline void LoadGameplayHudGraphics(void)
-{
-    u8 color = gKirbys[gLocalPlayerId].color;
-    void *tiles = BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185);
-    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
-    CpuCopy16(gUnk_082EC7A0, tiles, TILE_SIZE_4BPP * 0x38);
-    tiles += TILE_OFFSET_4BPP(0x38);
-    CpuCopy16(sHudEnemyAndAreaNameGraphics[gLanguage], tiles, TILE_SIZE_4BPP * 8);
-}
-
-static inline void DrawHudLivesLabel(void)
-{
-    u16 *tiles = BG_SCREEN_ADDR(28) + 0x48E;
-    *tiles++ = 0xF18F;
-    *tiles++ = 0xF190;
-    *tiles = 0xF191;
-    tiles += 30;
-    *tiles++ = 0xF19F;
-    *tiles++ = 0xF59F;
-    *tiles = 0xF1A1;
-}
-
-static inline void DrawHudLivesCount(struct Kirby *kirby)
-{
-    u8 lives = kirby->lives;
-    u16 i;
-    if (lives > 99)
-        lives = 99;
-    for (i = 0; i < 2; i++) {
-        u32 column = i + 10;
-        u16 *tiles = (u16 *)(BG_SCREEN_ADDR(28) + 0x480) + column;
-        u32 quotient;
-        u16 digit;
-        quotient = lives / sHudDecimalDivisors[i + 6];
-        digit = quotient;
-        lives -= sHudDecimalDivisors[i + 6] * quotient;
-        *tiles = (digit + 0x185) | 0xF000;
-        tiles = (u16 *)(BG_SCREEN_ADDR(28) + 0x4C0) + column;
-        *tiles = (digit + 0x195) | 0xF000;
-    }
-}
-
-static inline void DrawDemoHud(void)
-{
-    u8 color = gKirbys[gLocalPlayerId].color;
-    u16 *tiles = BG_SCREEN_ADDR(28) + 0x198;
-    u8 i;
-    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
-    CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
-    for (i = 0; i < 6; i++)
-        *tiles++ = (i + 0x1B5) | 0xF000;
-}
-
-static inline void DrawHudPhoneIcon(void)
-{
-    u16 *tiles = BG_SCREEN_ADDR(28) + 0x2;
-    tiles[0] = 0xF1B0;
-    tiles[32] = 0xF1B1;
-}
-
-static inline void ClearHudPhoneIcon(void)
-{
-    u16 *tiles = BG_SCREEN_ADDR(28) + 0x2;
-    *tiles = 0xF184;
-    tiles += 32;
-    *tiles = 0xF184;
-}
-
-static inline void DrawHudNameTiles(void)
-{
-    if (!(gUnk_0203AD10 & 0x10)) {
-        u16 *tiles = BG_SCREEN_ADDR(28) + 0x4AA;
-        u16 i;
-        for (i = 0; i < 8; i++)
-            *tiles++ = (i + 0x1BD) | 0xF000;
-    }
-}
-
-inline void ShowGameOverHud(void)
-{
-    if (!(gUnk_0203AD10 & 0x10)) {
-        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
-        DrawGameOverMessage();
-        gGameplayHudTask->main = UpdateGameOverHudIndicators;
-    }
-}
-
-inline void ShowBorrowLifeHud(void)
-{
-    if (!(gUnk_0203AD10 & 0x10)) {
-        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
-        DrawBorrowLifePrompt();
-        gGameplayHudTask->main = UpdateBorrowLifeHud;
-    }
-}
-
-inline void RestoreHudAfterLifeBorrow(void)
-{
-    if (!(gUnk_0203AD10 & 0x10) && gGameplayHudTask->main == UpdateBorrowLifeHud) {
-        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
-        gGameplayHudTask->main = UpdateGameplayHud;
-        RefreshGameplayHud(&gKirbys[gLocalPlayerId]);
-    }
-}
-
-inline void ClearBorrowLifeHud(struct ObjectBase *object UNUSED)
-{
-    if (!(gUnk_0203AD10 & 0x10) && gGameplayHudTask->main == UpdateBorrowLifeHud) {
-        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
-        DrawHudPhoneBattery(&gKirbys[gLocalPlayerId]);
-    }
-}
-
-inline void ExpireHudEnemyHealthDelay(void)
-{
-    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
-    if (hud != NULL && hud->unkF != 0)
-        hud->unkF = 0x31;
-}
-
-static inline void DrawGameOverMessage(void)
-{
-    u16 *tiles = BG_SCREEN_ADDR(28) + 0x18E;
-    u8 y, x;
-    CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
-    for (y = 0; y < 3; y++) {
-        for (x = 0; x < 16; x++)
-            *tiles++ = (y * 16 + (x + 0x185)) | 0xF000;
-        tiles += 16;
-    }
-}
 
 void RefreshGameplayHud(struct Kirby *kirby)
 {
@@ -1185,33 +1091,33 @@ void RefreshGameplayHud(struct Kirby *kirby)
     u8 i;
     CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
     if (gUnk_0203AD10 & 0x10) {
-        DrawDemoHud();
+        DrawDemoHudInline();
         return;
     }
     LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
     if (gGameplayHudTask->main == UpdateGameOverHudIndicators) {
-        DrawGameOverMessage();
+        DrawGameOverMessageInline();
         return;
     }
-    LoadGameplayHudGraphics();
+    LoadGameplayHudGraphicsInline();
     if (gGameplayHudTask->main == UpdateBorrowLifeHud) {
         DrawBorrowLifePrompt();
         return;
     }
     if (gKirbys[gLocalPlayerId].unkDB)
-        LoadHudAbilityIcon(gKirbys[gLocalPlayerId].unkDB);
+        LoadHudAbilityIconInline(gKirbys[gLocalPlayerId].unkDB);
     else
-        LoadHudAbilityIcon(gKirbys[gLocalPlayerId].ability);
-    DrawHudLivesLabel();
-    DrawHudLivesCount(&gKirbys[gLocalPlayerId]);
+        LoadHudAbilityIconInline(gKirbys[gLocalPlayerId].ability);
+    DrawHudLivesLabelInline();
+    DrawHudLivesCountInline(&gKirbys[gLocalPlayerId]);
     DrawKirbyHealthBar(&gKirbys[gLocalPlayerId]);
     DrawHudAbilityIconRows(hud->unk14);
     if (gRoomProps[gKirbys[gLocalPlayerId].base.roomId].priorityFlags & 8)
-        DrawHudPhoneIcon();
+        DrawHudPhoneIconInline();
     else
-        ClearHudPhoneIcon();
+        ClearHudPhoneIconInline();
     DrawHudPhoneBattery(&gKirbys[gLocalPlayerId]);
-    DrawHudNameTiles();
+    DrawHudNameTilesInline();
     if (hud->unk1C != NULL) {
         CpuCopy16(sHudEnemyAndAreaNameGraphics[gLanguage] + hud->unk1C->type * 0x100, BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x1BD), TILE_SIZE_4BPP * 0x8);
         DrawEnemyHealthOrAreaName(hud);
@@ -1257,7 +1163,7 @@ void RefreshGameplayHud(struct Kirby *kirby)
                 DrawLifeSharingHudMessage(0);
             else
                 DrawHudCallMessage(0);
-            DrawHudPhoneIcon();
+            DrawHudPhoneIconInline();
             DrawHudPhoneBattery(kirby);
             hud->unkD = 0;
         }
@@ -1268,12 +1174,191 @@ void RefreshGameplayHud(struct Kirby *kirby)
                 DrawLifeSharingHudMessage(0);
             else
                 DrawHudCallMessage(0);
-            DrawHudPhoneIcon();
+            DrawHudPhoneIconInline();
             DrawHudPhoneBattery(kirby);
             hud->unkD = 0;
         }
     }
     hud->unk10 |= 1;
+}
+
+void LoadHudAbilityIcon(u8 ability)
+{
+    LoadAbilityIconGraphicsAndPalette(BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x1C5), 0xE, ability);
+}
+
+void StartHudAbilityIconExpansion(struct ObjectBase *object)
+{
+    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
+    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId) {
+        hud->unk4 = 0;
+        DrawHudAbilityIconRows(2);
+    }
+}
+
+void HoldExpandedHudAbilityIcon(struct ObjectBase *object)
+{
+    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
+    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId) {
+        hud->unk4 = 0x80;
+        DrawHudAbilityIconRows(6);
+    }
+}
+
+void ScheduleHudAbilityIconCollapse(struct ObjectBase *object)
+{
+    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
+    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId)
+        hud->unk4 = 0xC;
+}
+
+void CollapseHudAbilityIcon(struct ObjectBase *object)
+{
+    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
+    if (!(gUnk_0203AD10 & 0x10) && object->unk56 == gLocalPlayerId)
+        hud->unk4 = 0x7C;
+}
+
+static void UpdateGameOverHudIndicators(void)
+{
+    struct GameplayHud *hud = TaskGetStructPtr(gCurTask);
+    DrawHudOtherKirbys(hud);
+}
+
+static void GameplayHudDestructor(struct Task *task UNUSED)
+{
+}
+
+static void LoadGameplayHudGraphics(void)
+{
+    u8 color = gKirbys[gLocalPlayerId].color;
+    void *tiles = BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185);
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    CpuCopy16(gUnk_082EC7A0, tiles, TILE_SIZE_4BPP * 0x38);
+    tiles += TILE_OFFSET_4BPP(0x38);
+    CpuCopy16(sHudEnemyAndAreaNameGraphics[gLanguage], tiles, TILE_SIZE_4BPP * 8);
+}
+
+static void DrawHudLivesLabel(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x48E;
+    *tiles++ = 0xF18F;
+    *tiles++ = 0xF190;
+    *tiles = 0xF191;
+    tiles += 30;
+    *tiles++ = 0xF19F;
+    *tiles++ = 0xF59F;
+    *tiles = 0xF1A1;
+}
+
+static void DrawHudLivesCount(struct Kirby *kirby)
+{
+    u8 lives = kirby->lives;
+    u16 i;
+    if (lives > 99)
+        lives = 99;
+    for (i = 0; i < 2; i++) {
+        u32 column = i + 10;
+        u16 *tiles = (u16 *)(BG_SCREEN_ADDR(28) + 0x480) + column;
+        u32 quotient;
+        u16 digit;
+        quotient = lives / sHudDecimalDivisors[i + 6];
+        digit = quotient;
+        lives -= sHudDecimalDivisors[i + 6] * quotient;
+        *tiles = (digit + 0x185) | 0xF000;
+        tiles = (u16 *)(BG_SCREEN_ADDR(28) + 0x4C0) + column;
+        *tiles = (digit + 0x195) | 0xF000;
+    }
+}
+
+static void DrawDemoHud(void)
+{
+    u8 color = gKirbys[gLocalPlayerId].color;
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x198;
+    u8 i;
+    LoadBgPaletteAndPaletteEffectSource(sHudPalettes[color], 0xF0, ARRAY_COUNT(sHudPalettes[color]));
+    CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
+    for (i = 0; i < 6; i++)
+        *tiles++ = (i + 0x1B5) | 0xF000;
+}
+
+static void DrawHudPhoneIcon(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x2;
+    tiles[0] = 0xF1B0;
+    tiles[32] = 0xF1B1;
+}
+
+static void ClearHudPhoneIcon(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x2;
+    *tiles = 0xF184;
+    tiles += 32;
+    *tiles = 0xF184;
+}
+
+static void DrawHudNameTiles(void)
+{
+    if (!(gUnk_0203AD10 & 0x10)) {
+        u16 *tiles = BG_SCREEN_ADDR(28) + 0x4AA;
+        u16 i;
+        for (i = 0; i < 8; i++)
+            *tiles++ = (i + 0x1BD) | 0xF000;
+    }
+}
+
+void ShowGameOverHud(void)
+{
+    if (!(gUnk_0203AD10 & 0x10)) {
+        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
+        DrawGameOverMessage();
+        gGameplayHudTask->main = UpdateGameOverHudIndicators;
+    }
+}
+
+void ShowBorrowLifeHud(void)
+{
+    if (!(gUnk_0203AD10 & 0x10)) {
+        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
+        DrawBorrowLifePrompt();
+        gGameplayHudTask->main = UpdateBorrowLifeHud;
+    }
+}
+
+void RestoreHudAfterLifeBorrow(void)
+{
+    if (!(gUnk_0203AD10 & 0x10) && gGameplayHudTask->main == UpdateBorrowLifeHud) {
+        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
+        gGameplayHudTask->main = UpdateGameplayHud;
+        RefreshGameplayHud(&gKirbys[gLocalPlayerId]);
+    }
+}
+
+void ClearBorrowLifeHud(struct ObjectBase *object UNUSED)
+{
+    if (!(gUnk_0203AD10 & 0x10) && gGameplayHudTask->main == UpdateBorrowLifeHud) {
+        CpuFill16(0x184, BG_SCREEN_ADDR(28), 0x500);
+        DrawHudPhoneBattery(&gKirbys[gLocalPlayerId]);
+    }
+}
+
+void ExpireHudEnemyHealthDelay(void)
+{
+    struct GameplayHud *hud = TaskGetStructPtr(gGameplayHudTask);
+    if (hud != NULL && hud->unkF != 0)
+        hud->unkF = 0x31;
+}
+
+static void DrawGameOverMessage(void)
+{
+    u16 *tiles = BG_SCREEN_ADDR(28) + 0x18E;
+    u8 y, x;
+    CpuCopy16(sHudGameOverAndDemoGraphics[gLanguage], BG_CHAR_ADDR(1) + TILE_OFFSET_4BPP(0x185), TILE_SIZE_4BPP * 0x40);
+    for (y = 0; y < 3; y++) {
+        for (x = 0; x < 16; x++)
+            *tiles++ = (y * 16 + (x + 0x185)) | 0xF000;
+        tiles += 16;
+    }
 }
 
 static const u16 sHudPalettes[18][16] = {

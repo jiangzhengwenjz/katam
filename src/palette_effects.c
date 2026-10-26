@@ -12,13 +12,8 @@
 struct PaletteEffect;
 struct Task;
 
-inline void SaveObjPaletteColors(u8 offset, u8 num);
-inline void SaveBgPaletteColors(u8 offset, u8 num);
-inline void BackupPaletteEffectSourcePalettes(void);
-inline void RestorePaletteEffectSourcePalettes(void);
-inline struct PaletteEffect *GetPaletteEffect(u8 arg0);
-static inline void PaletteEffectsTaskDestructor(struct Task *task UNUSED);
-static inline void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 arg1);
+static void PaletteEffectsTaskDestructor(struct Task *task UNUSED);
+static void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 arg1);
 
 struct SourcePalettes {
     /* 0x000 */ u16 bg[0x100];
@@ -27,6 +22,12 @@ struct SourcePalettes {
 
 extern struct SourcePalettes gSourcePalettes ALIGNED(4);
 extern struct SourcePalettes gSourcePalettesBackup ALIGNED(4);
+
+// The sprite palette transforms inline this operation; other callers use SaveObjPaletteColors.
+static inline void SaveObjPaletteColorsInline(u8 offset, u8 num)
+{
+    CpuCopy16(&gObjPalette[offset], &gSourcePalettes.obj[offset], num << 1);
+}
 
 static void UpdatePaletteEffects(void);
 
@@ -813,53 +814,6 @@ void EnablePaletteEffectsForCurrentRoom(void)
     }
 }
 
-inline void SaveObjPaletteColors(u8 offset, u8 num)
-{
-    CpuCopy16(&gObjPalette[offset], &gSourcePalettes.obj[offset], num << 1);
-}
-
-inline void SaveBgPaletteColors(u8 offset, u8 num)
-{
-    CpuCopy16(&gBgPalette[offset], &gSourcePalettes.bg[offset], num << 1);
-}
-
-inline void BackupPaletteEffectSourcePalettes(void)
-{
-    CpuFastCopy(&gSourcePalettes, &gSourcePalettesBackup, sizeof(gSourcePalettes));
-}
-
-inline void RestorePaletteEffectSourcePalettes(void)
-{
-    CpuFastCopy(&gSourcePalettesBackup, &gSourcePalettes, sizeof(gSourcePalettes));
-}
-
-inline struct PaletteEffect *GetPaletteEffect(u8 slot)
-{
-    return &gPaletteEffectManager.unk0[slot];
-}
-
-static inline void PaletteEffectsTaskDestructor(struct Task *task UNUSED)
-{
-    gPaletteEffectsTask = NULL;
-}
-
-static inline void InsertPaletteEffectByPriority(struct PaletteEffect *effect, u8 index)
-{
-    u8 queueIndex = index;
-    struct PaletteEffect *existing = gPaletteEffectManager.unk80[queueIndex];
-
-    if (existing == NULL) {
-        gPaletteEffectManager.unk80[queueIndex] = effect;
-        return;
-    }
-    if (existing->unk3 <= effect->unk3) {
-        InsertPaletteEffectByPriority(effect, queueIndex + 1);
-        return;
-    }
-    InsertPaletteEffectByPriority(existing, queueIndex + 1);
-    gPaletteEffectManager.unk80[queueIndex] = effect;
-}
-
 static inline s8 ClampPaletteChannel(s32 value)
 {
     s8 result = value;
@@ -938,7 +892,7 @@ void BlendSpriteAnimationPalettes(u8 paletteId, u16 sourceAnim, u8 sourceVariant
         DmaCopy16(3, source, &gObjPalette[paletteId * 16], sizeof(source));
         gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
-    SaveObjPaletteColors(paletteId * 16, 16);
+    SaveObjPaletteColorsInline(paletteId * 16, 16);
 }
 
 void OffsetSpriteAnimationPalette(u8 paletteId, u16 anim, u8 variant, s8 red, s8 green, s8 blue, u16 amount)
@@ -995,7 +949,7 @@ void OffsetSpriteAnimationPalette(u8 paletteId, u16 anim, u8 variant, s8 red, s8
         gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
     }
     gMainFlags |= MAIN_FLAG_OBJ_PALETTE_SYNC_ENABLE;
-    SaveObjPaletteColors(paletteId * 16, 16);
+    SaveObjPaletteColorsInline(paletteId * 16, 16);
 }
 
 bool8 IsPaletteEffectFinished(u8 slot)
@@ -1036,4 +990,51 @@ void LoadLevelPaletteEffectSourcePalettes(const u16 **arg0, const u16 **arg1)
 {
     CpuCopy32(*arg0, gSourcePalettes.bg, 0xC0);
     CpuCopy32(*arg1, &gSourcePalettes.bg[0x60], 0x100);
+}
+
+void SaveObjPaletteColors(u8 offset, u8 num)
+{
+    CpuCopy16(&gObjPalette[offset], &gSourcePalettes.obj[offset], num << 1);
+}
+
+void SaveBgPaletteColors(u8 offset, u8 num)
+{
+    CpuCopy16(&gBgPalette[offset], &gSourcePalettes.bg[offset], num << 1);
+}
+
+void BackupPaletteEffectSourcePalettes(void)
+{
+    CpuFastCopy(&gSourcePalettes, &gSourcePalettesBackup, sizeof(gSourcePalettes));
+}
+
+void RestorePaletteEffectSourcePalettes(void)
+{
+    CpuFastCopy(&gSourcePalettesBackup, &gSourcePalettes, sizeof(gSourcePalettes));
+}
+
+struct PaletteEffect *GetPaletteEffect(u8 slot)
+{
+    return &gPaletteEffectManager.unk0[slot];
+}
+
+static void PaletteEffectsTaskDestructor(struct Task *task UNUSED)
+{
+    gPaletteEffectsTask = NULL;
+}
+
+static void InsertPaletteEffectByPriority(struct PaletteEffect *effect, u8 index)
+{
+    u8 queueIndex = index;
+    struct PaletteEffect *existing = gPaletteEffectManager.unk80[queueIndex];
+
+    if (existing == NULL) {
+        gPaletteEffectManager.unk80[queueIndex] = effect;
+        return;
+    }
+    if (existing->unk3 <= effect->unk3) {
+        InsertPaletteEffectByPriority(effect, queueIndex + 1);
+        return;
+    }
+    InsertPaletteEffectByPriority(existing, queueIndex + 1);
+    gPaletteEffectManager.unk80[queueIndex] = effect;
 }
