@@ -605,6 +605,12 @@ extern u16 gUnk_02022E60[];
 extern u16 gUnk_02022E70[];
 extern u32 gUnk_02022E80[];
 extern u8 gUnk_02022EB0[4][2];
+// TODO(match): Every access treats this as four groups of 0x40 entries, as if it were declared
+// gUnk_02022F50[][0x40]. A two-dimensional declaration with all users rewritten does not match
+// ProcessObjectCollisionLists. The C registration sites outside object_collision.c (SetPointerSomething
+// and two copies in code_0806F780.c) compute the flat index with explicit 0x40 arithmetic and need
+// matching workarounds (an empty asm memory clobber or a ++/-- pair), which also points to a
+// two-dimensional original.
 extern struct ObjectBase *gUnk_02022F50[];
 
 extern u32 gUnk_02023388[][16];

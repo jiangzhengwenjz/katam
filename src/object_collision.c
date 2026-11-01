@@ -910,7 +910,7 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
     bool32 previousOverlap[2];
     u8 widthA, widthB, heightA, heightB;
     bool8 overlapX, overlapY;
-    u32 solidFlags, savedFlags, facing;
+    u32 solidFlags, solidFlags2, facing;
 
     if (object->flags & 1) {
         a[2] = -object->unk3C;
@@ -923,7 +923,7 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
     a[3] = object->unk3F;
     solidFlags = solid->base.flags;
     facing = solidFlags & 1;
-    savedFlags = solidFlags;
+    solidFlags2 = solidFlags;
     if (facing) {
         b[2] = -solid->base.unk3C;
         b[0] = -solid->base.unk3E;
@@ -942,7 +942,7 @@ static void ResolveSolidObjectCollision(struct ObjectBase *object, struct Object
     overlapX = COLLISION_AXIS_OVERLAP(object->x + a[0] * 0x100, widthA * 0x100, solid->base.x + b[0] * 0x100, widthB * 0x100);
     overlapY = COLLISION_AXIS_OVERLAP(object->y + a[1] * 0x100, heightA * 0x100, solid->base.y + b[1] * 0x100, heightB * 0x100);
     if (overlapX && overlapY) {
-        if (savedFlags & 0x80) {
+        if (solidFlags2 & 0x80) {
             object->unk62 |= 0x10;
             object->unk6C = solid;
             return;
@@ -1250,7 +1250,7 @@ static void ProcessKirbyContacts(void)
                     else
                         contacts |= mask;
                 } else {
-                    contacts |= contacts & mask;
+                    contacts |= mask;
                 }
                 *contactField = contacts;
             }
@@ -1280,7 +1280,7 @@ static void ProcessKirbyContacts(void)
                     else
                         contacts |= mask;
                 } else {
-                    contacts |= contacts & mask;
+                    contacts |= mask;
                 }
                 *contactField = contacts;
             }

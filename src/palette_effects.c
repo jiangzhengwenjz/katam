@@ -410,7 +410,7 @@ static void ApplyPaletteBrightening(struct PaletteEffect *effect)
     u16 bank;
     u32 finished;
     u32 flags;
-    u32 savedFlags;
+    u32 flags2;
     u32 color;
     s8 amount;
     if (effect->unk8 & 2) {
@@ -438,9 +438,9 @@ static void ApplyPaletteBrightening(struct PaletteEffect *effect)
     }
     flags = effect->unk8;
     finished = flags & 1;
-    savedFlags = flags;
-    if (!finished && (!(gMainFlags & 0x800) || (savedFlags & 0x80)))
-        AdvancePaletteEffect(effect, savedFlags);
+    flags2 = flags;
+    if (!finished && (!(gMainFlags & 0x800) || (flags2 & 0x80)))
+        AdvancePaletteEffect(effect, flags2);
 }
 
 static void ApplyPaletteTableDarkening(struct PaletteEffect *effect)
@@ -449,7 +449,7 @@ static void ApplyPaletteTableDarkening(struct PaletteEffect *effect)
     u16 bank;
     u32 finished;
     u32 flags;
-    u32 savedFlags;
+    u32 flags2;
     if (effect->unk8 & 2) {
         palette = gBgPalette;
         for (bank = 0; bank < 16; bank++) {
@@ -475,9 +475,9 @@ static void ApplyPaletteTableDarkening(struct PaletteEffect *effect)
     }
     flags = effect->unk8;
     finished = flags & 1;
-    savedFlags = flags;
-    if (!finished && (!(gMainFlags & 0x800) || (savedFlags & 0x80)))
-        AdvancePaletteEffect(effect, savedFlags);
+    flags2 = flags;
+    if (!finished && (!(gMainFlags & 0x800) || (flags2 & 0x80)))
+        AdvancePaletteEffect(effect, flags2);
 }
 
 static void ApplyPaletteRedTint(struct PaletteEffect *effect)
@@ -486,7 +486,7 @@ static void ApplyPaletteRedTint(struct PaletteEffect *effect)
     u16 bank;
     u32 finished;
     u32 flags;
-    u32 savedFlags;
+    u32 flags2;
     if (effect->unk8 & 2) {
         palette = gBgPalette;
         for (bank = 0; bank < 16; bank++) {
@@ -512,9 +512,9 @@ static void ApplyPaletteRedTint(struct PaletteEffect *effect)
     }
     flags = effect->unk8;
     finished = flags & 1;
-    savedFlags = flags;
-    if (!finished && (!(gMainFlags & 0x800) || (savedFlags & 0x80)))
-        AdvancePaletteEffect(effect, savedFlags);
+    flags2 = flags;
+    if (!finished && (!(gMainFlags & 0x800) || (flags2 & 0x80)))
+        AdvancePaletteEffect(effect, flags2);
 }
 
 static void ApplyPaletteWhiteFill(struct PaletteEffect *effect)
@@ -523,7 +523,7 @@ static void ApplyPaletteWhiteFill(struct PaletteEffect *effect)
     u16 bank;
     u32 finished;
     u32 flags;
-    u32 savedFlags;
+    u32 flags2;
     if (effect->unk8 & 2) {
         palette = gBgPalette;
         for (bank = 0; bank < 16; bank++) {
@@ -547,9 +547,9 @@ static void ApplyPaletteWhiteFill(struct PaletteEffect *effect)
     }
     flags = effect->unk8;
     finished = flags & 1;
-    savedFlags = flags;
+    flags2 = flags;
     if (!finished)
-        AdvancePaletteEffect(effect, savedFlags);
+        AdvancePaletteEffect(effect, flags2);
 }
 
 #undef TRANSFORM_VISIBLE_COLORS
