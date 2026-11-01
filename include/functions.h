@@ -142,8 +142,6 @@ void sub_080BB080(struct Object*, u8);
 void sub_080BB470(struct Object*);
 void sub_080BB804(struct Object*, u8);
 
-void sub_080C3694(struct Object *, u8);
-
 void sub_0811BF24(struct Object*);
 
 void sub_08123FD4(void);
