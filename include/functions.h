@@ -138,6 +138,9 @@ void sub_0802E6C4(struct Unk_0802E57C *);
 void sub_08033674(u8);
 void sub_0803E778(u8, u16, u8);
 
+void sub_080A158C(struct Object*);
+void sub_080A245C(struct Object*);
+
 void sub_080BB080(struct Object*, u8);
 void sub_080BB470(struct Object*);
 void sub_080BB804(struct Object*, u8);
@@ -156,6 +159,5 @@ void sub_0815898C(void);
 void sub_081589E8(void);
 void Timer3Intr(void);
 void nullsub_2(void);
-bool32 sub_080B6368(struct Object *, struct Kirby *);
 
 #endif
