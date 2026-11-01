@@ -11,6 +11,7 @@
 #include "crazy_hand.h"
 #include "droppy.h"
 #include "gobbler.h"
+#include "leap.h"
 #include "master_hand.h"
 #include "mr_frosty.h"
 #include "phan_phan.h"
