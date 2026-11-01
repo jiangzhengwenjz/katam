@@ -1,11 +1,68 @@
 #include "destroyable_rock_block.h"
 #include "functions.h"
+#include "kirby.h"
+#include "code_0806F780.h"
 
 static void DestroyDestroyableRockBlock(struct Task*);
+static void sub_0811C07C(struct RockBlock *);
 
 const struct AnimInfo gUnk_08357C54[] = {
     { 0x2D1, 2, 0 },
 };
+
+void sub_0811BF24(struct Object *obj) {
+    struct RockBlock *block = (struct RockBlock *)obj;
+    u16 currentRoom = gCurLevelInfo[block->base.base.unk56].currentRoom;
+    u8 i;
+
+    for (i = 0; i < gNumKirbys; ++i) {
+        if (gKirbys[i].base.roomId == currentRoom) {
+            s16 rect[4];
+            s16 kirbyX, kirbyY;
+
+            if (block->base.objTemplate->unk22 & 1) {
+                rect[0] = (block->base.base.x >> 8) + block->base.objTemplate->unk1A;
+                rect[1] = (block->base.base.y >> 8) + block->base.objTemplate->unk1C;
+                rect[2] = rect[0] + block->base.objTemplate->unk1E;
+                rect[3] = rect[1] + block->base.objTemplate->unk20;
+            } else {
+                rect[0] = (block->base.base.x >> 8) - 8;
+                rect[1] = (block->base.base.y >> 8) - 24;
+                rect[2] = (block->base.base.x >> 8) + 8;
+                rect[3] = (block->base.base.y >> 8) - 8;
+            }
+            kirbyX = gKirbys[i].base.x >> 8;
+            kirbyY = gKirbys[i].base.y >> 8;
+            if (rect[0] <= kirbyX && rect[2] >= kirbyX
+                && rect[1] <= kirbyY && rect[3] >= kirbyY
+                && !(gKirbys[i].base.unkC & 0x8000)
+                && !(gKirbys[i].base.flags & 0x20)
+                && !(gKirbys[i].base.flags & 0x40)) {
+                block->unkB6 |= 1;
+                block->base.unk78 = sub_0811C07C;
+            }
+        }
+    }
+    ++block->base.base.counter;
+}
+
+static void sub_0811C07C(struct RockBlock *block)
+{
+    u8 unk56 = block->base.base.unk56;
+    u32 tileX = (0x10u * block->base.base.x) >> 0x10;
+    u32 tileY = (0x10u * block->base.base.y) >> 0x10;
+    u16 unused[4];
+
+    if ((s16)block->unkB4 == 0) {
+        CreateEffectObject(&block->base.base, 0, 0x28D, 0);
+        PlaySfx(&block->base.base, SE_BLOCK_BREAK);
+        GetCollisionTile(unk56, tileX, tileY);
+        sub_08001408(unk56, sub_080025AC(unk56, tileX, tileY), 0, 0);
+        block->base.base.flags |= 0x1000;
+    } else {
+        --block->unkB4;
+    }
+}
 
 void* CreateDestroyableRockBlock(struct ObjectTemplate* arg0, u8 arg1) {
     struct Task *task;
