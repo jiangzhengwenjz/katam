@@ -5,6 +5,7 @@
 #include "random.h"
 #include "code_0806F780.h"
 #include "sir_kibble.h"
+#include "hot_head.h"
 #include "constants/kirby.h"
 
 static void sub_08023910(struct Task *);
