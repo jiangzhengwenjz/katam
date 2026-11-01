@@ -9,12 +9,6 @@
 #include "palette_effects.h"
 #include "functions.h"
 
-struct PaletteEffect;
-struct Task;
-
-static void PaletteEffectsTaskDestructor(struct Task *task UNUSED);
-static void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 arg1);
-
 struct SourcePalettes {
     /* 0x000 */ u16 bg[0x100];
     /* 0x200 */ u16 obj[0x100];
@@ -36,6 +30,9 @@ static void ApplyPaletteBrightening(struct PaletteEffect *);
 static void ApplyPaletteTableDarkening(struct PaletteEffect *);
 static void ApplyPaletteRedTint(struct PaletteEffect *);
 static void ApplyPaletteWhiteFill(struct PaletteEffect *);
+
+static void PaletteEffectsTaskDestructor(struct Task *task UNUSED);
+static void InsertPaletteEffectByPriority(struct PaletteEffect *arg0, u8 arg1);
 
 static const u16 sBrightenRedTable[64] = {
     0x0001, 0x0002, 0x0003, 0x0004, 0x0005, 0x0006, 0x0007, 0x0008,
