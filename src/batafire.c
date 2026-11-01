@@ -220,7 +220,7 @@ static void sub_080C939C(struct Object *batafire)
         && batafire->base.roomId == batafire->kirby3->base.roomId)
     {
 
-        if (Macro_08039430_1(&batafire->kirby3->base, batafire))
+        if (ObjectOriginOverlapsRectAtObject(&batafire->kirby3->base, batafire))
         {
             Macro_081003EC(batafire, &batafire->kirby3->base);
             if (batafire->kirby3->base.x > batafire->base.x)

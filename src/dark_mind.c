@@ -1,3 +1,6 @@
+#include "hud.h"
+#include "object_collision.h"
+#include "palette_effects.h"
 #include "code_080332BC.h"
 #include "global.h"
 #include "data.h"
@@ -714,7 +717,7 @@ static void sub_081003EC(struct DarkMindForm1 *r5)
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.unkC & 0x8000)
         && r5->unk0.base.roomId == r5->unk0.kirby3->base.roomId
-        && Macro_08039430_1(&r5->unk0.kirby3->base, &r5->unk0))
+        && ObjectOriginOverlapsRectAtObject(&r5->unk0.kirby3->base, &r5->unk0))
     {
         r8 = r5;
         Macro_081003EC(&r5->unk0, &r5->unk0.kirby3->base);
@@ -1188,7 +1191,7 @@ static void sub_08100EA0(struct DarkMindForm1 *r4)
     if (r4->unk0.subtype == 3)
         r4->unk0.base.counter = 300;
     r5->unkE0 = 256;
-    sub_0803CFC4(r5->unk0.base.sprite.palId, 920, 0, -0x18, -0x18, -0x18, 0x100);
+    OffsetSpriteAnimationPalette(r5->unk0.base.sprite.palId, 920, 0, -0x18, -0x18, -0x18, 0x100);
 }
 
 static void sub_08100F18(struct DarkMindForm1 *r5)
@@ -1209,7 +1212,7 @@ static void sub_08100F18(struct DarkMindForm1 *r5)
                 sub_081059A8(r5);
             if (r5->unk0.base.counter <= 180 && sb->unkE0)
             {
-                sub_0803CFC4(r5->unk0.base.sprite.palId, 0x398, 0, -24, -24, -24, sb->unkE0);
+                OffsetSpriteAnimationPalette(r5->unk0.base.sprite.palId, 0x398, 0, -24, -24, -24, sb->unkE0);
                 sb->unkE0 -= 4;
             }
         }
@@ -1225,7 +1228,7 @@ static void sub_08100F18(struct DarkMindForm1 *r5)
                 if (r5->unk0.base.counter <= 180
                     && sb->unkE0)
                 {
-                    sub_0803CFC4(r5->unk0.base.sprite.palId, 0x398, 0, -24, -24, -24, sb->unkE0);
+                    OffsetSpriteAnimationPalette(r5->unk0.base.sprite.palId, 0x398, 0, -24, -24, -24, sb->unkE0);
                     sb->unkE0 -= 8;
                 }
             if (r5->unk0.base.counter == 200)
@@ -1337,7 +1340,7 @@ static void sub_081013C8(struct DarkMindForm1 *r7)
     }
     else
     {
-        sub_0803CFC4(r7->unk0.base.sprite.palId, 0x398, 0, 31, 31, 31, r7->unk0.base.counter);
+        OffsetSpriteAnimationPalette(r7->unk0.base.sprite.palId, 0x398, 0, 31, 31, 31, r7->unk0.base.counter);
         r7->unk0.base.counter += 2;
     }
     if (r7->unk0.base.header.unk1 == 1)
@@ -1964,7 +1967,7 @@ static void sub_081027C0(struct DarkMindForm1 *r5)
         if (r5->unk0.unk9E > 20)
         {
             if (gKirbys[gLocalPlayerId].base.roomId == r5->unk0.base.roomId)
-                sub_0803CFC4(r5->unk0.base.sprite.palId, 0x398, 0, -16, -8, 21, 6 * r5->unk0.unk9F);
+                OffsetSpriteAnimationPalette(r5->unk0.base.sprite.palId, 0x398, 0, -16, -8, 21, 6 * r5->unk0.unk9F);
             ++r5->unk0.unk9F;
             if (r5->unk0.unk9F >= 45)
                 r5->unk0.unk9F = 45;
@@ -6013,7 +6016,7 @@ static void sub_0810BD28(struct DarkMindForm2 *r5)
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.unkC & 0x8000)
         && r5->unk0.base.roomId == r5->unk0.kirby3->base.roomId
-        && Macro_08039430_1(&r5->unk0.kirby3->base, &r5->unk0))
+        && ObjectOriginOverlapsRectAtObject(&r5->unk0.kirby3->base, &r5->unk0))
     {
         Macro_081003EC(&r5->unk0, &r5->unk0.kirby3->base);
         sub_0810F13C(r5);
@@ -6215,7 +6218,7 @@ static void sub_0810C510(struct DarkMindForm2 *r4)
 
 static void sub_0810C62C(struct DarkMindForm2 *r5)
 {
-    struct Unk_02022930_0 *s;
+    struct PaletteEffect *s;
 
     ObjectSetFunc(r5, 0, sub_0810C6A4);
     r5->unk0.base.xspeed = 0;
@@ -6225,7 +6228,7 @@ static void sub_0810C62C(struct DarkMindForm2 *r5)
     r5->unk0.unk9F = 0;
     r5->unk0.base.counter = 360;
     RequestScreenShake(5, &r5->unk0.base);
-    s = sub_0803C83C(5, r5->unk0.base.roomId);
+    s = CreateRoomPaletteEffect(5, r5->unk0.base.roomId);
     s->unk0 = 3;
     s->unk8 |= 0x40;
     s->unkA = 0x20;
@@ -6237,7 +6240,7 @@ static void sub_0810C62C(struct DarkMindForm2 *r5)
 
 static void sub_0810C6A4(struct DarkMindForm2 *r7)
 {
-    struct Unk_02022930_0 *s;
+    struct PaletteEffect *s;
     u8 i;
     struct Kirby *kirby;
 
@@ -6251,7 +6254,7 @@ static void sub_0810C6A4(struct DarkMindForm2 *r7)
         CpuFill32(0, (void *)0x600E800, 0x1000);
         if (gKirbys[gLocalPlayerId].base.roomId == r7->unk0.base.roomId)
             gCurLevelInfo[gLocalPlayerId].unk0 = 1;
-        s = sub_0803C83C(5, r7->unk0.base.roomId);
+        s = CreateRoomPaletteEffect(5, r7->unk0.base.roomId);
         s->unk0 = 3;
         s->unkA = 0xFF00;
         s->unkC = 0x1F00;
@@ -6274,8 +6277,8 @@ static void sub_0810C6A4(struct DarkMindForm2 *r7)
                     gUnk_0203AD34 = 0;
                 kirby->ability = KIRBY_ABILITY_NORMAL;
                 kirby->unkDB = 0;
-                sub_08035E28(0);
-                sub_08034C9C(2);
+                LoadHudAbilityIcon(0);
+                DrawHudAbilityIconRows(2);
                 if ((kirby->transitioningAbility & 0x1F) == KIRBY_ABILITY_MASTER)
                     gUnk_0203AD34 = 0;
                 kirby->transitioningAbility = 0;
@@ -7955,9 +7958,9 @@ static void sub_0810EDEC(struct DarkMindForm2 *r4)
         if (gKirbys[gLocalPlayerId].base.roomId == sb->unk0.base.roomId)
         {
             if (r4->unkE4.unk6 & 2)
-                sub_0803D2A8(2, 0xD);
+                SaveBgPaletteColors(2, 0xD);
             if (r4->unkF0.unk6 & 2)
-                sub_0803D2A8(0x13, 0xC);
+                SaveBgPaletteColors(0x13, 0xC);
         }
         if (r4->unk130 && !--r4->unk130)
             r4->unk12F = 0;
@@ -8731,7 +8734,7 @@ static void sub_08110C10(struct DarkMindMirror *r4)
     struct DarkMindForm2 *r2 = r4->unk0.base.parent;
 
     r4->unk0.base.flags |= 4;
-    if (sub_0803925C(&r4->unk0.base, &r2->laser->base))
+    if (ObjectHitboxesOverlap(&r4->unk0.base, &r2->laser->base))
     {
         r2->laser->unk85 = r4->unk0.unk85;
         sub_08111534(r2->laser, r4);
@@ -8855,7 +8858,7 @@ static void sub_08110F80(struct DarkMindMirror *r7)
             r5->unk130 = 60;
             r5->unk12F += r7->unk0.unk80 - r8->unkE4;
             sb->unk0.unk80 -= r7->unk0.unk80 - r8->unkE4;
-            sub_08034E14(&sb->unk0);
+            TryTrackHudEnemy(&sb->unk0);
             if (sb->unk0.unk83 == 2 && r5->unk12F >= 5 * gNumHumanPlayers + 5)
             {
                 sub_08110F28(r7);
@@ -9624,7 +9627,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
     }
     else
     {
-        struct Unk_02022930_0 *s;
+        struct PaletteEffect *s;
         struct Task *t = TaskCreate(sub_081135A8, sizeof(struct Unk_08113508), 0xFFFE, TASK_USE_IWRAM, sub_081147B0);
         struct Unk_08113508 *var = TaskGetStructPtr(t);
 
@@ -9633,7 +9636,7 @@ static struct Task *sub_08113508(struct DarkMindForm2 *r5, u16 r6)
         var->unk4 = r6;
         var->unk6 = 8;
         var->unk8 = r5;
-        s = sub_0803C83C(5, r5->unk0.base.roomId);
+        s = CreateRoomPaletteEffect(5, r5->unk0.base.roomId);
         s->unk0 = 1;
         s->unkA = 0x400;
         s->unk2 = 0x20;
@@ -9651,7 +9654,7 @@ static void sub_081135A8(void)
 
     if (r4->unk0.base.flags & 0x1000)
     {
-        struct Unk_02022930_0 *s = sub_0803C83C(5, r4->unk0.base.roomId);
+        struct PaletteEffect *s = CreateRoomPaletteEffect(5, r4->unk0.base.roomId);
 
         s->unk0 = 1;
         s->unkA = 0xFF00;
@@ -9671,7 +9674,7 @@ static void sub_081135A8(void)
             --r2->unk6;
             if (!r2->unk6)
             {
-                struct Unk_02022930_0 *s = sub_0803C83C(5, r4->unk0.base.roomId);
+                struct PaletteEffect *s = CreateRoomPaletteEffect(5, r4->unk0.base.roomId);
 
                 s->unk0 = 1;
                 s->unkA = 0xFF00;
@@ -9731,13 +9734,13 @@ static void sub_0811370C(void)
 static void sub_081138D0(struct Task *t)
 {
     struct Unk_08113508 *r2 = TaskGetStructPtr(t);
-    struct Unk_02022930_0 *r0;
+    struct PaletteEffect *r0;
     const struct DarkMindForm2 *r3 = r2->unk8;
 
     if (t->main == sub_0811370C)
     {
         r2->unk6 = 9;
-        r0 = sub_0803C83C(5, r3->unk0.base.roomId);
+        r0 = CreateRoomPaletteEffect(5, r3->unk0.base.roomId);
         r0->unk0 = 1;
         r0->unkA = 0x400;
         r0->unk2 = 0x20;
@@ -9752,7 +9755,7 @@ static void sub_08113940(void)
 {
     struct Unk_08113508 *r0 = TaskGetStructPtr(gCurTask), *r2 = r0;
     const struct DarkMindForm2 *ip = r2->unk8;
-    struct Unk_02022930_0 *s;
+    struct PaletteEffect *s;
 
     if (!Macro_081135A8(r2->roomId))
         TaskDestroy(gCurTask);
@@ -9761,7 +9764,7 @@ static void sub_08113940(void)
         --r2->unk6;
         if (!r2->unk6)
         {
-            s = sub_0803C83C(5, ip->unk0.base.roomId);
+            s = CreateRoomPaletteEffect(5, ip->unk0.base.roomId);
             s->unk0 = 1;
             s->unkA = 0xFF00;
             s->unkC = 0x2000;
@@ -10528,7 +10531,7 @@ static void sub_08114B28(struct DarkMindTrigger *r5)
     r5->unk0.kirby3 = FindTargetKirby(&r5->unk0.base);
     r5->unk0.base.flags |= 4;
     if (!(r5->unk0.kirby3->base.unkC & 0x8000) && r5->unk0.base.roomId == r5->unk0.kirby3->base.roomId
-        && Macro_08039430_1(&r5->unk0.kirby3->base, &r5->unk0))
+        && ObjectOriginOverlapsRectAtObject(&r5->unk0.kirby3->base, &r5->unk0))
     {
         r5->unk0.base.flags &= ~0x200;
         sub_08114BA0(r5);
@@ -11133,13 +11136,13 @@ static void sub_0811643C(struct DarkMindTrigger *r4)
             sub_080860A8(&r4->unk0.base, gUnk_08357ACC);
             sub_08117C84(r4);
             sub_08117C84(r4);
-            sub_08034E14(&r4->unk0);
+            TryTrackHudEnemy(&r4->unk0);
         }
         r4->unkBA = r4->unk0.unk80;
         if (r4->unk0.base.flags & 0x40000)
         {
             kirby = r4->unk0.base.unk6C;
-            sub_08034E14(&r4->unk0);
+            TryTrackHudEnemy(&r4->unk0);
             if (!kirby->base.header.kind && ~(kirby->base.unk5C & ~7) & 0x80 && (kirby->base.unk5C & 7) < 4)
             {
                 sub_08052E2C(kirby);
@@ -11295,7 +11298,7 @@ static void sub_081169E4(struct DarkMindTrigger *ip)
 static void sub_08116BC0(struct DarkMindTrigger *r5)
 {
     struct Kirby *kirby;
-    struct Object5 *r1;
+    struct GameplayHud *hud;
     u8 i;
 
     ObjectSetFunc(r5, 0, sub_08118964);
@@ -11303,9 +11306,9 @@ static void sub_08116BC0(struct DarkMindTrigger *r5)
     r5->unk0.base.yspeed = 0;
     r5->unk0.base.counter = 0x40;
     r5->unk0.base.flags |= 0x40;
-    r1 = sub_08034E14(&r5->unk0);
-    if (r1)
-        r1->unk9 = 0;
+    hud = TryTrackHudEnemy(&r5->unk0);
+    if (hud)
+        hud->unk9 = 0;
     for (i = 0; i < gNumKirbys; ++i)
     {
         kirby = &gKirbys[i];

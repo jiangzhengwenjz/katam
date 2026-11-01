@@ -1,3 +1,4 @@
+#include "object_collision.h"
 #include "sir_kibble.h"
 #include "random.h"
 #include "kirby.h"
@@ -246,7 +247,7 @@ static void sub_080B17BC(struct Object *arg0) {
         if (parent->base.flags & 0x1000) {
             arg0->base.parent = NULL;
         }
-        if (sub_0803925C(&arg0->base, &parent->base)) {
+        if (ObjectHitboxesOverlap(&arg0->base, &parent->base)) {
             arg0->base.flags |= 0x1000;
         }
     }
@@ -343,7 +344,7 @@ static void sub_080B1AC4(void) {
     if (ObjectPreUpdate(obj))
         return;
     if (parent) {
-        if (sub_0803925C(obj, &parent->base)) {
+        if (ObjectHitboxesOverlap(obj, &parent->base)) {
             obj->flags |= 0x1000;
             return;
         }
@@ -433,7 +434,7 @@ void sub_080B1FD0(struct Object *arg0) {
 static void sub_080B207C(struct Object *arg0) {
     struct Object *parent = arg0->base.parent;
     arg0->base.flags |= 4;
-    if (parent && sub_0803925C(&arg0->base, &parent->base)) {
+    if (parent && ObjectHitboxesOverlap(&arg0->base, &parent->base)) {
         arg0->base.flags |= 0x1000;
         return;
     }

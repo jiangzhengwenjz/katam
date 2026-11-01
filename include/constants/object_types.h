@@ -293,6 +293,27 @@
 
 #define ObjType6Dto9A(obj) (ObjType6Dto99(obj) || (obj)->type == OBJ_EMPTY_9A)
 
+#define ObjType9BToD4(obj) ((obj)->type == OBJ_KING_GOLEM_ROCK || (obj)->type == OBJ_KING_GOLEM_GORDO || (obj)->type == OBJ_FOLEY_LEAVES \
+                            || (obj)->type == OBJ_COOKIN_PAN || (obj)->type == OBJ_GOBBLER_BABY || (obj)->type == OBJ_UNKNOWN_A0 \
+                            || (obj)->type == OBJ_BATAFIRE_FIREBALL || (obj)->type == OBJ_PARASOL || (obj)->type == OBJ_ABILITY_STAR_1 \
+                            || (obj)->type == OBJ_ABILITY_STAR_2 || (obj)->type == OBJ_INHALABLE_STAR || (obj)->type == OBJ_MR_FROSTY_ICE_CUBE_SMALL \
+                            || (obj)->type == OBJ_MR_FROSTY_ICE_CUBE_LARGE || (obj)->type == OBJ_BONKERS_NUT_SMALL || (obj)->type == OBJ_BONKERS_NUT_LARGE \
+                            || (obj)->type == OBJ_APPLE || (obj)->type == OBJ_PRANK_FIRE || (obj)->type == OBJ_PRANK_ICE \
+                            || (obj)->type == OBJ_PRANK_BOMB || (obj)->type == OBJ_PRANK_PAN || (obj)->type == OBJ_BANANA_PEEL \
+                            || (obj)->type == OBJ_BOXY_BOX || (obj)->type == OBJ_SHOOTING_ENEMY_STAR || (obj)->type == OBJ_BOMBAR_BOMB \
+                            || (obj)->type == OBJ_BOMBAR_MISSILE || (obj)->type == OBJ_BOX_BOXER_ENERGY_BALL || (obj)->type == OBJ_WIZ_FOOTBALL \
+                            || (obj)->type == OBJ_WIZ_CAR || (obj)->type == OBJ_WIZ_BALLOON || (obj)->type == OBJ_WIZ_BOMB \
+                            || (obj)->type == OBJ_WIZ_CLOUD || (obj)->type == OBJ_WIZ_APPLE || (obj)->type == OBJ_WIZ_DROPPY \
+                            || (obj)->type == OBJ_TITAN_ARM_1 || (obj)->type == OBJ_TITAN_ARM_2 || (obj)->type == OBJ_TITAN_ARM_3 \
+                            || (obj)->type == OBJ_TITAN_ARM_4 || (obj)->type == OBJ_TITAN_HEAD_MISSILE || (obj)->type == OBJ_MOLEY_ROCK \
+                            || (obj)->type == OBJ_MOLEY_SCREW || (obj)->type == OBJ_MOLEY_TIRE || (obj)->type == OBJ_MOLEY_BOMB \
+                            || (obj)->type == OBJ_MOLEY_BIG_ROCK || (obj)->type == OBJ_MOLEY_BARREL || (obj)->type == OBJ_MOLEY_SPIKE_BALL \
+                            || (obj)->type == OBJ_MASTER_HAND_BULLET || (obj)->type == OBJ_THROWN_BOMB_2 || (obj)->type == OBJ_SHADOW_KIRBY_BOMB \
+                            || (obj)->type == OBJ_DARK_MIND_STAR_FIRE || (obj)->type == OBJ_DARK_MIND_STAR_ICE || (obj)->type == OBJ_DARK_MIND_STAR_SPARK \
+                            || (obj)->type == OBJ_DARK_MIND_STAR_MIX || (obj)->type == OBJ_UNKNOWN_CF || (obj)->type == OBJ_DARK_MIND_MIRROR \
+                            || (obj)->type == OBJ_DARK_MIND_LASER || (obj)->type == OBJ_DARK_MIND_LASER_SHOWER || (obj)->type == OBJ_DARK_MIND_MIRROR_CUTTER \
+                            || (obj)->type == OBJ_UNKNOWN_D4)
+
 #define ObjIsTitanArm(obj) ((obj)->type == OBJ_TITAN_ARM_1 || (obj)->type == OBJ_TITAN_ARM_2 || (obj)->type == OBJ_TITAN_ARM_3 || (obj)->type == OBJ_TITAN_ARM_4)
 
 // TODO: depends on object type order

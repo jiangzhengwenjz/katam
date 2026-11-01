@@ -1,3 +1,4 @@
+#include "in_game_interlude.h"
 #include "special_doors.h"
 #include "constants/kirby.h"
 #include "functions.h"
@@ -205,7 +206,7 @@ static void sub_0802AE9C(struct DoorToHub *door)
             asm(""::"r"(r8)); // somehow use r8
 #endif
         }
-        if (r8 && sub_080395D4())
+        if (r8 && CanStartInGameInterlude())
         {
             struct LevelInfo *li = &gCurLevelInfo[door->obj.base.unk56];
 
@@ -222,7 +223,7 @@ static void sub_0802AE9C(struct DoorToHub *door)
                 sub_0805BDF4(&gKirbys[j], gUnk_082D8CF0[j], gUnk_082D8D08[j][0] >> 12, gUnk_082D8D08[j][1] >> 12);
             }
             if (gAIKirbyState < AI_KIRBY_STATE_CUTSCENE)
-                sub_08039600(0x19);
+                StartInGameInterlude(0x19);
         }
     }
 }

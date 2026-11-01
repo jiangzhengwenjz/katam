@@ -1,3 +1,4 @@
+#include "hud.h"
 #include "crazy_hand.h"
 #include "object.h"
 #include "functions.h"
@@ -189,7 +190,7 @@ static void sub_080DF4C0(struct CrazyHand *ch)
     ch->obj.base.flags |= 4;
     if (!(ch->obj.kirby3->base.unkC & 0x8000)
         && ch->obj.base.roomId == ch->obj.kirby3->base.roomId
-        && Macro_08039430_1(&ch->obj.kirby3->base, &ch->obj))
+        && ObjectOriginOverlapsRectAtObject(&ch->obj.kirby3->base, &ch->obj))
     {
         Macro_081003EC(&ch->obj, &ch->obj.kirby3->base);
         ch->obj.unk85 = 0;
@@ -202,12 +203,12 @@ static void sub_080DF5A4(struct CrazyHand *ch)
     ObjectSetFunc(ch, 0, sub_080E36C4);
     if (ch->obj.type == OBJ_CRAZY_HAND_1)
     {
-        struct Object5 *obj5;
+        struct GameplayHud *hud;
         ch->obj.base.x = 0x11800;
         ch->obj.base.xspeed = -0xC0;
-        obj5 = sub_08034E14(&ch->obj);
-        if (obj5)
-            obj5->unk9 = 0;
+        hud = TryTrackHudEnemy(&ch->obj);
+        if (hud)
+            hud->unk9 = 0;
     }
     else
     {
@@ -1903,7 +1904,7 @@ static void sub_080E1868(struct CrazyHand *ch)
         sub_080E3C6C(ch);
 }
 
-bool8 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
+bool32 sub_080E1B8C(struct CrazyHand *ch, struct Kirby *kirby)
 {
     if (ch->obj.unk83 != 0xD
         || kirby->base.header.kind

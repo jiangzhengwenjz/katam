@@ -158,7 +158,7 @@ static void sub_080D1780(struct Object *mh)
     mh->base.flags |= 4;
     if (!(mh->kirby3->base.unkC & 0x8000)
         && mh->base.roomId == mh->kirby3->base.roomId
-        && Macro_08039430_1(&mh->kirby3->base, mh))
+        && ObjectOriginOverlapsRectAtObject(&mh->kirby3->base, mh))
     {
         Macro_081003EC(mh, &mh->kirby3->base);
         mh->base.flags &= ~0x200;
@@ -1889,7 +1889,7 @@ static void sub_080D3C58(struct Object *mh)
         sub_080D5574(mh);
 }
 
-bool8 sub_080D4004(struct Object *mh, struct Kirby *kirby)
+bool32 sub_080D4004(struct Object *mh, struct Kirby *kirby)
 {
     if (mh->unk83 != 0xD
         || kirby->base.header.kind

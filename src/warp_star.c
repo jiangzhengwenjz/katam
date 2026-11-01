@@ -1,3 +1,4 @@
+#include "palette_effects.h"
 // TODO: need a better file name
 #include "warp_star.h"
 #include "random.h"
@@ -2155,7 +2156,7 @@ static void sub_0800CA84(struct GoalStar *gs)
     if (gKirbys[gsAlias->unkBE[0]].base.y < 0x46000)
     {
         if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
-            sub_0803CA20(gLocalPlayerId);
+            CreatePaletteFadeToWhite(gLocalPlayerId);
         gsAlias->unkCC = 0;
         gs->unk0.obj.unk78 = sub_0800CB54;
     }
@@ -2217,7 +2218,7 @@ static void sub_0800CBF0(struct GoalStar *gs)
     gsAlias->unkE2 = 0;
     gsAlias->unkE4 = gUnk_082DDE7C[gsAlias->unk0.unkB4] / (gForegroundPalettes[gRoomProps[gs->unk0.obj.base.roomId].paletteDataIdx]->unk4[0]->unk4[0] - 1);
     if ((gsAlias->unk0.unkB5 >> gLocalPlayerId) & 1)
-        sub_0803C95C(gLocalPlayerId);
+        CreatePaletteFadeFromWhite(gLocalPlayerId);
     gs->unk0.obj.unk78 = sub_0800DDAC;
 }
 
@@ -2274,7 +2275,7 @@ static void sub_0800CDE8(struct GoalStar *gs)
                 DmaCopy16(3, r4->unk0.u16ppp[gsAlias->unkE0][0], &gBgPalette[r4->unk4[1]], r4->unk8 * sizeof(u16));
                 gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
             }
-            sub_0803D21C(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
+            LoadBgPaletteAndPaletteEffectSource(r4->unk0.u16ppp[gsAlias->unkE0][0], r4->unk4[1], r4->unk8);
             gsAlias->unkE2 = 0;
             ++gsAlias->unkE0;
         }

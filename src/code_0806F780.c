@@ -1,3 +1,6 @@
+#include "hud.h"
+#include "object_collision.h"
+#include "palette_effects.h"
 #include "code_0806F780.h"
 #include "code_080332BC.h"
 #include "task.h"
@@ -4052,7 +4055,7 @@ bool8 sub_08079264(struct Unk_080C4EDC *a1) {
         }
     }
     if (a1->base.counter > 4) {
-        if (!(kirby->base.flags & 0x200) && sub_0803925C(&a1->base, &kirby->base)) {
+        if (!(kirby->base.flags & 0x200) && ObjectHitboxesOverlap(&a1->base, &kirby->base)) {
             a1->base.flags |= 0x1000;
             return TRUE;
         }
@@ -7986,7 +7989,7 @@ void sub_080838DC(struct Kirby *kirby, struct Kirby *kirby2) {
     sub_0803E2B0(objBase, -0x28, -0x50, 0, 0x50);
     ObjectBaseInitSprite(objBase, &objBase->sprite, (kirby2->base.unk56 << 0xB) + 0x6010400, 0x209, 0, 8);
     objBase->sprite.palId = kirby2->base.unk56 + 4;
-    objBase->kirby2 = kirby2;
+    objBase->unk74 = &kirby2->base;
     v8 = gCurLevelInfo[objBase->unk56].viewportPosition.x;
     objBase->x = v8 + 0x7800; // dead code
     v9 = gCurLevelInfo[objBase->unk56].viewportPosition.y;
@@ -8003,7 +8006,7 @@ void sub_080838DC(struct Kirby *kirby, struct Kirby *kirby2) {
 
 void sub_08083B04(void) {
     struct ObjectBase *tmp = TaskGetStructPtr(gCurTask), *objBase = tmp;
-    struct Kirby *kirby2 = objBase->kirby2, *kirby = objBase->parent;
+    struct Kirby *kirby2 = (struct Kirby *)objBase->unk74, *kirby = objBase->parent;
 
     objBase->sprite.palId = kirby2->base.unk56 + 4;
     if (kirby2->ability != KIRBY_ABILITY_MAGIC) {
@@ -9015,7 +9018,7 @@ void sub_080860A8(struct ObjectBase *objBase, const struct Unk_08357260 *a2) {
     unk->unk0 = (gDispCnt & (DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON)) >> 8;
     unk->unk1 = a2->unk3;
     if (gKirbys[gLocalPlayerId].base.roomId == unk->roomId) {
-        sub_0803D21C(&a2->unk0, 0, 1);
+        LoadBgPaletteAndPaletteEffectSource(&a2->unk0, 0, 1);
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         if (unk->unk4->unk2 == 1) {
             gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
@@ -9036,7 +9039,7 @@ void sub_08086194(void) {
         ++unk->unk4;
         unk->unk1 = unk->unk4->unk3;
         if (gKirbys[gLocalPlayerId].base.roomId == unk->roomId) {
-            sub_0803D21C(&unk->unk4->unk0, 0, 1);
+            LoadBgPaletteAndPaletteEffectSource(&unk->unk4->unk0, 0, 1);
             gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
         }
         if (!unk->unk1) TaskDestroy(gCurTask);
@@ -9154,12 +9157,12 @@ void sub_0808668C(void) {
 struct Object6 *sub_0808671C(struct Object *obj) {
     struct Task *t = TaskCreate(sub_080867E4, sizeof(struct Object6), 0x3500, TASK_USE_IWRAM, sub_080868D4);
     struct Object6 *obj6 = TaskGetStructPtr(t);
-    struct Unk_02022930_0 *unk;
+    struct PaletteEffect *unk;
 
     obj6->unk4 = obj;
     obj6->unk2 = 0xB;
     obj6->unk0 = 0;
-    unk = sub_0803C8CC(5, obj->base.roomId);
+    unk = CreateLowPriorityRoomPaletteEffect(5, obj->base.roomId);
     unk->unk0 = 2;
     unk->unkA = 0x100;
     unk->unk3 = 5;
@@ -9171,7 +9174,7 @@ struct Object6 *sub_0808671C(struct Object *obj) {
 }
 
 void sub_080867A0(struct Object6 *obj6) {
-    struct Unk_02022930_0 *unk = sub_0803C8CC(5, obj6->unk4->base.roomId);
+    struct PaletteEffect *unk = CreateLowPriorityRoomPaletteEffect(5, obj6->unk4->base.roomId);
 
     unk->unk0 = 2;
     unk->unkA = -0x100;
@@ -9187,13 +9190,13 @@ void sub_080867A0(struct Object6 *obj6) {
 void sub_080867E4(void) {
     struct Object6 *tmp = TaskGetStructPtr(gCurTask), *obj6 = tmp;
     struct Object *obj = obj6->unk4;
-    struct Unk_02022930_0 *unk;
+    struct PaletteEffect *unk;
 
     if (obj->base.flags & 0x1000) {
         TaskDestroy(gCurTask);
         return;
     }
-    unk = sub_0803D308(5);
+    unk = GetPaletteEffect(5);
     if (unk->unk8 & 2) {
         if (gKirbys[gLocalPlayerId].base.roomId != obj->base.roomId)
             unk->unk8 &= ~2;
@@ -9210,10 +9213,10 @@ void sub_080867E4(void) {
 void sub_080868D4(struct Task *t) {
     struct Object6 *obj6 = TaskGetStructPtr(t);
     struct Object *obj = obj6->unk4;
-    struct Unk_02022930_0 *unk;
+    struct PaletteEffect *unk;
 
     if (obj6->unk0 != 2) {
-        unk = sub_0803C8CC(5, obj->base.roomId);
+        unk = CreateLowPriorityRoomPaletteEffect(5, obj->base.roomId);
         unk->unk0 = 2;
         unk->unkA = -0x1000;
         unk->unkC = 0x1000;
@@ -9228,7 +9231,7 @@ void sub_080868D4(struct Task *t) {
 struct Object6 *sub_08086938(struct Object *obj, u8 a2) {
     struct Task *t = TaskCreate(sub_08086AC0, sizeof(struct Object6), 0x3500, TASK_USE_IWRAM, sub_08086B40);
     struct Object6 *tmp = TaskGetStructPtr(t), *obj6 = tmp;
-    struct Unk_02022930_0 *unk;
+    struct PaletteEffect *unk;
     u8 ret;
 
     obj6->unk4 = obj;
@@ -9236,7 +9239,7 @@ struct Object6 *sub_08086938(struct Object *obj, u8 a2) {
     obj6->unk0 = 0;
     if (a2)
         t->dtor = sub_08086BE0;
-    unk = sub_0803C8CC(6, obj->base.roomId);
+    unk = CreateLowPriorityRoomPaletteEffect(6, obj->base.roomId);
     unk->unk4 = 0xFF00;
     unk->unk6 = 0x3FFF;
     ret = sub_0803DF24(0x39A);
@@ -9262,7 +9265,7 @@ struct Object6 *sub_08086938(struct Object *obj, u8 a2) {
 }
 
 void sub_08086A28(struct Object6 *obj6, u8 a2) {
-    struct Unk_02022930_0 *unk = sub_0803C8CC(6, obj6->unk4->base.roomId);
+    struct PaletteEffect *unk = CreateLowPriorityRoomPaletteEffect(6, obj6->unk4->base.roomId);
     u8 ret;
 
     unk->unk4 = 0xFF00;
@@ -9301,12 +9304,12 @@ void sub_08086AC0(void) {
 
 void sub_08086B40(struct Task *t) {
     struct Object6 *obj6 = TaskGetStructPtr(t);
-    struct Unk_02022930_0 *unk;
+    struct PaletteEffect *unk;
     struct Object *obj = obj6->unk4;
     u8 ret;
 
     if (obj6->unk0 != 2) {
-        unk = sub_0803C8CC(6, obj->base.roomId);
+        unk = CreateLowPriorityRoomPaletteEffect(6, obj->base.roomId);
         unk->unk0 = 2;
         unk->unkA = -0x1000;
         unk->unkC = 0x1F00;
@@ -9326,11 +9329,11 @@ void sub_08086B40(struct Task *t) {
 
 void sub_08086BE0(struct Task *t) {
     struct Object6 *obj6 = TaskGetStructPtr(t);
-    struct Unk_02022930_0 *unk;
+    struct PaletteEffect *unk;
     struct Object *obj = obj6->unk4;
 
     if (obj6->unk0 != 2) {
-        unk = sub_0803C8CC(6, obj->base.roomId);
+        unk = CreateLowPriorityRoomPaletteEffect(6, obj->base.roomId);
         unk->unk0 = 2;
         unk->unkA = -0x1000;
         unk->unkC = 0x1F00;
@@ -9671,7 +9674,7 @@ void sub_08087B58(void) {
     struct Unk_08086C48 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
     bool32 b = FALSE;
     u8 i;
-    struct Unk_02022930_0 *v8;
+    struct PaletteEffect *v8;
 
     for (i = 0; i < gNumKirbys; ++i) {
         if (gKirbys[i].base.roomId == unk->roomId && !(gUnk_02026D50[gCurLevelInfo[i].unk65E] & 8))
@@ -9696,7 +9699,7 @@ void sub_08087B58(void) {
                 }
             }
             sub_08033540(unk->unk0);
-            v8 = sub_0803CA20(unk->unk0);
+            v8 = CreatePaletteFadeToWhite(unk->unk0);
             v8->unk4 = 0xFFFF;
             v8->unk6 = 0xFFFF;
             unk->unk4 = 0x28;
@@ -9710,7 +9713,7 @@ void sub_08087CEC(void) {
     struct Unk_08086C48 *tmp = TaskGetStructPtr(gCurTask), *unk = tmp;
     bool32 b = FALSE;
     u8 i;
-    struct Unk_02022930_0 *v7;
+    struct PaletteEffect *v7;
     u8 v9;
 
     for (i = 0; i < gNumKirbys; ++i) {
@@ -9720,7 +9723,7 @@ void sub_08087CEC(void) {
     if (!b)
         TaskDestroy(gCurTask);
     else if (!--unk->unk4) {
-        v7 = sub_0803C95C(unk->unk0);
+        v7 = CreatePaletteFadeFromWhite(unk->unk0);
         v7->unk4 = 0xFFFF;
         v7->unk6 = 0xFFFF;
         TaskDestroy(gCurTask);
@@ -9784,17 +9787,17 @@ void sub_08087F98(void) {
     if (!Macro_0810B1F4(&kirby->base)) {
         if (kirby->ability != KIRBY_ABILITY_NORMAL) {
             if (gLocalPlayerId == kirby->base.unk56)
-                sub_08035E28(kirby->ability);
+                LoadHudAbilityIcon(kirby->ability);
             TaskDestroy(gCurTask);
         } else {
             --unk->unk2;
             if (gLocalPlayerId == kirby->base.unk56) {
-                sub_08035E28(unk->unk0);
-                sub_08035F50(&kirby->base);
+                LoadHudAbilityIcon(unk->unk0);
+                CollapseHudAbilityIcon(&kirby->base);
             }
             if (!unk->unk2) {
                 if (gLocalPlayerId == kirby->base.unk56)
-                    sub_08035E28(kirby->ability);
+                    LoadHudAbilityIcon(kirby->ability);
                 TaskDestroy(gCurTask);
             }
         }
@@ -14859,9 +14862,9 @@ void sub_08096898(void) {
                 return;
             }
             if (effectObject->header.unk1 == 0xF) {
-                struct Unk_02022930_0 *v13;
+                struct PaletteEffect *v13;
 
-                v13 = sub_0803C83C(4, kirby->base.roomId);
+                v13 = CreateRoomPaletteEffect(4, kirby->base.roomId);
                 v13->unk0 = 2;
                 v13->unkA = 0x180;
                 v13->unk4 = 0x7F00;
@@ -14869,9 +14872,9 @@ void sub_08096898(void) {
                 v13->unk8 |= 0x40;
             }
             if (effectObject->header.unk1 == 0x24) {
-                struct Unk_02022930_0 *v14;
+                struct PaletteEffect *v14;
 
-                v14 = sub_0803CA20(kirby->base.unk56);
+                v14 = CreatePaletteFadeToWhite(kirby->base.unk56);
                 v14->unkA = 0x600;
                 v14->unk4 = 0;
                 v14->unk6 = 0x3FFF;

@@ -10,7 +10,7 @@ void *CreateShootingEnemyStar(struct ObjectTemplate *, u8);
 void sub_080D1A38(struct Object *);
 void sub_080D4F3C(struct Object *);
 
-bool8 sub_080D4004(struct Object *, struct Kirby *);
+bool32 sub_080D4004(struct Object *, struct Kirby *);
 
 extern const struct AnimInfo gUnk_08356108[];
 extern const struct AnimInfo gUnk_08356114[];

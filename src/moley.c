@@ -154,7 +154,7 @@ static void sub_080EB2C0(struct Moley *moley)
     moley->obj.base.flags |= 4;
     if (!(moley->obj.kirby3->base.unkC & 0x8000)
         && moley->obj.base.roomId == moley->obj.kirby3->base.roomId
-        && Macro_08039430_1(&moley->obj.kirby3->base, &moley->obj))
+        && ObjectOriginOverlapsRectAtObject(&moley->obj.kirby3->base, &moley->obj))
     {
         Macro_081003EC(&moley->obj, &moley->obj.kirby3->base);
         sub_080ED54C(moley);

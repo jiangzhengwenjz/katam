@@ -286,7 +286,7 @@ static void sub_080DBA1C(struct Kracko *kracko)
     kracko->obj.base.flags |= 4;
     if (!(kracko->obj.kirby3->base.unkC & 0x8000)
         && kracko->obj.base.roomId == kracko->obj.kirby3->base.roomId
-        && Macro_08039430_1(&kracko->obj.kirby3->base, &kracko->obj))
+        && ObjectOriginOverlapsRectAtObject(&kracko->obj.kirby3->base, &kracko->obj))
     {
         Macro_081003EC(&kracko->obj, &kracko->obj.kirby3->base);
         sub_080DF2BC(kracko);

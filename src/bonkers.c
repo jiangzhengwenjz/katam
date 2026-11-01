@@ -127,7 +127,7 @@ static void BonkersWaitForKirby(struct Object *arg0) {
             else {
                 arg0->base.flags &= ~1;
             }
-            if (Macro_08039430_2(&arg0->kirby3->base, arg0)) {
+            if (ObjectOriginOverlapsRectAtTemplate(&arg0->kirby3->base, arg0)) {
                 Macro_081003EC(arg0, &arg0->kirby3->base);
                 arg0->base.flags &= ~0x200;
                 BonkersStartIdle(arg0);

@@ -1,3 +1,4 @@
+#include "object_collision.h"
 #include <limits.h>
 #include "code_0800ECAC.h"
 #include "functions.h"
@@ -611,14 +612,14 @@ bool32 sub_080103BC(struct Unk_02038590 *a1) {
 // https://decomp.me/scratch/Q0OQa
 struct Object *sub_08010590(struct Unk_02038590 *a1, s32 a2, s32 a3) {
     s32 dx, dy;
-    struct Object **r7 = sub_08039490(&a1->unk40->base);
+    struct ObjectBase **r7 = GetRoomObjectCollisionList(&a1->unk40->base);
     struct Object *sp = NULL;
     s32 x = a1->unk40->base.x;
     s32 y = a1->unk40->base.y;
 
     for (; *r7; ++r7) {
-        struct Object *r3 = *r7;
-        struct Object *r5 = *r7;
+        struct Object *r3 = (struct Object *)*r7;
+        struct Object *r5 = (struct Object *)*r7;
 
         if (r3->base.flags & 0x10000000 || !(r3->base.flags & 0x8000)) {
             if (ObjType0To37(r3) || ObjType38To52(r3) || ObjType43To52(r3) || ObjType53To5C(r3) || r3->type == OBJ_EMPTY_5D) {

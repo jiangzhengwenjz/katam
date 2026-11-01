@@ -51,7 +51,7 @@ struct CutsceneTrigger5 {
     /* 0x0B8 */ struct EffectObject *unkB8;
     /* 0x0BC */ struct EffectObject *unkBC;
     /* 0x0C0 */ struct EffectObject *unkC0;
-    /* 0x0C4 */ struct Unk_02022930_0 *unkC4;
+    /* 0x0C4 */ struct PaletteEffect *unkC4;
     /* 0x0C8 */ u8 unkC8;
     /* 0x0C9 */ u8 unkC9;
     /* 0x0CA */ s8 unkCA;

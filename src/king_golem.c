@@ -90,7 +90,7 @@ static void sub_080DA2BC(struct KingGolem *kg)
     kg->obj.kirby3 = FindTargetKirby(&kg->obj.base);
     if (!(kg->obj.kirby3->base.unkC & 0x8000)
         && kg->obj.base.roomId == kg->obj.kirby3->base.roomId
-        && Macro_08039430_1(&kg->obj.kirby3->base, &kg->obj))
+        && ObjectOriginOverlapsRectAtObject(&kg->obj.kirby3->base, &kg->obj))
     {
         Macro_081003EC(&kg->obj, &kg->obj.kirby3->base);
         sub_080DA4B0(kg);

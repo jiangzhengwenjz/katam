@@ -125,7 +125,7 @@ static void sub_080D571C(struct Boxy *boxy)
             boxy->obj.base.flags |= 1;
         else
             boxy->obj.base.flags &= ~1;
-        if (Macro_08039430_2(&boxy->obj.kirby3->base, &boxy->obj))
+        if (ObjectOriginOverlapsRectAtTemplate(&boxy->obj.kirby3->base, &boxy->obj))
         {
             Macro_081003EC(&boxy->obj, &boxy->obj.kirby3->base);
             boxy->obj.base.flags &= ~0x200;

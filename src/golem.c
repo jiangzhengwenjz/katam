@@ -1,3 +1,4 @@
+#include "object_collision.h"
 #include "golem.h"
 #include "king_golem.h"
 #include "kirby.h"
@@ -273,12 +274,12 @@ static void sub_080C57D8(struct Object *golem)
                 || golem->objTemplate->unk1E
                 || golem->objTemplate->unk20)
             {
-                if (Macro_08039430_1(&golem->kirby3->base, golem))
+                if (ObjectOriginOverlapsRectAtObject(&golem->kirby3->base, golem))
                     golem->base.flags &= ~8;
             }
             else
             {
-                if (sub_08039430(&golem->kirby3->base, golem->base.x, golem->base.y, -0x28, -0x28, 0x50, 0x3C))
+                if (ObjectOriginOverlapsRect(&golem->kirby3->base, golem->base.x, golem->base.y, -0x28, -0x28, 0x50, 0x3C))
                     golem->base.flags &= ~8;
             }
         }

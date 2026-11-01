@@ -16,11 +16,10 @@ SECTIONS {
         . = 0x00020EE0; gKirbys = .;
         . = 0x00021580; gUnk_02021580 = .;
         . = 0x00021590; gUnk_02021590 = .;
-        . = 0x00022120; gUnk_02022120 = .;
-        . = 0x00022320; gUnk_02022320 = .;
-        . = 0x00022520; gUnk_02022520 = .;
-        . = 0x00022920; gUnk_02022920 = .;
-        . = 0x00022930; gUnk_02022930 = .;
+        . = 0x00022120; gSourcePalettes = .;
+        . = 0x00022520; gSourcePalettesBackup = .;
+        . = 0x00022920; gPaletteEffectsTask = .;
+        . = 0x00022930; gPaletteEffectManager = .;
         . = 0x000229D0; gShadowKirbyEncounters = .;
         . = 0x000229D4; gUnk_020229D4 = .;
         . = 0x000229D8; gMirraEncounters = .;
@@ -79,7 +78,7 @@ SECTIONS {
         . = 0x0003AD40; gUnk_0203AD40 = .;
         . = 0x0003AD44; gNumKirbys = .;
         . = 0x0003AD48; gSaveID = .;
-        . = 0x0003AD4C; gUnk_0203AD4C = .;
+        . = 0x0003AD4C; gInGameInterludeTask = .;
         . = 0x0003AD50; gUnk_0203AD50 = .;
         . = 0x0003ADE0; gUnk_0203ADE0 = .;
         . = 0x0003ADE4; ewram_end = .;
@@ -91,7 +90,7 @@ SECTIONS {
         . = 0x00000004; gUnk_03000004 = .;
         . = 0x00000008; gUnk_03000008 = .;
         . = 0x0000000C; gUnk_0300000C = .;
-        . = 0x00000010; gUnk_03000010 = .;
+        . = 0x00000010; gGameplayHudTask = .;
         . = 0x00000014; src/multi_boot.o(.bss);
         . = ALIGN(16); gUnk_03000020 = .;
         . = 0x0000002C; gUnk_0300002C = .;
@@ -258,7 +257,10 @@ SECTIONS {
         src/multi_08030C94.o(.text);
         src/multi_08032E98.o(.text);
         src/code_080332BC.o(.text);
-        asm/code_08032E98.o(.text);
+        src/hud.o(.text);
+        src/object_collision.o(.text);
+        src/in_game_interlude.o(.text);
+        src/palette_effects.o(.text);
         src/kirby.o(.text);
         src/code_0806F780.o(.text);
         asm/code_0806F734.o(.text);
@@ -436,6 +438,10 @@ SECTIONS {
         src/warp_star_data.o(.rodata);
         src/multi_08032E98.o(.rodata);
         data/data_6.o(.rodata);
+        src/hud.o(.rodata);
+        src/object_collision.o(.rodata);
+        src/in_game_interlude.o(.rodata);
+        src/palette_effects.o(.rodata);
         src/kirby.o(.rodata);
         src/code_0806F780.o(.rodata);
         data/object.o(.rodata);
@@ -1008,6 +1014,8 @@ SECTIONS {
         *libc.a:s_rint.o(.rodata);
         data/data_3.o(.rodata); /* very likely to be unused .rodata section in some library */
         *libc.a:impure.o(.rodata);
+        data/data_08D60980.o(.data);
+        src/hud.o(.data);
         /* TODO: extract the multiboot programs from ROM. */
         data/data_2.o(.rodata);
         data/multi_boot_images.o(.rodata);

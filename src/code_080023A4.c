@@ -1,3 +1,4 @@
+#include "palette_effects.h"
 #include "data.h"
 #include "functions.h"
 #include "kirby.h"
@@ -1876,7 +1877,7 @@ void sub_08003108(u8 playerId, bool32 arg1)
                     gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
                 }
 
-                sub_0803D21C(
+                LoadBgPaletteAndPaletteEffectSource(
                     fgPal4p->unk0.u16ppp[var0[0]][0],
                     fgPal4p->unk4[1],
                     fgPal4p->unk8

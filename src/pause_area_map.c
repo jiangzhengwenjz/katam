@@ -1,3 +1,5 @@
+#include "in_game_interlude.h"
+#include "palette_effects.h"
 #include "pause_area_map.h"
 #include "bg.h"
 #include "constants/languages.h"
@@ -2650,7 +2652,7 @@ inline void AreaMapToGame(void) {
     if (areamap->toGameCounter++ > 18) {
         TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
         TaskDestroy(gCurTask);
-        sub_08039670();
+        FinishInGameInterludeScreen();
     }
 }
 
@@ -3222,8 +3224,8 @@ static void AreaMapInit(void) {
         gCurTask->main = AreaMapToGame;
     }
     else {
-        sub_0803D2A8(0, 0xff);
-        sub_0803D280(0x80, 0x7f);
+        SaveBgPaletteColors(0, 0xff);
+        SaveObjPaletteColors(0x80, 0x7f);
         gCurTask->main = AreaMapMain;
         AreaMapRoomsInit(areamap);
     }
@@ -3355,8 +3357,8 @@ static void AreaMapMain(void) {
 
             AreaMapCameraInitPosition(areamap);
             (&areamap->cameraBg2)->flags |= 0x0001;
-            sub_0803D2A8(0, 0xff);
-            sub_0803D280(0x80, 0x7f);
+            SaveBgPaletteColors(0, 0xff);
+            SaveObjPaletteColors(0x80, 0x7f);
             AreaMapTextLabelInit(areamap);
             AreaMapBGInit(areamap);
             AreaMapRoomsInit(areamap);

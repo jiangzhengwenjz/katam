@@ -1,4 +1,6 @@
 #include "cutscene_trigger.h"
+#include "palette_effects.h"
+#include "in_game_interlude.h"
 #include "functions.h"
 #include "code_0806F780.h"
 #include "kirby.h"
@@ -1296,7 +1298,7 @@ static void sub_08022D78(struct CutsceneTrigger5 *trigger)
 {
     if (++trigger->unkB4 > 0x3B)
     {
-        trigger->unkC4 = sub_0803C83C(5, trigger->obj.base.roomId);
+        trigger->unkC4 = CreateRoomPaletteEffect(5, trigger->obj.base.roomId);
         trigger->unkC4->unk8 |= 0x40;
         trigger->unkC4->unkA = 0x80;
         trigger->unkC4->unk4 = 0xFFFF;
@@ -1643,9 +1645,9 @@ static void sub_080233E0(struct Object *obj)
 
 static void sub_08023414(struct Object *obj)
 {
-    if (sub_080395D4())
+    if (CanStartInGameInterlude())
     {
-        sub_08039600(0x1A);
+        StartInGameInterlude(0x1A);
         obj->unk78 = nullsub_113;
     }
 }
@@ -1724,7 +1726,7 @@ static void sub_08023580(struct CutsceneTrigger1 *trigger)
 
 static void sub_08023594(struct CutsceneTrigger1 *trigger)
 {
-    sub_0803CA20(7)->unkA = 0x400;
+    CreatePaletteFadeToWhite(7)->unkA = 0x400;
     trigger->unkBC = 0;
     trigger->obj.unk78 = sub_08023664;
 }
@@ -1794,7 +1796,7 @@ static void sub_080236CC(struct CutsceneTrigger1 *trigger)
 
 static void sub_080236EC(struct CutsceneTrigger1 *trigger)
 {
-    sub_0803C95C(7)->unkA = 0xFF80;
+    CreatePaletteFadeFromWhite(7)->unkA = 0xFF80;
     trigger->unkBC = 0;
     trigger->obj.unk78 = sub_08023714;
 }

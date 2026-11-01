@@ -645,7 +645,7 @@ sub_08120670: @ 0x08120670
 	ldrh r0, [r0]
 	mov sb, r0
 	adds r0, r4, #0
-	bl sub_08039490
+	bl GetRoomObjectCollisionList
 	adds r6, r0, #0
 	mov r3, sp
 	ldr r0, [r4, #0x40]

@@ -1,3 +1,5 @@
+#include "in_game_interlude.h"
+#include "palette_effects.h"
 #include "pause_world_map.h"
 #include "code_0801DA58.h"
 #include "constants/languages.h"
@@ -1148,8 +1150,8 @@ static void WorldMapPauseInit(void) {
 
     WorldMapLoadPalettes();
     gCurTask->main = WorldMapPauseMain;
-    sub_0803D280(0x80, 0x7f);
-    sub_0803D2A8(0x00, 0xff);
+    SaveObjPaletteColors(0x80, 0x7f);
+    SaveBgPaletteColors(0x00, 0xff);
 
     CpuFill32(0, BG_CHAR_ADDR(1), BG_CHAR_SIZE / 2);
     worldmap->bg.unkA = 0;
@@ -1249,10 +1251,10 @@ static void WorldMapUnlockInitBg(void) {
     CpuCopy32(sWorldMapAllUnlockedTilemap, BG_SCREEN_ADDR(24), sizeof(sWorldMapAllUnlockedTilemap));
 
     sub_08124EA0();
-    sub_0803D280(0x80, 0x7f);
-    sub_0803D2A8(0x00, 0xff);
+    SaveObjPaletteColors(0x80, 0x7f);
+    SaveBgPaletteColors(0x00, 0xff);
     white = RGB_WHITE;
-    sub_0803D21C(&white, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&white, 0, 1);
 }
 
 static void WorldMapUnlockInitKirbyAndDoors(void) {
@@ -1375,7 +1377,7 @@ static void WorldMapUnlockMain(void) {
         }
         else {
             TaskDestroy(gCurTask);
-            sub_08039670();
+            FinishInGameInterludeScreen();
         }
     }
     else {
@@ -1553,7 +1555,7 @@ static void WorldMapToGame(void) {
     if (worldmap->closeCounter++ > 18) {
         TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
         TaskDestroy(gCurTask);
-        sub_08039670();
+        FinishInGameInterludeScreen();
     }
     WorldMapDrawKirbys(worldmap);
 }

@@ -196,5 +196,7 @@ void sub_08098E54(struct Kirby *, s8, s8, s16, s16);
 void sub_08099118(struct Kirby *);
 void sub_08099A60(struct Kirby *);
 void sub_08099AC4(struct ObjectBase *);
+void sub_080853C8(struct Kirby *, u16);
+void sub_08088F84(struct Kirby *, s16, s16);
 
 #endif

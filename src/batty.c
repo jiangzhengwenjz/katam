@@ -315,7 +315,7 @@ static void sub_080BD2B4(struct Object* arg0) {
     if (arg0->unk83 == 2) {
         if (++arg0->base.counter > 0x14) {
             if (arg0->objTemplate->unk1A != 0 || arg0->objTemplate->unk1C != 0 || arg0->objTemplate->unk1E != 0 || arg0->objTemplate->unk20 != 0) {
-                if (Macro_08039430_1(&arg0->kirby3->base, arg0) != 0) {
+                if (ObjectOriginOverlapsRectAtObject(&arg0->kirby3->base, arg0) != 0) {
                     arg0->unk83 = 3;
                 }
             }

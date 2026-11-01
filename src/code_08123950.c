@@ -1,3 +1,4 @@
+#include "palette_effects.h"
 #include "code_08123950.h"
 #include "code_080332BC.h"
 #include "data.h"
@@ -179,8 +180,8 @@ static void sub_08123EA8(void) {
         {0x4000, 0x4000},
     };
 
-    if (sub_0803D1A4(0)) {
-        sub_0803D208(0);
+    if (IsPaletteEffectFinished(0)) {
+        DestroyPaletteEffectsTask(0);
         sub_080332BC(1, 0, sp4, sp1C[0], spC);
         TaskDestroy(gCurTask);
     }
@@ -206,7 +207,7 @@ static void sub_08123F18(void) {
 
     if (unk->unk80 > 240) {
         if (gPressedKeys & (A_BUTTON | START_BUTTON)) {
-            sub_0803C95C(0);
+            CreatePaletteFadeFromWhite(0);
             gCurTask->main = sub_08123EA8;
         }
         unk->unk80 = 250;

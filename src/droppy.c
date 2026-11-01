@@ -253,7 +253,7 @@ static const struct Kirby_110 gUnk_08352E18[] = {
 };
 
 static void sub_080A05C8(struct Object *arg0);
-bool8 sub_080A049C(struct Object *arg0, struct Kirby *kirby) {
+bool32 sub_080A049C(struct Object *arg0, struct Kirby *kirby) {
     if (arg0->unk83 > 0xa
         || kirby->base.header.kind
         || kirby->hp <= 0

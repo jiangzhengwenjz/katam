@@ -1,3 +1,4 @@
+#include "object_collision.h"
 #include "code_0800ECAC.h"
 #include "functions.h"
 #include "kirby.h"
@@ -391,7 +392,7 @@ void sub_0800F044(struct Unk_02038590 *a1) {
             r5[0x10] = 0;
         }
     }
-    r7 = sub_080394C8(&kirby->base);
+    r7 = GetRoomSolidCollisionList(&kirby->base);
     sp14 = kirby->base.x >> 8;
     sp18 = kirby->base.y >> 8;
     if (kirby->base.yspeed > 0) {

@@ -3,8 +3,9 @@
 
 #include "global.h"
 
-// sub_08020220, sub_08020370 and sub_080203C8 are also non-static, but they are
-// called only from asm/code_08032E98.s, so they have no declaration here.
+void sub_08020220(void);
+void sub_08020370(void);
+void sub_080203C8(void);
 
 void sub_08020428(void (*)(void));
 void sub_08020490(void);

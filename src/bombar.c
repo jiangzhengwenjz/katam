@@ -157,7 +157,7 @@ static void sub_080D7A6C(struct Object *bombar)
     bombar->base.flags |= 4;
     if (!(bombar->kirby3->base.unkC & 0x8000)
         && bombar->base.roomId == bombar->kirby3->base.roomId
-        && Macro_08039430_1(&bombar->kirby3->base, bombar))
+        && ObjectOriginOverlapsRectAtObject(&bombar->kirby3->base, bombar))
     {
         Macro_081003EC(bombar, &bombar->kirby3->base);
         bombar->base.flags &= ~0x200;

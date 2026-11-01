@@ -47,8 +47,8 @@ struct BlendRegs {
 
 struct Unk_03002EC0 {
     /* TODO: fixing types breaks sub_081525DC. */
-    u32 unk0; // const void *
-    u32 unk4; // void *
+    uintptr_t unk0; // const void *
+    uintptr_t unk4; // void *
     u16 unk8;
     u8 fillerA[2];
 };

@@ -1,6 +1,8 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#include "palette_effects.h"
+
 #include "global.h"
 #include "main.h"
 
@@ -83,7 +85,7 @@
     (sprite)->palId = (palIdVal); \
     (sprite)->unk8 = (unk8Val); \
     sub_08155128(sprite); \
-    sub_0803D280(0x10 * (sprite)->palId, 0x10); \
+    SaveObjPaletteColors(0x10 * (sprite)->palId, 0x10); \
 })
 
 struct Sprite_20 {

@@ -4,6 +4,8 @@
 #include "global.h"
 #include "bg.h"
 #include "sprite.h"
+#include "hud.h"
+#include "palette_effects.h"
 
 #define PlaySfxInternal(objBase, num) ({ \
     if ((((objBase)->header.kind != 0) || ((objBase)->unk56 == gLocalPlayerId)) \
@@ -338,7 +340,7 @@ struct ObjectBase {
     s32 unk68;
     void *unk6C; // can be ObjectBase */Kirby */?
     void *parent;
-    struct Kirby *kirby2;
+    struct ObjectBase *unk74; // Collision support or Magic ability target base.
 }; /* size = 0x78 */
 
 struct ThrowAbilityObject {
@@ -398,25 +400,6 @@ struct EffectObject {
     u16 roomId;
     void *parent;
 }; /* size = 0x48 */
-
-struct Object5 {
-    u32 unk0;
-    u16 unk4;
-    s8 unk6;
-    u8 unk7;
-    u8 filler8;
-    u8 unk9;
-    u8 unkA;
-    u8 unkB;
-    u8 unkC;
-    u8 unkD;
-    u8 unkE;
-    u8 unkF;
-    u32 unk10;
-    u8 filler14[8];
-    struct Object *unk1C;
-    struct Sprite unk20[3][4];
-}; /* size = 0x200 */
 
 struct Object6 {
     u16 unk0;
@@ -616,33 +599,18 @@ struct AnimInfo {
 
 extern struct AnimInfo gUnk_02021590[4][185];
 
-struct Unk_02022930_0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u16 unk4;
-    u16 unk6;
-    u16 unk8;
-    s16 unkA;
-    u16 unkC;
-    u16 unkE;
-}; /* size = 0x10 */
-
-struct Unk_02022930 {
-    struct Unk_02022930_0 unk0[8];
-    struct Unk_02022930_0 *unk80[8];
-}; /* size = 0xA0 */
-
-extern struct Task* gUnk_02022920;
-extern struct Unk_02022930 gUnk_02022930;
-
 extern u32 gShadowKirbyEncounters;
 extern u32 gMirraEncounters;
 extern u16 gUnk_02022E60[];
 extern u16 gUnk_02022E70[];
 extern u32 gUnk_02022E80[];
-extern u8 gUnk_02022EB0[][2];
+extern u8 gUnk_02022EB0[4][2];
+// TODO(match): Every access treats this as four groups of 0x40 entries, as if it were declared
+// gUnk_02022F50[][0x40]. A two-dimensional declaration with all users rewritten does not match
+// ProcessObjectCollisionLists. The C registration sites outside object_collision.c (SetPointerSomething
+// and two copies in code_0806F780.c) compute the flat index with explicit 0x40 arithmetic and need
+// matching workarounds (an empty asm memory clobber or a ++/-- pair), which also points to a
+// two-dimensional original.
 extern struct ObjectBase *gUnk_02022F50[];
 
 extern u32 gUnk_02023388[][16];

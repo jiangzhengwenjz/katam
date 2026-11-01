@@ -1,3 +1,6 @@
+#include "hud.h"
+#include "in_game_interlude.h"
+#include "palette_effects.h"
 #include "code_080332BC.h"
 #include "global.h"
 #include "data.h"
@@ -5777,7 +5780,7 @@ u8 sub_0803DFAC(u16 r2, u8 r6)
     if (gUnk_02022EA0 >= 7) gUnk_02022EA0 = 7;
     r4 = gUnk_02022EA0 + 7;
     SpriteSomething(&sprite, 0x6000000, r2 & 0xFFF, r6, 0xFF, 0, 0, 0, 0, 0x10, r4 & 0xF, 0x80000);
-    sub_0803D280(0x10 * r4, 0x10);
+    SaveObjPaletteColors(0x10 * r4, 0x10);
     return r4;
 }
 
@@ -5794,8 +5797,8 @@ void sub_0803E050(u16 sl)
     }
     SpriteSomething(&sprite, 0x6000000, 0x17, 0, 0xFF, 0, 0, 0, 0, 0x10, 0xE, 0x80000);
     SpriteSomething(&sprite, 0x6000000, 0x28A, 0, 0xFF, 0, 0, 0, 0, 0x10, 0xF, 0x80000);
-    sub_0803D280(0xE0, 0x10);
-    sub_0803D280(0xF0, 0x10);
+    SaveObjPaletteColors(0xE0, 0x10);
+    SaveObjPaletteColors(0xF0, 0x10);
     gUnk_02022EA0 = 0;
     sub_0803E4D4(8);
     sub_0803E4D4(9);
@@ -5968,7 +5971,7 @@ void sub_0803E558(u8 r8)
             sprite.animId = gUnk_08350A3C[gKirbys[r8].ability].animId;
             sprite.variant = gUnk_08350A3C[gKirbys[r8].ability].variant + gKirbys[r8].color;
             sub_08155128(&sprite);
-            sub_0803D280(0x10 * sprite.palId, 0x10);
+            SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
             return;
         }
     }
@@ -5977,7 +5980,7 @@ void sub_0803E558(u8 r8)
         sprite.animId = 0x15;
         sprite.variant = gKirbys[r8].color;
         sub_08155128(&sprite);
-        sub_0803D280(0x10 * sprite.palId, 0x10);
+        SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
         return;
     }
     sub_08155128(&sprite);
@@ -5986,7 +5989,7 @@ void sub_0803E558(u8 r8)
     sprite.variant = gKirbys[r8].color;
     sub_08155128(&sprite);
     CpuCopy16(colors, &gObjPalette[0x10 * r8 + 0xC], sizeof(colors));
-    sub_0803D280(0x10 * sprite.palId, 0x10);
+    SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
     gKirbys[r8].base.unkC &= ~0x200;
 }
 
@@ -6009,7 +6012,7 @@ void sub_0803E6B8(u8 r6, u16 r1, u8 r2)
         sprite.animId = 0x15;
         sprite.variant = gKirbys[r6].color;
         sub_08155128(&sprite);
-        sub_0803D280(0x10 * sprite.palId, 0x10);
+        SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
     }
     else
     {
@@ -6021,7 +6024,7 @@ void sub_0803E6B8(u8 r6, u16 r1, u8 r2)
         sprite.variant = gKirbys[r6].color;
         sub_08155128(&sprite);
         CpuCopy16(colors, &gObjPalette[0x10 * r6 + 0xC], sizeof(colors));
-        sub_0803D280(0x10 * sprite.palId, 0x10);
+        SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
     }
 }
 
@@ -6045,7 +6048,7 @@ void sub_0803E778(u8 r8, u16 r1, u8 r2)
         sprite.animId = 0x15;
         sprite.variant = gKirbys[r8].color;
         sub_08155128(&sprite);
-        sub_0803D280(0x10 * sprite.palId, 0x10);
+        SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
     }
     else
     {
@@ -6059,7 +6062,7 @@ void sub_0803E778(u8 r8, u16 r1, u8 r2)
         sub_08155128(&sprite);
         CpuCopy16(colors, &gObjPalette[0x10 * r8 + 0xA], sizeof(colors));
         CpuCopy16(&colorBuf, &gObjPalette[0x10 * r8 + 0x1], sizeof(colorBuf));
-        sub_0803D280(0x10 * sprite.palId, 0x10);
+        SaveObjPaletteColors(0x10 * sprite.palId, 0x10);
     }
 }
 
@@ -6335,14 +6338,14 @@ void sub_0803EE18(void)
             }
         }
         if (kirby->unk11A & 8
-            && sub_080395D4()
+            && CanStartInGameInterlude()
             && !(gUnk_0203AD10 & 0xE0)
             && !(kirby->base.unkC & 0x10000000)
             && !(kirby->base.flags & 0x2000000))
         {
             kirby->unk11A &= ~8;
             gUnk_0203AD50 = kirby->base.unk56;
-            sub_08039600(0);
+            StartInGameInterlude(0);
         }
         if (!Macro_0810B1F4(&kirby->base)
             && kirby->unkE8)
@@ -6781,7 +6784,7 @@ void sub_0803F790(struct Kirby *kirby)
 void sub_0803FBB4(struct Kirby *kirby)
 {
     u32 r6;
-    struct Kirby *kirby2;
+    struct ObjectBase *support;
 
     if (!Macro_0810B1F4(&kirby->base))
     {
@@ -6837,12 +6840,12 @@ void sub_0803FBB4(struct Kirby *kirby)
         else
             kirby->base.flags &= ~0x20;
     }
-    if ((kirby2 = kirby->base.kirby2))
+    if ((support = kirby->base.unk74))
     {
         if (!kirby->base.xspeed)
-            kirby->base.x += kirby2->base.xspeed;
-        kirby->base.y -= kirby2->base.yspeed;
-        kirby->base.kirby2 = NULL;
+            kirby->base.x += support->xspeed;
+        kirby->base.y -= support->yspeed;
+        kirby->base.unk74 = NULL;
     }
     if (!(kirby->base.flags & 0x100))
     {
@@ -6928,10 +6931,10 @@ void sub_0803FE74(struct Kirby *kirby)
         sub_080A9038(kirby, TRUE); \
         if (gLocalPlayerId == (kirby)->base.unk56) \
         { \
-            sub_08035E28(0); \
-            sub_08034C9C(2); \
+            LoadHudAbilityIcon(0); \
+            DrawHudAbilityIconRows(2); \
         } \
-        sub_08035E40(&(kirby)->base); \
+        StartHudAbilityIconExpansion(&(kirby)->base); \
         if ((kirby)->ability == KIRBY_ABILITY_UFO) \
             _a = TRUE; \
         if ((kirby)->ability == KIRBY_ABILITY_MINI) \
@@ -9016,10 +9019,10 @@ void sub_0804A728(struct Kirby *kirby)
                         sub_080A9038(kirby, FALSE);
                     if (gLocalPlayerId == kirby->base.unk56)
                     {
-                        sub_08035E28(0);
-                        sub_08034C9C(2);
+                        LoadHudAbilityIcon(0);
+                        DrawHudAbilityIconRows(2);
                     }
-                    sub_08035E40(&kirby->base);
+                    StartHudAbilityIconExpansion(&kirby->base);
                     kirby->ability = KIRBY_ABILITY_NORMAL;
                     kirby->base.unkC &= ~2;
                     sub_0806F260(kirby);
@@ -9113,10 +9116,10 @@ void sub_0804ADD4(struct Kirby *kirby)
             sub_080A9038(kirby, FALSE);
         if (gLocalPlayerId == kirby->base.unk56)
         {
-            sub_08035E28(0);
-            sub_08034C9C(2);
+            LoadHudAbilityIcon(0);
+            DrawHudAbilityIconRows(2);
         }
-        sub_08035E40(&kirby->base);
+        StartHudAbilityIconExpansion(&kirby->base);
         kirby->ability = KIRBY_ABILITY_NORMAL;
         kirby->base.unkC &= ~2;
         sub_0806F260(kirby);
@@ -9288,9 +9291,9 @@ void sub_0804BD00(struct Kirby *kirby)
 ({ \
     if (gLocalPlayerId == (kirby)->base.unk56) \
     { \
-        sub_08035E28(0); \
-        sub_08034C9C(2); \
-        sub_08035F50(&(kirby)->base); \
+        LoadHudAbilityIcon(0); \
+        DrawHudAbilityIconRows(2); \
+        CollapseHudAbilityIcon(&(kirby)->base); \
     } \
 })
 
@@ -9423,7 +9426,7 @@ void sub_0804C410(struct Kirby *kirby, s16 r5)
 void sub_0804C614(struct Kirby *kirby)
 {
     struct EffectObject *r3;
-    struct Unk_02022930_0 *r2;
+    struct PaletteEffect *r2;
 
     if (!(kirby->base.flags & 2))
         return;
@@ -9451,9 +9454,9 @@ void sub_0804C614(struct Kirby *kirby)
     if (kirby->flyTimer == 0x60)
     {
         if (kirby->base.unk56 == gLocalPlayerId)
-            r2 = sub_0803CA20(kirby->base.unk56);
+            r2 = CreatePaletteFadeToWhite(kirby->base.unk56);
         else
-            r2 = sub_0803CAE4(kirby->base.unk56);
+            r2 = CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
         r2->unkA = 0x400;
         r2->unk8 |= 0x40;
     }
@@ -9873,10 +9876,10 @@ void sub_0804D4E4(struct Kirby *kirby)
                         sub_080A9038(kirby, FALSE);
                     if (gLocalPlayerId == kirby->base.unk56)
                     {
-                        sub_08035E28(0);
-                        sub_08034C9C(2);
+                        LoadHudAbilityIcon(0);
+                        DrawHudAbilityIconRows(2);
                     }
-                    sub_08035E40(&kirby->base);
+                    StartHudAbilityIconExpansion(&kirby->base);
                     kirby->ability = KIRBY_ABILITY_NORMAL;
                     kirby->base.unkC &= ~2;
                     sub_0806F260(kirby);
@@ -9945,10 +9948,10 @@ void sub_0804D9D4(struct Kirby *kirby)
                     sub_080A9038(kirby, FALSE);
                 if (gLocalPlayerId == kirby->base.unk56)
                 {
-                    sub_08035E28(0);
-                    sub_08034C9C(2);
+                    LoadHudAbilityIcon(0);
+                    DrawHudAbilityIconRows(2);
                 }
-                sub_08035E40(&kirby->base);
+                StartHudAbilityIconExpansion(&kirby->base);
                 kirby->ability = KIRBY_ABILITY_NORMAL;
                 kirby->base.unkC &= ~2;
                 sub_0806F260(kirby);
@@ -10262,10 +10265,10 @@ void sub_0804EA18(struct Kirby *kirby, s16 a, s16 b)
 #endif
             if (gLocalPlayerId == kirby->base.unk56)
             {
-                sub_08035E28(0);
-                sub_08034C9C(2);
+                LoadHudAbilityIcon(0);
+                DrawHudAbilityIconRows(2);
             }
-            sub_08035E40(&kirby->base);
+            StartHudAbilityIconExpansion(&kirby->base);
             kirby->ability = KIRBY_ABILITY_NORMAL;
             kirby->base.unkC &= ~2;
             sub_0806F260(kirby);
@@ -10330,10 +10333,10 @@ void sub_0804EDDC(struct Kirby *kirby, u16 r1)
                 sub_080A9038(kirby, FALSE);
             if (gLocalPlayerId == kirby->base.unk56)
             {
-                sub_08035E28(0);
-                sub_08034C9C(2);
+                LoadHudAbilityIcon(0);
+                DrawHudAbilityIconRows(2);
             }
-            sub_08035E40(&kirby->base);
+            StartHudAbilityIconExpansion(&kirby->base);
             kirby->ability = KIRBY_ABILITY_NORMAL;
             kirby->base.unkC &= ~2;
             sub_0806F260(kirby);
@@ -10504,10 +10507,10 @@ void sub_0804F3A8(struct Kirby *kirby)
                     sub_080A9038(kirby, FALSE);
                 if (gLocalPlayerId == kirby->base.unk56)
                 {
-                    sub_08035E28(0);
-                    sub_08034C9C(2);
+                    LoadHudAbilityIcon(0);
+                    DrawHudAbilityIconRows(2);
                 }
-                sub_08035E40(&kirby->base);
+                StartHudAbilityIconExpansion(&kirby->base);
                 kirby->ability = KIRBY_ABILITY_NORMAL;
                 kirby->base.unkC &= ~2;
                 sub_0806F260(kirby);
@@ -10612,15 +10615,15 @@ void sub_0804FBFC(struct Kirby *kirby)
     if (kirby->base.counter == 180)
     {
         if (kirby->base.unk56 == gLocalPlayerId)
-            sub_0803CA20(kirby->base.unk56);
+            CreatePaletteFadeToWhite(kirby->base.unk56);
         else
-            sub_0803CAE4(kirby->base.unk56);
+            CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
     }
     if (kirby->base.counter == 194)
     {
         if (kirby->base.unk56 == gLocalPlayerId)
         {
-            struct Unk_02022930_0 *v = sub_0803CA20(kirby->base.unk56);
+            struct PaletteEffect *v = CreatePaletteFadeToWhite(kirby->base.unk56);
 
             v->unk8 |= 0x40;
             v->unk0 = 4;
@@ -10702,7 +10705,7 @@ void sub_0804FBFC(struct Kirby *kirby)
                     kirby->base.unkC |= 0x10000000;
                     sub_08050884(kirby);
                     if (kirby->base.unk56 == gLocalPlayerId)
-                        sub_0803620C();
+                        ShowGameOverHud();
                 }
                 return;
             }
@@ -10711,7 +10714,7 @@ void sub_0804FBFC(struct Kirby *kirby)
                 kirby->base.unkC |= 0x10000000;
                 sub_08050218(kirby);
                 if (kirby->base.unk56 == gLocalPlayerId)
-                    sub_08036258();
+                    ShowBorrowLifeHud();
                 return;
             }
             if (gAIKirbyState >= AI_KIRBY_STATE_CUTSCENE)
@@ -10753,9 +10756,9 @@ void sub_0804FBFC(struct Kirby *kirby)
 #define Macro_08050218(kirby) \
 ({ \
     if (gLocalPlayerId == (kirby)->base.unk56) \
-        sub_0803C95C((kirby)->base.unk56); \
+        CreatePaletteFadeFromWhite((kirby)->base.unk56); \
     else \
-        sub_0803CAE4((kirby)->base.unk56); \
+        CreateHiddenPaletteFadeToWhite((kirby)->base.unk56); \
 })
 
 void sub_08050218(struct Kirby *kirby)
@@ -10861,7 +10864,7 @@ void sub_080506A8(struct Kirby *kirby)
     kirby->base.flags |= 0x400;
     if (kirby->base.counter == 30 && gLocalPlayerId == kirby->base.unk56)
     {
-        struct Unk_02022930_0 *v = sub_0803CA20(kirby->base.unk56);
+        struct PaletteEffect *v = CreatePaletteFadeToWhite(kirby->base.unk56);
 
         v->unk8 |= 0x40;
         v->unk0 = 4;
@@ -10964,7 +10967,7 @@ void sub_08050908(struct Kirby *kirby)
                 kirby->spawnLocation.y = kirby2->base.y >> 12;
                 if (kirby->base.unk56 == gLocalPlayerId)
                 {
-                    struct Unk_02022930_0 *v = sub_0803CA20(kirby->base.unk56);
+                    struct PaletteEffect *v = CreatePaletteFadeToWhite(kirby->base.unk56);
 
                     v->unkA = 0x400;
                     v->unk8 |= 0x40;
@@ -11060,7 +11063,7 @@ void sub_08050B44(struct Kirby *kirby)
                 kirby->spawnLocation.y = kirby2->base.y >> 12;
                 if (kirby->base.unk56 == gLocalPlayerId)
                 {
-                    struct Unk_02022930_0 *v = sub_0803CA20(kirby->base.unk56);
+                    struct PaletteEffect *v = CreatePaletteFadeToWhite(kirby->base.unk56);
 
                     v->unkA = 0x400;
                     v->unk8 |= 0x40;
@@ -11296,12 +11299,12 @@ void sub_0805177C(struct Kirby *kirby)
         || kirby->base.y > gCurLevelInfo[kirby->base.unk56].levelMaxPosition.y
         || kirby->base.y < gCurLevelInfo[kirby->base.unk56].levelMinPosition.y)
     {
-        struct Unk_02022930_0 *v;
+        struct PaletteEffect *v;
 
         if (kirby->base.unk56 == gLocalPlayerId)
-            v = sub_0803CA20(kirby->base.unk56);
+            v = CreatePaletteFadeToWhite(kirby->base.unk56);
         else
-            v = sub_0803CAE4(kirby->base.unk56);
+            v = CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
         v->unkA = 0x200;
         v->unk8 |= 0x40;
         kirby->idleTimer = 1;
@@ -11849,9 +11852,9 @@ void sub_080534D0(struct Kirby *kirby)
         {
         case 0:
             if (kirby->base.unk56 == gLocalPlayerId)
-                sub_0803CA20(kirby->base.unk56);
+                CreatePaletteFadeToWhite(kirby->base.unk56);
             else
-                sub_0803CAE4(kirby->base.unk56);
+                CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
             break;
         case 10:
             if (kirby->base.unkC & 0x2000)
@@ -12501,12 +12504,12 @@ void sub_0805545C(struct Kirby *kirby)
         if (sl) kirby->animationIndex = 65;
         if (kirby->base.unkC & 0x800000)
         {
-            struct Unk_02022930_0 *v;
+            struct PaletteEffect *v;
 
             if (kirby->base.unk56 == gLocalPlayerId)
-                v = sub_0803CA20(kirby->base.unk56);
+                v = CreatePaletteFadeToWhite(kirby->base.unk56);
             else
-                v = sub_0803CAE4(kirby->base.unk56);
+                v = CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
             v->unkA = 0x400;
             v->unk8 |= 0x40;
         }
@@ -12519,19 +12522,19 @@ void sub_0805545C(struct Kirby *kirby)
             kirby->animationIndex = 43;
             if (kirby->base.unkC & 0x800000)
             {
-                struct Unk_02022930_0 *v;
+                struct PaletteEffect *v;
 
                 if (kirby->base.unk56 == gLocalPlayerId)
-                    v = sub_0803CA20(kirby->base.unk56);
+                    v = CreatePaletteFadeToWhite(kirby->base.unk56);
                 else
-                    v = sub_0803CAE4(kirby->base.unk56);
+                    v = CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
                 v->unkA = 0x400;
                 v->unk8 |= 0x40;
             }
         }
         else
         {
-            struct Unk_02022930_0 *v;
+            struct PaletteEffect *v;
 
             kirby->base.flags |= sp04;
             ++kirby->idleTimer;
@@ -12543,9 +12546,9 @@ void sub_0805545C(struct Kirby *kirby)
                     kirby->animationIndex = 42;
             }
             if (kirby->base.unk56 == gLocalPlayerId)
-                v = sub_0803CA20(kirby->base.unk56);
+                v = CreatePaletteFadeToWhite(kirby->base.unk56);
             else
-                v = sub_0803CAE4(kirby->base.unk56);
+                v = CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
             v->unkA = 0x400;
             v->unk8 |= 0x40;
         }
@@ -12617,13 +12620,13 @@ void sub_08055920(struct Kirby *kirby)
 
 void sub_08055C14(struct Kirby *kirby)
 {
-    struct Unk_02022930_0 *v;
+    struct PaletteEffect *v;
 
     if (++kirby->unkD9 > 7)
     {
         if (kirby->idleTimer)
         {
-            v = sub_0803D308(kirby->base.unk56);
+            v = GetPaletteEffect(kirby->base.unk56);
             if (kirby->idleTimer == 5)
             {
                 v->unk6 = 0;
@@ -12662,9 +12665,9 @@ void sub_08055C14(struct Kirby *kirby)
             else
                 kirby->animationIndex = 42;
             if (kirby->base.unk56 == gLocalPlayerId)
-                v = sub_0803CA20(kirby->base.unk56);
+                v = CreatePaletteFadeToWhite(kirby->base.unk56);
             else
-                v = sub_0803CAE4(kirby->base.unk56);
+                v = CreateHiddenPaletteFadeToWhite(kirby->base.unk56);
             v->unkA = 0x400;
             v->unk8 |= 0x40;
         }
@@ -12675,9 +12678,9 @@ void sub_08055C14(struct Kirby *kirby)
 ({ \
     if (gLocalPlayerId == (kirby)->base.unk56) \
     { \
-        sub_08035E28(0); \
-        sub_08034C9C(2); \
-        sub_08035E40(&(kirby)->base); \
+        LoadHudAbilityIcon(0); \
+        DrawHudAbilityIconRows(2); \
+        StartHudAbilityIconExpansion(&(kirby)->base); \
     } \
 })
 
@@ -12690,9 +12693,9 @@ void sub_08055D9C(struct Kirby *kirby)
     case 0:
         if (kirby->base.unk56 == gLocalPlayerId)
         {
-            struct Unk_02022930_0 *v;
+            struct PaletteEffect *v;
 
-            v = sub_0803CA20(kirby->base.unk56);
+            v = CreatePaletteFadeToWhite(kirby->base.unk56);
             v->unk8 |= 0x40;
             v->unk0 = 4;
         }
@@ -12702,9 +12705,9 @@ void sub_08055D9C(struct Kirby *kirby)
         if (gLocalPlayerId == kirby->base.unk56)
         {
             if (kirby->hp > 0)
-                sub_080362A4();
+                RestoreHudAfterLifeBorrow();
             if (kirby->base.roomId == 0x397)
-                sub_08036314(&kirby->base);
+                ClearBorrowLifeHud(&kirby->base);
         }
         if (kirby->base.roomId == 0x321)
             Macro_0803E920(kirby);
@@ -12960,11 +12963,11 @@ _080564F8:
         }
     }
     if (kirby->base.unk56 == gLocalPlayerId)
-        sub_08034FA8(NULL);
+        DrawEnemyHealthOrAreaName(NULL);
     sub_08033674(kirby->base.unk56);
-    sub_0803CD40();
+    EnablePaletteEffectsForCurrentRoom();
     if (gLocalPlayerId == kirby->base.unk56)
-        sub_0803D250(&a, &b);
+        LoadLevelPaletteEffectSourcePalettes(&a, &b);
     kirby->base.flags &= ~0x1000000;
 }
 
@@ -13110,7 +13113,7 @@ void sub_08056C2C(struct Kirby *kirby)
         if (gUnk_02021580 > gNumKirbys)
             gUnk_0203AD20 |= 2;
         kirby->idleTimer = gUnk_02021580;
-        sub_0803CBC4(kirby->base.unk56);
+        CreatePaletteDim(kirby->base.unk56);
         PlaySfx(&kirby->base, SE_KIRBY_CALL);
         kirby->movementOverride.x = 0;
         kirby->movementOverride.y = 0;
@@ -13151,7 +13154,7 @@ void sub_08056E40(struct Kirby *kirby)
         kirby->base.flags &= ~0x40;
     kirby->base.flags &= ~2;
     kirby->idleTimer = 0;
-    sub_0803CBC4(kirby->base.unk56);
+    CreatePaletteDim(kirby->base.unk56);
     PlaySfx(&kirby->base, SE_KIRBY_CALL);
     kirby->movementOverride.x = 0;
     kirby->movementOverride.y = 0;
@@ -13188,7 +13191,7 @@ void sub_0805701C(struct Kirby *kirby)
                 kirby->animationIndex = 97;
         }
         if (kirby->base.counter == 20)
-            sub_0803CC80(kirby->base.unk56);
+            CreatePaletteUndim(kirby->base.unk56);
         if (kirby->base.counter > 28)
         {
             if (kirby->base.unkC & 0x40000
@@ -13551,9 +13554,9 @@ void sub_08057E08(struct Kirby *kirby)
                     kirby->spawnLocation.y = kirby2->base.y >> 12;
                     if (kirby->base.unk56 == gLocalPlayerId)
                     {
-                        struct Unk_02022930_0 *v;
+                        struct PaletteEffect *v;
 
-                        v = sub_0803CA20(kirby->base.unk56);
+                        v = CreatePaletteFadeToWhite(kirby->base.unk56);
                         v->unkA = 0x400;
                         v->unk8 |= 0x40;
                     }
@@ -15137,7 +15140,7 @@ void sub_0805C11C(struct Kirby *kirby)
     sub_08033540(kirby->base.unk56);
     kirby->base.flags |= 0x2000;
     if (!(kirby->base.unkC & 0x20))
-        sub_0803CBC4(kirby->base.unk56);
+        CreatePaletteDim(kirby->base.unk56);
     if (kirby->transitioningAbility & KIRBY_ABILITY_CHANGE_IS_ABILITY_STAR)
     {
         ++kirby->unkF0;
@@ -15160,8 +15163,8 @@ void sub_0805C11C(struct Kirby *kirby)
         kirby->stateFn = sub_0805C3B8;
         kirby->animationIndex = 0;
         if (gLocalPlayerId == kirby->base.unk56)
-            sub_08035E28(kirby->ability);
-        sub_08035E9C(&kirby->base);
+            LoadHudAbilityIcon(kirby->ability);
+        HoldExpandedHudAbilityIcon(&kirby->base);
     }
     else
     {
@@ -15185,13 +15188,13 @@ void sub_0805C3B8(struct Kirby *kirby)
     if (gLocalPlayerId == kirby->base.unk56)
     {
         if (kirby->idleTimer < 8)
-            sub_08035E28(0);
+            LoadHudAbilityIcon(0);
         else
         {
             if (ip != kirby->transitioningAbility)
                 PlaySfx(&kirby->base, SE_MAIN_MENU_CURSOR);
             if (gLocalPlayerId == kirby->base.unk56)
-                sub_08035E28(kirby->transitioningAbility);
+                LoadHudAbilityIcon(kirby->transitioningAbility);
         }
     }
     if (kirby->idleTimer > 0xA
@@ -15257,15 +15260,15 @@ void sub_0805C618(struct Kirby *kirby)
         kirby->transitioningAbility = 0;
         if (gLocalPlayerId == kirby->base.unk56)
         {
-            sub_08035E28(kirby->ability);
-            sub_08035E40(&kirby->base);
+            LoadHudAbilityIcon(kirby->ability);
+            StartHudAbilityIconExpansion(&kirby->base);
         }
         if (kirby->ability == KIRBY_ABILITY_MASTER)
             gUnk_0203AD34 = 1;
         if (kirby->base.counter)
-            sub_08035EF8(&kirby->base);
+            ScheduleHudAbilityIconCollapse(&kirby->base);
         else
-            sub_08035E40(&kirby->base);
+            StartHudAbilityIconExpansion(&kirby->base);
         kirby->base.counter = 0;
         kirby->idleTimer = 0;
         sub_0806F260(kirby);
@@ -15317,10 +15320,10 @@ void sub_0805C700(struct Kirby *kirby)
         }
     }
     if (kirby->base.counter == 18 && !(kirby->base.unkC & 0x20))
-        sub_0803CC80(kirby->base.unk56);
+        CreatePaletteUndim(kirby->base.unk56);
     if (kirby->base.counter > 25)
     {
-        sub_08036378();
+        ExpireHudEnemyHealthDelay();
         kirby->base.flags &= ~0x200;
         kirby->base.flags &= ~0x100;
         kirby->base.flags &= ~0x800;
@@ -15382,10 +15385,10 @@ void sub_0805C954(struct Kirby *kirby)
             kirby->base.flags |= 4;
     }
     if (kirby->base.counter == 18 && !(kirby->base.unkC & 0x20))
-        sub_0803CC80(kirby->base.unk56);
+        CreatePaletteUndim(kirby->base.unk56);
     if (kirby->base.counter > 25)
     {
-        sub_08036378();
+        ExpireHudEnemyHealthDelay();
         kirby->base.flags &= ~0x200;
         kirby->base.flags &= ~0x100;
         kirby->base.flags &= ~0x800;
@@ -15427,10 +15430,10 @@ void sub_0805CB88(struct Kirby *kirby)
     else
         kirby->base.flags |= 4;
     if (kirby->base.counter == 18 && !(kirby->base.unkC & 0x20))
-        sub_0803CC80(kirby->base.unk56);
+        CreatePaletteUndim(kirby->base.unk56);
     if (kirby->base.counter > 25)
     {
-        sub_08036378();
+        ExpireHudEnemyHealthDelay();
         kirby->base.flags &= ~0x200;
         kirby->base.flags &= ~0x100;
         kirby->base.flags &= ~0x800;
@@ -15474,10 +15477,10 @@ void sub_0805CD3C(struct Kirby *kirby)
     else if (kirby->base.counter <= 25)
         kirby->animationIndex = 52;
     if (kirby->base.counter == 24 && !(kirby->base.unkC & 0x20))
-        sub_0803CC80(kirby->base.unk56);
+        CreatePaletteUndim(kirby->base.unk56);
     if (kirby->base.counter > 31)
     {
-        sub_08036378();
+        ExpireHudEnemyHealthDelay();
         kirby->base.flags &= ~0x200;
         kirby->base.flags &= ~0x100;
         kirby->base.flags &= ~0x800;
@@ -15513,10 +15516,10 @@ void sub_0805CEEC(struct Kirby *kirby)
     if (kirby->base.flags & 2)
         kirby->animationIndex = 57;
     if (kirby->base.counter == 4 && !(kirby->base.unkC & 0x20))
-        sub_0803CC80(kirby->base.unk56);
+        CreatePaletteUndim(kirby->base.unk56);
     if (kirby->base.counter > 16)
     {
-        sub_08036378();
+        ExpireHudEnemyHealthDelay();
         kirby->base.flags &= ~0x200;
         kirby->base.flags &= ~0x100;
         kirby->base.flags &= ~0x800;
@@ -15555,10 +15558,10 @@ void sub_0805D044(struct Kirby *kirby)
     kirby->base.sprite.unk1C = 0;
     kirby->sprites[1].unk1C = 0;
     if (kirby->base.counter == 4 && !(kirby->base.unkC & 0x20))
-        sub_0803CC80(kirby->base.unk56);
+        CreatePaletteUndim(kirby->base.unk56);
     if (kirby->base.counter > 16)
     {
-        sub_08036378();
+        ExpireHudEnemyHealthDelay();
         kirby->base.flags &= ~0x200;
         kirby->base.flags &= ~0x100;
         kirby->base.flags &= ~0x800;
@@ -18913,8 +18916,8 @@ void sub_08064510(struct Kirby *kirby)
         kirby->ability = KIRBY_ABILITY_NORMAL;
         if (gLocalPlayerId == kirby->base.unk56)
         {
-            sub_08035E28(0);
-            sub_08034C9C(2);
+            LoadHudAbilityIcon(0);
+            DrawHudAbilityIconRows(2);
         }
         sub_0806F260(kirby);
         Macro_0803FF64_6(kirby);
@@ -20046,8 +20049,8 @@ void sub_08066F04(struct Kirby *kirby)
         kirby->ability = KIRBY_ABILITY_NORMAL;
         if (gLocalPlayerId == kirby->base.unk56)
         {
-            sub_08035E28(0);
-            sub_08034C9C(2);
+            LoadHudAbilityIcon(0);
+            DrawHudAbilityIconRows(2);
         }
         sub_0806F260(kirby);
         kirby->base.flags &= ~0x200;
@@ -20794,12 +20797,12 @@ void sub_080684D8(struct Kirby *kirby)
     if (kirby->base.header.unk1 == 0x15 || kirby->base.header.unk1 == 0x21)
     {
         sub_0803E558(kirby->base.unk56);
-        sub_0803CD98(kirby->base.unk56, 0, 0, 0x232, 4, 0x55);
+        BlendSpriteAnimationPalettes(kirby->base.unk56, 0, 0, 0x232, 4, 0x55);
     }
     else if (kirby->base.header.unk1 == 0x17 || kirby->base.header.unk1 == 0x22)
     {
         sub_0803E558(kirby->base.unk56);
-        sub_0803CD98(kirby->base.unk56, 0, 0, 0x232, 4, 0xAA);
+        BlendSpriteAnimationPalettes(kirby->base.unk56, 0, 0, 0x232, 4, 0xAA);
     }
     else if (kirby->base.header.unk1 == 0x19 || kirby->base.header.unk1 == 0x23)
     {
@@ -20822,7 +20825,7 @@ void sub_080684D8(struct Kirby *kirby)
         if (kirby->idleTimer > 0x100)
             kirby->idleTimer = 0x100;
         sub_0803E558(kirby->base.unk56);
-        sub_0803CD98(kirby->base.unk56, 0, 0, 0x232, 3, kirby->idleTimer);
+        BlendSpriteAnimationPalettes(kirby->base.unk56, 0, 0, 0x232, 3, kirby->idleTimer);
     }
     if (kirby->base.flags & 2)
     {
@@ -20848,12 +20851,12 @@ void sub_080685F4(struct Kirby *kirby)
             {
                 kirby->idleTimer = -1;
                 sub_0803E558(kirby->base.unk56);
-                sub_0803CD98(kirby->base.unk56, 0, 0, 0x232, 3, 0x100);
+                BlendSpriteAnimationPalettes(kirby->base.unk56, 0, 0, 0x232, 3, 0x100);
             }
             else
             {
                 sub_0803E558(kirby->base.unk56);
-                sub_0803CD98(kirby->base.unk56, 0, 0, 0x232, 3, kirby->idleTimer);
+                BlendSpriteAnimationPalettes(kirby->base.unk56, 0, 0, 0x232, 3, kirby->idleTimer);
             }
         }
         if (!(kirby->base.flags & 2))
@@ -20891,23 +20894,23 @@ void sub_08068724(struct Kirby *kirby)
             {
                 kirby->idleTimer = -1;
                 sub_0803E558(kirby->base.unk56);
-                sub_0803CD98(kirby->base.unk56, 0x232, 3, 0, 0, 0x100);
+                BlendSpriteAnimationPalettes(kirby->base.unk56, 0x232, 3, 0, 0, 0x100);
             }
             else
             {
                 sub_0803E558(kirby->base.unk56);
-                sub_0803CD98(kirby->base.unk56, 0x232, 3, 0, 0, kirby->idleTimer);
+                BlendSpriteAnimationPalettes(kirby->base.unk56, 0x232, 3, 0, 0, kirby->idleTimer);
             }
         }
         if (kirby->base.header.unk1 == 0x1A)
         {
-            struct Unk_02022930_0 *a;
+            struct PaletteEffect *a;
 
-            a = sub_0803C95C(kirby->base.unk56);
+            a = CreatePaletteFadeFromWhite(kirby->base.unk56);
             a->unkA = -0x600;
             a->unk4 = 0;
             a->unk6 = 0x3FFF;
-            a = sub_0803C83C(4, kirby->base.roomId);
+            a = CreateRoomPaletteEffect(4, kirby->base.roomId);
             a->unk0 = 2;
             a->unkA = -0x500;
             a->unkC = 0x1F00;
@@ -20931,8 +20934,8 @@ void sub_08068724(struct Kirby *kirby)
             kirby->ability = KIRBY_ABILITY_NORMAL;
             if (gLocalPlayerId == kirby->base.unk56)
             {
-                sub_08035E28(0);
-                sub_08034C9C(2);
+                LoadHudAbilityIcon(0);
+                DrawHudAbilityIconRows(2);
             }
             sub_0806F260(kirby);
             kirby->base.yspeed = 0;
@@ -21049,8 +21052,8 @@ void sub_08068CA4(struct Kirby *kirby)
     kirby->ability = KIRBY_ABILITY_NORMAL;
     if (gLocalPlayerId == kirby->base.unk56)
     {
-        sub_08035E28(0);
-        sub_08034C9C(2);
+        LoadHudAbilityIcon(0);
+        DrawHudAbilityIconRows(2);
     }
     sub_0806F260(kirby);
     kirby->transitioningAbility = (Rand16() & 0x1F) | KIRBY_ABILITY_CHANGE_RANDOM;
@@ -21164,8 +21167,8 @@ void sub_080690EC(struct Kirby *kirby)
         kirby->base.unkC &= ~0x200;
         if (gLocalPlayerId == kirby->base.unk56)
         {
-            sub_08035E28(0);
-            sub_08034C9C(2);
+            LoadHudAbilityIcon(0);
+            DrawHudAbilityIconRows(2);
         }
         sub_0806F260(kirby);
         kirby->base.flags &= ~0x200;

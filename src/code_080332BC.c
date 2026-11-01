@@ -1,3 +1,6 @@
+#include "hud.h"
+#include "object_collision.h"
+#include "in_game_interlude.h"
 #include "code_080332BC.h"
 #include "code_0800ECAC.h"
 #include "demo.h"
@@ -8,9 +11,6 @@
 // In this file
 static void sub_080334E8(void);
 static void sub_08033638(void);
-extern void sub_080338B4(void);
-extern void sub_0803641C(void);
-extern void sub_080395C0(void);
 
 // TODO: Could be indicator that this belongs into kirby.c
 extern void sub_0803E050(u16);
@@ -48,7 +48,7 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     if (aiKirbyState > 199) {
         startRoomId = 0x321;
     }
-    sub_080395C0();
+    ResetInGameInterlude();
     InitLevelTasks();
 
     for (curKirbyId = 0; curKirbyId < 4; curKirbyId++) {
@@ -64,8 +64,8 @@ void sub_080332BC(u8 arg0, u8 arg1, const u16* arg2, const s32* arg3, const bool
     sub_080027A8();
     sub_08002848();
     sub_0803E050(gKirbys[gLocalPlayerId].base.roomId);
-    sub_0803641C();
-    sub_080338B4();
+    CreateObjectCollisionManager();
+    CreateGameplayHud();
 
     for (idx = 0; idx < gNumKirbys; idx++) {
         gCurLevelInfo[idx].unk1EC = 1;
@@ -84,8 +84,8 @@ void sub_08033478(void) {
     gUnk_0203AD18[0] = 0;
     gUnk_0203AD18[1] = 0;
     gUnk_0203AD38 = 0xff;
-    gUnk_02022920 = NULL;
-    CpuFill16(0, &gUnk_02022930, sizeof(gUnk_02022930));
+    gPaletteEffectsTask = NULL;
+    CpuFill16(0, &gPaletteEffectManager, sizeof(gPaletteEffectManager));
     gUnk_03002E60 = (const union Unk_03002E60*)gUnk_082D7850;
     gUnk_03000558 = 0;
     gUnk_03000554 = 0;
@@ -247,3 +247,11 @@ static void UNUSED sub_08033790(struct Kirby *arg0) {
     }
 }
 
+static void UNUSED ResetKirbyInputHistory(struct Kirby *kirby)
+{
+    DmaFill32(3, 0, kirby->unk124, 0x80);
+    kirby->unk1A0[0] = 0;
+    kirby->unk1A0[1] = 0;
+    kirby->unk1A0[2] = 0;
+    kirby->unk1A4 = 0;
+}

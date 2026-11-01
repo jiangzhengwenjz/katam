@@ -274,10 +274,10 @@ static void sub_0811CEF4(struct Object *scrollLock)
         && gKirbys[2].base.roomId == gKirbys[1].base.roomId
         && gKirbys[3].base.roomId == gKirbys[2].base.roomId)
     {
-        if (Macro_08039430_1(&gKirbys[0].base, scrollLock)
-            && Macro_08039430_1(&gKirbys[1].base, scrollLock)
-            && Macro_08039430_1(&gKirbys[2].base, scrollLock)
-            && Macro_08039430_1(&gKirbys[3].base, scrollLock))
+        if (ObjectOriginOverlapsRectAtObject(&gKirbys[0].base, scrollLock)
+            && ObjectOriginOverlapsRectAtObject(&gKirbys[1].base, scrollLock)
+            && ObjectOriginOverlapsRectAtObject(&gKirbys[2].base, scrollLock)
+            && ObjectOriginOverlapsRectAtObject(&gKirbys[3].base, scrollLock))
         {
             if (!(p->unk4 & 1))
             {
@@ -336,10 +336,10 @@ static void sub_0811D158(struct Object *scrollLock)
             && gKirbys[2].base.roomId == gKirbys[1].base.roomId
             && gKirbys[3].base.roomId == gKirbys[2].base.roomId)
         {
-            if (Macro_08039430_1(&gKirbys[0].base, scrollLock)
-                && Macro_08039430_1(&gKirbys[1].base, scrollLock)
-                && Macro_08039430_1(&gKirbys[2].base, scrollLock)
-                && Macro_08039430_1(&gKirbys[3].base, scrollLock))
+            if (ObjectOriginOverlapsRectAtObject(&gKirbys[0].base, scrollLock)
+                && ObjectOriginOverlapsRectAtObject(&gKirbys[1].base, scrollLock)
+                && ObjectOriginOverlapsRectAtObject(&gKirbys[2].base, scrollLock)
+                && ObjectOriginOverlapsRectAtObject(&gKirbys[3].base, scrollLock))
             {
                 if (!(p->unk0.unk4 & 1))
                 {
@@ -452,7 +452,7 @@ static void sub_0811D508(struct Object *scrollLock)
     {
         if (gKirbys[i].base.roomId == roomId)
         {
-            if (Macro_08039430_1(&gKirbys[i].base, scrollLock))
+            if (ObjectOriginOverlapsRectAtObject(&gKirbys[i].base, scrollLock))
             {
                 if (!(gKirbys[i].base.unkC & 0x8000))
                 {
@@ -504,7 +504,7 @@ static void sub_0811D68C(struct Object *scrollLock)
         {
             if (gKirbys[i].base.roomId == roomId)
             {
-                if (Macro_08039430_1(&gKirbys[i].base, scrollLock))
+                if (ObjectOriginOverlapsRectAtObject(&gKirbys[i].base, scrollLock))
                 {
                     if (!(gKirbys[i].base.unkC & 0x8000))
                     {

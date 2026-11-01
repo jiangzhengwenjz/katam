@@ -169,7 +169,7 @@ static void sub_080CB7E8(struct Object *mf)
             mf->base.flags |= 1;
         else
             mf->base.flags &= ~1;
-        if (Macro_08039430_2(&mf->kirby3->base, mf))
+        if (ObjectOriginOverlapsRectAtTemplate(&mf->kirby3->base, mf))
         {
             Macro_081003EC(mf, &mf->kirby3->base);
             mf->base.flags &= ~0x200;
@@ -530,7 +530,7 @@ static void sub_080CC5A4(struct Object *mf)
     }
 }
 
-bool8 sub_080CC6F0(struct Object *mf, struct Kirby *kirby)
+bool32 sub_080CC6F0(struct Object *mf, struct Kirby *kirby)
 {
     if (mf->unk83 != 2
         || kirby->base.header.kind

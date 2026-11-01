@@ -305,7 +305,7 @@ static void sub_080EDAD0(struct MegaTitan *mt)
     mt->obj.base.flags |= 4;
     if (!(mt->obj.kirby3->base.unkC & 0x8000)
         && mt->obj.base.roomId == mt->obj.kirby3->base.roomId
-        && Macro_08039430_1(&mt->obj.kirby3->base, &mt->obj))
+        && ObjectOriginOverlapsRectAtObject(&mt->obj.kirby3->base, &mt->obj))
     {
         mt->obj.unkA4 = 0x10;
         mt->obj.unkA6 = 0x10;

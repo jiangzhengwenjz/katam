@@ -133,45 +133,11 @@ void sub_08025A80(void);
 void sub_08025AD0(void);
 void sub_0802B4A8(void);
 struct Unk_0802E57C *sub_0802E57C(void);
+void sub_0802E16C(void);
 void sub_0802E6C4(struct Unk_0802E57C *);
 void sub_0802FBE0(struct Unk_0802E57C *);
 void sub_0802FBF4(struct Unk_0802E57C *);
 void sub_08033674(u8);
-struct Object5 *sub_08034E14(struct Object *);
-void sub_08034C9C(u8);
-void sub_08034FA8(struct Object5 *);
-void sub_08035E28(u8);
-void sub_08035E40(struct ObjectBase *);
-void sub_08035E9C(struct ObjectBase *);
-void sub_08035EF8(struct ObjectBase *);
-void sub_08035F50(struct ObjectBase *);
-void sub_0803620C(void);
-void sub_08036258(void);
-void sub_080362A4(void);
-void sub_08036314(struct ObjectBase *);
-void sub_08036378(void);
-u8 sub_0803925C(struct ObjectBase*, struct ObjectBase*);
-u8 sub_08039430(struct ObjectBase *, s32, s32, s16, s16, u16, u16);
-void *sub_08039490(struct ObjectBase *); // TODO: may return struct Object ** or struct ObjectBase **
-struct Object **sub_080394C8(struct ObjectBase *);
-bool32 sub_080395D4(void);
-void sub_08039600(u16);
-void sub_08039670(void);
-struct Unk_02022930_0 *sub_0803C83C(u8, u16);
-struct Unk_02022930_0 *sub_0803C8CC(u8, u16);
-struct Unk_02022930_0 *sub_0803C95C(u8);
-struct Unk_02022930_0 *sub_0803CA20(u8);
-struct Unk_02022930_0 *sub_0803CAE4(u8);
-struct Unk_02022930_0 *sub_0803CBC4(u8);
-struct Unk_02022930_0 *sub_0803CC80(u8);
-void sub_0803CD40(void);
-void sub_0803CD98(u8, u16, u8, u16, u8, u16);
-void sub_0803CFC4(u8, u16, u8, s8, s8, s8, u16); /* TODO: signed vs unsigned */
-void sub_0803D21C(const u16 *palette, u8 offset, u16 num);
-void sub_0803D250(const u16 **, const u16 **);
-void sub_0803D280(u8, u8);
-void sub_0803D2A8(u8, u8);
-struct Unk_02022930_0 *sub_0803D308(u8);
 void sub_0803E778(u8, u16, u8);
 
 void sub_080BB080(struct Object*, u8);
@@ -194,8 +160,7 @@ void sub_0815898C(void);
 void sub_081589E8(void);
 void Timer3Intr(void);
 void nullsub_2(void);
-
-bool8 sub_0803D1A4(u8);
-void sub_0803D208(u32);
+bool32 sub_080B0758(struct Object *, struct Kirby *);
+bool32 sub_080B6368(struct Object *, struct Kirby *);
 
 #endif

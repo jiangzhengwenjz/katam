@@ -1,3 +1,5 @@
+#include "in_game_interlude.h"
+#include "palette_effects.h"
 #include "data.h"
 #include "code_0814A828.h"
 #include "functions.h"
@@ -266,10 +268,10 @@ void sub_0814A828(void) {
     struct Unk_0814A828 *var;
 
     if (gUnk_0203AD10 & 0x10)
-        sub_08039670();
+        FinishInGameInterludeScreen();
     else if (gAIKirbyState < AI_KIRBY_STATE_NORMAL) {
         color = RGB_WHITE;
-        sub_0803D21C(&color, 0, 1);
+        LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
         gDispCnt = DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
         m4aSoundVSyncOn();
         for (i = 0; i < gNumHumanPlayers; ++i)
@@ -398,15 +400,15 @@ static void sub_0814ACA8(struct Unk_0814A828 *a1) {
     const struct TiledBg_082D7850 *var = gUnk_082D7850[0x306];
     const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
     u16 color = RGB_WHITE;
-    struct Unk_02022930_0 *var2;
+    struct PaletteEffect *var2;
 
-    sub_0803D21C(var->palette, 0, 0x60);
-    sub_0803D21C(bg->palette, bg->paletteOffset, bg->paletteSize);
-    var2 = sub_0803C95C(7);
+    LoadBgPaletteAndPaletteEffectSource(var->palette, 0, 0x60);
+    LoadBgPaletteAndPaletteEffectSource(bg->palette, bg->paletteOffset, bg->paletteSize);
+    var2 = CreatePaletteFadeFromWhite(7);
     var2->unk8 |= 0x180;
     var2->unk4 = 0xFFFF;
     var2->unk6 = 0xFFFF;
-    sub_0803D21C(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     a1->unkC = 0;
     a1->unk8 = sub_0814E0E8;
     a1->unk10.unk16 = 0x100;
@@ -472,7 +474,7 @@ static void sub_0814AF04(struct Unk_0814A828 *a1) {
             UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
         }
     }
-    sub_08039670();
+    FinishInGameInterludeScreen();
     for (i = 0; i < 2; ++i) {
         if (a1->unkA8[i]) {
             TaskDestroy(a1->unkA8[i]);
@@ -2322,12 +2324,12 @@ static void sub_0814E284(struct Unk_0814A828 *a1) {
 
 static void sub_0814E290(struct Unk_0814A828 *a1) {
     u16 color = RGB_WHITE;
-    struct Unk_02022930_0 *var = sub_0803CA20(7);
+    struct PaletteEffect *var = CreatePaletteFadeToWhite(7);
 
     var->unk8 |= 0x180;
     var->unk4 = 0xFFFF;
     var->unk6 = 0xFFFF;
-    sub_0803D21C(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     a1->unk4 |= 0x80000000;
     m4aMPlayFadeOut(&gMPlayInfo_0, 2);
     m4aMPlayFadeOut(&gMPlayInfo_1, 2);

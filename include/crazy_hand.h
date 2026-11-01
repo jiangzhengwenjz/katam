@@ -17,7 +17,7 @@ void *CreateCrazyHand(struct ObjectTemplate *, u8);
 void *CreateMasterHandBullet(struct ObjectTemplate *, u8);
 void sub_080DF894(struct CrazyHand *);
 void sub_080E3370(struct Object *);
-bool8 sub_080E1B8C(struct CrazyHand *, struct Kirby *);
+bool32 sub_080E1B8C(struct CrazyHand *, struct Kirby *);
 
 extern const struct AnimInfo gUnk_08356910[];
 extern const struct AnimInfo gUnk_08356974[];

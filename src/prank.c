@@ -257,7 +257,7 @@ void sub_080A170C(struct Object *prank)
     }
 }
 
-bool8 sub_080A1804(struct Object *prank, struct Kirby *kirby)
+bool32 sub_080A1804(struct Object *prank, struct Kirby *kirby)
 {
     if (prank->unk83 != 2
         || kirby->base.header.kind

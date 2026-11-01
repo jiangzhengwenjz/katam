@@ -5849,7 +5849,7 @@ sub_0802E16C: @ 0x0802E16C
 	strh r1, [r0]
 	movs r1, #0
 	movs r2, #1
-	bl sub_0803D21C
+	bl LoadBgPaletteAndPaletteEffectSource
 	ldr r1, _0802E1BC @ =gDispCnt
 	movs r0, #0xc2
 	lsls r0, r0, #5
@@ -6066,14 +6066,14 @@ _0802E352:
 	movs r2, #0x80
 	lsls r2, r2, #1
 	movs r1, #0
-	bl sub_0803D21C
+	bl LoadBgPaletteAndPaletteEffectSource
 	movs r0, #0
 	movs r1, #0xff
-	bl sub_0803D280
-	bl sub_0803D2D0
+	bl SaveObjPaletteColors
+	bl BackupPaletteEffectSourcePalettes
 	bl m4aMPlayAllStop
 	bl m4aSoundVSyncOff
-	bl sub_08039670
+	bl FinishInGameInterludeScreen
 	ldr r0, _0802E38C @ =gCurTask
 	ldr r0, [r0]
 	bl TaskDestroy
@@ -6149,9 +6149,9 @@ sub_0802E3D4: @ 0x0802E3D4
 	ldr r0, [r2, #0x10]
 	movs r1, #0
 	movs r2, #0x20
-	bl sub_0803D21C
+	bl LoadBgPaletteAndPaletteEffectSource
 	movs r0, #7
-	bl sub_0803C95C
+	bl CreatePaletteFadeFromWhite
 	ldrh r2, [r0, #8]
 	movs r3, #0xc0
 	lsls r3, r3, #1
@@ -6167,7 +6167,7 @@ sub_0802E3D4: @ 0x0802E3D4
 	mov r0, sp
 	movs r1, #0
 	movs r2, #1
-	bl sub_0803D21C
+	bl LoadBgPaletteAndPaletteEffectSource
 	adds r0, r5, #0
 	adds r0, #0x44
 	strh r4, [r0]
@@ -6296,7 +6296,7 @@ sub_0802E500: @ 0x0802E500
 	movs r0, #0
 	strh r0, [r1]
 	movs r0, #7
-	bl sub_0803CA20
+	bl CreatePaletteFadeToWhite
 	ldrh r2, [r0, #8]
 	movs r1, #0x80
 	orrs r1, r2
@@ -6309,7 +6309,7 @@ sub_0802E500: @ 0x0802E500
 	mov r0, sp
 	movs r1, #0
 	movs r2, #1
-	bl sub_0803D21C
+	bl LoadBgPaletteAndPaletteEffectSource
 	ldr r0, _0802E554 @ =gMPlayInfo_0
 	movs r1, #2
 	bl m4aMPlayFadeOut

@@ -155,7 +155,7 @@ static void sub_080E7EBC(struct Object *wiz)
     wiz->base.flags |= 4;
     if (!(wiz->kirby3->base.unkC & 0x8000)
         && wiz->base.roomId == wiz->kirby3->base.roomId
-        && Macro_08039430_1(&wiz->kirby3->base, wiz))
+        && ObjectOriginOverlapsRectAtObject(&wiz->kirby3->base, wiz))
     {
         Macro_081003EC(wiz, &wiz->kirby3->base);
         sub_080EABC0(wiz);

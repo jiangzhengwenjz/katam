@@ -13,7 +13,23 @@ gUnk_08357B3E:: @ 08357B3E
 	.incbin "baserom.gba", 0x357B3E, 0x000004E
 
 gUnk_08357B8C:: @ 08357B8C
-	.incbin "baserom.gba", 0x357B8C, 0x0000044
+	.word nullsub_127
+	.word StartWorldMapUnlockMoonlightMansion
+	.word StartWorldMapUnlockRainbowRouteEast
+	.word StartWorldMapUnlockRainbowRouteSouth
+	.word StartWorldMapUnlockCabbageCavernCenter
+	.word StartWorldMapUnlockRainbowRouteWest
+	.word StartWorldMapUnlockCarrotCastle
+	.word StartWorldMapUnlockRainbowRouteNorth
+	.word StartWorldMapUnlockMustardMountain
+	.word StartWorldMapUnlockCabbageCavernWest
+	.word StartWorldMapUnlockRadishRuins
+	.word StartWorldMapUnlockPeppermintPalaceEast
+	.word StartWorldMapUnlockPeppermintPalaceWest
+	.word StartWorldMapUnlockCabbageCavernEast
+	.word StartWorldMapUnlockOliveOcean
+	.word StartWorldMapUnlockCandyConstellation
+	.word sub_080396BC
 
 gUnk_08357BD0:: @ 08357BD0
 	.incbin "baserom.gba", 0x357BD0, 0x000000C

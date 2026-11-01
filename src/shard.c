@@ -1,3 +1,4 @@
+#include "in_game_interlude.h"
 #include "shard.h"
 #include "constants/kirby.h"
 #include "object.h"
@@ -499,9 +500,9 @@ static void sub_0801C50C(struct Shard *shard)
 
 static void sub_0801C52C(struct Shard *shard)
 {
-    if (sub_080395D4())
+    if (CanStartInGameInterlude())
     {
-        sub_08039600(shard->unkD4 + 1);
+        StartInGameInterlude(shard->unkD4 + 1);
         shard->obj.unk78 = sub_0801C558;
     }
 }

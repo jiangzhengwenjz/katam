@@ -9,11 +9,9 @@ gUnk_082EC790:: @ 082EC790
 gUnk_082EC794:: @ 082EC794
 	.incbin "baserom.gba", 0x2EC794, 0x000000C
 
+	.balign 2
 gUnk_082EC7A0:: @ 082EC7A0
-	.incbin "baserom.gba", 0x2EC7A0, 0x0000400
-
-gUnk_082ECBA0:: @ 082ECBA0
-	.incbin "baserom.gba", 0x2ECBA0, 0x0000400
+	.incbin "baserom.gba", 0x2EC7A0, 0x0000800
 
 gUnk_082ECFA0:: @ 082ECFA0
 	.incbin "baserom.gba", 0x2ECFA0, 0x0001A3E
@@ -1172,42 +1170,3 @@ gUnk_0834AF03:: @ 0834AF03
 
 gUnk_0834B320:: @ 0834B320
 	.incbin "baserom.gba", 0x34B320, 0x0000800
-
-gUnk_0834BB20:: @ 0834BB20
-	.incbin "baserom.gba", 0x34BB20, 0x0000240
-
-gUnk_0834BD60:: @ 0834BD60
-	.incbin "baserom.gba", 0x34BD60, 0x0000020
-
-gUnk_0834BD80:: @ 0834BD80
-	.incbin "baserom.gba", 0x34BD80, 0x0000004
-
-gUnk_0834BD84:: @ 0834BD84
-	.incbin "baserom.gba", 0x34BD84, 0x0000004
-
-gUnk_0834BD88:: @ 0834BD88
-	.incbin "baserom.gba", 0x34BD88, 0x000000C
-
-gUnk_0834BD94:: @ 0834BD94
-	.incbin "baserom.gba", 0x34BD94, 0x000008C
-
-gUnk_0834BE20:: @ 0834BE20
-	.incbin "baserom.gba", 0x34BE20, 0x0000080
-
-gUnk_0834BEA0:: @ 0834BEA0
-	.incbin "baserom.gba", 0x34BEA0, 0x0000080
-
-gUnk_0834BF20:: @ 0834BF20
-	.incbin "baserom.gba", 0x34BF20, 0x0000080
-
-gUnk_0834BFA0:: @ 0834BFA0
-	.incbin "baserom.gba", 0x34BFA0, 0x0000080
-
-gUnk_0834C020:: @ 0834C020
-	.incbin "baserom.gba", 0x34C020, 0x0000080
-
-gUnk_0834C0A0:: @ 0834C0A0
-	.incbin "baserom.gba", 0x34C0A0, 0x0000080
-
-gUnk_0834C120:: @ 0834C120
-	.incbin "baserom.gba", 0x34C120, 0x0000014

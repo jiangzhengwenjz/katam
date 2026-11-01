@@ -279,7 +279,7 @@ _08121C12:
 	bne _08121C58
 	adds r0, r6, #0
 	adds r1, r5, #0
-	bl sub_0803925C
+	bl ObjectHitboxesOverlap
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _08121C58
@@ -319,7 +319,7 @@ _08121C58:
 	adds r7, r4, r0
 	adds r0, r6, #0
 	adds r1, r7, #0
-	bl sub_0803925C
+	bl ObjectHitboxesOverlap
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _08121CB0
@@ -362,7 +362,7 @@ _08121CB0:
 	adds r7, r4, r0
 	adds r0, r6, #0
 	adds r1, r7, #0
-	bl sub_0803925C
+	bl ObjectHitboxesOverlap
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _08121D08
@@ -411,7 +411,7 @@ _08121D32:
 	adds r7, r5, r0
 	adds r0, r6, #0
 	adds r1, r7, #0
-	bl sub_0803925C
+	bl ObjectHitboxesOverlap
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	bne _08121D48

@@ -1,3 +1,6 @@
+#include "hud.h"
+#include "in_game_interlude.h"
+#include "palette_effects.h"
 #include "pause_help.h"
 #include "constants/languages.h"
 #include "constants/songs.h"
@@ -11,8 +14,6 @@
 #include "sprite.h"
 #include "subgames.h"
 #include "treasures.h"
-
-extern void sub_080356AC(u32, u8, u8);
 
 enum HelpMenuButtonTile {
     HELPMENU_BUTTON_B,
@@ -257,7 +258,7 @@ static inline u32 GetPlayerRoomFlags(void) {
 }
 
 // Selects which menu to show when pressing START
-// Called in sub_08039ED4 with function table gUnk_0834BD94
+// Called in OpenInGameInterludeScreen with function table sInGameInterludeScreens
 void CreatePauseMenu(void) {
     struct Task* task = CreatePauseMenuTask();
     u32 playerRoomFlags;
@@ -313,7 +314,7 @@ void CreateHelpMenu(void) {
     u16 language = gLanguage;
     u16 color = RGB_WHITE;
 
-    sub_0803D21C(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     CpuFill32(0, (u32*)BG_VRAM, BG_VRAM_SIZE);
     DmaFill32(3, 0, (u32*)(BG_VRAM + (gBgCntRegs[0] & 0xc) * 0x1000), 0x40);
 
@@ -358,8 +359,8 @@ void CreateHelpMenu(void) {
         SpriteInit(&unkSprite, (u32)OBJ_VRAM0, 0x480, sHelpMenuButtonAnimInfos[language][1].animId, sHelpMenuButtonAnimInfos[language][1].variant, 0,
                    0xff, 0x10, 8, 0, 0, 0x80000);
     }
-    sub_0803D280(0x80, 0x7f);
-    sub_0803D2A8(0x00, 0xff);
+    SaveObjPaletteColors(0x80, 0x7f);
+    SaveBgPaletteColors(0x00, 0xff);
 
     CpuFill32(0, &helpmenu->frame, sizeof(helpmenu->frame));
     CpuFill32(0, &helpmenu->abilityText, sizeof(helpmenu->abilityText));
@@ -375,7 +376,7 @@ void CreateHelpMenu(void) {
         HelpMenuBGInit(&helpmenu->frame, sHelpMenuUnkTiledBGsIndices[language][0], 0, 7);
     }
     HelpMenuBGInit(&helpmenu->abilityText, sHelpMenuUnkTiledBGsIndices[language][2 + gKirbys[gLocalPlayerId].ability], 1, 15);
-    sub_080356AC((u32)BG_CHAR_ADDR(2), 1, helpmenu->abilityText.unk1C - sHelpMenuUnkTiledBGsIndices[language][2]);
+    LoadAbilityIconGraphicsAndPalette(BG_CHAR_ADDR(2), 1, helpmenu->abilityText.unk1C - sHelpMenuUnkTiledBGsIndices[language][2]);
     HelpMenuAbilityImageInit();
 
     SpriteInitNoFunc(&helpmenu->buttonB, (u32)OBJ_VRAM0 + 0x2000, 0x480, sHelpMenuButtonAnimInfos[language][1].animId,
@@ -494,7 +495,7 @@ static void HelpMenuToGame(void) {
 
     if (helpmenu->toGameCounter++ > 18) {
         TaskDestroy(gPauseMenus[gLocalPlayerId].mainTask);
-        sub_08039670();
+        FinishInGameInterludeScreen();
         TaskDestroy(gCurTask);
     }
     else if (!(gUnk_0203AD10 & 4)) {
@@ -623,19 +624,19 @@ void PauseMenuInitRetained(void) {
 
 // Influences fading
 void sub_08124EA0(void) {
-    struct Unk_02022930_0* unk_0803C95C = sub_0803C95C(7);
-    unk_0803C95C->unk8 |= 0x0180;
-    unk_0803C95C->unk4 = ~0;
-    unk_0803C95C->unk6 = ~0;
+    struct PaletteEffect* effect = CreatePaletteFadeFromWhite(7);
+    effect->unk8 |= 0x0180;
+    effect->unk4 = ~0;
+    effect->unk6 = ~0;
 }
 
 // Runs once immediately when pause menu (or BigSwitch activation) should be closed
 void sub_08124EC8(void) {
     u16 white;
-    struct Unk_02022930_0* unk_0803C95C = sub_0803CA20(7);
-    unk_0803C95C->unk8 |= 0x0180;
-    unk_0803C95C->unk4 = ~0;
-    unk_0803C95C->unk6 = ~0;
+    struct PaletteEffect* effect = CreatePaletteFadeToWhite(7);
+    effect->unk8 |= 0x0180;
+    effect->unk4 = ~0;
+    effect->unk6 = ~0;
 
     white = RGB_WHITE;
     if (gMainFlags & MAIN_FLAG_BG_PALETTE_TRANSFORMATION_ENABLE) {
@@ -645,5 +646,5 @@ void sub_08124EC8(void) {
         DmaCopy16(3, &white, gBgPalette, sizeof(white));
         gMainFlags |= MAIN_FLAG_BG_PALETTE_SYNC_ENABLE;
     }
-    sub_0803D2A8(0, 0xff);
+    SaveBgPaletteColors(0, 0xff);
 }

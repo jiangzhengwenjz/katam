@@ -1,3 +1,4 @@
+#include "palette_effects.h"
 #include "dark_meta_knight.h"
 #include "object.h"
 #include "functions.h"
@@ -209,7 +210,7 @@ static void sub_080F5974(struct DarkMetaKnight *dmk)
     dmk->obj.base.flags |= 4;
     if (!(dmk->obj.kirby3->base.unkC & 0x8000)
         && dmk->obj.base.roomId == dmk->obj.kirby3->base.roomId
-        && Macro_08039430_1(&dmk->obj.kirby3->base, &dmk->obj))
+        && ObjectOriginOverlapsRectAtObject(&dmk->obj.kirby3->base, &dmk->obj))
     {
         Macro_081003EC(&dmk->obj, &dmk->obj.kirby3->base);
         if (dmk->obj.objTemplate->subtype1)
@@ -285,7 +286,7 @@ static void sub_080F5CD0(struct DarkMetaKnight *dmk)
         {
             u8 i;
             struct Kirby *kirby;
-            struct Unk_02022930_0 *pointer;
+            struct PaletteEffect *pointer;
 
             for (i = 0; i < gNumKirbys; ++i)
             {
@@ -294,7 +295,7 @@ static void sub_080F5CD0(struct DarkMetaKnight *dmk)
                     && kirby->base.roomId == dmk->obj.base.roomId
                     && kirby->unk11A & 8)
                 {
-                    pointer = sub_0803C83C(5, dmk->obj.base.roomId);
+                    pointer = CreateRoomPaletteEffect(5, dmk->obj.base.roomId);
                     pointer->unk0 = 1;
                     pointer->unkA = 0x800;
                     pointer->unk2 = 0x20;
@@ -404,8 +405,8 @@ static void sub_080F5DA0(struct DarkMetaKnight *dmk)
     {
         if (gKirbys[gLocalPlayerId].base.roomId == dmk->obj.base.roomId)
         {
-            sub_0803CD98(dmk->obj.base.sprite.palId, 0x394, 1, 0x390, 0, dmk->obj.base.counter);
-            sub_0803CD98(dmk2->unkB4->sprite.palId, 0x394, 3, 0x391, 0, dmk->obj.base.counter);
+            BlendSpriteAnimationPalettes(dmk->obj.base.sprite.palId, 0x394, 1, 0x390, 0, dmk->obj.base.counter);
+            BlendSpriteAnimationPalettes(dmk2->unkB4->sprite.palId, 0x394, 3, 0x391, 0, dmk->obj.base.counter);
         }
         dmk->obj.base.counter += 2;
         if (dmk->obj.base.counter > 0x100)
@@ -580,8 +581,8 @@ static void sub_080F6544(struct DarkMetaKnight *dmk)
             dmk->obj.base.xspeed = 0;
             if (gKirbys[gLocalPlayerId].base.roomId == dmk->obj.base.roomId)
             {
-                sub_0803CD98(dmk->obj.base.sprite.palId, 0x390, 0, 0x394, 0, dmk->obj.base.counter);
-                sub_0803CD98(dmk2->unkB4->sprite.palId, 0x391, 0, 0x394, 2, dmk->obj.base.counter);
+                BlendSpriteAnimationPalettes(dmk->obj.base.sprite.palId, 0x390, 0, 0x394, 0, dmk->obj.base.counter);
+                BlendSpriteAnimationPalettes(dmk2->unkB4->sprite.palId, 0x391, 0, 0x394, 2, dmk->obj.base.counter);
             }
             dmk->obj.base.counter += 2;
             if (dmk->obj.base.counter > 0x100)
@@ -673,13 +674,13 @@ static void sub_080F6824(struct DarkMetaKnight *dmk)
                 dmk->obj.base.yspeed = -0x900;
             if (dmk->obj.base.unk62 & 4)
             {
-                struct Unk_02022930_0 *pointer;
+                struct PaletteEffect *pointer;
 
                 dmk->obj.base.counter = 8;
                 dmk->obj.unk83 = 0x12;
                 CreateEffectObject(&dmk->obj.base, 0, 0x2AD, 2);
                 RequestScreenShake(1, &dmk->obj.base);
-                pointer = sub_0803C83C(5, dmk->obj.base.roomId);
+                pointer = CreateRoomPaletteEffect(5, dmk->obj.base.roomId);
                 pointer->unk0 = 1;
                 pointer->unkA = 0x800;
                 pointer->unk2 = 0x20;
@@ -721,7 +722,7 @@ static void sub_080F6AEC(struct DarkMetaKnight *dmk, u8 a2)
     Macro_08100F18(&dmk->obj);
     if (!a2)
     {
-        struct Unk_02022930_0 *pointer = sub_0803C83C(5, dmk->obj.base.roomId);
+        struct PaletteEffect *pointer = CreateRoomPaletteEffect(5, dmk->obj.base.roomId);
 
         pointer->unk0 = 1;
         pointer->unkA = 0xF800;
@@ -852,8 +853,8 @@ static void sub_080F714C(struct DarkMetaKnight *dmk)
     {
         if (gKirbys[gLocalPlayerId].base.roomId == dmk->obj.base.roomId)
         {
-            sub_0803CD98(dmk->obj.base.sprite.palId, 0x394, 1, 0x390, 0, dmk->obj.base.counter);
-            sub_0803CD98(dmk2->unkB4->sprite.palId, 0x394, 3, 0x391, 0, dmk->obj.base.counter);
+            BlendSpriteAnimationPalettes(dmk->obj.base.sprite.palId, 0x394, 1, 0x390, 0, dmk->obj.base.counter);
+            BlendSpriteAnimationPalettes(dmk2->unkB4->sprite.palId, 0x394, 3, 0x391, 0, dmk->obj.base.counter);
         }
         dmk->obj.base.counter += 2;
         if (dmk->obj.base.counter > 0x100)
@@ -2620,8 +2621,8 @@ static void sub_080FB700(struct DarkMetaKnight *dmk)
         {
             if (gKirbys[gLocalPlayerId].base.roomId == dmk->obj.base.roomId)
             {
-                sub_0803CD98(dmk->obj.base.sprite.palId, 0x390, 0, 0x394, 0, dmk->obj.base.counter);
-                sub_0803CD98(dmk2->unkB4->sprite.palId, 0x391, 0, 0x394, 2, dmk->obj.base.counter);
+                BlendSpriteAnimationPalettes(dmk->obj.base.sprite.palId, 0x390, 0, 0x394, 0, dmk->obj.base.counter);
+                BlendSpriteAnimationPalettes(dmk2->unkB4->sprite.palId, 0x391, 0, 0x394, 2, dmk->obj.base.counter);
             }
             dmk->obj.base.counter += 4;
             if (dmk->obj.base.counter > 0x100)

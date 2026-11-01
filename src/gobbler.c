@@ -214,7 +214,7 @@ static void sub_080E3FFC(struct Gobbler *gobbler)
     gobbler->obj.kirby3 = FindTargetKirby(&gobbler->obj.base);
     if (!(gobbler->obj.kirby3->base.unkC & 0x8000)
         && gobbler->obj.base.roomId == gobbler->obj.kirby3->base.roomId
-        && Macro_08039430_1(&gobbler->obj.kirby3->base, &gobbler->obj))
+        && ObjectOriginOverlapsRectAtObject(&gobbler->obj.kirby3->base, &gobbler->obj))
     {
         Macro_081003EC(&gobbler->obj, &gobbler->obj.kirby3->base);
         sub_080E43B4(gobbler);
@@ -1203,7 +1203,7 @@ static void sub_080E5760(struct Gobbler *gobbler)
     }
 }
 
-bool8 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
+bool32 sub_080E588C(struct Gobbler *gobbler, struct Kirby *kirby)
 {
     if (gobbler->obj.unk83 != 3
         || kirby->base.header.kind
@@ -2280,7 +2280,7 @@ static void sub_080E72C0(struct Object *baby)
     }
 }
 
-bool8 sub_080E74E4(struct Object *baby, struct Kirby *kirby)
+bool32 sub_080E74E4(struct Object *baby, struct Kirby *kirby)
 {
     if (baby->unk83 != 3
         || kirby->base.header.kind

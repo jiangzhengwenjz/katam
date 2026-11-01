@@ -1,3 +1,5 @@
+#include "in_game_interlude.h"
+#include "palette_effects.h"
 #include "code_0801C6F8.h"
 #include "task.h"
 #include "functions.h"
@@ -90,7 +92,7 @@ static void sub_0801C6F8(u16 a1)
     struct Unk_0801C6F8 *var;
     u16 color = RGB_WHITE;
 
-    sub_0803D21C(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     var = TaskGetStructPtr(t);
     var->unk208 = sub_0801D530;
     var->unk20C = 0x20000000;
@@ -278,11 +280,11 @@ static void sub_0801CC30(struct Unk_0801C6F8 *var)
     struct Sprite sprite;
     const struct TiledBg_082D7850 *r2 = gUnk_082D7850[0x306];
     const struct RoomTiledBG *bg = gRoomTiledBGs[gRoomProps[0x321].backgroundIdx];
-    struct Unk_02022930_0 *unkStruct;
+    struct PaletteEffect *unkStruct;
 
-    sub_0803D21C(r2->palette, 0, 0x60);
-    sub_0803D21C(bg->palette, bg->paletteOffset, bg->paletteSize);
-    unkStruct = sub_0803C95C(7);
+    LoadBgPaletteAndPaletteEffectSource(r2->palette, 0, 0x60);
+    LoadBgPaletteAndPaletteEffectSource(bg->palette, bg->paletteOffset, bg->paletteSize);
+    unkStruct = CreatePaletteFadeFromWhite(7);
     unkStruct->unk8 |= 0x180;
     unkStruct->unk4 = 0xFFFF;
     unkStruct->unk6 = 0xFFFF;
@@ -321,13 +323,13 @@ static void sub_0801CDE8(struct Unk_0801C6F8 *var)
 
 static void sub_0801CE74(struct Unk_0801C6F8 *var)
 {
-    struct Unk_02022930_0 *unkStruct;
+    struct PaletteEffect *unkStruct;
 
     if (NumShardsCollected() > 6)
         m4aSongNumStart(SE_MIRROR_COMPLETE);
     else
         m4aSongNumStart(SE_SHARD_OBTAINED);
-    unkStruct = sub_0803CA20(7);
+    unkStruct = CreatePaletteFadeToWhite(7);
     unkStruct->unk8 |= 0x180;
     unkStruct->unk6 = 0;
     unkStruct->unk4 = 6;
@@ -359,7 +361,7 @@ static void sub_0801CF00(struct Unk_0801C6F8 *var)
 static void sub_0801CF78(struct Unk_0801C6F8 *var)
 {
     struct Sprite sprite;
-    struct Unk_02022930_0 *unkStruct = sub_0803C95C(7);
+    struct PaletteEffect *unkStruct = CreatePaletteFadeFromWhite(7);
 
     unkStruct->unk8 |= 0x180;
     unkStruct->unkA = unkStruct->unkA >> 2;
@@ -533,12 +535,12 @@ static void sub_0801D568(struct Unk_0801C6F8 *var)
 static void sub_0801D584(struct Unk_0801C6F8 *var)
 {
     u16 color = RGB_WHITE;
-    struct Unk_02022930_0 *unkStruct = sub_0803CA20(7);
+    struct PaletteEffect *unkStruct = CreatePaletteFadeToWhite(7);
 
     unkStruct->unk8 |= 0x180;
     unkStruct->unk4 = 0xFFFF;
     unkStruct->unk6 = 0xFFFF;
-    sub_0803D21C(&color, 0, 1);
+    LoadBgPaletteAndPaletteEffectSource(&color, 0, 1);
     var->unk20C |= 0x20000000;
     var->unk21C = 0;
     var->unk208 = sub_0801D8C8;
@@ -716,7 +718,7 @@ static void sub_0801D948(struct Unk_0801C6F8 *var)
             UpdateSaveBufferByOffset(SAVE_BUFFER_TYPE_WORLD_PROPS, gSaveID > 2 ? 0 : gSaveID);
     }
     sub_080027A8();
-    sub_08039670();
+    FinishInGameInterludeScreen();
     TaskDestroy(gCurTask);
 }
 

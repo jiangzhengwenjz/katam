@@ -414,7 +414,7 @@ sub_081194DC: @ 0x081194DC
 	b _081197C0
 _081194F4:
 	mov r0, r8
-	bl sub_08039490
+	bl GetRoomObjectCollisionList
 	adds r4, r0, #0
 	mov r1, sp
 	mov r0, r8
@@ -1282,7 +1282,7 @@ _08119B74:
 	ands r0, r1
 	cmp r0, #0
 	beq _08119BA4
-	bl sub_080395D4
+	bl CanStartInGameInterlude
 	cmp r0, #0
 	beq _08119BA4
 	ldr r1, _08119BAC @ =gUnk_08357B8C

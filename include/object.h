@@ -1,6 +1,9 @@
 #ifndef GUARD_OBJECT_H
 #define GUARD_OBJECT_H
 
+#include "hud.h"
+#include "object_collision.h"
+
 #include "data.h"
 #include "task.h"
 #include "malloc_vram.h"
@@ -171,7 +174,7 @@
 #define Macro_08100F18(obj) ({ \
     s16 _r3; \
     u8 _r6; \
-    struct Object5 *_r1 = sub_08034E14(obj); \
+    struct GameplayHud *_r1 = TryTrackHudEnemy(obj); \
  \
     if (_r1) _r1->unk9 = 0; \
     _r3 = ObjTypeAltIdx(obj); \
@@ -365,12 +368,12 @@
         (obj)->unk9F = 0xFF; \
 })
 
-#define Macro_08039430_1(objBase, obj) sub_08039430(objBase, \
+#define ObjectOriginOverlapsRectAtObject(objBase, obj) ObjectOriginOverlapsRect(objBase, \
     (obj)->base.x, (obj)->base.y, \
     (obj)->objTemplate->unk1A, (obj)->objTemplate->unk1C, \
     (obj)->objTemplate->unk1E, (obj)->objTemplate->unk20)
 
-#define Macro_08039430_2(objBase, obj) sub_08039430(objBase, \
+#define ObjectOriginOverlapsRectAtTemplate(objBase, obj) ObjectOriginOverlapsRect(objBase, \
     (obj)->objTemplate->x * 0x100, (obj)->objTemplate->y * 0x100, \
     (obj)->objTemplate->unk1A, (obj)->objTemplate->unk1C, \
     (obj)->objTemplate->unk1E, (obj)->objTemplate->unk20)

@@ -1093,7 +1093,7 @@ _0800F85C:
 	strb r0, [r5, #0x10]
 _0800F85E:
 	mov r0, r8
-	bl sub_080394C8
+	bl GetRoomSolidCollisionList
 	adds r7, r0, #0
 	mov r3, r8
 	ldr r0, [r3, #0x40]

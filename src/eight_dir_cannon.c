@@ -1,3 +1,4 @@
+#include "object_collision.h"
 #include "eight_dir_cannon.h"
 #include "functions.h"
 #include "task.h"
@@ -58,7 +59,7 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
         rect[3] = cannon->obj.base.unk3B * 0x100;
         if (gKirbys[0].base.roomId == roomId && gNumHumanPlayers > 0
             && !(cannon->unkBA & 1)
-            && sub_0803925C(&cannon->obj.base, &gKirbys[0].base)
+            && ObjectHitboxesOverlap(&cannon->obj.base, &gKirbys[0].base)
             && gKirbys[0].base.unk6C == cannon
             && sub_08051C40(&gKirbys[0])) {
             CreateEffectObject(&cannon->obj.base, 0, 0x2A8, 7);
@@ -70,7 +71,7 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
         }
         if (gKirbys[1].base.roomId == roomId && gNumHumanPlayers > 1
             && !(cannon2->unkBA & 2)
-            && sub_0803925C(&cannon2->obj.base, &gKirbys[1].base)
+            && ObjectHitboxesOverlap(&cannon2->obj.base, &gKirbys[1].base)
             && gKirbys[1].base.unk6C == cannon2
             && sub_08051C40(&gKirbys[1])) {
             CreateEffectObject(&cannon2->obj.base, 0, 0x2A8, 7);
@@ -82,7 +83,7 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
         }
         if (gKirbys[2].base.roomId == roomId && gNumHumanPlayers > 2
             && !(cannon2->unkBA & 4)
-            && sub_0803925C(&cannon2->obj.base, &gKirbys[2].base)
+            && ObjectHitboxesOverlap(&cannon2->obj.base, &gKirbys[2].base)
             && gKirbys[2].base.unk6C == cannon2
             && sub_08051C40(&gKirbys[2])) {
             CreateEffectObject(&cannon2->obj.base, 0, 0x2A8, 7);
@@ -94,7 +95,7 @@ static void EightDirCannonIdle(struct EightDirCannon *cannon) {
         }
         if (gKirbys[3].base.roomId == roomId && gNumHumanPlayers > 3
             && !(cannon2->unkBA & 8)
-            && sub_0803925C(&cannon2->obj.base, &gKirbys[3].base)
+            && ObjectHitboxesOverlap(&cannon2->obj.base, &gKirbys[3].base)
             && gKirbys[3].base.unk6C == cannon2
             && sub_08051C40(&gKirbys[3])) {
             CreateEffectObject(&cannon2->obj.base, 0, 0x2A8, 7);
