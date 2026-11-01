@@ -8,6 +8,7 @@
 #include "task.h"
 #include "code_0806F780.h"
 #include "box_boxer.h"
+#include "cookin.h"
 #include "crazy_hand.h"
 #include "droppy.h"
 #include "gobbler.h"
