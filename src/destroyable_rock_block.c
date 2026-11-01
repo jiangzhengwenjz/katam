@@ -49,7 +49,7 @@ void sub_0811BF24(struct Object *obj) {
 static void sub_0811C07C(struct RockBlock *block)
 {
     u8 unk56 = block->base.base.unk56;
-    u32 tileX = (0x10u * block->base.base.x) >> 0x10;
+    s32 tileX = (0x10u * block->base.base.x) >> 0x10;
     u32 tileY = (0x10u * block->base.base.y) >> 0x10;
     u16 unused[4];
 
