@@ -350,7 +350,12 @@ SECTIONS {
         src/star_platform.o(.text);
         src/flame_column.o(.text);
         src/large_stone_block_7D.o(.text);
-        asm/large_star_stone_block.o(.text);
+        src/large_star_stone_block.o(.text);
+        src/cpu_kirby_trigger.o(.text);
+        src/unknown_82.o(.text);
+        src/unknown_87.o(.text);
+        src/large_star_stone_block_88.o(.text);
+        src/large_star_stone_block_89.o(.text);
         asm/kirby_cannon.o(.text);
         src/eight_dir_cannon.o(.text);
         src/bonus.o(.text);
@@ -528,6 +533,13 @@ SECTIONS {
         data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
+        src/large_star_stone_block.o(.rodata);
+        src/cpu_kirby_trigger.o(.rodata);
+        src/unknown_82.o(.rodata);
+        src/unknown_87.o(.rodata);
+        src/large_star_stone_block_88.o(.rodata);
+        src/large_star_stone_block_89.o(.rodata);
+        data/data_25.o(.rodata);
         src/code_08123950.o(.rodata);
         src/pause_help.o(.rodata);
         src/pause_world_map.o(.rodata);
