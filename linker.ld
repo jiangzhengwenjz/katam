@@ -297,7 +297,6 @@ SECTIONS {
         src/cookin.o(.text);
         src/waddle_doo.o(.text);
         src/flamer.o(.text);
-        asm/flamer.o(.text);
         src/pengy.o(.text);
         src/twister.o(.text);
         src/wheelie.o(.text);
