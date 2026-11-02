@@ -1,4 +1,5 @@
 #include "in_game_interlude.h"
+#include "code_0802E16C.h"
 #include "hud.h"
 #include "palette_effects.h"
 #include "global.h"
