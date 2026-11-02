@@ -345,7 +345,8 @@ SECTIONS {
         src/lava_wall.o(.text);
         src/scroll_lock.o(.text);
         src/cannon_fuse.o(.text);
-        asm/star_stone_block.o(.text);
+        src/star_stone_block.o(.text);
+        src/unknown_7A.o(.text);
         src/star_platform.o(.text);
         src/flame_column.o(.text);
         src/large_stone_block_7D.o(.text);
@@ -522,6 +523,8 @@ SECTIONS {
         src/lava_wall.o(.rodata);
         src/scroll_lock.o(.rodata);
         src/cannon_fuse.o(.rodata);
+        src/star_stone_block.o(.rodata);
+        src/unknown_7A.o(.rodata);
         data/data_19.o(.rodata);
         src/flame_column.o(.rodata);
         data/data_22.o(.rodata);
