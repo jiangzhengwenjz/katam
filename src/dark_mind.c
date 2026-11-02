@@ -1,6 +1,7 @@
 #include "hud.h"
 #include "object_collision.h"
 #include "palette_effects.h"
+#include "code_0802B4A8.h"
 #include "code_080332BC.h"
 #include "global.h"
 #include "data.h"
