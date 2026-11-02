@@ -24,8 +24,16 @@ struct Unk_0802E57C_C {
     /* 0x44 */ u16 unk44;
     /* 0x46 */ u16 unk46;
     /* 0x48 */ u16 unk48;
-    /* 0x4A */ u8 filler4A[6];
+    /* 0x4A */ u16 unk4A;
+    /* 0x4C */ u8 filler4C[4];
 }; /* size = 0x50 */
+
+struct Unk_0802E57C_174 {
+    /* 0x0 */ s16 unk0;
+    /* 0x2 */ s16 unk2;
+    /* 0x4 */ u16 unk4;
+    /* 0x6 */ u16 unk6;
+}; /* size = 0x8 */
 
 struct Unk_0802E57C {
     /* 0x000 */ struct Task *unk0;
@@ -33,30 +41,21 @@ struct Unk_0802E57C {
     /* 0x008 */ u32 unk8; // vram
     /* 0x00C */ struct Unk_0802E57C_C unkC[4];
     /* 0x14C */ struct Sprite unk14C;
-    /* 0x174 */ u8 filler174[4];
+    /* 0x174 */ const struct Unk_0802E57C_174 *unk174;
     /* 0x178 */ s32 unk178;
     /* 0x17C */ s32 unk17C;
     /* 0x180 */ s16 unk180;
     /* 0x182 */ s16 unk182;
-    /* 0x184 */ u32 filler184;
+    /* 0x184 */ u16 unk184;
+    /* 0x186 */ u16 unk186;
     /* 0x188 */ u32 unk188;
     /* 0x18C */ u32 unk18C;
     /* 0x190 */ u16 unk190;
 }; /* size = 0x194 */
 
-void sub_0802E97C(struct Unk_0802E57C *);
-void sub_0802ECBC(struct Unk_0802E57C *);
-void sub_0802EF90(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F088(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F1C4(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F2D0(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F40C(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F4BC(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F51C(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F5B8(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F638(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F6A0(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F714(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
-void sub_0802F77C(struct Unk_0802E57C *, struct Unk_0802E57C_C *);
+struct Unk_0802E57C *sub_0802E57C(void);
+void sub_0802E6C4(struct Unk_0802E57C *);
+void sub_0802FBE0(struct Unk_0802E57C *);
+void sub_0802FBF4(struct Unk_0802E57C *);
 
 #endif
