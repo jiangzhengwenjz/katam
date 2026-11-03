@@ -35,7 +35,7 @@ static void (*const gUnk_08357B8C[])(void) = {
     [WORLDMAP_CABBAGE_CAVERN_EAST] = StartWorldMapUnlockCabbageCavernEast,
     [WORLDMAP_OLIVE_OCEAN] = StartWorldMapUnlockOliveOcean,
     [WORLDMAP_CANDY_CONSTELLATION] = StartWorldMapUnlockCandyConstellation,
-    [NUM_WORLDMAP_DOORS] = sub_080396BC,
+    sub_080396BC,
 };
 
 const struct AnimInfo gUnk_08357BD0[] = {
