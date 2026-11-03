@@ -1,0 +1,342 @@
+#include "big_small_switch.h"
+#include "bonus.h"
+#include "functions.h"
+#include "in_game_interlude.h"
+#include "kirby.h"
+#include "object.h"
+#include "object_collision.h"
+#include "task.h"
+#include "constants/object_types.h"
+#include "constants/songs.h"
+
+struct SwitchSlot {
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 unk1;
+    /* 0x02 */ u8 unk2;
+    /* 0x03 */ u8 unk3;
+}; /* size = 0x4 */
+
+static void sub_08119980(struct Switch *);
+static void sub_08119A20(struct Switch *);
+static void sub_08119AA8(struct Switch *);
+static void sub_08119B3C(struct Switch *);
+static void nullsub_127(void);
+static void sub_08119BB8(struct Switch *);
+static void sub_08119C0C(struct Switch *);
+
+static void (*const gUnk_08357B8C[])(void) = {
+    nullsub_127,
+    StartWorldMapUnlockMoonlightMansion,
+    StartWorldMapUnlockRainbowRouteEast,
+    StartWorldMapUnlockRainbowRouteSouth,
+    StartWorldMapUnlockCabbageCavernCenter,
+    StartWorldMapUnlockRainbowRouteWest,
+    StartWorldMapUnlockCarrotCastle,
+    StartWorldMapUnlockRainbowRouteNorth,
+    StartWorldMapUnlockMustardMountain,
+    StartWorldMapUnlockCabbageCavernWest,
+    StartWorldMapUnlockRadishRuins,
+    StartWorldMapUnlockPeppermintPalaceEast,
+    StartWorldMapUnlockPeppermintPalaceWest,
+    StartWorldMapUnlockCabbageCavernEast,
+    StartWorldMapUnlockOliveOcean,
+    StartWorldMapUnlockCandyConstellation,
+    sub_080396BC,
+};
+
+const struct AnimInfo gUnk_08357BD0[] = {
+    { 0x304, 0, 0 },
+    { 0x304, 1, 0 },
+    { 0x304, 2, 0 },
+};
+
+const struct AnimInfo gUnk_08357BDC[] = {
+    { 0x2E0, 0, 0 },
+    { 0x2E0, 1, 0 },
+    { 0x2E0, 1, 0 },
+};
+
+void *CreateSmallSwitch(struct ObjectTemplate *template, u8 arg1)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Switch), 0x1001, TASK_USE_IWRAM, ObjectDestroy);
+    struct Switch *sw = TaskGetStructPtr(t);
+
+    InitObject(&sw->obj, template, arg1);
+    sw->obj.base.flags |= 0x2608000;
+    sw->obj.base.unk68 &= ~7;
+    sw->obj.base.unk5C |= 0x308020;
+    sw->obj.base.unkC |= 1;
+    sw->unkB8 = FALSE;
+    sub_0803E2B0(&sw->obj.base, -7, -10, 7, -2);
+    ObjectSetBounds(&sw->obj.base, -7, -10, 7, -2);
+    sw->obj.base.unk4C = sw->obj.base.y = ((sw->obj.base.y + sw->obj.base.unk3F * 0x100 + 0xFFF) & ~0xFFF) - sw->obj.base.unk3F * 0x100 - 1;
+    ObjectInitSprite(&sw->obj);
+    gUnk_08351648[sw->obj.type].unk10(&sw->obj);
+    return sw;
+}
+
+void *CreateBigSwitch(struct ObjectTemplate *template, u8 arg1)
+{
+    struct Task *t = TaskCreate(ObjectMain, sizeof(struct Switch), 0x1000, TASK_USE_IWRAM, ObjectDestroy);
+    struct Switch *sw = TaskGetStructPtr(t);
+
+    InitObject(&sw->obj, template, arg1);
+    sw->obj.base.flags |= 0x2308000;
+    sw->obj.base.unk68 &= ~7;
+    sw->obj.base.unk5C |= ~0x87;
+    sw->unkB8 = TRUE;
+    sub_0803E2B0(&sw->obj.base, -14, -24, 14, 0);
+    ObjectSetBounds(&sw->obj.base, -14, -24, 14, 0);
+    ObjectInitSprite(&sw->obj);
+    gUnk_08351648[sw->obj.type].unk10(&sw->obj);
+    return sw;
+}
+
+void sub_0811938C(struct Switch *arg0)
+{
+    struct Switch *sw = arg0;
+
+    ObjectSetFunc(arg0, 0, sub_08119980);
+    if (arg0->unkB8 && *GetStateSlot(STATE_SLOT_WORLD, arg0->obj.objTemplate->unk4, gCurLevelInfo[arg0->obj.base.unk56].unk65E)) {
+        arg0->obj.unk78 = sub_08119C0C;
+        arg0->obj.base.flags |= 0xF40;
+    } else {
+        sw->unkB4 = 0;
+        sw->unkB6 = 0;
+        if (arg0->obj.objTemplate->unk18)
+            sw->unkB6 |= 0x400;
+        else if (arg0->obj.objTemplate->unk22 & 4)
+            sw->unkB6 |= 0x400;
+    }
+}
+
+static bool32 sub_0811942C(struct Switch *sw)
+{
+    if ((sw->obj.base.y >> 8) >= gCurLevelInfo[sw->obj.base.unk56].roomHeight - 20) {
+        sw->obj.base.flags |= 0x40;
+        if (sw->obj.base.xspeed < 0) {
+            sw->obj.base.xspeed += 0x200;
+            if (sw->obj.base.xspeed > 0)
+                sw->obj.base.xspeed = 0;
+        } else {
+            sw->obj.base.xspeed -= 0x200;
+            if (sw->obj.base.xspeed < 0)
+                sw->obj.base.xspeed = 0;
+        }
+        if (sw->obj.base.yspeed < 0) {
+            sw->obj.base.yspeed += 0x200;
+            if (sw->obj.base.yspeed > 0)
+                sw->obj.base.yspeed = 0;
+        } else {
+            sw->obj.base.yspeed -= 0x200;
+            if (sw->obj.base.yspeed < 0)
+                sw->obj.base.yspeed = 0;
+        }
+    }
+    if (sw->obj.base.flags & 0x40)
+        return FALSE;
+    return TRUE;
+}
+
+static bool32 sub_081194DC(struct Switch *sw)
+{
+    struct ObjectBase **list;
+    s16 rect[4], other[4];
+    u8 i;
+
+    if (!sub_0811942C(sw))
+        return FALSE;
+    list = GetRoomObjectCollisionList(&sw->obj.base);
+    rect[0] = (sw->obj.base.x >> 8) + sw->obj.base.unk3C;
+    rect[1] = (sw->obj.base.y >> 8) + sw->obj.base.unk3D;
+    rect[2] = (sw->obj.base.x >> 8) + sw->obj.base.unk3E;
+    rect[3] = (sw->obj.base.y >> 8) + sw->obj.base.unk3F;
+    for (; *list; list++) {
+        u8 type = ((struct Object *)*list)->type;
+
+        if (type == OBJ_STAR_STONE_BLOCK || type == OBJ_LARGE_STAR_STONE_BLOCK_7D) {
+            other[0] = ((*list)->x >> 8) + (*list)->unk3C;
+            other[1] = ((*list)->y >> 8) + (*list)->unk3D;
+            other[2] = ((*list)->x >> 8) + (*list)->unk3E;
+            other[3] = ((*list)->y >> 8) + (*list)->unk3F;
+            if (COLLISION_AXIS_OVERLAP(rect[0], rect[2] - rect[0], other[0], other[2] - other[0])
+                && COLLISION_AXIS_OVERLAP(rect[1], rect[3] - rect[1], other[1], other[3] - other[1]))
+                return TRUE;
+        }
+    }
+    if (!(sw->obj.objTemplate->unk22 & 2)) {
+        if (sw->unkB6 & 0x400) {
+            if (!(sw->obj.base.flags & 0x40000)) {
+                if (sw->obj.base.flags & 0x1000000)
+                    return TRUE;
+            }
+        } else {
+            for (i = 0; i < gNumKirbys; i++) {
+                if (gKirbys[i].base.unk56 == sw->obj.base.unk56) {
+                    other[0] = (gKirbys[i].base.x >> 8) + gKirbys[i].base.unk38;
+                    other[1] = (gKirbys[i].base.y >> 8) + gKirbys[i].base.unk39;
+                    other[2] = (gKirbys[i].base.x >> 8) + gKirbys[i].base.unk3A;
+                    other[3] = (gKirbys[i].base.y >> 8) + gKirbys[i].base.unk3B;
+                    if (COLLISION_AXIS_OVERLAP(rect[0], rect[2] - rect[0], other[0], other[2] - other[0])
+                        && COLLISION_AXIS_OVERLAP(rect[1], rect[3] - rect[1], other[1], other[3] - other[1])) {
+                        if (!(gKirbys[i].base.unkC & 0x8000))
+                            return TRUE;
+                    } else if (sw->obj.base.flags & 0x1000000) {
+                        return TRUE;
+                    }
+                }
+            }
+        }
+    }
+    if (sw->obj.base.flags & 0x40000) {
+        struct Kirby *kirby;
+
+        if (!sw->unkB8)
+            return TRUE;
+        kirby = sw->obj.base.unk6C;
+        if (kirby->base.unk56 < gNumHumanPlayers) {
+            if (!(sw->unkB6 & 0x2000))
+                BonusCreateTomato(kirby);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static void sub_081197D4(struct Switch *sw)
+{
+    if (sub_081194DC(sw)) {
+        sw->unkB6 &= ~4;
+        sw->unkB6 |= 0x100;
+        if (sw->unkB6 & 1) {
+            sw->unkB6 &= ~2;
+        } else {
+            sw->unkB6 |= 2;
+            sw->unkB4 = sw->obj.objTemplate->unk18 + 2;
+            PlaySfx(&sw->obj.base, SE_SWITCH_ACTIVATE);
+        }
+        sw->unkB6 |= 1;
+        sw->unkB6 |= 0x200;
+    } else {
+        if (sw->unkB6 & 1)
+            sw->unkB6 &= ~2;
+        sw->unkB6 &= ~0x100;
+        if (sw->unkB4 <= 0) {
+            if (!(sw->obj.objTemplate->unk22 & 4)) {
+                sw->unkB6 &= ~0x20;
+                sw->unkB6 &= ~0x10;
+                if (sw->unkB6 & 4)
+                    sw->unkB6 &= ~4;
+                if (sw->unkB6 & 1)
+                    sw->unkB6 |= 4;
+                sw->unkB6 &= ~1;
+            }
+        } else {
+            if (sw->unkB6 & 0x10)
+                sw->unkB6 &= ~0x20;
+            else
+                sw->unkB6 |= 0x20;
+            sw->unkB6 |= 0x10;
+            sw->unkB4--;
+        }
+    }
+}
+
+static void sub_08119980(struct Switch *arg0)
+{
+    struct Switch *sw = arg0;
+
+    sub_081197D4(arg0);
+    if (sw->unkB6 & 1) {
+        sw->obj.unk83 = 1;
+        if (sw->unkB6 & 0x400)
+            sw->obj.base.flags |= 0x10000;
+    } else {
+        sw->obj.unk83 = 0;
+        if (sw->obj.base.flags & 0x10000)
+            sw->obj.base.flags &= ~0x10000;
+    }
+    if (sw->obj.objTemplate->unk22 & 1)
+        sub_08119AA8(arg0);
+    else if (sw->obj.objTemplate->unk22 & 2)
+        sub_08119B3C(arg0);
+    else if (sw->obj.objTemplate->unk22 & 0x8000)
+        sub_08119BB8(arg0);
+    else
+        sub_08119A20(arg0);
+    sw->obj.base.counter++;
+}
+
+static void sub_08119A20(struct Switch *sw)
+{
+    u32 *count;
+
+    if (sw->unkB6 & 2) {
+        count = GetStateSlot(STATE_SLOT_ROOM, sw->obj.objTemplate->unk4, gCurLevelInfo[sw->obj.base.unk56].unk65E);
+        ++*count;
+    } else if (sw->unkB6 & 4) {
+        count = GetStateSlot(STATE_SLOT_ROOM, sw->obj.objTemplate->unk4, gCurLevelInfo[sw->obj.base.unk56].unk65E);
+        if (*count)
+            --*count;
+    }
+}
+
+static inline bool32 SlotEquals(struct SwitchSlot *slot, u8 a, u8 b, u8 c)
+{
+    if (slot->unk0 != a || slot->unk1 != b)
+        return FALSE;
+    if (slot->unk2 != c)
+        return FALSE;
+    return TRUE;
+}
+
+static void sub_08119AA8(struct Switch *sw)
+{
+    struct SwitchSlot *slot = (struct SwitchSlot *)GetStateSlot(STATE_SLOT_ROOM, sw->obj.objTemplate->unk4, gCurLevelInfo[sw->obj.base.unk56].unk65E);
+
+    if (sw->unkB6 & 1) {
+        slot->unk0 = sw->obj.objTemplate->unk14 >> 8;
+        slot->unk1 = sw->obj.objTemplate->unk14;
+        slot->unk2 = sw->obj.objTemplate->unk12 >> 8;
+        slot->unk3 = 0;
+    } else if (SlotEquals(slot, sw->obj.objTemplate->unk14 >> 8, sw->obj.objTemplate->unk14, sw->obj.objTemplate->unk12 >> 8)) {
+        slot->unk0 = 0;
+        slot->unk1 = 0;
+        slot->unk2 = 0;
+        slot->unk3 = 0;
+    }
+}
+
+static void sub_08119B3C(struct Switch *sw)
+{
+    if (sw->unkB6 & 0x2000 && !(sw->unkB6 & 0x1000))
+        sw->obj.base.flags |= 0xF40;
+    if (sw->unkB6 & 2) {
+        sw->unkB6 |= 0x1000;
+        sw->unkB6 |= 0x2000;
+    }
+    if (sw->unkB6 & 0x1000 && CanStartInGameInterlude()) {
+        gUnk_08357B8C[sw->obj.objTemplate->unk14]();
+        sw->unkB6 &= ~0x1000;
+    }
+}
+
+static void nullsub_127(void)
+{
+}
+
+static void sub_08119BB8(struct Switch *sw)
+{
+    sub_08119A20(sw);
+    if (sw->unkB6 & 1) {
+        u32 *slot = GetStateSlot(STATE_SLOT_ROOM, 0xF, gCurLevelInfo[sw->obj.base.unk56].unk65E);
+
+        if (*slot < sw->obj.objTemplate->unk11)
+            *slot = sw->obj.objTemplate->unk11;
+    }
+}
+
+static void sub_08119C0C(struct Switch *sw)
+{
+    sw->obj.base.flags |= 0x1000;
+}

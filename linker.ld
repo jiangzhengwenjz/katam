@@ -334,7 +334,7 @@ SECTIONS {
         src/dark_meta_knight.o(.text);
         src/dark_mind.o(.text);
         src/boss_challenge_door.o(.text);
-        asm/big_small_switch.o(.text);
+        src/big_small_switch.o(.text);
         src/fire.o(.text);
         src/mirror_door.o(.text);
         asm/shotzo.o(.text);
@@ -520,6 +520,7 @@ SECTIONS {
         src/dark_meta_knight.o(.rodata);
         src/dark_mind.o(.rodata);
         data/data_13.o(.rodata);
+        src/big_small_switch.o(.rodata);
         src/fire.o(.rodata);
         src/mirror_door.o(.rodata);
         data/data_20.o(.rodata);

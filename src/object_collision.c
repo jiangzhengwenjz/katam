@@ -32,9 +32,6 @@ static void ProcessKirbyContacts(void);
 static void ResolveSolidObjectCollision(struct ObjectBase *, struct Object *);
 static void ObjectCollisionTaskDestructor(struct Task *);
 
-#define COLLISION_AXIS_OVERLAP(a, aSize, b, bSize) \
-    (((a) <= (b) && (a) + (aSize) >= (b)) || ((a) >= (b) && (b) + (bSize) >= (a)))
-
 static inline u8 GetObjectCollisionCount(u8 group, u8 kind)
 {
     return gUnk_02022EB0[group][kind];
