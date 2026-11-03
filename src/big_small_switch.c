@@ -5,16 +5,10 @@
 #include "kirby.h"
 #include "object.h"
 #include "object_collision.h"
+#include "pause_world_map.h"
 #include "task.h"
 #include "constants/object_types.h"
 #include "constants/songs.h"
-
-struct SwitchSlot {
-    /* 0x00 */ u8 unk0;
-    /* 0x01 */ u8 unk1;
-    /* 0x02 */ u8 unk2;
-    /* 0x03 */ u8 unk3;
-}; /* size = 0x4 */
 
 static void sub_08119980(struct Switch *);
 static void sub_08119A20(struct Switch *);
@@ -25,23 +19,23 @@ static void sub_08119BB8(struct Switch *);
 static void sub_08119C0C(struct Switch *);
 
 static void (*const gUnk_08357B8C[])(void) = {
-    nullsub_127,
-    StartWorldMapUnlockMoonlightMansion,
-    StartWorldMapUnlockRainbowRouteEast,
-    StartWorldMapUnlockRainbowRouteSouth,
-    StartWorldMapUnlockCabbageCavernCenter,
-    StartWorldMapUnlockRainbowRouteWest,
-    StartWorldMapUnlockCarrotCastle,
-    StartWorldMapUnlockRainbowRouteNorth,
-    StartWorldMapUnlockMustardMountain,
-    StartWorldMapUnlockCabbageCavernWest,
-    StartWorldMapUnlockRadishRuins,
-    StartWorldMapUnlockPeppermintPalaceEast,
-    StartWorldMapUnlockPeppermintPalaceWest,
-    StartWorldMapUnlockCabbageCavernEast,
-    StartWorldMapUnlockOliveOcean,
-    StartWorldMapUnlockCandyConstellation,
-    sub_080396BC,
+    [WORLDMAP_NO_UNLOCK] = nullsub_127,
+    [WORLDMAP_MOONLIGHT_MANSION] = StartWorldMapUnlockMoonlightMansion,
+    [WORLDMAP_RAINBOW_ROUTE_EAST] = StartWorldMapUnlockRainbowRouteEast,
+    [WORLDMAP_RAINBOW_ROUTE_SOUTH] = StartWorldMapUnlockRainbowRouteSouth,
+    [WORLDMAP_CABBAGE_CAVERN_CENTER] = StartWorldMapUnlockCabbageCavernCenter,
+    [WORLDMAP_RAINBOW_ROUTE_WEST] = StartWorldMapUnlockRainbowRouteWest,
+    [WORLDMAP_CARROT_CASTLE] = StartWorldMapUnlockCarrotCastle,
+    [WORLDMAP_RAINBOW_ROUTE_NORTH] = StartWorldMapUnlockRainbowRouteNorth,
+    [WORLDMAP_MUSTARD_MOUNTAIN] = StartWorldMapUnlockMustardMountain,
+    [WORLDMAP_CABBAGE_CAVERN_WEST] = StartWorldMapUnlockCabbageCavernWest,
+    [WORLDMAP_RADISH_RUINS] = StartWorldMapUnlockRadishRuins,
+    [WORLDMAP_PEPPERMINT_PALACE_EAST] = StartWorldMapUnlockPeppermintPalaceEast,
+    [WORLDMAP_PEPPERMINT_PALACE_WEST] = StartWorldMapUnlockPeppermintPalaceWest,
+    [WORLDMAP_CABBAGE_CAVERN_EAST] = StartWorldMapUnlockCabbageCavernEast,
+    [WORLDMAP_OLIVE_OCEAN] = StartWorldMapUnlockOliveOcean,
+    [WORLDMAP_CANDY_CONSTELLATION] = StartWorldMapUnlockCandyConstellation,
+    [NUM_WORLDMAP_DOORS] = sub_080396BC,
 };
 
 const struct AnimInfo gUnk_08357BD0[] = {
@@ -281,29 +275,33 @@ static void sub_08119A20(struct Switch *sw)
     }
 }
 
-static inline bool32 SlotEquals(struct SwitchSlot *slot, u8 a, u8 b, u8 c)
+static inline bool32 SlotEquals(u8 *slot, u8 a, u8 b, u8 c)
 {
-    if (slot->unk0 != a || slot->unk1 != b)
+    if (slot[0] != a || slot[1] != b)
         return FALSE;
-    if (slot->unk2 != c)
+    if (slot[2] != c)
         return FALSE;
     return TRUE;
 }
 
 static void sub_08119AA8(struct Switch *sw)
 {
-    struct SwitchSlot *slot = (struct SwitchSlot *)GetStateSlot(STATE_SLOT_ROOM, sw->obj.objTemplate->unk4, gCurLevelInfo[sw->obj.base.unk56].unk65E);
+    u32 r1;
+    u8 *slot = (u8 *)GetStateSlot(STATE_SLOT_ROOM, sw->obj.objTemplate->unk4, gCurLevelInfo[sw->obj.base.unk56].unk65E);
 
     if (sw->unkB6 & 1) {
-        slot->unk0 = sw->obj.objTemplate->unk14 >> 8;
-        slot->unk1 = sw->obj.objTemplate->unk14;
-        slot->unk2 = sw->obj.objTemplate->unk12 >> 8;
-        slot->unk3 = 0;
+        u8 val = sw->obj.objTemplate->unk14 >> 8;
+
+        r1 = 0; // TODO(match): fake var r1 is for using the other zero register
+        slot[0] = val;
+        slot[1] = sw->obj.objTemplate->unk14;
+        slot[2] = sw->obj.objTemplate->unk12 >> 8;
+        slot[3] = r1;
     } else if (SlotEquals(slot, sw->obj.objTemplate->unk14 >> 8, sw->obj.objTemplate->unk14, sw->obj.objTemplate->unk12 >> 8)) {
-        slot->unk0 = 0;
-        slot->unk1 = 0;
-        slot->unk2 = 0;
-        slot->unk3 = 0;
+        slot[0] = 0;
+        slot[1] = 0;
+        slot[2] = 0;
+        slot[3] = 0;
     }
 }
 
