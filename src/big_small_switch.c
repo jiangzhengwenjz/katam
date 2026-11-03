@@ -132,7 +132,7 @@ static bool32 sub_0811942C(struct Switch *sw)
     return TRUE;
 }
 
-static bool32 SwitchIsPressed(struct Switch *sw)
+static bool32 SwitchCheckPressAndGiveTomato(struct Switch *sw)
 {
     struct ObjectBase **list;
     s16 rect[4], other[4];
@@ -199,7 +199,7 @@ static bool32 SwitchIsPressed(struct Switch *sw)
 
 static void SwitchUpdatePressState(struct Switch *sw)
 {
-    if (SwitchIsPressed(sw)) {
+    if (SwitchCheckPressAndGiveTomato(sw)) {
         sw->unkB6 &= ~4;
         sw->unkB6 |= 0x100;
         if (sw->unkB6 & 1) {
