@@ -6,6 +6,9 @@
 struct ObjectBase;
 struct Object;
 
+#define COLLISION_AXIS_OVERLAP(a, aSize, b, bSize) \
+    (((a) <= (b) && (a) + (aSize) >= (b)) || ((a) >= (b) && (b) + (bSize) >= (a)))
+
 void CreateObjectCollisionManager(void);
 bool8 ObjectHitboxesOverlap(struct ObjectBase *first, struct ObjectBase *second);
 // Uses a one-pixel box at the object origin and inclusive edges.
