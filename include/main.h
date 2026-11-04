@@ -117,7 +117,7 @@ extern u8 gUnk_03002548;
 extern s16 gUnk_0300254C;
 extern u8 gUnk_03002550;
 extern u32 gMultiSioStatusFlags;
-extern u8 gUnk_03002558;
+extern u8 gMultiSioEnabled;
 extern u8 gUnk_03002760[2][0x280] __attribute__((aligned(4)));
 extern u16 gObjPalette[0x100] __attribute__((aligned(4)));
 extern u32 gFrameCount;

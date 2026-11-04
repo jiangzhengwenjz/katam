@@ -790,7 +790,7 @@ static void sub_08031D24(void)
 {
     struct Multi_08032B0C *r6;
 
-    sub_081589E8();
+    DisableMultiSio();
     r6 = TaskGetStructPtr(gCurTask);
     r6->unk20 = 0;
     REG_RCNT = 0;
@@ -1350,7 +1350,7 @@ static void sub_08032BEC(void)
 {
     struct Multi_08032B0C *r4 = TaskGetStructPtr(gCurTask);
 
-    sub_08158934();
+    ResetMultiSio();
     r4->unk16 = 8;
     r4->unk1E = 0x3C;
     r4->unkE = 2;
@@ -1402,7 +1402,7 @@ static void sub_08032D3C(void)
 
     if (--r1->unk16 == 0xFFFF)
     {
-        sub_0815898C();
+        EnableMultiSio();
         gCurTask->main = sub_08031FAC;
     }
 }

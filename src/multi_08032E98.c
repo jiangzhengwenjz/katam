@@ -56,7 +56,7 @@ void sub_08032E98(void) {
     r2->unk44 = 0;
     r2->unk46 = gUnk_02038580;
     sub_08031CC8();
-    sub_081589E8();
+    DisableMultiSio();
 
     DmaFill32(3, 0, &gMultiSioSend, sizeof(gMultiSioSend));
     DmaWait(3);
@@ -64,7 +64,7 @@ void sub_08032E98(void) {
     DmaWait(3);
 
     gMultiSioStatusFlags = 0;
-    gUnk_03002558 = 0;
+    gMultiSioEnabled = 0;
     MultiSioInit(0);
     sub_08031BFC();
     m4aMPlayAllStop();
@@ -78,7 +78,7 @@ void sub_08032E98(void) {
 
 static void sub_08033008(struct Unk_08032E98* arg0) {
     sub_08031CC8();
-    sub_081589E8();
+    DisableMultiSio();
     m4aMPlayAllStop();
     gUnk_0203AD10 = 0;
     gMainFlags &= ~0x400;

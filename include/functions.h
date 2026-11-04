@@ -153,9 +153,9 @@ void sub_08138D64(u8);
 
 void sub_08145B64(u16);
 
-void sub_08158934(void);
-void sub_0815898C(void);
-void sub_081589E8(void);
+void ResetMultiSio(void);
+void EnableMultiSio(void);
+void DisableMultiSio(void);
 void Timer3Intr(void);
 void nullsub_2(void);
 

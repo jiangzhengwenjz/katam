@@ -4974,7 +4974,7 @@ static void sub_0812E51C(void) {
         TaskDestroy(gCurTask);
         if (gUnk_0203AD10 & 2) {
             sub_08031CC8();
-            sub_081589E8();
+            DisableMultiSio();
         }
         sub_08138D64(1);
     }
@@ -8470,7 +8470,7 @@ static void sub_081330AC(void) {
         TaskDestroy(gCurTask);
         if (gUnk_0203AD10 & 2) {
             sub_08031CC8();
-            sub_081589E8();
+            DisableMultiSio();
         }
         sub_08138D64(2);
     }
@@ -11127,7 +11127,7 @@ static void sub_0813754C(void) {
         TaskDestroy(gCurTask);
         if (gUnk_0203AD10 & 2) {
             sub_08031CC8();
-            sub_081589E8();
+            DisableMultiSio();
         }
         sub_08138D64(0);
     }

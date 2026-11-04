@@ -92,9 +92,9 @@ SECTIONS {
         . = 0x0000000C; gUnk_0300000C = .;
         . = 0x00000010; gGameplayHudTask = .;
         . = 0x00000014; src/multi_boot.o(.bss);
-        . = ALIGN(16); gUnk_03000020 = .;
-        . = 0x0000002C; gUnk_0300002C = .;
-        . = 0x00000030; gUnk_03000030 = .;
+        . = ALIGN(16); gSio32Id = .;
+        . = 0x0000002C; gSio32SendData = .;
+        . = 0x00000030; gSio32ReceivedData = .;
         . = 0x00000034; gUnk_03000034 = .;
         . = 0x00000038; *libgcc.a:dp-bit.o(.bss);
         . = ALIGN(4); *libgcc.a:fp-bit.o(.bss);
@@ -143,7 +143,7 @@ SECTIONS {
         . = 0x0000254C; gUnk_0300254C = .;
         . = 0x00002550; gUnk_03002550 = .;
         . = 0x00002554; gMultiSioStatusFlags = .;
-        . = 0x00002558; gUnk_03002558 = .;
+        . = 0x00002558; gMultiSioEnabled = .;
         . = 0x00002560; gTaskPtrs = .;
         . = 0x00002760; gUnk_03002760 = .;
         . = 0x00002C60; gObjPalette = .;
@@ -215,7 +215,7 @@ SECTIONS {
         . = ALIGN(4); src/sio32_multi_load.o(common_data);
         . = ALIGN(16); src/input_recorder.o(common_data);
         . = ALIGN(4); src/input_recorder.o(.bss);
-        . = ALIGN(4); gUnk_03006CC0 = .;
+        . = ALIGN(4); gSio32CommState = .;
         . = 0x00006CC4; iwram_end = .;
         . = 0x00008000;
     } >iwram
@@ -386,7 +386,7 @@ SECTIONS {
         src/sio32_multi_load.o(.text);
         src/input_recorder.o(.text);
         src/palette.o(.text);
-        asm/multi_sio_08158934.o(.text);
+        src/multi_sio_08158934.o(.text);
         asm/multi_sio_asm.o(.text);
         src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);
@@ -1024,6 +1024,7 @@ SECTIONS {
         data/data_12.o(.rodata);
         src/multi_sio.o(.rodata);
         src/sio32_multi_load.o(.rodata);
+        src/multi_sio_08158934.o(.rodata);
         src/agb_sram.o(.rodata);
         *libc.a:wf_pow.o(.rodata);
         *libc.a:ef_pow.o(.rodata);

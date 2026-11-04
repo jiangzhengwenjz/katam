@@ -183,7 +183,7 @@ void TasksExec(void) {
 
             gCurTask = gNextTask;
             if (gExecSoundMain) {
-                if (gUnk_03002558 == 1) {
+                if (gMultiSioEnabled == 1) {
                     m4aSoundMain();
                 }
                 gExecSoundMain = FALSE;

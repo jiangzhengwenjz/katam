@@ -325,7 +325,7 @@ struct Multi_08019F28 *sub_08019F28(s32 r7)
 static void sub_08019FDC(struct Multi_08019F28 *r7)
 {
     r7->unk9C = 0;
-    sub_081589E8();
+    DisableMultiSio();
     REG_RCNT = 0;
     CpuFill16(0, &gMultiBootParam, sizeof(gMultiBootParam));
     CpuFill16(0, &gMultiBootStruct, sizeof(gMultiBootStruct));
@@ -712,7 +712,7 @@ static void nullsub_26(void)
 
 static void sub_0801A800(struct Multi_08019F28 *r4)
 {
-    sub_08158934();
+    ResetMultiSio();
     r4->unk9A = 60;
     r4->unk0E = 5;
     r4->callback = sub_0801A950;
@@ -736,7 +736,7 @@ static void sub_0801A830(struct Multi_08019F28 *r1)
 
 static void sub_0801A868(struct Multi_08019F28 *r4)
 {
-    sub_08158934();
+    ResetMultiSio();
     r4->unk0E = 5;
     r4->callback = sub_0801A5B8;
 }
@@ -791,7 +791,7 @@ static void sub_0801A950(struct Multi_08019F28 *r4)
 {
     if (r4->unk0C & 4)
     {
-        sub_0815898C();
+        EnableMultiSio();
         r4->callback = sub_0801A970;
     }
 }
