@@ -95,7 +95,7 @@ SECTIONS {
         . = ALIGN(16); gSio32Id = .;
         . = 0x0000002C; gSio32SendData = .;
         . = 0x00000030; gSio32ReceivedData = .;
-        . = 0x00000034; gUnk_03000034 = .;
+        . = 0x00000034; gSio32RemoteDeviceId = .;
         . = 0x00000038; *libgcc.a:dp-bit.o(.bss);
         . = ALIGN(4); *libgcc.a:fp-bit.o(.bss);
         . = ALIGN(4); src/m4a.o(.bss*);
@@ -387,6 +387,7 @@ SECTIONS {
         src/input_recorder.o(.text);
         src/palette.o(.text);
         src/multi_sio_08158934.o(.text);
+        src/gbplayer.o(.text);
         asm/multi_sio_asm.o(.text);
         src/malloc_ewram.o(.text);
         src/agb_sram.o(.text);
@@ -1024,7 +1025,7 @@ SECTIONS {
         data/data_12.o(.rodata);
         src/multi_sio.o(.rodata);
         src/sio32_multi_load.o(.rodata);
-        src/multi_sio_08158934.o(.rodata);
+        src/gbplayer.o(.rodata);
         src/agb_sram.o(.rodata);
         *libc.a:wf_pow.o(.rodata);
         *libc.a:ef_pow.o(.rodata);

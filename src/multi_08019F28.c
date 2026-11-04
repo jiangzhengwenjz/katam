@@ -8,6 +8,7 @@
 #include "multi_08030C94.h"
 #include "multi_08032E98.h"
 #include "multi_sio.h"
+#include "multi_sio_08158934.h"
 #include "sio32_multi_load.h"
 #include "title_screen.h"
 #include "gba/m4a.h"
