@@ -13,6 +13,7 @@ struct RockBlock {
 
 void* CreateDestroyableRockBlock(struct ObjectTemplate* arg0, u8 arg1);
 void DestroyableRockBlockInit(struct RockBlock*);
+void sub_0811BF24(struct RockBlock*);
 
 extern const struct AnimInfo gUnk_08357C54[];
 
