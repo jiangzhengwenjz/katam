@@ -4,6 +4,7 @@
 #include "gba/m4a.h"
 #include "init.h"
 #include "functions.h"
+#include "gbplayer.h"
 #include "task.h"
 #include "main.h"
 #include "multi_sio.h"
@@ -38,7 +39,7 @@ IntrFunc const gIntrTableTemplate[] = {
     Timer0Intr,
     Timer1Intr,
     Timer2Intr,
-    Timer3Intr,
+    Sio32TimeoutIntr,
     Dma0Intr,
     Dma1Intr,
     Dma2Intr,

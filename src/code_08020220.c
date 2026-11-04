@@ -8,6 +8,7 @@
 #include "malloc_ewram.h"
 #include "malloc_vram.h"
 #include "multi_08030C94.h"
+#include "multi_sio_08158934.h"
 #include "demo.h"
 #include "gba/m4a.h"
 
