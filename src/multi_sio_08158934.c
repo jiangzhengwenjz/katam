@@ -112,10 +112,8 @@ static void UNUSED Sio32IDIntr(void)
                 gSio32Id.count = 0;
             }
         }
-        // TODO(match): sSio32ConnectionData[count] reloads count after the table address (one extra ldrh); the pointer
-        // arithmetic reuses the value from the comparison.
         if (gSio32Id.count < 4)
-            gSio32Id.send_id = *(sSio32ConnectionData + gSio32Id.count);
+            gSio32Id.send_id = *(gSio32Id.count + sSio32ConnectionData);
         else
             gSio32Id.send_id = 0x8000;
         gSio32Id.recv_id = ~recv;
@@ -195,15 +193,13 @@ static u32 Sio32ValidateResponse(u8 state)
 static u8 Sio32VerifyChecksum(void)
 {
     u32 packet = gSio32ReceivedData;
-    u32 body = packet >> 4;
+    s32 body = packet >> 4;
     u32 sum = packet & 0xF;
-    // TODO(match): without the (s32) cast this folds into packet >> 28 (lsrs r3, r0, #28) and body and sum
-    // swap registers; the target shifts body (lsrs r3, r4, #24).
-    u8 chk = (s32)body >> 24;
+    u8 chk = body >> 24;
     u8 i;
 
     for (i = 6; i != 0; i--)
-        chk ^= (body >> ((i - 1) * 4)) & 0xF;
+        chk ^= ((u32)body >> ((i - 1) * 4)) & 0xF;
     if (chk == sum)
         return 0;
     return 1;
