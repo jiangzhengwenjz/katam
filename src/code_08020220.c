@@ -189,7 +189,7 @@ static void sub_08020640(struct Unk_08020428 *fade) {
 static void sub_08020674(struct Unk_08020428 *fade) {
     if (gUnk_0203AD10 & 2) {
         sub_08031CC8();
-        sub_081589E8();
+        DisableMultiSio();
     }
     fade->func = sub_08020298;
 }

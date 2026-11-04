@@ -1148,7 +1148,7 @@ static void sub_08020164(struct SubGameMenu* arg0) {
 }
 
 static void sub_080201A0(struct SubGameMenu* arg0) {
-    sub_08158934();
+    ResetMultiSio();
     arg0->unk170 = 8;
     arg0->unk172 = 0xb4;
     arg0->unk154 = sub_080201EC;
@@ -1161,7 +1161,7 @@ static void sub_080201D0(struct SubGameMenu* arg0) {
 
 static void sub_080201EC(struct SubGameMenu* arg0) {
     if (--arg0->unk170 == 0xffff) {
-        sub_0815898C();
+        EnableMultiSio();
         arg0->unk154 = sub_08020094;
     }
 }

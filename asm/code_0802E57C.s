@@ -1093,7 +1093,7 @@ _0802EDC4: .4byte sub_0802EDC8
 sub_0802EDC8: @ 0x0802EDC8
 	push {r4, r5, lr}
 	adds r4, r0, #0
-	ldr r0, _0802EDE0 @ =gUnk_03002558
+	ldr r0, _0802EDE0 @ =gMultiSioEnabled
 	ldrb r1, [r0]
 	adds r3, r0, #0
 	cmp r1, #1
@@ -1104,7 +1104,7 @@ sub_0802EDC8: @ 0x0802EDC8
 	ldr r0, _0802EDE4 @ =gUnk_082EB740
 	b _0802EDF0
 	.align 2, 0
-_0802EDE0: .4byte gUnk_03002558
+_0802EDE0: .4byte gMultiSioEnabled
 _0802EDE4: .4byte gUnk_082EB740
 _0802EDE8:
 	movs r2, #0xba

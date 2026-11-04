@@ -1,6 +1,6 @@
 #include "agb_sram.h"
 
-const char gAgbSramLibVer[] = "NINTENDOSRAM_V113";
+const char gAgbSramLibVer[] = "SRAM_V113";
 
 static void ReadSram_Core(const u8 *src, u8 *dest, u32 size)
 {
