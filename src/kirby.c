@@ -18,6 +18,7 @@
 #include "treasures.h"
 #include "code_0806F780.h"
 #include "code_08020220.h"
+#include "code_080257A8.h"
 
 // TODO: define file boundaries
 

@@ -246,7 +246,8 @@ SECTIONS {
         src/hammer_peg.o(.text);
         src/master_sword.o(.text);
         src/lever_wall.o(.text);
-        asm/code_08025650.o(.text);
+        src/code_08025650.o(.text);
+        src/code_080257A8.o(.text);
         src/demo.o(.text);
         src/code_08026044.o(.text);
         src/special_doors.o(.text);
@@ -438,6 +439,8 @@ SECTIONS {
         src/shadow_kirby.o(.rodata);
         src/hammer_peg.o(.rodata);
         src/master_sword.o(.rodata);
+        src/code_08025650.o(.rodata);
+        src/code_080257A8.o(.rodata);
         data/data_11.o(.rodata);
         src/demo.o(.rodata);
         src/code_08026044.o(.rodata);
