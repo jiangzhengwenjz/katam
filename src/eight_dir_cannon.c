@@ -9,9 +9,54 @@ static void EightDirCannonRotate(struct EightDirCannon *);
 static bool32 EightDirCannonUpdateRecoil(struct EightDirCannon *);
 static void EightDirCannonRecoil(struct EightDirCannon *);
 
-extern void sub_081222AC(struct ObjectBase *, u8);
 extern bool8 sub_08051C40(struct Kirby *);
 extern void sub_08051F70(struct Kirby *, u8);
+
+static void sub_081222AC(struct ObjectBase *objBase, u8 direction) {
+    struct EffectObject *effect;
+
+    switch (direction) {
+    case 0:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 0);
+        effect->y -= 0x1000;
+        break;
+    case 1:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 1);
+        effect->x += 0xC00;
+        effect->y -= 0xC00;
+        break;
+    case 2:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 2);
+        effect->x += 0x1000;
+        break;
+    case 3:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 3);
+        effect->x += 0xC00;
+        effect->y += 0xC00;
+        break;
+    case 4:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 4);
+        effect->y += 0x1000;
+        break;
+    case 5:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 3);
+        effect->x -= 0xC00;
+        effect->y += 0xC00;
+        effect->flags |= 1;
+        break;
+    case 6:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 2);
+        effect->x -= 0x1000;
+        effect->flags |= 1;
+        break;
+    case 7:
+        effect = CreateEffectObject(objBase, 0, 0x2A8, 1);
+        effect->x -= 0xC00;
+        effect->y -= 0xC00;
+        effect->flags |= 1;
+        break;
+    }
+}
 
 void *CreateEightDirCannon(struct ObjectTemplate *arg0, u8 arg1) {
     struct EightDirCannon *cannon;
