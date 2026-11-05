@@ -2,7 +2,7 @@
 #include "subgame_menu.h"
 #include "functions.h"
 #include "multi_08032E98.h"
-#include "multi_sio_08158934.h"
+#include "multi_sio_util.h"
 #include "palette.h"
 #include "bg.h"
 #include "subgames.h"

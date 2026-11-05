@@ -8,7 +8,7 @@
 #include "malloc_ewram.h"
 #include "malloc_vram.h"
 #include "multi_sio.h"
-#include "multi_sio_08158934.h"
+#include "multi_sio_util.h"
 #include "task.h"
 #include "title_screen.h"
 

@@ -5,7 +5,7 @@
 #include "palette.h"
 #include "random.h"
 #include "functions.h"
-#include "multi_sio_08158934.h"
+#include "multi_sio_util.h"
 #include "constants/languages.h"
 
 static void sub_08128DB0(void);

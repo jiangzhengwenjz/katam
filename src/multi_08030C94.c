@@ -9,7 +9,7 @@
 #include "multi_08032E98.h"
 #include "multi_boot_util.h"
 #include "multi_sio.h"
-#include "multi_sio_08158934.h"
+#include "multi_sio_util.h"
 #include "save.h"
 #include "random.h"
 
