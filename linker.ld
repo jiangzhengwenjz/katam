@@ -356,7 +356,7 @@ SECTIONS {
         src/unknown_87.o(.text);
         src/large_star_stone_block_88.o(.text);
         src/large_star_stone_block_89.o(.text);
-        asm/kirby_cannon.o(.text);
+        src/kirby_cannon.o(.text);
         src/eight_dir_cannon.o(.text);
         src/bonus.o(.text);
         src/code_08123950.o(.text);
@@ -541,6 +541,7 @@ SECTIONS {
         src/unknown_87.o(.rodata);
         src/large_star_stone_block_88.o(.rodata);
         src/large_star_stone_block_89.o(.rodata);
+        src/kirby_cannon.o(.rodata);
         data/data_25.o(.rodata);
         src/code_08123950.o(.rodata);
         src/pause_help.o(.rodata);
