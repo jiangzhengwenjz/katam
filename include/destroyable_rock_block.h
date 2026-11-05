@@ -7,7 +7,7 @@
 
 struct RockBlock {
     struct Object base;
-    u16 unkB4;
+    s16 unkB4;
     u16 unkB6;
 }; /* size = 0xB8 */
 
