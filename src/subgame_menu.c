@@ -1,5 +1,6 @@
 #include "main.h"
 #include "subgame_menu.h"
+#include "code_08025650.h"
 #include "functions.h"
 #include "multi_08032E98.h"
 #include "multi_sio_util.h"

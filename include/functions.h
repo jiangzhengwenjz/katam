@@ -128,9 +128,6 @@ void sub_0800A8F8(u8 arg0, u8 arg1, u8 arg2);
 void sub_0800EE04(u8, u32);
 u8 sub_0800EEBC(struct ObjectBase *);
 
-void sub_08025650(u8);
-void sub_08025A80(void);
-void sub_08025AD0(void);
 void sub_0802B4A8(void);
 struct Unk_0802E57C *sub_0802E57C(void);
 void sub_0802E6C4(struct Unk_0802E57C *);
