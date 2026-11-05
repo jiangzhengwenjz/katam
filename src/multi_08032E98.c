@@ -65,7 +65,7 @@ void sub_08032E98(void) {
     DmaWait(3);
 
     gMultiSioStatusFlags = 0;
-    gMultiSioEnabled = 0;
+    gMultiSioEnabled = FALSE;
     MultiSioInit(0);
     sub_08031BFC();
     m4aMPlayAllStop();

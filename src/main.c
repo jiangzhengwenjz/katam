@@ -205,7 +205,7 @@ void GameInit(void) {
     DmaFill32(3, 0, gMultiSioRecv, sizeof(gMultiSioRecv));
     DmaWait(3);
     gMultiSioStatusFlags = 0;
-    gMultiSioEnabled = 0;
+    gMultiSioEnabled = FALSE;
     MultiSioInit(0);
     gUnk_0300607C = 0;
     gUnk_030024E0 = 0;
@@ -224,7 +224,7 @@ void GameLoop(void) {
 
         if (gUnk_030035D4 == 0xff) {
             GetInput();
-            if (gMultiSioEnabled != 0) {
+            if (gMultiSioEnabled) {
                 sub_08030E44();
                 gMultiSioStatusFlags = MultiSioMain(&gMultiSioSend, gMultiSioRecv, 0);
                 if (sub_08030FE0() == 0) {
@@ -475,7 +475,7 @@ static void VBlankIntr(void) {
         REG_IE &= ~INTR_FLAG_VCOUNT;
     }
 
-    if (gMultiSioEnabled != 1) {
+    if (gMultiSioEnabled != TRUE) {
         if (!(gUnk_03003670 & 0x1000000)) {
             if (!(gUnk_03003670 & 0x4000)) {
                 m4aSoundMain();

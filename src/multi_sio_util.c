@@ -9,7 +9,7 @@ void ResetMultiSio(void)
     DmaFill32(3, 0, &gMultiSioSend, sizeof(gMultiSioSend));
     DmaFill32(3, 0, gMultiSioRecv, sizeof(gMultiSioRecv));
     gMultiSioStatusFlags = 0;
-    gMultiSioEnabled = 0;
+    gMultiSioEnabled = FALSE;
     MultiSioInit(0);
 }
 
@@ -24,12 +24,12 @@ void EnableMultiSio(void)
         REG_IME = 1;
         MultiSioInit(0);
     }
-    gMultiSioEnabled = 1;
+    gMultiSioEnabled = TRUE;
 }
 
 void DisableMultiSio(void)
 {
-    gMultiSioEnabled = 0;
+    gMultiSioEnabled = FALSE;
     gMainFlags &= ~0x100000;
     MultiSioStop();
     MultiSioInit(0);
