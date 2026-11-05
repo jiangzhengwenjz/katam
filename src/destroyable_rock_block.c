@@ -53,7 +53,7 @@ static void sub_0811C07C(struct RockBlock *block)
     u32 tileY = (0x10u * block->base.base.y) >> 0x10;
     u16 unused[4];
 
-    if ((s16)block->unkB4 == 0) {
+    if (block->unkB4 == 0) {
         CreateEffectObject(&block->base.base, 0, 0x28D, 0);
         PlaySfx(&block->base.base, SE_BLOCK_BREAK);
         GetCollisionTile(unk56, tileX, tileY);
