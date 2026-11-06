@@ -18,7 +18,14 @@ static void sub_0802E484(struct Unk_0802E16C *);
 static void sub_0802E500(struct Unk_0802E16C *);
 static void sub_0802E55C(struct Unk_0802E16C *);
 
-extern const u16 gUnk_082EB6D0[];
+static const u16 gUnk_082EB6D0[NUM_LANGUAGES] = {
+    [LANGUAGE_JAPANESE] = 0x309,
+    [LANGUAGE_ENGLISH]  = 0x30A,
+    [LANGUAGE_GERMAN]   = 0x30B,
+    [LANGUAGE_FRENCH]   = 0x30C,
+    [LANGUAGE_SPANISH]  = 0x30D,
+    [LANGUAGE_ITALIAN]  = 0x30E,
+};
 
 void sub_0802E16C(void) {
     struct Task *t = TaskCreate(sub_0802E390, sizeof(struct Unk_0802E16C), 0x1000, TASK_USE_IWRAM | TASK_x0004, nullsub_11);
