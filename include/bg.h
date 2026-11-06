@@ -63,6 +63,6 @@ struct Background {
 })
 
 void sub_08153060(struct Background *);
-u32 sub_08153184(void);
+bool32 sub_08153184(void);
 
 #endif
