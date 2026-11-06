@@ -265,7 +265,6 @@ SECTIONS {
         src/palette_effects.o(.text);
         src/kirby.o(.text);
         src/code_0806F780.o(.text);
-        asm/code_0806F734.o(.text);
         src/object.o(.text);
         src/gordo.o(.text);
         src/droppy.o(.text);
