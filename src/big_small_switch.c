@@ -13,7 +13,7 @@
 static void SwitchMain(struct Switch *);
 static void SwitchUpdateHeldCount(struct Switch *);
 static void sub_08119AA8(struct Switch *);
-static void SwitchStartWorldMapUnlock(struct Switch *);
+static void SwitchTryWorldMapUnlock(struct Switch *);
 static void nullsub_127(void);
 static void SwitchUpdateCPUKirbyTrigger(struct Switch *);
 static void SwitchDespawn(struct Switch *);
@@ -253,7 +253,7 @@ static void SwitchMain(struct Switch *arg0)
     if (sw->obj.objTemplate->unk22 & 1)
         sub_08119AA8(arg0);
     else if (sw->obj.objTemplate->unk22 & 2)
-        SwitchStartWorldMapUnlock(arg0);
+        SwitchTryWorldMapUnlock(arg0);
     else if (sw->obj.objTemplate->unk22 & 0x8000)
         SwitchUpdateCPUKirbyTrigger(arg0);
     else
@@ -305,7 +305,7 @@ static void sub_08119AA8(struct Switch *sw)
     }
 }
 
-static void SwitchStartWorldMapUnlock(struct Switch *sw)
+static void SwitchTryWorldMapUnlock(struct Switch *sw)
 {
     if (sw->unkB6 & 0x2000 && !(sw->unkB6 & 0x1000))
         sw->obj.base.flags |= 0xF40;
