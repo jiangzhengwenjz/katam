@@ -475,27 +475,22 @@ u32 sub_08154B14(void) {
         u8 *topBase;
         u32 t;
         u8 *topPtr;
-        u32 off;
-        u32 bottom;
         u8 rowMin;
         u8 colMin;
-        u8 *bottomPtr;
         u32 screenBase;
         u16 stride;
         u16 bgcnt;
         u32 bgSize;
 
+        // TODO(match): the text branch and the final clear below spell this
+        // index bgId * 4 instead of t. With t throughout, the index is copied
+        // to a high register before the two row-bound loads instead of
+        // between them and their compare.
         t = bgId * 4;
         topBase = gUnk_03002E80;
         topBase++;
         topPtr = topBase + t;
-        bottomPtr = &gUnk_03002E83[t];
-        // TODO(match): keep the first top-bound read volatile; otherwise
-        // agbcc reuses it for the rowMin load below.
-        rowMin = *(vu8 *)topPtr;
-        bottom = *bottomPtr;
-        off = t;
-        if (rowMin == bottom && ((u8 *)gUnk_03002E80)[off] == gUnk_03002E82[off]) {
+        if (*topPtr == gUnk_03002E83[t] && gUnk_03002E80[t] == gUnk_03002E82[t]) {
             continue;
         }
         bgcnt = gBgCntRegs[bgId];
@@ -505,25 +500,25 @@ u32 sub_08154B14(void) {
             screenBase = vram + ((bgcnt & 0x1F00) << 3);
         }
         rowMin = *topPtr;
-        colMin = ((u8 *)gUnk_03002E80)[off];
+        colMin = gUnk_03002E80[t];
         if (bgId > 1 && (gDispCnt & 3) != 0) {
             screenBase += colMin;
             bgSize = bgcnt >> 14;
             stride = (0x100000u << bgSize) >> 16;
-            if (bottom == 0xFF) {
+            if (gUnk_03002E83[t] == 0xFF) {
                 u16 v = gUnk_030060A0.parts[bgId] | (gUnk_030060A0.parts[bgId] << 8);
                 u32 dst = screenBase + rowMin * stride;
 
-                DmaFill16(3, v, dst, (*bottomPtr - rowMin) * stride);
+                DmaFill16(3, v, dst, (gUnk_03002E83[t] - rowMin) * stride);
             } else {
-                if (rowMin <= bottom) {
+                if (rowMin <= gUnk_03002E83[t]) {
                     do {
                         u16 v = gUnk_030060A0.parts[bgId] | (gUnk_030060A0.parts[bgId] << 8);
                         u32 dst = screenBase + rowMin * stride;
 
-                        DmaFill16(3, v, dst, (gUnk_03002E82[off] - colMin + 1) >> 1);
+                        DmaFill16(3, v, dst, (gUnk_03002E82[t] - colMin + 1) >> 1);
                         rowMin++;
-                    } while (rowMin <= gUnk_03002E83[off]);
+                    } while (rowMin <= gUnk_03002E83[t]);
                 }
             }
         } else {
@@ -532,24 +527,24 @@ u32 sub_08154B14(void) {
             bgSize = gBgCntRegs[bgId] >> 14;
             if ((u8)(bgSize - 2) <= 1)
                 stride = 0x40;
-            if (gUnk_03002E82[off] == 0xFF) {
+            if (gUnk_03002E82[bgId * 4] == 0xFF) {
                 u16 v = gUnk_030060A0.parts[bgId];
                 u32 dst = screenBase + rowMin * (stride << 1);
 
-                DmaFill16(3, v, dst, (gUnk_03002E83[off] - rowMin) * stride << 1);
+                DmaFill16(3, v, dst, (gUnk_03002E83[bgId * 4] - rowMin) * stride << 1);
             } else {
-                if (rowMin <= gUnk_03002E83[off]) {
+                if (rowMin <= gUnk_03002E83[bgId * 4]) {
                     do {
                         u16 v = gUnk_030060A0.parts[bgId];
                         u32 dst = screenBase + rowMin * (stride << 1);
 
-                        DmaFill16(3, v, dst, (gUnk_03002E82[off] - colMin + 1) * 2);
+                        DmaFill16(3, v, dst, (gUnk_03002E82[bgId * 4] - colMin + 1) * 2);
                         rowMin++;
-                    } while (rowMin <= gUnk_03002E83[off]);
+                    } while (rowMin <= gUnk_03002E83[bgId * 4]);
                 }
             }
         }
-        DmaFill32(3, 0, ((u8 *)gUnk_03002E80) + off, 4);
+        DmaFill32(3, 0, &gUnk_03002E80[bgId * 4], 4);
     }
     return 1;
 }
