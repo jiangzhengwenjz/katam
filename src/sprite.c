@@ -226,17 +226,6 @@ void sub_08154148(struct Sprite *sprite) {
 
 extern u8 gUnk_08D60814[8];
 
-/* Scratch area shared by the sub_08155604/sub_081558A0/sub_08155C38
- * OAM-affine positioning functions. */
-struct AffineScratch {
-    /* 0x00 */ s16 m[4];    // local rotation/scale matrix
-    /* 0x08 */ s16 trig[4]; // cos, sin, xscale, yscale
-    /* 0x10 */ s32 x;
-    /* 0x14 */ s32 y;
-    /* 0x18 */ s16 gm[4];   // global/base matrix
-    /* 0x20 */ u16 idx;
-}; /* size = 0x24 */
-
 u32 sub_0815436C(void) {
     u16 oam[3];
     u8 spriteIndex;
@@ -936,27 +925,31 @@ void sub_08155544(u16 angle, s16 sx, s16 sy, u16 idx) {
 }
 
 void sub_08155604(struct Sprite *sprite, struct SpriteTransform *transform) {
-    struct AffineScratch scratch;
+    u16 *affine;
     union SpriteAttributes attr;
-    s16 *affine;
-    u16 *pIdx;
-    // TODO(match): volatile halfword accesses retain the target's ldrh loads
-    // and sign-extension shifts; ordinary pointers change the load sequence.
-    vs16 *pCos, *pSin, *pSx, *pSy;
-    s16 *pm0, *pm1, *pm2, *pm3;
-    vs16 *qm1, *qm2;
-    vs16 *qm3;
-    s16 *pgm, *pgm2;
-    // TODO(match): keep this one-element halfword storage. A scalar s16
-    // is promoted to SImode here and changes the sign-check instructions.
-    s16 syRaw[1];
-    s32 sxRaw;
-    u16 sx2;
-    s32 sy2;
-    s16 res;
-    u16 w, h;
-    u16 w2, h2;
-    u16 dx, dy;
+    s16 offsetX, offsetY;
+    u32 width, height;
+    s32 qOffsetX, qOffsetY;
+    // TODO(match): these locals are volatile so that each one has a stack
+    // slot which every store and read goes through; a plain local stays in
+    // a register. The slots follow this declaration order. The s32 w and h
+    // temporaries below are also required: assigning width and height
+    // directly loads them into a different register.
+    vs16 rotScaleOffsetMat00;
+    vs16 rotScaleOffsetMat01;
+    vs16 rotScaleOffsetMat10;
+    vs16 rotScaleOffsetMat11;
+    vs16 qDirX;
+    vs16 qDirY;
+    vs16 qScaleX;
+    vs16 qScaleY;
+    vs32 posX;
+    vs32 posY;
+    vs16 rotScaleRefPointMat00;
+    vs16 rotScaleRefPointMat01;
+    vs16 rotScaleRefPointMat10;
+    vs16 rotScaleRefPointMat11;
+    vu16 affineIndex;
 
     if (sprite->unk4 == -1)
         return;
@@ -966,105 +959,92 @@ void sub_08155604(struct Sprite *sprite, struct SpriteTransform *transform) {
     else
         attr.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
 
-    pIdx = &scratch.idx;
-    *pIdx = sprite->unk8 & 0x1F;
-    affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
+    affineIndex = sprite->unk8 & 0x1F;
+    affine = &gOamBuffer[affineIndex * 16 + 3];
 
-    pCos = &scratch.trig[0];
-    *pCos = gSineTable[(transform->rotation & 0x3FF) + 0x100] >> 6;
-    pSin = &scratch.trig[1];
-    *pSin = gSineTable[transform->rotation & 0x3FF] >> 6;
-    pSx = &scratch.trig[2];
-    *pSx = transform->qScaleX;
-    pSy = &scratch.trig[3];
-    *pSy = transform->qScaleY;
+    qDirX = gSineTable[(transform->rotation & 0x3FF) + 0x100] >> 6;
+    qDirY = gSineTable[transform->rotation & 0x3FF] >> 6;
 
-    res = Div(0x10000, *pSx);
-    affine[0] = (*pCos * res) >> 8;
-    res = Div(0x10000, *pSx);
-    affine[4] = (*pSin * res) >> 8;
-    res = Div(0x10000, *pSy);
-    affine[8] = (-*pSin * res) >> 8;
+    qScaleX = transform->qScaleX;
+    qScaleY = transform->qScaleY;
 
-    res = Div(0x10000, *pSy);
-    affine[12] = (*pCos * res) >> 8;
+    affine[0] = (qDirX * (s16)Div(0x10000, qScaleX)) >> 8;
+    affine[4] = (qDirY * (s16)Div(0x10000, qScaleX)) >> 8;
+    affine[8] = (-qDirY * (s16)Div(0x10000, qScaleY)) >> 8;
+    affine[12] = (qDirX * (s16)Div(0x10000, qScaleY)) >> 8;
 
-    sx2 = transform->qScaleX;
-    sxRaw = transform->qScaleX;
-    if (sxRaw < 0)
-        *pSx = -sx2;
-    sy2 = transform->qScaleY;
-    syRaw[0] = transform->qScaleY;
-    if (sy2 < 0)
-        *pSy = -syRaw[0];
-    pm0 = &scratch.m[0];
-    *pm0 = (*pCos * *pSx) >> 8;
-    pm1 = &scratch.m[1];
-    *pm1 = (-*pSin * *pSx) >> 8;
-    pm2 = &scratch.m[2];
-    *pm2 = (*pSin * *pSy) >> 8;
-    pm3 = &scratch.m[3];
-    *pm3 = (*pCos * *pSy) >> 8;
+    if (transform->qScaleX < 0)
+        qScaleX = -transform->qScaleX;
+    if (transform->qScaleY < 0)
+        qScaleY = -transform->qScaleY;
 
-    pgm = &scratch.gm[0];
-    *pgm = 0x100;
-    *++pgm = 0;
-    pgm2 = &scratch.gm[2];
-    *pgm2 = 0;
-    *++pgm2 = 0x100;
+    rotScaleOffsetMat00 = (qDirX * qScaleX) >> 8;
+    rotScaleOffsetMat01 = (-qDirY * qScaleX) >> 8;
+    rotScaleOffsetMat10 = (qDirY * qScaleY) >> 8;
+    rotScaleOffsetMat11 = (qDirX * qScaleY) >> 8;
 
-    scratch.x = transform->x;
-    scratch.y = transform->y;
+    rotScaleRefPointMat00 = 0x100;
+    rotScaleRefPointMat01 = 0;
+    rotScaleRefPointMat10 = 0;
+    rotScaleRefPointMat11 = 0x100;
 
-    qm1 = pm1;
-    qm2 = pm2;
-    qm3 = pm3;
+    posX = transform->x;
+    posY = transform->y;
 
-    if (sxRaw > 0) {
-        dx = attr.sub->offsetX;
-        w = attr.sub->width;
+    if (transform->qScaleX > 0) {
+        offsetX = attr.sub->offsetX;
+        width = attr.sub->width;
     } else {
-        w2 = attr.sub->width;
-        dx = w2 - attr.sub->offsetX;
-        w = attr.sub->width;
+        s32 w = attr.sub->width;
+        offsetX = w - attr.sub->offsetX;
+        width = w;
     }
-    if (syRaw[0] > 0) {
-        dy = attr.sub->offsetY;
-        h = attr.sub->height;
+
+    if (transform->qScaleY > 0) {
+        offsetY = attr.sub->offsetY;
+        height = attr.sub->height;
     } else {
-        h2 = attr.sub->height;
-        dy = h2 - attr.sub->offsetY;
-        h = attr.sub->height;
+        s32 h = attr.sub->height;
+        offsetY = h - attr.sub->offsetY;
+        height = h;
     }
 
-    {
-        // TODO(match): retain the qualified scratch view for the matrix
-        // halfword load and the final coordinate reloads.
-        volatile struct AffineScratch *v = &scratch;
+    qOffsetX = rotScaleOffsetMat00 * (offsetX - (width / 2)) + rotScaleOffsetMat01 * (offsetY - (height / 2)) + (width / 2) * 0x100;
+    posX -= qOffsetX >> 8;
 
-        v->x -= (v->m[0] * ((s16)dx - (w >> 1)) + *qm1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
-        v->y -= (*qm2 * ((s16)dx - (w >> 1)) + *qm3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
+    qOffsetY = rotScaleOffsetMat10 * (offsetX - (width / 2)) + rotScaleOffsetMat11 * (offsetY - (height / 2)) + (height / 2) * 0x100;
+    posY -= qOffsetY >> 8;
 
-        sprite->x = v->x;
-        sprite->y = v->y;
-    }
+    sprite->x = posX;
+    sprite->y = posY;
 }
 
-void sub_081558A0(struct Sprite *sprite, s16 *p) {
-    struct AffineScratch v;
+void sub_081558A0(struct Sprite *sprite, struct SpriteTransform *transform) {
     union SpriteAttributes attr;
-    s16 *affine;
-    u16 *pIdx;
-    // TODO(match): volatile halfword accesses retain the target's ldrh loads
-    // and sign-extension shifts; ordinary pointers change the load sequence.
-    vs16 *pCos, *pSin, *pSx, *pSy;
-    s32 sxRaw;
-    s16 *pm1, *pm2, *pm3;
-    vs16 *pgm0, *pgm1, *pgm2, *pgm3;
-    u16 w, h;
-    u16 w2, h2;
-    u16 dx;
-    u16 dy;
+    u16 *affine;
+    s32 qOffsetX, qOffsetY;
+    u32 width, height;
+    s16 offsetX, offsetY;
+    // TODO(match): these locals are volatile so that each one has a stack
+    // slot which every store and read goes through; a plain local stays in
+    // a register. The slots follow this declaration order. The s32 w and h
+    // temporaries below are also required: assigning width and height
+    // directly loads them into a different register.
+    vs16 rotScaleOffsetMat00;
+    vs16 rotScaleOffsetMat01;
+    vs16 rotScaleOffsetMat10;
+    vs16 rotScaleOffsetMat11;
+    vs16 qDirX;
+    vs16 qDirY;
+    vs16 qScaleX;
+    vs16 qScaleY;
+    vs32 posX;
+    vs32 posY;
+    vs16 rotScaleRefPointMat00;
+    vs16 rotScaleRefPointMat01;
+    vs16 rotScaleRefPointMat10;
+    vs16 rotScaleRefPointMat11;
+    vu16 affineIndex;
 
     if (sprite->unk4 == -1)
         return;
@@ -1074,107 +1054,94 @@ void sub_081558A0(struct Sprite *sprite, s16 *p) {
     else
         attr.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
 
-    pIdx = &v.idx;
-    *pIdx = sprite->unk8 & 0x1F;
-    affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
+    affineIndex = sprite->unk8 & 0x1F;
+    affine = &gOamBuffer[affineIndex * 16 + 3];
 
-    pCos = &v.trig[0];
-    *pCos = gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
-    pSin = &v.trig[1];
-    *pSin = gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] >> 6;
-    pSx = &v.trig[2];
-    *pSx = (p[1] * gUnk_030023F0) >> 8;
-    pSy = &v.trig[3];
-    *pSy = (p[2] * gUnk_030068B4) >> 8;
+    qDirX = gSineTable[((transform->rotation + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
+    qDirY = gSineTable[(transform->rotation + gUnk_03002544) & 0x3FF] >> 6;
 
-    affine[0] = (*pCos * (s16)Div(0x10000, *pSx)) >> 8;
-    affine[4] = (*pSin * (s16)Div(0x10000, *pSx)) >> 8;
-    affine[8] = (-*pSin * (s16)Div(0x10000, *pSy)) >> 8;
-    affine[12] = (*pCos * (s16)Div(0x10000, *pSy)) >> 8;
+    qScaleX = (transform->qScaleX * gUnk_030023F0) >> 8;
+    qScaleY = (transform->qScaleY * gUnk_030068B4) >> 8;
 
-    sxRaw = p[1];
-    if (sxRaw < 0) {
-        s16 sxr = p[1];
-        *pSx = (-sxr * gUnk_030023F0) >> 8;
-    }
-    if (p[2] < 0) {
-        s16 syr = p[2];
-        *pSy = (-syr * gUnk_030068B4) >> 8;
-    }
+    affine[0] = (qDirX * (s16)Div(0x10000, qScaleX)) >> 8;
+    affine[4] = (qDirY * (s16)Div(0x10000, qScaleX)) >> 8;
+    affine[8] = (-qDirY * (s16)Div(0x10000, qScaleY)) >> 8;
+    affine[12] = (qDirX * (s16)Div(0x10000, qScaleY)) >> 8;
 
-    v.m[0] = (*pCos * *pSx) >> 8;
-    pm1 = &v.m[1];
-    *pm1 = (-*pSin * *pSx) >> 8;
-    pm2 = &v.m[2];
-    *pm2 = (*pSin * *pSy) >> 8;
-    pm3 = &v.m[3];
-    *pm3 = (*pCos * *pSy) >> 8;
+    if (transform->qScaleX < 0)
+        qScaleX = (-transform->qScaleX * gUnk_030023F0) >> 8;
+    if (transform->qScaleY < 0)
+        qScaleY = (-transform->qScaleY * gUnk_030068B4) >> 8;
 
-    pgm0 = &v.gm[0];
-    *pgm0 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8;
-    pgm1 = &v.gm[1];
-    *pgm1 = ((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8;
-    pgm2 = &v.gm[2];
-    *pgm2 = ((gSineTable[gUnk_03002544] >> 6) * gUnk_030068B4) >> 8;
-    pgm3 = &v.gm[3];
-    *pgm3 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030068B4) >> 8;
+    rotScaleOffsetMat00 = (qDirX * qScaleX) >> 8;
+    rotScaleOffsetMat01 = (-qDirY * qScaleX) >> 8;
+    rotScaleOffsetMat10 = (qDirY * qScaleY) >> 8;
+    rotScaleOffsetMat11 = (qDirX * qScaleY) >> 8;
 
-    v.x = (*pgm0 * p[3] + *pgm1 * p[4] + (gUnk_0300254C * 0x100)) >> 8;
-    v.y = (*pgm2 * p[3] + *pgm3 * p[4] + (gUnk_0300367C * 0x100)) >> 8;
+    rotScaleRefPointMat00 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8;
+    rotScaleRefPointMat01 = ((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8;
+    rotScaleRefPointMat10 = ((gSineTable[gUnk_03002544] >> 6) * gUnk_030068B4) >> 8;
+    rotScaleRefPointMat11 = ((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030068B4) >> 8;
 
-    if (sxRaw > 0) {
-        dx = attr.sub->offsetX;
-        w = attr.sub->width;
+    posX = (rotScaleRefPointMat00 * transform->x + rotScaleRefPointMat01 * transform->y + gUnk_0300254C * 0x100) >> 8;
+    posY = (rotScaleRefPointMat10 * transform->x + rotScaleRefPointMat11 * transform->y + gUnk_0300367C * 0x100) >> 8;
+
+    if (transform->qScaleX > 0) {
+        offsetX = attr.sub->offsetX;
+        width = attr.sub->width;
     } else {
-        w2 = attr.sub->width;
-        dx = w2 - attr.sub->offsetX;
-        w = w2;
+        s32 w = attr.sub->width;
+        offsetX = w - attr.sub->offsetX;
+        width = w;
     }
-    if (p[2] > 0) {
-        dy = attr.sub->offsetY;
-        h = attr.sub->height;
+
+    if (transform->qScaleY > 0) {
+        offsetY = attr.sub->offsetY;
+        height = attr.sub->height;
     } else {
-        h2 = attr.sub->height;
-        dy = h2 - attr.sub->offsetY;
-        h = h2;
+        s32 h = attr.sub->height;
+        offsetY = h - attr.sub->offsetY;
+        height = h;
     }
 
     /* Shift the transformed origin so that the sprite rotates about its
      * centre rather than its top-left corner. */
-    {
-        // TODO(match): volatile matrix reads retain sign-extension shifts,
-        // and volatile coordinates preserve the final x/y reloads.
-        vs32 *px = &v.x;
-        vs32 *py = &v.y;
-        vs16 *m0 = &v.m[0];
-        vs16 *m1 = &v.m[1];
-        vs16 *m2 = &v.m[2];
-        vs16 *m3 = &v.m[3];
+    qOffsetX = rotScaleOffsetMat00 * (offsetX - (width / 2)) + rotScaleOffsetMat01 * (offsetY - (height / 2)) + (width / 2) * 0x100;
+    posX -= qOffsetX >> 8;
 
-        *px -= (*m0 * ((s16)dx - (w >> 1)) + *m1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
-        *py -= (*m2 * ((s16)dx - (w >> 1)) + *m3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
+    qOffsetY = rotScaleOffsetMat10 * (offsetX - (width / 2)) + rotScaleOffsetMat11 * (offsetY - (height / 2)) + (height / 2) * 0x100;
+    posY -= qOffsetY >> 8;
 
-        sprite->x = *px;
-        sprite->y = *py;
-    }
+    sprite->x = posX;
+    sprite->y = posY;
 }
 
-void sub_08155C38(struct Sprite *sprite, s16 *p) {
-    struct AffineScratch v;
+void sub_08155C38(struct Sprite *sprite, struct SpriteTransform *transform) {
     union SpriteAttributes attr;
-    s16 *affine;
-    u16 *pIdx;
-    // TODO(match): volatile halfword accesses retain the target's ldrh loads
-    // and sign-extension shifts; ordinary pointers change the load sequence.
-    vs16 *pCos;
-    vs16 *pSin;
-    vs16 *pSx, *pSy;
-    s32 sxRaw;
-    s16 *pm1, *pm2, *pm3;
-    vs16 *pgm0, *pgm1, *pgm2, *pgm3;
-    u16 w, h;
-    u16 w2, h2;
-    u16 dx, dy;
+    u16 *affine;
+    s32 qOffsetX, qOffsetY;
+    u32 width, height;
+    s16 offsetX, offsetY;
+    // TODO(match): these locals are volatile so that each one has a stack
+    // slot which every store and read goes through; a plain local stays in
+    // a register. The slots follow this declaration order. The s32 w and h
+    // temporaries below are also required: assigning width and height
+    // directly loads them into a different register.
+    vs16 rotScaleOffsetMat00;
+    vs16 rotScaleOffsetMat01;
+    vs16 rotScaleOffsetMat10;
+    vs16 rotScaleOffsetMat11;
+    vs16 qDirX;
+    vs16 qDirY;
+    vs16 qScaleX;
+    vs16 qScaleY;
+    vs32 posX;
+    vs32 posY;
+    vs16 rotScaleRefPointMat00;
+    vs16 rotScaleRefPointMat01;
+    vs16 rotScaleRefPointMat10;
+    vs16 rotScaleRefPointMat11;
+    vu16 affineIndex;
 
     if (sprite->unk4 == -1)
         return;
@@ -1184,93 +1151,70 @@ void sub_08155C38(struct Sprite *sprite, s16 *p) {
     else
         attr.full = &gSpriteTables->attrs[sprite->animId].full[sprite->unk4];
 
-    pIdx = &v.idx;
-    *pIdx = sprite->unk8 & 0x1F;
-    affine = (s16 *)((void *)gOamBuffer + 6 + *pIdx * 32);
+    affineIndex = sprite->unk8 & 0x1F;
+    affine = &gOamBuffer[affineIndex * 16 + 3];
 
-    pCos = &v.trig[0];
-    *pCos = gSineTable[(((u16)p[0] + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
-    pSin = &v.trig[1];
-    *pSin = gSineTable[((u16)p[0] + gUnk_03002544) & 0x3FF] >> 6;
-    pSx = &v.trig[2];
-    *pSx = (p[1] * gUnk_030023F0) >> 8;
-    pSy = &v.trig[3];
-    *pSy = (p[2] * gUnk_030068B4) >> 8;
+    qDirX = gSineTable[((transform->rotation + gUnk_03002544) & 0x3FF) + 0x100] >> 6;
+    qDirY = gSineTable[(transform->rotation + gUnk_03002544) & 0x3FF] >> 6;
 
-    affine[0] = (*pCos * (s16)Div(0x10000, *pSx)) >> 8;
-    affine[4] = (*pSin * (s16)Div(0x10000, *pSx)) >> 8;
-    affine[8] = (-*pSin * (s16)Div(0x10000, *pSy)) >> 8;
-    affine[12] = (*pCos * (s16)Div(0x10000, *pSy)) >> 8;
+    qScaleX = (transform->qScaleX * gUnk_030023F0) >> 8;
+    qScaleY = (transform->qScaleY * gUnk_030068B4) >> 8;
 
-    sxRaw = p[1];
-    if (sxRaw < 0) {
-        s16 sxr = p[1];
-        *pSx = (-sxr * gUnk_030023F0) >> 8;
-    }
-    if (p[2] < 0) {
-        s16 syr = p[2];
-        *pSy = (-syr * gUnk_030068B4) >> 8;
-    }
+    affine[0] = (qDirX * (s16)Div(0x10000, qScaleX)) >> 8;
+    affine[4] = (qDirY * (s16)Div(0x10000, qScaleX)) >> 8;
+    affine[8] = (-qDirY * (s16)Div(0x10000, qScaleY)) >> 8;
+    affine[12] = (qDirX * (s16)Div(0x10000, qScaleY)) >> 8;
 
-    v.m[0] = (*pCos * *pSx) >> 8;
-    pm1 = &v.m[1];
-    *pm1 = (-*pSin * *pSx) >> 8;
-    pm2 = &v.m[2];
-    *pm2 = (*pSin * *pSy) >> 8;
-    pm3 = &v.m[3];
-    *pm3 = (*pCos * *pSy) >> 8;
+    if (transform->qScaleX < 0)
+        qScaleX = (-transform->qScaleX * gUnk_030023F0) >> 8;
+    if (transform->qScaleY < 0)
+        qScaleY = (-transform->qScaleY * gUnk_030068B4) >> 8;
 
-    pgm0 = &v.gm[0];
-    *pgm0 = (((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8))
-        * ((s16)((*pSx * gUnk_030068B8) >> 8))) >> 8;
-    pgm1 = &v.gm[1];
-    *pgm1 = (((s16)(((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8))
-        * ((s16)((*pSx * gUnk_030068B8) >> 8))) >> 8;
-    pgm2 = &v.gm[2];
-    *pgm2 = (((s16)(((gSineTable[gUnk_03002544] >> 6) * gUnk_030068B4) >> 8))
-        * ((s16)((*pSy * gUnk_030068B8) >> 8))) >> 8;
-    pgm3 = &v.gm[3];
-    *pgm3 = (((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030068B4) >> 8))
-        * ((s16)((*pSy * gUnk_030068B8) >> 8))) >> 8;
+    rotScaleOffsetMat00 = (qDirX * qScaleX) >> 8;
+    rotScaleOffsetMat01 = (-qDirY * qScaleX) >> 8;
+    rotScaleOffsetMat10 = (qDirY * qScaleY) >> 8;
+    rotScaleOffsetMat11 = (qDirX * qScaleY) >> 8;
 
-    v.x = (*pgm0 * p[3] + *pgm1 * p[4] + (gUnk_0300254C * 0x100)) >> 8;
-    v.y = (*pgm2 * p[3] + *pgm3 * p[4] + (gUnk_0300367C * 0x100)) >> 8;
+    rotScaleRefPointMat00 = ((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030023F0) >> 8)
+                             * (s16)((qScaleX * gUnk_030068B8) >> 8)) >> 8;
+    rotScaleRefPointMat01 = ((s16)(((-gSineTable[gUnk_03002544] >> 6) * gUnk_030023F0) >> 8)
+                             * (s16)((qScaleX * gUnk_030068B8) >> 8)) >> 8;
+    rotScaleRefPointMat10 = ((s16)(((gSineTable[gUnk_03002544] >> 6) * gUnk_030068B4) >> 8)
+                             * (s16)((qScaleY * gUnk_030068B8) >> 8)) >> 8;
+    rotScaleRefPointMat11 = ((s16)(((gSineTable[gUnk_03002544 + 0x100] >> 6) * gUnk_030068B4) >> 8)
+                             * (s16)((qScaleY * gUnk_030068B8) >> 8)) >> 8;
 
-    if (sxRaw > 0) {
-        dx = attr.sub->offsetX;
-        w = attr.sub->width;
+    posX = (rotScaleRefPointMat00 * transform->x + rotScaleRefPointMat01 * transform->y + gUnk_0300254C * 0x100) >> 8;
+    posY = (rotScaleRefPointMat10 * transform->x + rotScaleRefPointMat11 * transform->y + gUnk_0300367C * 0x100) >> 8;
+
+    if (transform->qScaleX > 0) {
+        offsetX = attr.sub->offsetX;
+        width = attr.sub->width;
     } else {
-        w2 = attr.sub->width;
-        dx = w2 - attr.sub->offsetX;
-        w = w2;
+        s32 w = attr.sub->width;
+        offsetX = w - attr.sub->offsetX;
+        width = w;
     }
-    if (p[2] > 0) {
-        dy = attr.sub->offsetY;
-        h = attr.sub->height;
+
+    if (transform->qScaleY > 0) {
+        offsetY = attr.sub->offsetY;
+        height = attr.sub->height;
     } else {
-        h2 = attr.sub->height;
-        dy = h2 - attr.sub->offsetY;
-        h = h2;
+        s32 h = attr.sub->height;
+        offsetY = h - attr.sub->offsetY;
+        height = h;
     }
 
     /* Shift the transformed origin so that the sprite rotates about its
      * centre rather than its top-left corner. */
-    {
-        // TODO(match): volatile matrix reads retain sign-extension shifts,
-        // and volatile coordinates preserve the final x/y reloads.
-        vs32 *px = &v.x;
-        vs32 *py = &v.y;
-        vs16 *m0 = &v.m[0];
-        vs16 *m1 = &v.m[1];
-        vs16 *m2 = &v.m[2];
-        vs16 *m3 = &v.m[3];
+    qOffsetX = rotScaleOffsetMat00 * (offsetX - (width / 2)) + rotScaleOffsetMat01 * (offsetY - (height / 2)) + (width / 2) * 0x100;
+    posX -= qOffsetX >> 8;
 
-        *px -= (*m0 * ((s16)dx - (w >> 1)) + *m1 * ((s16)dy - (h >> 1)) + ((w >> 1) << 8)) >> 8;
-        *py -= (*m2 * ((s16)dx - (w >> 1)) + *m3 * ((s16)dy - (h >> 1)) + ((h >> 1) << 8)) >> 8;
+    qOffsetY = rotScaleOffsetMat10 * (offsetX - (width / 2)) + rotScaleOffsetMat11 * (offsetY - (height / 2)) + (height / 2) * 0x100;
+    posY -= qOffsetY >> 8;
 
-        sprite->x = *px;
-        sprite->y = *py;
-    }
+    sprite->x = posX;
+    sprite->y = posY;
 }
 
 void DisplaySprite(struct Sprite *sprite) {
