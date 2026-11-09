@@ -556,33 +556,35 @@ u32 sub_08154B14(void) {
 
 u32 sub_08154D78(void *dest, void *glyphs, u16 x, u16 y, u8 bg, u8 *str, u8 pal) {
     u8 i;
-    s32 mapBits;
     u16 *mp;
     u32 mapBase;
     u16 bgcnt;
+    u16 charOffset;
     u32 charBase;
     u16 *map;
     u16 index;
 
     i = 0;
     bgcnt = gBgCntRegs[bg];
-    charBase = ((bgcnt & 0xC) << 12) + 0x6000000;
-    mapBits = bgcnt & 0x1F00;
-    // TODO(match): replacing this one-pass loop with a block changes
-    // register allocation in 15 instructions, without changing the count.
-    do {
-        mapBase = (mapBits << 3) + 0x6000000;
-        map = (u16 *)(mapBase + y * 0x40 + x * 2);
-        while (str[i] != 0) {
-            void *tile = dest + i * 0x20;
-            CpuFastSet(glyphs + str[i] * 0x20, tile, 8);
-            index = ((uintptr_t)tile - charBase) >> 5;
-            mp = &map[i];
-            *mp = index | (pal << 12);
-            i++;
-        }
-        return i << 5;
-    } while (0);
+    // TODO(match): charOffset is a u16 and mapBase is built in three steps
+    // only for register assignment. With a u32 charOffset the string and
+    // tilemap pointers swap r6 and r7; with mapBase as one expression
+    // bgcnt and the VRAM base swap r4 and r1.
+    charOffset = ((bgcnt & 0xC) >> 2) * BG_CHAR_SIZE;
+    charBase = BG_VRAM + charOffset;
+    mapBase = bgcnt & 0x1F00;
+    mapBase <<= 3;
+    mapBase += BG_VRAM;
+    map = (u16 *)(mapBase + y * 0x40 + x * 2);
+    while (str[i] != 0) {
+        void *tile = dest + i * 0x20;
+        CpuFastSet(glyphs + str[i] * 0x20, tile, 8);
+        index = ((uintptr_t)tile - charBase) >> 5;
+        mp = &map[i];
+        *mp = index | (pal << 12);
+        i++;
+    }
+    return i << 5;
 }
 
 s32 sub_08154E18(union AnimCmd cursor, struct Sprite *sprite) {
