@@ -320,11 +320,10 @@ static inline void AdvancePaletteEffect(struct PaletteEffect *effect, u32 flags)
                 e->unkC = e->unk2 * 0x100;
                 e->unk1 = target;
             } else {
-                u16 newFlags;
-                // TODO(match): The do-while(0) keeps regmove from folding the ORed value back
-                // into the flags register, so newFlags gets a register of its own.
-                do newFlags = flags | 1; while (0);
-                e->unk8 = newFlags & 0xFF59;
+                u32 newFlags = flags | 1;
+
+                newFlags &= 0xFF59;
+                e->unk8 = newFlags;
             }
         } else {
             e->unk1 = target;

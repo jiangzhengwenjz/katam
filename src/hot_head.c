@@ -159,7 +159,6 @@ static void sub_080C34D4(void) {
 void sub_080C3694(struct Object *parent, u8 dirIndex) {
     struct Task *task = TaskCreate(sub_080C3880, sizeof(struct ObjectBase), 0x3500, TASK_USE_IWRAM, ObjectBaseDestroy);
     struct ObjectBase *tmp = TaskGetStructPtr(task), *objBase = tmp;
-    u32 idx;
 
     ClearObjectBase(tmp);
     objBase->header.kind = 2;
@@ -179,9 +178,8 @@ void sub_080C3694(struct Object *parent, u8 dirIndex) {
     objBase->unk5C |= 0x80000;
     if (dirIndex > 5)
         dirIndex = 5;
-    // TODO(match): The assignment inside the subscript makes the table address load before the shift.
-    objBase->xspeed = gUnk_0835553A[idx = dirIndex * 2];
-    objBase->yspeed = gUnk_0835553A[idx + 1];
+    objBase->xspeed = gUnk_0835553A[dirIndex << 1];
+    objBase->yspeed = gUnk_0835553A[(dirIndex << 1) + 1];
     if (parent->base.flags & 1) {
         objBase->x -= 0xE00;
         objBase->flags |= 1;
