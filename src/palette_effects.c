@@ -320,9 +320,6 @@ static inline void AdvancePaletteEffect(struct PaletteEffect *effect, u32 flags)
                 e->unkC = e->unk2 * 0x100;
                 e->unk1 = target;
             } else {
-                // TODO(match): The OR and the AND are separate statements on a u32 so that
-                // the result is built in the constant's register. As one expression the OR
-                // lands in the flags register and the two flag stores no longer share a strh.
                 u32 newFlags = flags | 1;
 
                 newFlags &= 0xFF59;
