@@ -16,6 +16,6 @@ extern const struct AnimInfo gUnk_08357BDC[];
 
 void *CreateSmallSwitch(struct ObjectTemplate *, u8);
 void *CreateBigSwitch(struct ObjectTemplate *, u8);
-void sub_0811938C(struct Switch *);
+void SwitchSetFunc(struct Switch *);
 
 #endif

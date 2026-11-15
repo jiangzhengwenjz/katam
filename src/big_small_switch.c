@@ -10,13 +10,13 @@
 #include "constants/object_types.h"
 #include "constants/songs.h"
 
-static void sub_08119980(struct Switch *);
-static void sub_08119A20(struct Switch *);
+static void SwitchMain(struct Switch *);
+static void SwitchUpdateHeldCount(struct Switch *);
 static void sub_08119AA8(struct Switch *);
-static void sub_08119B3C(struct Switch *);
+static void SwitchTryWorldMapUnlock(struct Switch *);
 static void nullsub_127(void);
-static void sub_08119BB8(struct Switch *);
-static void sub_08119C0C(struct Switch *);
+static void SwitchUpdateCPUKirbyTrigger(struct Switch *);
+static void SwitchDespawn(struct Switch *);
 
 static void (*const gUnk_08357B8C[])(void) = {
     [WORLDMAP_NO_UNLOCK] = nullsub_127,
@@ -86,13 +86,13 @@ void *CreateBigSwitch(struct ObjectTemplate *template, u8 arg1)
     return sw;
 }
 
-void sub_0811938C(struct Switch *arg0)
+void SwitchSetFunc(struct Switch *arg0)
 {
     struct Switch *sw = arg0;
 
-    ObjectSetFunc(arg0, 0, sub_08119980);
+    ObjectSetFunc(arg0, 0, SwitchMain);
     if (arg0->unkB8 && *GetStateSlot(STATE_SLOT_WORLD, arg0->obj.objTemplate->unk4, gCurLevelInfo[arg0->obj.base.unk56].unk65E)) {
-        arg0->obj.unk78 = sub_08119C0C;
+        arg0->obj.unk78 = SwitchDespawn;
         arg0->obj.base.flags |= 0xF40;
     } else {
         sw->unkB4 = 0;
@@ -132,7 +132,7 @@ static bool32 sub_0811942C(struct Switch *sw)
     return TRUE;
 }
 
-static bool32 sub_081194DC(struct Switch *sw)
+static bool32 SwitchCheckPressAndGiveTomato(struct Switch *sw)
 {
     struct ObjectBase **list;
     s16 rect[4], other[4];
@@ -197,9 +197,9 @@ static bool32 sub_081194DC(struct Switch *sw)
     return FALSE;
 }
 
-static void sub_081197D4(struct Switch *sw)
+static void SwitchUpdatePressState(struct Switch *sw)
 {
-    if (sub_081194DC(sw)) {
+    if (SwitchCheckPressAndGiveTomato(sw)) {
         sw->unkB6 &= ~4;
         sw->unkB6 |= 0x100;
         if (sw->unkB6 & 1) {
@@ -236,11 +236,11 @@ static void sub_081197D4(struct Switch *sw)
     }
 }
 
-static void sub_08119980(struct Switch *arg0)
+static void SwitchMain(struct Switch *arg0)
 {
     struct Switch *sw = arg0;
 
-    sub_081197D4(arg0);
+    SwitchUpdatePressState(arg0);
     if (sw->unkB6 & 1) {
         sw->obj.unk83 = 1;
         if (sw->unkB6 & 0x400)
@@ -253,15 +253,15 @@ static void sub_08119980(struct Switch *arg0)
     if (sw->obj.objTemplate->unk22 & 1)
         sub_08119AA8(arg0);
     else if (sw->obj.objTemplate->unk22 & 2)
-        sub_08119B3C(arg0);
+        SwitchTryWorldMapUnlock(arg0);
     else if (sw->obj.objTemplate->unk22 & 0x8000)
-        sub_08119BB8(arg0);
+        SwitchUpdateCPUKirbyTrigger(arg0);
     else
-        sub_08119A20(arg0);
+        SwitchUpdateHeldCount(arg0);
     sw->obj.base.counter++;
 }
 
-static void sub_08119A20(struct Switch *sw)
+static void SwitchUpdateHeldCount(struct Switch *sw)
 {
     u32 *count;
 
@@ -305,7 +305,7 @@ static void sub_08119AA8(struct Switch *sw)
     }
 }
 
-static void sub_08119B3C(struct Switch *sw)
+static void SwitchTryWorldMapUnlock(struct Switch *sw)
 {
     if (sw->unkB6 & 0x2000 && !(sw->unkB6 & 0x1000))
         sw->obj.base.flags |= 0xF40;
@@ -323,9 +323,9 @@ static void nullsub_127(void)
 {
 }
 
-static void sub_08119BB8(struct Switch *sw)
+static void SwitchUpdateCPUKirbyTrigger(struct Switch *sw)
 {
-    sub_08119A20(sw);
+    SwitchUpdateHeldCount(sw);
     if (sw->unkB6 & 1) {
         u32 *slot = GetStateSlot(STATE_SLOT_ROOM, 0xF, gCurLevelInfo[sw->obj.base.unk56].unk65E);
 
@@ -334,7 +334,7 @@ static void sub_08119BB8(struct Switch *sw)
     }
 }
 
-static void sub_08119C0C(struct Switch *sw)
+static void SwitchDespawn(struct Switch *sw)
 {
     sw->obj.base.flags |= 0x1000;
 }
