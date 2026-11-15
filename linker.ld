@@ -251,7 +251,7 @@ SECTIONS {
         src/demo.o(.text);
         src/code_08026044.o(.text);
         src/special_doors.o(.text);
-        asm/code_0802B4A8.o(.text);
+        src/code_0802B4A8.o(.text);
         src/code_0802E16C.o(.text);
         asm/code_0802E57C.o(.text);
         src/code_0802F8D8.o(.text);
@@ -445,6 +445,8 @@ SECTIONS {
         src/demo.o(.rodata);
         src/code_08026044.o(.rodata);
         src/special_doors.o(.rodata);
+        src/code_0802B4A8.o(.rodata);
+        src/code_0802E16C.o(.rodata);
         data/data_17.o(.rodata);
         src/code_0802F8D8.o(.rodata);
         data/data_24.o(.rodata);
