@@ -1233,12 +1233,12 @@ static void sub_0802DB34(struct Unk_0802B4A8 *arg0) {
 }
 
 static struct Unk_0802DB48 *sub_0802DB48(struct Unk_0802B4A8 *arg0) {
-    struct Task *t;
+    struct Task *task;
     struct Unk_0802DB48 *unk0802DB48;
 
     arg0->flags &= ~0x2000000;
-    t = TaskCreate(sub_0802DD3C, sizeof(struct Unk_0802DB48), 0x101, TASK_USE_IWRAM, NULL);
-    unk0802DB48 = TaskGetStructPtr(t);
+    task = TaskCreate(sub_0802DD3C, sizeof(struct Unk_0802DB48), 0x101, TASK_USE_IWRAM, NULL);
+    unk0802DB48 = TaskGetStructPtr(task);
     CpuFill16(0, unk0802DB48, sizeof(struct Unk_0802DB48));
     unk0802DB48->parent = arg0;
     unk0802DB48->unk0 = sub_0802DD94;
