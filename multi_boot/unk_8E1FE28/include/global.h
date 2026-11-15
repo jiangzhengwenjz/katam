@@ -43,6 +43,9 @@
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 
+// Converts a number to Q2.14 fixed-point format
+#define Q_2_14(n) ((s16)((n) * 0x4000))
+
 #define abs(n) (((n) >= 0) ? (n) : -(n))
 #define min(a, b) ((a) < (b) ? (a) : (b))
 #define max(a, b) ((a) >= (b) ? (a) : (b))
@@ -53,5 +56,13 @@
     (b) ^= (a); \
     (a) ^= (b); \
 })
+
+// TODO: move to proper location
+typedef void (*HBlankFunc)(u8);
+typedef void (*FuncType_030068C0)(void);
+typedef u32 (*FuncType_08D5FDD4)(void);
+typedef void (*IntrFunc)(void);
+
+extern void *iwram_end;
 
 #endif // GUARD_GLOBAL_H

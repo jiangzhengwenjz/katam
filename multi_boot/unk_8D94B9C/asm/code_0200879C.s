@@ -26,7 +26,7 @@ sub_020087B0: @ 0x020087B0
 	ldr r2, _02008804 @ =0x00004014
 	adds r0, r2, #0
 	strh r0, [r1]
-	ldr r2, _02008808 @ =gUnk_030013D0
+	ldr r2, _02008808 @ =gMainFlags
 	movs r3, #0
 	str r3, [r2]
 	ldr r0, _0200880C @ =gUnk_03002600
@@ -61,7 +61,7 @@ _020087EC:
 	.align 2, 0
 _02008800: .4byte 0x04000208
 _02008804: .4byte 0x00004014
-_02008808: .4byte gUnk_030013D0
+_02008808: .4byte gMainFlags
 _0200880C: .4byte gUnk_03002600
 _02008810: .4byte gUnk_03001E24
 _02008814: .4byte 0x04000134
@@ -296,7 +296,7 @@ _020089A6:
 	str r0, [r1]
 	movs r1, #0
 _020089CE:
-	ldr r3, _02008C34 @ =gUnk_03000740
+	ldr r3, _02008C34 @ =gIntrTable
 	lsls r0, r1, #0x10
 	asrs r0, r0, #0x10
 	lsls r1, r0, #2
@@ -418,7 +418,7 @@ _02008A90:
 	ldr r0, _02008C84 @ =0x06014000
 	str r0, [r1]
 	bl nullsub_1
-	ldr r2, _02008C88 @ =gUnk_030013D0
+	ldr r2, _02008C88 @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #0x80
 	lsls r1, r1, #1
@@ -468,7 +468,7 @@ _02008B12:
 	ldr r1, _02008BA0 @ =0x040000D4
 	mov r0, sp
 	str r0, [r1]
-	ldr r0, _02008CB0 @ =gUnk_03002640
+	ldr r0, _02008CB0 @ =gMultiSioSend
 	str r0, [r1, #4]
 	ldr r0, _02008CB4 @ =0x85000005
 	str r0, [r1, #8]
@@ -482,7 +482,7 @@ _02008B2C:
 	ldr r1, _02008BA0 @ =0x040000D4
 	mov r2, sp
 	str r2, [r1]
-	ldr r0, _02008CB8 @ =gUnk_03001420
+	ldr r0, _02008CB8 @ =gMultiSioRecv
 	str r0, [r1, #4]
 	ldr r0, _02008CBC @ =0x85000014
 	str r0, [r1, #8]
@@ -491,10 +491,10 @@ _02008B46:
 	ldr r0, [r1, #8]
 	cmp r0, #0
 	blt _02008B46
-	ldr r0, _02008CC0 @ =gUnk_030014E4
+	ldr r0, _02008CC0 @ =gMultiSioStatusFlags
 	movs r4, #0
 	str r4, [r0]
-	ldr r0, _02008CC4 @ =gUnk_030014E8
+	ldr r0, _02008CC4 @ =gMultiSioEnabled
 	strb r4, [r0]
 	movs r0, #0
 	bl MultiSioInit
@@ -564,7 +564,7 @@ _02008C24: .4byte gUnk_03005868
 _02008C28: .4byte gUnk_03002570
 _02008C2C: .4byte gUnk_03002630
 _02008C30: .4byte gUnk_03001DF4
-_02008C34: .4byte gUnk_03000740
+_02008C34: .4byte gIntrTable
 _02008C38: .4byte gUnk_0201DE94
 _02008C3C: .4byte gUnk_030016F0
 _02008C40: .4byte 0x85000140
@@ -585,7 +585,7 @@ _02008C78: .4byte gUnk_03005864
 _02008C7C: .4byte gUnk_03001418
 _02008C80: .4byte gUnk_030014D0
 _02008C84: .4byte 0x06014000
-_02008C88: .4byte gUnk_030013D0
+_02008C88: .4byte gMainFlags
 _02008C8C: .4byte sub_020000FC
 _02008C90: .4byte gUnk_03000780
 _02008C94: .4byte 0x03007FFC
@@ -595,12 +595,12 @@ _02008CA0: .4byte 0x080000B2
 _02008CA4: .4byte 0x080000AC
 _02008CA8: .4byte 0x454B3842
 _02008CAC: .4byte 0x04000208
-_02008CB0: .4byte gUnk_03002640
+_02008CB0: .4byte gMultiSioSend
 _02008CB4: .4byte 0x85000005
-_02008CB8: .4byte gUnk_03001420
+_02008CB8: .4byte gMultiSioRecv
 _02008CBC: .4byte 0x85000014
-_02008CC0: .4byte gUnk_030014E4
-_02008CC4: .4byte gUnk_030014E8
+_02008CC0: .4byte gMultiSioStatusFlags
+_02008CC4: .4byte gMultiSioEnabled
 _02008CC8: .4byte gUnk_0300500C
 _02008CCC: .4byte gUnk_03001470
 _02008CD0: .4byte gUnk_030014E0
@@ -615,7 +615,7 @@ _02008CE2:
 	ldr r1, _02008D40 @ =gUnk_03005864
 	movs r0, #0
 	strb r0, [r1]
-	ldr r1, _02008D44 @ =gUnk_030013D0
+	ldr r1, _02008D44 @ =gMainFlags
 	ldr r0, [r1]
 	ldr r2, _02008D48 @ =0xFEFFFFFF
 	ands r0, r2
@@ -629,16 +629,16 @@ _02008CE2:
 	cmp r0, #0xff
 	bne _02008D6E
 	bl sub_020094F4
-	ldr r0, _02008D54 @ =gUnk_030014E8
+	ldr r0, _02008D54 @ =gMultiSioEnabled
 	ldrb r0, [r0]
 	cmp r0, #0
 	beq _02008D2C
 	bl sub_02000470
-	ldr r0, _02008D58 @ =gUnk_03002640
-	ldr r1, _02008D5C @ =gUnk_03001420
+	ldr r0, _02008D58 @ =gMultiSioSend
+	ldr r1, _02008D5C @ =gMultiSioRecv
 	movs r2, #0
 	bl MultiSioMain
-	ldr r1, _02008D60 @ =gUnk_030014E4
+	ldr r1, _02008D60 @ =gMultiSioStatusFlags
 	str r0, [r1]
 	bl sub_020005A0
 	cmp r0, #0
@@ -655,21 +655,21 @@ _02008D2C:
 	b _02008D6E
 	.align 2, 0
 _02008D40: .4byte gUnk_03005864
-_02008D44: .4byte gUnk_030013D0
+_02008D44: .4byte gMainFlags
 _02008D48: .4byte 0xFEFFFFFF
 _02008D4C: .4byte gUnk_03002600
 _02008D50: .4byte gUnk_03002564
-_02008D54: .4byte gUnk_030014E8
-_02008D58: .4byte gUnk_03002640
-_02008D5C: .4byte gUnk_03001420
-_02008D60: .4byte gUnk_030014E4
+_02008D54: .4byte gMultiSioEnabled
+_02008D58: .4byte gMultiSioSend
+_02008D5C: .4byte gMultiSioRecv
+_02008D60: .4byte gMultiSioStatusFlags
 _02008D64: .4byte gUnk_03000470
 _02008D68:
 	ldr r1, _02008DB4 @ =gUnk_03002564
 	movs r0, #0
 	strb r0, [r1]
 _02008D6E:
-	ldr r4, _02008DB8 @ =gUnk_030013D0
+	ldr r4, _02008DB8 @ =gMainFlags
 	ldr r0, [r4]
 	movs r1, #0x80
 	lsls r1, r1, #0x11
@@ -703,7 +703,7 @@ _02008DA6:
 	b _02008DCA
 	.align 2, 0
 _02008DB4: .4byte gUnk_03002564
-_02008DB8: .4byte gUnk_030013D0
+_02008DB8: .4byte gMainFlags
 _02008DBC: .4byte gUnk_03002600
 _02008DC0: .4byte gUnk_030014A4
 _02008DC4:
@@ -711,7 +711,7 @@ _02008DC4:
 	ands r1, r0
 	str r1, [r4]
 _02008DCA:
-	ldr r0, _02008DFC @ =gUnk_030013D0
+	ldr r0, _02008DFC @ =gMainFlags
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #7
@@ -737,7 +737,7 @@ _02008DEA:
 	b _02008CE2
 	.align 2, 0
 _02008DF8: .4byte 0xFFFFF7FF
-_02008DFC: .4byte gUnk_030013D0
+_02008DFC: .4byte gMainFlags
 _02008E00: .4byte 0x04000004
 
 	thumb_func_start sub_02008E04
@@ -762,7 +762,7 @@ sub_02008E04: @ 0x02008E04
 	ldr r0, _02008F08 @ =0x84000002
 	str r0, [r3, #8]
 	ldr r0, [r3, #8]
-	ldr r5, _02008F0C @ =gUnk_030013D0
+	ldr r5, _02008F0C @ =gMainFlags
 	ldr r1, [r5]
 	movs r2, #1
 	adds r0, r1, #0
@@ -873,7 +873,7 @@ _02008EFC: .4byte 0x040000D4
 _02008F00: .4byte gUnk_03001E40
 _02008F04: .4byte 0x04000008
 _02008F08: .4byte 0x84000002
-_02008F0C: .4byte gUnk_030013D0
+_02008F0C: .4byte gMainFlags
 _02008F10: .4byte gUnk_03001E00
 _02008F14: .4byte gUnk_03002610
 _02008F18: .4byte gUnk_030014B0
@@ -994,7 +994,7 @@ _02009032:
 	ldrb r0, [r0]
 	cmp r4, r0
 	blo _02009020
-	ldr r0, _02009088 @ =gUnk_030013D0
+	ldr r0, _02009088 @ =gMainFlags
 	ldr r1, [r0]
 	movs r0, #0x10
 	ands r1, r0
@@ -1032,7 +1032,7 @@ _0200907A:
 	.align 2, 0
 _02009080: .4byte gUnk_03005850
 _02009084: .4byte gUnk_030014D8
-_02009088: .4byte gUnk_030013D0
+_02009088: .4byte gMainFlags
 _0200908C: .4byte gUnk_03002564
 _02009090: .4byte 0x040000D4
 _02009094: .4byte 0x85000004
@@ -1087,7 +1087,7 @@ sub_020090EC: @ 0x020090EC
 	ldr r1, _02009124 @ =gUnk_0300141C
 	movs r0, #0
 	strb r0, [r1]
-	ldr r5, _02009128 @ =gUnk_030013D0
+	ldr r5, _02009128 @ =gMainFlags
 	ldr r0, [r5]
 	movs r1, #9
 	rsbs r1, r1, #0
@@ -1111,7 +1111,7 @@ sub_020090EC: @ 0x020090EC
 	b _02009142
 	.align 2, 0
 _02009124: .4byte gUnk_0300141C
-_02009128: .4byte gUnk_030013D0
+_02009128: .4byte gMainFlags
 _0200912C: .4byte gUnk_03001414
 _02009130: .4byte gUnk_030016F0
 _02009134: .4byte gUnk_03001E3C
@@ -1327,7 +1327,7 @@ _020092DC:
 	ands r1, r0
 	strh r1, [r2]
 _020092F8:
-	ldr r0, _02009340 @ =gUnk_030014E8
+	ldr r0, _02009340 @ =gMultiSioEnabled
 	ldrb r0, [r0]
 	cmp r0, #1
 	beq _0200931A
@@ -1359,7 +1359,7 @@ _02009330: .4byte 0x04000004
 _02009334: .4byte 0x0000FFFB
 _02009338: .4byte 0x0000FFDF
 _0200933C: .4byte 0x04000200
-_02009340: .4byte gUnk_030014E8
+_02009340: .4byte gMultiSioEnabled
 _02009344: .4byte gUnk_03001DF4
 _02009348: .4byte 0x04000202
 
@@ -2093,7 +2093,7 @@ sub_02009894: @ 0x02009894
 	ldr r0, _02009904 @ =gUnk_030014F0
 	ldr r2, [r0]
 	str r2, [r1]
-	ldr r0, _02009908 @ =gUnk_030013D0
+	ldr r0, _02009908 @ =gMainFlags
 	ldr r0, [r0]
 	movs r1, #0x80
 	lsls r1, r1, #4
@@ -2127,7 +2127,7 @@ _020098D4:
 	ldrb r0, [r4]
 	cmp r0, #0
 	beq _020098F0
-	ldr r0, _02009914 @ =gUnk_030014E8
+	ldr r0, _02009914 @ =gMultiSioEnabled
 	ldrb r0, [r0]
 	cmp r0, #1
 	bne _020098EC
@@ -2146,10 +2146,10 @@ _020098F0:
 	.align 2, 0
 _02009900: .4byte gUnk_03002560
 _02009904: .4byte gUnk_030014F0
-_02009908: .4byte gUnk_030013D0
+_02009908: .4byte gMainFlags
 _0200990C: .4byte gUnk_03001E4C
 _02009910: .4byte gUnk_03005864
-_02009914: .4byte gUnk_030014E8
+_02009914: .4byte gMultiSioEnabled
 _02009918:
 	movs r0, #0xc0
 	lsls r0, r0, #0x12
@@ -3399,7 +3399,7 @@ sub_0200A1F8: @ 0x0200A1F8
 	orrs r0, r1
 	str r0, [r2, #8]
 	ldr r0, [r2, #8]
-	ldr r2, _0200A25C @ =gUnk_030013D0
+	ldr r2, _0200A25C @ =gMainFlags
 	ldr r0, [r2]
 	movs r1, #2
 	orrs r0, r1
@@ -3413,7 +3413,7 @@ _0200A246:
 _0200A250: .4byte 0x040000D4
 _0200A254: .4byte gUnk_03002604
 _0200A258: .4byte gUnk_03001BF0
-_0200A25C: .4byte gUnk_030013D0
+_0200A25C: .4byte gMainFlags
 
 	thumb_func_start sub_0200A260
 sub_0200A260: @ 0x0200A260
@@ -4812,7 +4812,7 @@ _0200ACCA:
 	adds r4, #1
 	cmp r4, #0x1f
 	ble _0200AC7E
-	ldr r7, _0200AD2C @ =gUnk_030013D0
+	ldr r7, _0200AD2C @ =gMainFlags
 	ldr r3, [r7]
 	movs r0, #0x80
 	lsls r0, r0, #4
@@ -4853,7 +4853,7 @@ _0200AD1C: .4byte gUnk_03002150
 _0200AD20: .4byte gUnk_03002580
 _0200AD24: .4byte 0x040000D4
 _0200AD28: .4byte 0x80000003
-_0200AD2C: .4byte gUnk_030013D0
+_0200AD2C: .4byte gMainFlags
 _0200AD30: .4byte gUnk_03001480
 _0200AD34: .4byte gUnk_03002990
 _0200AD38: .4byte 0x81000003
