@@ -14,12 +14,14 @@ SECTIONS {
         asm/crt0.o(.text);
         asm/multi_sio_asm.o(.text);
         src/main.o(.text);
-        asm/multi_sio.o(.text);
-        asm/sio32_multi_load.o(.text);
+        src/multi_sio.o(.text);
+        src/sio32_multi_load.o(.text);
         asm/libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
         data/data.o(.rodata);
         src/main.o(.rodata);
+        src/multi_sio.o(.rodata);
+        src/sio32_multi_load.o(.rodata);
         data/data_1.o(.rodata);
     } >ewram
 
@@ -31,14 +33,9 @@ SECTIONS {
         . = 0x000000A0; gIntrMainBuf = .;
         . = 0x000004A0; gMultiSioSend = .;
         . = 0x000004C0; gMultiSioIntrFuncBuf = .;
-        . = 0x00000640; gUnk_03000640 = .;
-        . = 0x000006A0; gUnk_030006A0 = .;
-        . = 0x000006BC; gUnk_030006BC = .;
-        . = 0x000006D8; gUnk_030006D8 = .;
-        . = 0x000006F4; gUnk_030006F4 = .;
-        . = 0x00000710; gUnk_03000710 = .;
-        . = 0x00000830; gUnk_03000830 = .;
-        . = 0x00000870; gUnk_03000870 = .;
+        . = 0x00000640; gMultiSioArea = .;
+        . = 0x00000830; gMultiSioRecvFuncBuf = .;
+        . = 0x00000870; gSio32MultiLoadArea = .;
         . = 0x00007F00; gUnk_03007F00 = .;
         . = 0x00007FA0; gUnk_03007FA0 = .;
         . = 0x00008000;
