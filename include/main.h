@@ -58,38 +58,6 @@ union Unk_030060A0 {
     u8 parts[4];
 };
 
-struct MultiSioData_0_0 {
-    u8 unk0;
-    u8 unk1;
-    u16 hword[6];
-    u8 unkE;
-    u32 unk10;
-};
-
-struct MultiSioData_0_1 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4[0x10];
-};
-
-struct MultiSioData_0_2 {
-    u8 unk0;
-    u8 unk1;
-    u16 unk2;
-    union Unk_020382A0_8 unk4;
-    u16 unkC;
-    u8 unkE;
-    u32 unk10;
-};
-
-union MultiSioData {
-    struct MultiSioData_0_0 pat0;
-    struct MultiSioData_0_1 pat1;
-    struct MultiSioData_0_2 pat2;
-}; /* size = MULTI_SIO_BLOCK_SIZE */
-
 extern struct Unk_020382D0 gUnk_020382D0;
 
 extern u16 gUnk_030023F0;

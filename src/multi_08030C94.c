@@ -46,7 +46,7 @@ static void nullsub_118(void);
 
 #define SIO_MULTI_CNT ((volatile struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
-void sub_08030C94(u8 r7, union Unk_020382A0_8 *r6)
+void sub_08030C94(u8 r7, union MultiSioHandshakePayload *r6)
 {
     struct Multi_08030C94 *r4;
 
@@ -61,7 +61,7 @@ void sub_08030C94(u8 r7, union Unk_020382A0_8 *r6)
     r4->func = sub_0803169C;
     r4->unk1C = r7;
     if (r6)
-        CpuCopy16(r6, &r4->unk4, sizeof(union Unk_020382A0_8));
+        CpuCopy16(r6, &r4->unk4, sizeof(union MultiSioHandshakePayload));
 }
 
 u32 sub_08030D4C(s32 sp)
@@ -98,7 +98,7 @@ void sub_08030E44(void)
     struct Unk_020382D0 *r7 = &gUnk_020382D0;
     u16 i, r5;
     struct Unk_020382D0_sub *r4;
-    struct MultiSioData_0_0 *r6;
+    struct MultiSioInputData *r6;
 
     if (r7->unk4 & 1 && !(r7->unk4 & 4))
     {
@@ -112,40 +112,40 @@ void sub_08030E44(void)
         }
         r4->unk0 = r7->unk0;
         r4->unk4 = (gHeldKeys & 0x3FF) | ((r5 << 10) & 0xC00);
-        r6 = &gMultiSioSend.pat0;
-        r6->unk0 = 0x20;
+        r6 = &gMultiSioSend.input;
+        r6->type = LINK_MSG_INPUT;
         r6->unk1 = gUnk_020382D0.unk6;
-        r6->unk10 = r4->unk0;
-        for (r5 = 0; r5 < 6; ++r5)
-            r6->hword[r5] = 0;
+        r6->frame = r4->unk0;
+        for (r5 = 0; r5 < ARRAY_COUNT(r6->packed); ++r5)
+            r6->packed[r5] = 0;
         r5 = r7->unk2AC;
         r4 = &r7->unk20[r5];
-        r6->hword[0] |= r4->unk4;
+        r6->packed[0] |= r4->unk4;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[0] |= r4->unk4 << 12;
-        r6->hword[1] |= r4->unk4 >> 4;
+        r6->packed[0] |= r4->unk4 << 12;
+        r6->packed[1] |= r4->unk4 >> 4;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[1] |= r4->unk4 << 8;
-        r6->hword[2] |= r4->unk4 >> 8;
+        r6->packed[1] |= r4->unk4 << 8;
+        r6->packed[2] |= r4->unk4 >> 8;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[2] |= r4->unk4 << 4;
+        r6->packed[2] |= r4->unk4 << 4;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[3] |= r4->unk4;
+        r6->packed[3] |= r4->unk4;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[3] |= r4->unk4 << 12;
-        r6->hword[4] |= r4->unk4 >> 4;
+        r6->packed[3] |= r4->unk4 << 12;
+        r6->packed[4] |= r4->unk4 >> 4;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[4] |= r4->unk4 << 8;
-        r6->hword[5] |= r4->unk4 >> 8;
+        r6->packed[4] |= r4->unk4 << 8;
+        r6->packed[5] |= r4->unk4 >> 8;
         r5 = (r5 - 1) & 0xF;
         r4 = &r7->unk20[r5];
-        r6->hword[5] |= r4->unk4 << 4;
+        r6->packed[5] |= r4->unk4 << 4;
         r7->unk2AC = (r7->unk2AC + 1) & 0xF;
     }
 }
@@ -192,49 +192,49 @@ u32 sub_08030FE0(void)
             }
             else
             {
-                struct MultiSioData_0_0 *r5 = &gMultiSioRecv[sb].pat0;
+                struct MultiSioInputData *r5 = &gMultiSioRecv[sb].input;
                 u32 r1 = (r8->unk2A4[sb] - 1) & 0xF;
 
-                sp00 = r5->unk10 - r8->unkA0[sb][r1].unk0;
+                sp00 = r5->frame - r8->unkA0[sb][r1].unk0;
                 r7 = (r8->unk2A4[sb] + sp00 - 1) & 0xF;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10;
-                r6->unk4 = r5->hword[0];
+                r6->unk0 = r5->frame;
+                r6->unk4 = r5->packed[0];
                 // r7 = (r7 - 1) & 0xF;
                 --r7;
                 r4 = 0xF;
                 r7 &= r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 1;
-                r6->unk4 = r5->hword[0] >> 12;
-                r6->unk4 |= r5->hword[1] << 4;
+                r6->unk0 = r5->frame - 1;
+                r6->unk4 = r5->packed[0] >> 12;
+                r6->unk4 |= r5->packed[1] << 4;
                 r7 = (r7 - 1) & r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 2;
-                r6->unk4 = r5->hword[1] >> 8;
-                r6->unk4 |= r5->hword[2] << 8;
+                r6->unk0 = r5->frame - 2;
+                r6->unk4 = r5->packed[1] >> 8;
+                r6->unk4 |= r5->packed[2] << 8;
                 r7 = (r7 - 1) & r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 3;
-                r6->unk4 = r5->hword[2] >> 4;
+                r6->unk0 = r5->frame - 3;
+                r6->unk4 = r5->packed[2] >> 4;
                 r7 = (r7 - 1) & r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 4;
-                r6->unk4 = r5->hword[3];
+                r6->unk0 = r5->frame - 4;
+                r6->unk4 = r5->packed[3];
                 r7 = (r7 - 1) & r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 5;
-                r6->unk4 = r5->hword[3] >> 12;
-                r6->unk4 |= r5->hword[4] << 4;
+                r6->unk0 = r5->frame - 5;
+                r6->unk4 = r5->packed[3] >> 12;
+                r6->unk4 |= r5->packed[4] << 4;
                 r7 = (r7 - 1) & r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 6;
-                r6->unk4 = r5->hword[4] >> 8;
-                r6->unk4 |= r5->hword[5] << 8;
+                r6->unk0 = r5->frame - 6;
+                r6->unk4 = r5->packed[4] >> 8;
+                r6->unk4 |= r5->packed[5] << 8;
                 r7 = (r7 - 1) & r4;
                 r6 = &r8->unkA0[sb][r7];
-                r6->unk0 = r5->unk10 - 7;
-                r6->unk4 = r5->hword[5] >> 4;
+                r6->unk0 = r5->frame - 7;
+                r6->unk4 = r5->packed[5] >> 4;
                 if (sp00 > 0)
                     r8->unk2A4[sb] = (r8->unk2A4[sb] + sp00) & r4;
 #ifndef NONMATCHING
@@ -251,7 +251,7 @@ u32 sub_08030FE0(void)
 #endif
                 if (r8->unk4 & 2)
                 {
-                    if (r5->unk0 != 0x20)
+                    if (r5->type != LINK_MSG_INPUT)
                     {
                         r8->unk4 |= 0x8000;
                         gUnk_02038580 = 3;
@@ -436,7 +436,7 @@ static void sub_0803149C(void)
 static s16 sub_080315B8(struct Multi_08030C94 *r8)
 {
     struct Unk_020382A0 *r0 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r1, *r5 = &gMultiSioSend.pat2;
+    struct MultiSioHandshakeData *r1, *r5 = &gMultiSioSend.handshake;
     s16 ret = 0;
     u16 i;
 
@@ -453,14 +453,14 @@ static s16 sub_080315B8(struct Multi_08030C94 *r8)
         else if (MULTI_SIO_CONNECTED_ID(i) & gMultiSioStatusFlags)
         {
             r0->unk28 = i + 1;
-            r1 = &gMultiSioRecv[i].pat2;
-            if (r1->unk0 == 2)
+            r1 = &gMultiSioRecv[i].handshake;
+            if (r1->type == LINK_MSG_HANDSHAKE)
             {
                 if (r8->unk1C != r1->unk1)
                     ret = -5;
                 else
                 {
-                    switch (r1->unkE)
+                    switch (r1->state)
                     {
                     case 0x20:
                     case 0x40:
@@ -481,14 +481,14 @@ static s16 sub_080315B8(struct Multi_08030C94 *r8)
 static s32 sub_0803169C(struct Multi_08030C94 *r4)
 {
     struct Unk_020382A0 *r6 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r1 = &gMultiSioSend.pat2;
+    struct MultiSioHandshakeData *r1 = &gMultiSioSend.handshake;
 
-    r1->unk0 = 2;
+    r1->type = LINK_MSG_HANDSHAKE;
     r1->unk1 = r4->unk1C;
-    r1->unk2 = 0x123;
-    r1->unkE = 0;
+    r1->magic = LINK_HANDSHAKE_MAGIC;
+    r1->state = 0;
     r1->unkC = 0;
-    CpuCopy16(&r4->unk4, &r1->unk4, sizeof(union Unk_020382A0_8));
+    CpuCopy16(&r4->unk4, &r1->payload, sizeof(union MultiSioHandshakePayload));
     r6->unk06 &= ~3;
     if (SIO_MULTI_CNT->id == 0
         && gMultiSioStatusFlags & MULTI_SIO_PARENT
@@ -510,15 +510,15 @@ static s32 sub_0803169C(struct Multi_08030C94 *r4)
 static s32 sub_08031764(struct Multi_08030C94 *r7)
 {
     struct Unk_020382A0 *r5 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r1, *r6 = &gMultiSioSend.pat2;
-    union Unk_020382A0_8 *p;
+    struct MultiSioHandshakeData *r1, *r6 = &gMultiSioSend.handshake;
+    union MultiSioHandshakePayload *p;
     s32 result;
     u16 i;
 
-    r6->unk0 = 2;
+    r6->type = LINK_MSG_HANDSHAKE;
     r6->unk1 = r7->unk1C;
-    r6->unk2 = 0x123;
-    r6->unkE = 0x20;
+    r6->magic = LINK_HANDSHAKE_MAGIC;
+    r6->state = 0x20;
     r6->unkC = 1;
     if (SIO_MULTI_CNT->id != 0
         || !(gMultiSioStatusFlags & MULTI_SIO_PARENT)
@@ -541,12 +541,12 @@ static s32 sub_08031764(struct Multi_08030C94 *r7)
                 p = gUnk_020382A0.unk08;
                 if (SIO_MULTI_CNT->id == i)
                 {
-                    CpuCopy16(&r6->unk4, p+i, sizeof(union Unk_020382A0_8));
+                    CpuCopy16(&r6->payload, p+i, sizeof(union MultiSioHandshakePayload));
                 }
                 else
                 {
-                    r1 = &gMultiSioRecv[i].pat2;
-                    CpuCopy16(&r1->unk4, p+i, sizeof(union Unk_020382A0_8));
+                    r1 = &gMultiSioRecv[i].handshake;
+                    CpuCopy16(&r1->payload, p+i, sizeof(union MultiSioHandshakePayload));
                 }
             }
             r7->func = sub_08031860;
@@ -560,13 +560,13 @@ static s32 sub_08031860(struct Multi_08030C94 *r6)
 {
     u16 i;
     struct Unk_020382A0 *r5 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r1, *r4 = &gMultiSioSend.pat2;
+    struct MultiSioHandshakeData *r1, *r4 = &gMultiSioSend.handshake;
     s16 sp00;
 
-    r4->unk0 = 2;
+    r4->type = LINK_MSG_HANDSHAKE;
     r4->unk1 = r6->unk1C;
-    r4->unk2 = 0x123;
-    r4->unkE = 0x22;
+    r4->magic = LINK_HANDSHAKE_MAGIC;
+    r4->state = 0x22;
     r4->unkC |= 1;
     if (SIO_MULTI_CNT->id != 0
         || !(gMultiSioStatusFlags & MULTI_SIO_PARENT)
@@ -586,16 +586,16 @@ static s32 sub_08031860(struct Multi_08030C94 *r6)
         }
         else if (MULTI_SIO_CONNECTED_ID(i) & gMultiSioStatusFlags)
         {
-            r1 = &gMultiSioRecv[i].pat2;
-            if (r1->unk0 == 2)
+            r1 = &gMultiSioRecv[i].handshake;
+            if (r1->type == LINK_MSG_HANDSHAKE)
             {
                 if (r6->unk1C != r1->unk1)
                     sp00 = -5;
-                else if (r1->unk2 != 0x123)
+                else if (r1->magic != LINK_HANDSHAKE_MAGIC)
                     sp00 = -6;
                 else
                 {
-                    switch (r1->unkE)
+                    switch (r1->state)
                     {
                     case 0x40:
                     case 0x41:
@@ -628,13 +628,13 @@ static s32 sub_08031860(struct Multi_08030C94 *r6)
 static s32 sub_080319F0(struct Multi_08030C94 *r4)
 {
     struct Unk_020382A0 *r3 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r1 = &gMultiSioSend.pat2, *r6 = &gMultiSioRecv[0].pat2;
+    struct MultiSioHandshakeData *r1 = &gMultiSioSend.handshake, *r6 = &gMultiSioRecv[0].handshake;
     s32 ret;
 
-    r1->unk0 = 2;
+    r1->type = LINK_MSG_HANDSHAKE;
     r1->unk1 = r4->unk1C;
-    r1->unk2 = 0x123;
-    r1->unkE = 0x40;
+    r1->magic = LINK_HANDSHAKE_MAGIC;
+    r1->state = 0x40;
     r1->unkC = 0;
     if (SIO_MULTI_CNT->id == 0
         || gMultiSioStatusFlags & MULTI_SIO_PARENT
@@ -644,11 +644,11 @@ static s32 sub_080319F0(struct Multi_08030C94 *r4)
         r4->func = sub_0803169C;
         return -1;
     }
-    if (r6->unk0 == 2)
+    if (r6->type == LINK_MSG_HANDSHAKE)
     {
         ret = sub_080315B8(r4);
         if (ret) return ret;
-        if (r6->unkE == 0x20 && (r6->unkC >> SIO_MULTI_CNT->id) & 1)
+        if (r6->state == 0x20 && (r6->unkC >> SIO_MULTI_CNT->id) & 1)
             r4->func = sub_08031AA8;
     }
     return 0;
@@ -658,14 +658,14 @@ static s32 sub_08031AA8(struct Multi_08030C94 *r8)
 {
     u16 i;
     struct Unk_020382A0 *r5 = &gUnk_020382A0;
-    struct MultiSioData_0_2 *r6 = &gMultiSioSend.pat2, *r7 = &gMultiSioRecv[0].pat2;
-    union Unk_020382A0_8 *p;
+    struct MultiSioHandshakeData *r6 = &gMultiSioSend.handshake, *r7 = &gMultiSioRecv[0].handshake;
+    union MultiSioHandshakePayload *p;
     s32 res;
 
-    r6->unk0 = 2;
+    r6->type = LINK_MSG_HANDSHAKE;
     r6->unk1 = r8->unk1C;
-    r6->unk2 = 0x123;
-    r6->unkE = 0x41;
+    r6->magic = LINK_HANDSHAKE_MAGIC;
+    r6->state = 0x41;
     r6->unkC = 0;
     if (SIO_MULTI_CNT->id == 0
         || gMultiSioStatusFlags & MULTI_SIO_PARENT
@@ -675,30 +675,30 @@ static s32 sub_08031AA8(struct Multi_08030C94 *r8)
         r8->func = sub_0803169C;
         return -1;
     }
-    else if (r7->unk0 != 2)
+    else if (r7->type != LINK_MSG_HANDSHAKE)
         return -1;
     else
     {
         res = sub_080315B8(r8);
         if (res) return res;
-        if (r7->unkE == 0x22)
+        if (r7->state == 0x22)
         {
             for (i = 0; i < 4; ++i)
             {
                 p = gUnk_020382A0.unk08;
                 if (SIO_MULTI_CNT->id == i)
                 {
-                    CpuCopy16(&r6->unk4, p+i, sizeof(union Unk_020382A0_8));
+                    CpuCopy16(&r6->payload, p+i, sizeof(union MultiSioHandshakePayload));
                 }
                 else
                 {
-                    r7 = &gMultiSioRecv[i].pat2;
-                    CpuCopy16(&r7->unk4, p+i, sizeof(union Unk_020382A0_8));
+                    r7 = &gMultiSioRecv[i].handshake;
+                    CpuCopy16(&r7->payload, p+i, sizeof(union MultiSioHandshakePayload));
                 }
             }
             r8->func = sub_08031BB0;
             r8->unk1A = 2;
-            r6->unkE = 0x42;
+            r6->state = 0x42;
         }
     }
     return 0;
@@ -706,24 +706,24 @@ static s32 sub_08031AA8(struct Multi_08030C94 *r8)
 
 static s32 sub_08031BB0(struct Multi_08030C94 *r1)
 {
-    struct MultiSioData_0_2 *r2 = &gMultiSioSend.pat2;
+    struct MultiSioHandshakeData *r2 = &gMultiSioSend.handshake;
 
     if (r1->unk1A)
     {
         --r1->unk1A;
-        r2->unk0 = 2;
+        r2->type = LINK_MSG_HANDSHAKE;
         r2->unk1 = r1->unk1C;
-        r2->unk2 = 0x123;
-        r2->unkE = 0x41;
+        r2->magic = LINK_HANDSHAKE_MAGIC;
+        r2->state = 0x41;
         return 0;
     }
     else
     {
         r1->unkC = 1;
-        r2->unk0 = 2;
+        r2->type = LINK_MSG_HANDSHAKE;
         r2->unk1 = r1->unk1C;
-        r2->unk2 = 0x123;
-        r2->unkE = 0x42;
+        r2->magic = LINK_HANDSHAKE_MAGIC;
+        r2->state = 0x42;
         return 2;
     }
 }
@@ -777,13 +777,13 @@ void sub_08031CE4(u8 r0)
 
 static s32 sub_08031D00(struct Multi_08030C94 *r0)
 {
-    struct MultiSioData_0_2 *r2 = &gMultiSioSend.pat2;
+    struct MultiSioHandshakeData *r2 = &gMultiSioSend.handshake;
 
     r0->unkC = 1;
-    r2->unk0 = 2;
+    r2->type = LINK_MSG_HANDSHAKE;
     r2->unk1 = r0->unk1C;
-    r2->unk2 = 0x123;
-    r2->unkE = 0x22;
+    r2->magic = LINK_HANDSHAKE_MAGIC;
+    r2->state = 0x22;
     return 2;
 }
 
@@ -904,12 +904,12 @@ static void sub_08031DF0(void)
 
 static void sub_08031FAC(void)
 {
-    union Unk_020382A0_8 sp00;
+    union MultiSioHandshakePayload sp00;
     struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk20 = 0;
-    sp00.pat1.unk00 = gUnk_0203ACB0[gSaveID < 3 ? gSaveID : 0]; 
-    sp00.pat1.unk02 = gUnk_0203ADE0;
+    sp00.preWorldProps.unk0 = gUnk_0203ACB0[gSaveID < 3 ? gSaveID : 0];
+    sp00.preWorldProps.unk2 = gUnk_0203ADE0;
     sub_08030C94(1, &sp00);
     gCurTask->main = sub_08032024;
 }
@@ -933,10 +933,10 @@ static void sub_08032024(void)
             for (i = 0; i < gNumHumanPlayers; ++i)
             {
                 u16 *r4 = r8->unk4; // useless variable for easy-matching
-                union Unk_020382A0_8 *r7 = gUnk_020382A0.unk08;
+                union MultiSioHandshakePayload *r7 = gUnk_020382A0.unk08;
 
-                r8->unk4[i] = r7[i].pat1.unk00;
-                gUnk_0203AD1C[i] = r7[i].pat1.unk02;
+                r8->unk4[i] = r7[i].preWorldProps.unk0;
+                gUnk_0203AD1C[i] = r7[i].preWorldProps.unk2;
                 r4 = r8->unk4; // dummy
             }
             for (; i < 4; ++i)
@@ -1028,10 +1028,10 @@ static void sub_080322E8(void)
     {
         r4 = &gMultiSioSend;
         sub_08031CC8();
-        r4->pat1.unk0 = 3;
-        r4->pat1.unk1 = 2;
-        r4->pat1.unk2 = 0;
-        r4->pat1.unk3 = 0;
+        r4->worldProps.type = LINK_MSG_WORLD_PROPS;
+        r4->worldProps.unk1 = 2;
+        r4->worldProps.seq = 0;
+        r4->worldProps.unk3 = 0;
         gCurTask->main = sub_0803234C;
     }
 }
@@ -1077,10 +1077,10 @@ static void sub_08032448(void)
     r1->unk1E = 0;
     r1->unk50 = 0;
     CpuFill16(0, r5, sizeof(union MultiSioData));
-    r5->pat1.unk0 = 3;
-    r5->pat1.unk1 = 2;
-    r5->pat1.unk2 = 0;
-    r5->pat1.unk3 = 0;
+    r5->worldProps.type = LINK_MSG_WORLD_PROPS;
+    r5->worldProps.unk1 = 2;
+    r5->worldProps.seq = 0;
+    r5->worldProps.unk3 = 0;
     gCurTask->main = sub_080324BC;
 }
 
@@ -1090,25 +1090,25 @@ static void sub_080324BC(void)
     union MultiSioData *r8 = &gMultiSioSend;
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
 
-    if (!r8->pat1.unk2)
-        r8->pat1.unk2 = 1;
+    if (!r8->worldProps.seq)
+        r8->worldProps.seq = 1;
     for (i = 0; i < gNumHumanPlayers; ++i)
     {
         if (i != SIO_MULTI_CNT->id)
         {
             union MultiSioData *r1 = &gMultiSioRecv[i];
 
-            if (r8->pat1.unk2 + 1 != r1->pat1.unk2)
+            if (r8->worldProps.seq + 1 != r1->worldProps.seq)
                 break;
         }
     }
     if (i == gNumHumanPlayers)
     {
-        for (j = 0; j < 0x10 && r4->unk1C + j < gWorldProps[r4->unk1A].dataSize; ++j)
+        for (j = 0; j < sizeof(r8->worldProps.chunk) && r4->unk1C + j < gWorldProps[r4->unk1A].dataSize; ++j)
             r4->unk50 += gWorldProps[r4->unk1A].dataPtr[r4->unk1C + j];
         r4->unk1E = 0;
-        ++r8->pat1.unk2;
-        r4->unk1C += 0x10;
+        ++r8->worldProps.seq;
+        r4->unk1C += sizeof(r8->worldProps.chunk);
         if (r4->unk1C >= gWorldProps[r4->unk1A].dataSize)
         {
             ++r4->unk1A;
@@ -1122,14 +1122,14 @@ static void sub_080324BC(void)
         sub_08032E98();
         return;
     }
-    CpuCopy16(gWorldProps[r4->unk1A].dataPtr + r4->unk1C, &r8->pat1.unk4, sizeof(r8->pat1.unk4));
+    CpuCopy16(gWorldProps[r4->unk1A].dataPtr + r4->unk1C, r8->worldProps.chunk, sizeof(r8->worldProps.chunk));
     if (r4->unk1A >= TheNumberSeven())
         gCurTask->main = sub_08032CA8;
 }
 
 static void sub_0803264C(void)
 {
-    struct MultiSioData_0_1 *r5 = &gMultiSioSend.pat1;
+    struct MultiSioWorldPropsData *r5 = &gMultiSioSend.worldProps;
     struct Multi_08032B0C *r1 = TaskGetStructPtr(gCurTask);
 
     r1->unk1A = 0;
@@ -1137,9 +1137,9 @@ static void sub_0803264C(void)
     r1->unk1E = 0;
     r1->unk50 = 0;
     CpuFill16(0, r5, (sizeof(*r5)));
-    r5->unk0 = 3;
+    r5->type = LINK_MSG_WORLD_PROPS;
     r5->unk1 = 2;
-    r5->unk2 = 1;
+    r5->seq = 1;
     r5->unk3 = 0;
     gCurTask->main = sub_080326C0;
 }
@@ -1152,7 +1152,7 @@ static void sub_080326C0(void)
     struct Multi_08032B0C *r0 = TaskGetStructPtr(gCurTask), *r4 = r0;
 
     ip = &gMultiSioRecv[r4->unk18];
-    if (!ip->pat1.unk2)
+    if (!ip->worldProps.seq)
     {
         if (r4->unk1E++ > 0x40)
         {
@@ -1161,7 +1161,7 @@ static void sub_080326C0(void)
             sub_08032E98();
         }
     }
-    else if (ip->pat1.unk2 != r8->pat1.unk2)
+    else if (ip->worldProps.seq != r8->worldProps.seq)
     {
         if (r4->unk1E++ > 0x10)
         {
@@ -1174,12 +1174,12 @@ static void sub_080326C0(void)
     {
         r4->unk1E = 0;
         size = gWorldProps[r4->unk1A].dataSize - r4->unk1C;
-        if (size > 0x10) size = 0x10;
-        CpuCopy16(ip->pat1.unk4, &gWorldProps[r4->unk1A].dataPtr[r4->unk1C], size);
-        for (i = 0; i < 0x10 && r4->unk1C + i < gWorldProps[r4->unk1A].dataSize; ++i)
+        if (size > sizeof(ip->worldProps.chunk)) size = sizeof(ip->worldProps.chunk);
+        CpuCopy16(ip->worldProps.chunk, &gWorldProps[r4->unk1A].dataPtr[r4->unk1C], size);
+        for (i = 0; i < sizeof(ip->worldProps.chunk) && r4->unk1C + i < gWorldProps[r4->unk1A].dataSize; ++i)
             r4->unk50 += gWorldProps[r4->unk1A].dataPtr[r4->unk1C + i];
-        ++r8->pat1.unk2;
-        r4->unk1C += 0x10;
+        ++r8->worldProps.seq;
+        r4->unk1C += sizeof(ip->worldProps.chunk);
         if (r4->unk1C >= gWorldProps[r4->unk1A].dataSize)
         {
             ++r4->unk1A;
@@ -1193,11 +1193,11 @@ static void sub_080326C0(void)
 static void sub_08032818(void)
 {
     struct Multi_08032B0C *r3 = TaskGetStructPtr(gCurTask);
-    union Unk_020382A0_8 sp00;
+    union MultiSioHandshakePayload sp00;
 
     r3->unk20 = 0;
-    sp00.pat0.unk00 = Rand32();
-    sp00.pat1.unk04 = r3->unk50;
+    sp00.postWorldProps.rngSeed = Rand32();
+    sp00.postWorldProps.checksum = r3->unk50;
     sub_08030C94(1, &sp00);
     gCurTask->main = sub_08032888;
 }
@@ -1228,12 +1228,12 @@ static void sub_08032888(void)
                 // 2x useless variables for easy-matching
                 u32 *d = r4->unk40;
                 u8 *p = &gNumHumanPlayers;
-                union Unk_020382A0_8 *s = gUnk_020382A0.unk08;
+                union MultiSioHandshakePayload *s = gUnk_020382A0.unk08;
 
                 ++r7; --r7; // swap r6/r7
-                r4->unk40[i] = s[i].pat0.unk00;
-                r7 &= s[i].pat1.unk04;
-                r5 |= s[i].pat1.unk04;
+                r4->unk40[i] = s[i].postWorldProps.rngSeed;
+                r7 &= s[i].postWorldProps.checksum;
+                r5 |= s[i].postWorldProps.checksum;
                 // dummy statements
                 d = r4->unk40;
                 p = &gNumHumanPlayers;
