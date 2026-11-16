@@ -55,7 +55,7 @@ u32 Sio32MultiLoadMain(u32 *progressCounterp)
         else if (dataCounter < 0)
             dataCounter = 0;
         if (progressCounterp)
-           *progressCounterp = dataCounter; // Set progress counter
+            *progressCounterp = dataCounter; // Set progress counter
         if (gSio32MultiLoadArea.type != SIO_SCK_IN)
         { // Slave
             while (gSio32MultiLoadArea.checkSumCounter < dataCounter) // Receiving data sum check
@@ -65,7 +65,7 @@ u32 Sio32MultiLoadMain(u32 *progressCounterp)
                     gSio32MultiLoadArea.downloadSuccessFlag = 1; // Succeeds download
         }
         if (dataCounterBak > SIO32ML_BLOCK_SIZE / 4 // Complete communication
-         || gSio32MultiLoadArea.frameCounter == 0x8C) // SIO32ML_LD_TIMEOUT_FRAMES in SDK doesn't match
+         || gSio32MultiLoadArea.frameCounter == SIO32ML_LD_TIMEOUT_FRAMES)
             gSio32MultiLoadArea.state = 3; // Load time out
         break;
     case 3:

@@ -245,6 +245,10 @@ Non-static inline functions can provide useful supporting evidence for translati
 
 Do not treat this as an unconditional boundary rule. `function_cannot_inline_p` can reject an explicitly `inline` function—for example, it rejects variadic functions—and linkage, addressability, use, and whether an out-of-line body is required also affect emission. Before using a late non-static inline function as a boundary marker, check that the function is eligible for the deferred-inline path and combine its placement with linker order, neighboring symbols, calls, static data, and other ownership evidence.
 
+### 4.5 Code shared with the multiboot programs
+
+The programs under `multi_boot/` contain copies of code that also exists in the main game, such as the SDK libraries (m4a, MultiSio, Sio32MultiLoad), `multi_sio_util`, and headers taken from `include/`. Keep every copy of shared code, declarations, names, and comments synchronized. A change to one copy, whether a decompilation, rename, type fix, or comment, must be applied to all other copies in the same pull request.
+
 ## 5. Writing C for decompilation
 
 ### 5.1 Prefer natural C first

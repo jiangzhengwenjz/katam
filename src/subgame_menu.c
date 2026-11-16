@@ -281,7 +281,7 @@ static const u16 gUnk_082DE99C[][NUM_LANGUAGES][2] = {
     },
 };
 
-extern const void *const gUnk_08D60AAC[][NUM_LANGUAGES];
+extern const u32 *const gUnk_08D60AAC[][NUM_LANGUAGES];
 
 static void sub_0801EC2C(u16, s32);
 static void sub_0801ED94(struct SubGameMenu*);
