@@ -241,7 +241,6 @@ static void sub_080B6D58(struct Object* arg0) {
 }
 
 static void sub_080B6DDC(struct Object* arg0, u8 arg1) {
-    u32 arg;
     struct Task *task = TaskCreate(sub_080B7068, sizeof(struct ObjectBase), 0x3500, TASK_USE_EWRAM, ObjectBaseDestroy);
     struct ObjectBase *objBase = TaskGetStructPtr(task), *obj = objBase;
     ClearObjectBase(obj);
@@ -261,8 +260,8 @@ static void sub_080B6DDC(struct Object* arg0, u8 arg1) {
     obj->flags |= 0x140;
     obj->unk68 = 0x20000043;
     obj->unk5C |= 0x80000;
-    obj->xspeed = gUnk_0835464C[(arg = arg1 * 2)];
-    obj->yspeed = gUnk_0835464C[arg1 * 2 + 1];
+    obj->xspeed = gUnk_0835464C[arg1 << 1];
+    obj->yspeed = gUnk_0835464C[(arg1 << 1) + 1];
     obj->y += 0x300;
     if (arg0->base.flags & 1) {
         obj->x -= 0x800;
