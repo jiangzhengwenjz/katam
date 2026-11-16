@@ -15,11 +15,6 @@ struct Unk_080C4EDC { // laser struct?
     u16 unk8A;
 }; /* size = 0x8C */
 
-extern const s8 gUnk_08350BB0[][2];
-extern const s8 gUnk_08350BCC[][2];
-extern const s8 gUnk_08350BF0[][2];
-extern const s8 gUnk_08350C20[][2];
-
 // TODO: A bunch of functions below have unknown 1st param type
 bool16 ObjectPreUpdate(struct ObjectBase *);
 bool32 sub_0806F8BC(struct ObjectBase *);
@@ -198,5 +193,23 @@ void sub_08099A60(struct Kirby *);
 void sub_08099AC4(struct ObjectBase *);
 void sub_080853C8(struct Kirby *, u16);
 void sub_08088F84(struct Kirby *, s16, s16);
+
+void sub_0806FDF4(void);
+void sub_08070404(void);
+bool8 sub_08070488(struct ObjectBase *);
+void sub_08070808(void);
+void sub_08070B14(struct ObjectBase *);
+void sub_08070B68(void);
+void sub_08074860(struct ObjectBase *);
+void sub_08085C38(void);
+void sub_08088234(struct ObjectBase *, u8, u16);
+void sub_08088324(struct ObjectBase *);
+void sub_08088400(struct Object7 *, const struct AnimInfo *);
+void sub_08089538(struct ObjectBase *);
+void sub_080918CC(struct Kirby *);
+
+extern const s8 gUnk_08350BB0[][2];
+extern const s8 gUnk_08350BCC[][2];
+extern const u16 gUnk_08350FF8;
 
 #endif
