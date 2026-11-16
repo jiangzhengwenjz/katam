@@ -510,10 +510,10 @@ static void sub_0801A374(struct Multi_08019F28 *r5)
                 for (r3 = 0; r3 < gNumHumanPlayers; ++r3)
                 {
                     struct Multi_08019F28_sub *p0 = &r5->unk84;
-                    union Unk_020382A0_8 *p = gUnk_020382A0.unk08;
+                    union MultiSioHandshakePayload *p = gUnk_020382A0.unk08;
 
-                    p0->unk00[r3] = p[r3].pat0.unk00;
-                    gUnk_0203AD1C[r3] = p[r3].pat0.unk04;
+                    p0->unk00[r3] = p[r3].multiBoot.rngSeed;
+                    gUnk_0203AD1C[r3] = p[r3].multiBoot.unk4;
                 }
                 for (; r3 < 4; ++r3)
                     gUnk_0203AD1C[r3] |= 0xFF;
@@ -640,16 +640,16 @@ static void sub_0801A618(struct Multi_08019F28 *r5)
     }
     if (gMultiSioStatusFlags & MULTI_SIO_LD_ENABLE)
         r5->loadRequest = 1;
-    gMultiSioSend.pat1.unk0 = gLanguage;
+    gMultiSioSend.load.language = gLanguage;
     gMultiSioStatusFlags = MultiSioMain(&gMultiSioSend, gMultiSioRecv, r5->loadRequest);
     if (r5->unkA4 == 0)
     {
         MultiSioStart();
         r5->unkA4 = 1;
     }
-    if (r5->unkA9 != gMultiSioRecv[0].pat1.unk2)
+    if (r5->unkA9 != gMultiSioRecv[0].load.loadCount)
     {
-        r5->unkA9 = gMultiSioRecv[0].pat1.unk2;
+        r5->unkA9 = gMultiSioRecv[0].load.loadCount;
         r5->unk9A = 0;
     }
 }
@@ -799,11 +799,11 @@ static void sub_0801A950(struct Multi_08019F28 *r4)
 
 static void sub_0801A970(struct Multi_08019F28 *r4)
 {
-    union Unk_020382A0_8 stru;
+    union MultiSioHandshakePayload stru;
 
     r4->unk9C = 0;
-    stru.pat0.unk00 = Rand32();
-    stru.pat0.unk04 = gUnk_0203ADE0;
+    stru.multiBoot.rngSeed = Rand32();
+    stru.multiBoot.unk4 = gUnk_0203ADE0;
     sub_08030C94(1, &stru);
     r4->callback = sub_0801A374;
 }
@@ -854,7 +854,7 @@ static void sub_0801AA58(struct Multi_08019F28 *r2)
     if (gMultiSioStatusFlags & MULTI_SIO_LD_ENABLE)
     {
         if (gMultiSioStatusFlags & MULTI_SIO_LD_SUCCESS)
-            ++gMultiSioSend.pat1.unk2;
+            ++gMultiSioSend.load.loadCount;
         r2->callback = sub_0801A618;
     }
     sub_0801A618(r2);
