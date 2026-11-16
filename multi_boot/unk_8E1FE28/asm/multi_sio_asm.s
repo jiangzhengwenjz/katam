@@ -9,7 +9,7 @@
 MultiSioRecvBufChange: @ 0x0200C864
 	push {r4, r5, r6, r7, r8, sb, sl, fp}
 	mov ip, #0x4000000
-	ldr fp, _0200C8A0 @ =gUnk_030059F0
+	ldr fp, _0200C8A0 @ =gMultiSioArea
 	add sl, fp, #0x40
 	mov sb, #1
 	mov r8, #0
@@ -23,7 +23,7 @@ MultiSioRecvBufChange: @ 0x0200C864
 	pop {r4, r5, r6, r7, r8, sb, sl, fp}
 	bx lr
 	.align 2, 0
-_0200C8A0: .4byte gUnk_030059F0
+_0200C8A0: .4byte gMultiSioArea
 
 	arm_func_start MultiSioIntr
 MultiSioIntr: @ 0x0200C8A4
@@ -31,7 +31,7 @@ MultiSioIntr: @ 0x0200C8A4
 	add ip, ip, #0x120
 	ldm ip, {r0, r1}
 	push {r7, r8, sb, sl, fp}
-	ldr fp, _0200C9BC @ =gUnk_030059F0
+	ldr fp, _0200C9BC @ =gMultiSioArea
 	mov sb, #0xfe
 	add sb, sb, #0xfe00
 	ldrh r3, [ip, #8]
@@ -104,5 +104,5 @@ _0200C9B0:
 	pop {r5, r6, r7, r8, sb, sl, fp}
 	bx lr
 	.align 2, 0
-_0200C9BC: .4byte gUnk_030059F0
+_0200C9BC: .4byte gMultiSioArea
 _0200C9C0: .4byte 0x0400010E

@@ -34,7 +34,7 @@
 
 // During development set NDEBUG to undefined and value below to 0,
 // define with last check and confirm operation with changed to 600.
-// (Even if increase setting the communication interval increases, but 
+// (Even if increase setting the communication interval increases, but
 //  processing doesn't slow).
 //#define NDEBUG                              // Can define with Makefile (MakefileDemo)
 #ifdef  NDEBUG
@@ -166,11 +166,11 @@ extern u32 MultiSioMain(void *sendp, void *recvp, u32 loadRequest);
 //* First determine if master or slave. If master recognized, initialize
 //  timer.
 //* Call MultiSioSendDataSet() and set send data.
-//* Call MultiSioRecvDataCheck() and check if normal receive done, 
+//* Call MultiSioRecvDataCheck() and check if normal receive done,
 //  and copy receive data to Recvp.
 //
 //* Set so called with as close a timing as possible within 1 frame.
-//* Safer not to send data that matches flag data (SIO_SYNC_DATA) prior 
+//* Safer not to send data that matches flag data (SIO_SYNC_DATA) prior
 //  to connection determination.
 //
 //* Arguments:
@@ -214,7 +214,7 @@ struct MultiSioReturn
     u32 loadEnable:1;                       // Enable load
     u32 loadRequest:1;                      // Load request
     u32 loadSuccessFlag:1;                  // Load success
-    u32 type:1;                             // Connection (master/slave) 
+    u32 type:1;                             // Connection (master/slave)
     u32 connectedFlags:4;                   // Connection history flag
     u32 hardError:1;                        // Hard error
     u32 idOverError:1;                      // ID over error
@@ -235,7 +235,7 @@ extern void MultiSioIntr(void);
 //
 //* Program so slave is called with communication interrupt and master
 //  is called with timer interrupt.
-//* Adjust setting so 1 packet (Except for OverRunCatch[]) can be 
+//* Adjust setting so 1 packet (Except for OverRunCatch[]) can be
 //  transfered with 1 frame.
 
 

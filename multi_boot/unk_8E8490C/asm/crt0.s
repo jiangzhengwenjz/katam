@@ -78,11 +78,11 @@ _02000118:
 	add r2, r2, #4
 _020001AC:
 	strh r0, [r3, #2]
-	ldr r1, _020001C8 @ =gUnk_03001F90
+	ldr r1, _020001C8 @ =gIntrTable
 	add r1, r1, r2
 	ldr r0, [r1]
 	bx r0
 	.align 2, 0
 _020001C0: .4byte 0x03007FFC
 _020001C4: .4byte sub_02009F1C
-_020001C8: .4byte gUnk_03001F90
+_020001C8: .4byte gIntrTable
