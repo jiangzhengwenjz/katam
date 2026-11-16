@@ -120,14 +120,14 @@ extern void Sio32MultiLoadIntr(void);
 
 //* Master does only send and slave only receive.
 //* Master resets timer during send.
-//* Slave stores receive data in order to receive buffer during 
+//* Slave stores receive data in order to receive buffer during
 //  communication interrupt.
 //  Lastly it stores checksum to work area.
 //
 //* Program so slave is called with communication interrupt and master
 //  is called with timer interrupt.
 //* Data is passed with pipeline operation so delayed with slave with
-//  large ID and then received. Therefore at a minimum need to send 
+//  large ID and then received. Therefore at a minimum need to send
 //  two (8 Bytes) extra times.
 //
 //* Example:

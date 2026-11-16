@@ -116,8 +116,8 @@ O_LEVEL ?= 2
 DINFO ?= 1
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=$(MODERN)
 ifeq ($(MODERN),0)
-  CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -iquote include -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
-  CC1 := tools/agbcc/bin/agbcc$(EXE)
+  CPPFLAGS += -I $(ROOT_DIR)/tools/agbcc/include -I $(ROOT_DIR)/tools/agbcc -nostdinc -iquote include -DREVISION=$(REVISION) -D$(GAME_LANGUAGE)
+  CC1 := $(ROOT_DIR)/tools/agbcc/bin/agbcc$(EXE)
   override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm -f2003-patch -ffix-debug-line
   LIBPATH := -L $(ROOT_DIR)/tools/agbcc/lib
   LIB := $(LIBPATH) -lgcc -lc
@@ -287,7 +287,7 @@ else
 endif
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
-	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
+	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I $(ROOT_DIR)/tools/agbcc/include $<
 
 ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(C_SRCS:.c=.d))

@@ -52,7 +52,7 @@ MultiSioInit: @ 0x0203933C
 	ldr r2, _02039400 @ =0x04000010
 	bl CpuSet
 	ldr r0, _02039404 @ =MultiSioIntr
-	ldr r1, _02039408 @ =gUnk_030004C0
+	ldr r1, _02039408 @ =gMultiSioIntrFuncBuf
 	ldr r2, _0203940C @ =0x04000060
 	bl CpuSet
 	ldr r0, _020393F0 @ =gUnk_03000640
@@ -95,7 +95,7 @@ _020393F8: .4byte MultiSioRecvBufChange
 _020393FC: .4byte gUnk_03000830
 _02039400: .4byte 0x04000010
 _02039404: .4byte MultiSioIntr
-_02039408: .4byte gUnk_030004C0
+_02039408: .4byte gMultiSioIntrFuncBuf
 _0203940C: .4byte 0x04000060
 _02039410: .4byte gUnk_030006A0
 _02039414: .4byte gUnk_030006BC

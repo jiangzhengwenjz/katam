@@ -17,6 +17,18 @@
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
 
+#define CPU_FILL_2(value, dest, size, bit)                                                                \
+({                                                                                                        \
+    vu##bit tmp = (vu##bit)(value);                                                                       \
+    CpuSet2((void*)&tmp, dest, CPU_SET_##bit##BIT | CPU_SET_SRC_FIXED | ((size) / (bit / 8) & 0x1FFFFF)); \
+})
+
+#define CpuFill16_2(value, dest, size) CPU_FILL_2(value, dest, size, 16)
+
+static inline void CpuSet2(const void* src, void* dest, u32 control) {
+    CpuSet(src, dest, control);
+}
+
 #define CpuFastFill(value, dest, size)                               \
 {                                                                    \
     vu32 tmp = (vu32)(value);                                        \
